@@ -1,0 +1,13 @@
+
+<h1>What is the court listed on your ticket?</h1>
+<hr/>
+<a ui-sref="state1.list">Show List</a>
+<div ui-view></div>
+
+
+<ion-list>
+  <ion-item ng-repeat="court in courts">
+    {{court.name}}
+  </ion-item>
+</ion-list>
+

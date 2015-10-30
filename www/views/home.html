@@ -1,0 +1,68 @@
+
+<div style="margin-top: 20px;text-align: center;">
+
+  <img src="../../img/ionic.png" style="margin-bottom:20px">
+
+  <h1>A traffic ticket follows you long after you've paid the fine...</h1>
+
+  <br><br>
+
+
+  <button id="fight-your-ticket" style="height:40px;width:80%"
+          ng-click="fightNewTicket('/ticket')">Fight Your Ticket</button>
+</div>
+
+
+
+<!--
+  <ion-tabs class="tabs-positive tabs-icon-only">
+    <ion-tab title="Home" icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline">
+      <div id="HomeView">
+
+      </div>
+    </ion-tab>
+
+    <ion-tab title="New Ticket" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
+      <div id="TicketView">
+        <ion-side-menus>
+
+          <ion-side-menu side="left">
+            <ion-header-bar class="bar-dark">
+              <h1 class="title">Projects</h1>
+              <button class="button button-icon ion-plus" ng-click="newProject()">
+              </button>
+            </ion-header-bar>
+            <ion-content scroll="false">
+              <ion-list>
+                <ion-item ng-repeat="project in projects" ng-click="selectProject(project, $index)"
+                          ng-class="{active: activeProject == project}">
+                  {{project.title}}
+                </ion-item>
+              </ion-list>
+            </ion-content>
+          </ion-side-menu>
+
+          <ion-side-menu-content>
+            <ion-header-bar class="bar-dark">
+              <button class="button button-icon" ng-click="toggleProjects()">
+                <i class="icon ion-navicon"></i>
+              </button>
+              <h1 class="title">{{activeProject.title}}</h1>
+
+              <button class="button button-icon" ng-click="newTask()">
+                <i class="icon ion-compose"></i>
+              </button>
+            </ion-header-bar>
+            <ion-content scroll="true">
+            </ion-content>
+          </ion-side-menu-content>
+
+        </ion-side-menus>
+      </div>
+    </ion-tab>
+
+    <ion-tab title="Settings" icon-on="ion-ios-gear" icon-off="ion-ios-gear-outline">
+      <div id="SettingsView"></div>
+    </ion-tab>
+  </ion-tabs>
+-->

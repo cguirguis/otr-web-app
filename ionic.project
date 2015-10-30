@@ -1,0 +1,17 @@
+{
+  "name": "OTRWebApp",
+  "app_id": "",
+  "proxies": [
+    {
+      "path": "/v1",
+      "proxyUrl": "https://otr-backend-service-us-devo.offtherecord.com/api/v1"
+    }
+  ],
+  "gulpStartupTasks": [
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}
