@@ -1,22 +1,18 @@
 
 controllers.controller('CourtCtrl',
-  ['$scope', '$http', '$timeout', '$location', '$ionicModal', 'Constants',
-  function($scope, $http, $timeout, $location, $ionicModal, Constants) {
+  ['$rootScope', '$scope', '$http', '$timeout', '$location', '$ionicModal', 'Constants',
+  function($rootScope, $scope, $http, $timeout, $location, $ionicModal, Constants) {
 
-    console.log("Court controller loaded.");
-
-    $scope.pageTitle = "Assigned court";
-    $scope.DevApiUrl =
-
-      $scope.courts = [
-        { name: 'Redmond District Court', city: "Redmond, WA" },
-        { name: 'Seattle Municipal Court', city: "Seattle, WA" },
-        { name: 'Kirkland Municipal Court', city: "Kirkland, WA" },
-        { name: 'King County District Court', city: "Issaquah,I' WA" }
-      ];
+    $rootScope.pageTitle = "Assigned court";
+    $scope.courts = [];
+    $scope.results = [];
+    $scope.query = "";
+    $scope.selectedCourt;
 
     var getCourts = function() {
-      var URL = ENV.apiEndpoint + "/courts/traffic/search?state=WA";
+      console.log("loading courts..");
+      var URL = Constants.ENV.apiEndpoint + "/courts/traffic/search?state=WA";
+
       $http.get(URL).then(
         function(response) {
           console.log("Successfully retrieved " + response.data.courts.length + " courts.");
@@ -28,6 +24,38 @@ controllers.controller('CourtCtrl',
       );
     };
 
-    getCourts();
+    $scope.filterCourts = function() {
+      var query = $scope.query.toLowerCase();
+
+      if (query.length > 2) {
+        $scope.results = $scope.courts.filter(function(court) {
+          return court.courtName.toLowerCase().indexOf(query) > 0
+          || court.city.toLowerCase().indexOf(query) === 0
+        });
+        console.log("Query '" + query + "' yielded " + $scope.results.length + " results.");
+      }
+      else {
+        $scope.results = [];
+      }
+    };
+
+    $scope.selectCourt = function(court) {
+
+      if ($scope.selectedCourt) {
+        $scope.selectedCourt.selected = false;
+      }
+
+      $scope.selectedCourt = court;
+      $rootScope.citation.court = court;
+      court.selected = true;
+    }
+
+    $scope.confirmCourt = function(court) {
+
+    }
+
+    if (!$scope.courts.length) {
+      getCourts();
+    }
 
   }]);

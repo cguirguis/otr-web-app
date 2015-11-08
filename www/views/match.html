@@ -1,0 +1,22 @@
+
+<div class="page match-view">
+
+  <div class="loading" ng-if="loading"></div>
+
+  <div class="match-found" ng-if="match">
+    <h2>Congratulations!</h2>
+    <h4>You've been matched with one of the top traffic attorney in {{citation.court.city}}.</h4>
+
+    <h3>Your chance of getting the ticket off your record:</h3><h2>93%</h2>
+
+    <h3>Your cost:</h3><h2>$249</h2>
+
+    <button class="confirm-match-button bottom" ui-sref="payment" style="margin-bottom: 40px;">FIGHT MY TICKET</button>
+  </div>
+
+  <div class="match-not-found" ng-if="!match" style="display:none;">
+    <h2>No match found for the location you specified.</h2>
+  </div>
+
+</div>
+

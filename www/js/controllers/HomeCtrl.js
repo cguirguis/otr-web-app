@@ -1,10 +1,10 @@
 
 var controllers = angular.module('OTRControllers', []);
 
-controllers.controller('HomeCtrl', function($scope, $http, $state, $location) {
+controllers.controller('HomeCtrl', function($rootScope, $scope, $http, $state, $location) {
 
   console.log("Home controller loaded.");
-  $scope.pageTitle = "Off The Record";
+  $rootScope.pageTitle = "Home";
 
   $scope.fightNewTicket = function (path) {
     $location.path(path)

@@ -1,8 +1,11 @@
 
-controllers.controller('TicketCtrl', ['$scope', function($scope) {
+controllers.controller('TicketCtrl',
+  ['$rootScope', '$scope',
+    function($rootScope, $scope) {
 
-  console.log("Ticket controller loaded.");
-  $scope.pageTitle = "Your Ticket";
-  $scope.ticket = {};
+    console.log("Ticket controller loaded.");
+    $rootScope.pageTitle = "Your Ticket";
+
+      $rootScope.citation = {};
 
 }]);
