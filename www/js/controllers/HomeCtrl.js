@@ -1,7 +1,8 @@
 
 var controllers = angular.module('OTRControllers', []);
 
-controllers.controller('HomeCtrl', function($rootScope, $scope, $http, $state, $location) {
+controllers.controller('HomeCtrl',
+  function($rootScope, $scope, $http, $state, $location) {
 
   console.log("Home controller loaded.");
   $rootScope.pageTitle = "Home";

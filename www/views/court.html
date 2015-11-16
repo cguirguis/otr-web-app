@@ -1,10 +1,11 @@
-<div class="page court-view">
+
+<ion-view class="page court-view">
   <h4>What is the court listed on your ticket?</h4>
 
-  <input type="text" ng-model="query" ng-change="filterCourts()"  scroll="false"/>
+  <input type="text" ng-model="query" ng-change="filterCourts()" scroll="false"/>
 
   <ion-list>
-    <ion-item ng-repeat="court in results" class="court-result-container" ng-class="{ 'selected': court.selected }">
+    <ion-item ng-hide="selectedCourt" ng-repeat="court in results" class="court-result-container" ng-class="{ 'selected': court.selected }">
       <img src="../../img/court-icon.png" class="court-icon">
       <div class="court-result" ng-click="selectCourt(court)">
         <div class="court-name">{{court.courtName}}</div>
@@ -13,7 +14,16 @@
     </ion-item>
   </ion-list>
 
-  <button class="confirm-court-button bottom" ng-click="confirmCourt('/ticket')" ng-disabled="!selectedCourt"
-          ui-sref="date">Continue</button>
-</div>
+  <div class="selected-court-details" ng-if="selectedCourt">
+    <div class="selected-court-text">You've selected the following court. Please make sure this matches the court specified on your ticket.</div>
+    <img class="selected-court-icon" src="../../img/court-icon.png" />
+    <div class="selected-court-name">{{selectedCourt.courtName}}</div>
+    <div class="selected-court-city">{{selectedCourt.city}}, {{selectedCourt.state}}</div>
 
+  </div>
+
+  <button class="confirm-court-button bottom"
+          ng-click="confirmCourt()"
+          ng-show="selectedCourt"
+          ui-sref="date">Continue</button>
+</ion-view>

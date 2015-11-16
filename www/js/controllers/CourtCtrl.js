@@ -29,10 +29,9 @@ controllers.controller('CourtCtrl',
 
       if (query.length > 2) {
         $scope.results = $scope.courts.filter(function(court) {
-          return court.courtName.toLowerCase().indexOf(query) > 0
+          return court.courtName.toLowerCase().indexOf(query) >= 0
           || court.city.toLowerCase().indexOf(query) === 0
         });
-        console.log("Query '" + query + "' yielded " + $scope.results.length + " results.");
       }
       else {
         $scope.results = [];
@@ -40,22 +39,25 @@ controllers.controller('CourtCtrl',
     };
 
     $scope.selectCourt = function(court) {
-
+      // Unselect current selection (if any)
       if ($scope.selectedCourt) {
         $scope.selectedCourt.selected = false;
       }
 
       $scope.selectedCourt = court;
-      $rootScope.citation.court = court;
       court.selected = true;
     }
 
-    $scope.confirmCourt = function(court) {
-
+    $scope.confirmCourt = function() {
+      if (!$scope.selectedCourt) {
+        alert("You must select a court to continue.");
+      }
+      // Save selected court to citation
+      $rootScope.citation = $rootScope.citation || {};
+      $rootScope.citation.court = $scope.selectedCourt;
     }
 
     if (!$scope.courts.length) {
       getCourts();
     }
-
   }]);

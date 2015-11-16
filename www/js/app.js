@@ -5,6 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 var WebApp = WebApp || angular.module('OTRWebApp', [
   'ionic',
+  'ngCordova',
   'OTRControllers'
 ]);
 
@@ -23,6 +24,12 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
         // State configuration
         //
         $stateProvider
+          .state('root', {
+            url: '/root',
+            abstract: true,
+            controller:'RootCtrl',
+            template:'<ion-nav-view />'
+          })
           .state('home', {
             url: "/",
             templateUrl: "../views/home.html",
@@ -72,6 +79,13 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
             StatusBar.styleDefault();
           }
         });
+
+        $rootScope.$on('$stateChangeStart',
+          function(event, toState, toParams, fromState, fromParams){
+            event.preventDefault();
+            // transitionTo() promise will be rejected with
+            // a 'transition prevented' error
+          })
       }
     ]);
 

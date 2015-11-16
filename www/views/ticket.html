@@ -1,9 +1,29 @@
 
-<div class="page ticket-view">
-  <h4>Take a photo of your ticket</h4>
+<ion-view class="page ticket-view">
+  <ion-content scroll="false">
+    <div class="image-input-options" ng-show="!capturingImage || !images.length">
+      <h4 ng-show="!images.length && !capturingImage">Please provide a clear photo of your ticket</h4>
 
-  <a ui-sref="state1.list"></a>
+      <button class="button camera-button" ng-click="addMedia()" ng-show="!capturingImage && !images.length"></button>
+    </div>
 
-  <button class="bottom" ui-sref="court">Continue</button>
+    <div ng-show="capturingImage">
+      <video autoplay></video>
+      <h4 class="image-instruction-text">Please take a clear photo of your ticket</h4>
+      <div class="shutter-button"></div>
+    </div>
 
-</div>
+    <div class="ticket-image-container" ng-show="images.length">
+      <img id="image-capture" src="" style="width:100%">
+    </div>
+
+    <canvas style="display:none;" width="1280" height="720"></canvas>
+  </ion-content>
+
+  <div class="bottom-bar" ng-show="images.length">
+    <button class="retake-picture" ng-click="retakePicture()">Retake picture</button>
+    <button class="continue" ng-click="continue()">Continue</button>
+  </div>
+
+</ion-view>
+
