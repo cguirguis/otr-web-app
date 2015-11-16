@@ -80,12 +80,12 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
           }
         });
 
-        $rootScope.$on('$stateChangeStart',
-          function(event, toState, toParams, fromState, fromParams){
-            event.preventDefault();
-            // transitionTo() promise will be rejected with
-            // a 'transition prevented' error
-          })
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+        });
+
+        $rootScope.$on('scope.stored', function (event, data) {
+          // controller $scope was stored using ScopeCache service
+        });
       }
     ]);
 

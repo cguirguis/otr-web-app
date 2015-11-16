@@ -2,15 +2,18 @@
 <div class="page violation-view">
 
   <div ng-show="!matchRequested">
-    <h4>How many violations were you cited for?</h4>
+    <h4>How many violations are listed on your ticket?</h4>
 
-    <button class="violation-button" ng-click="setViolationCount(1)">1</button>
-    <button class="violation-button" ng-click="setViolationCount(2)">2</button>
-    <button class="violation-button" ng-click="setViolationCount(3)">3</button>
-    <button class="violation-button" ng-click="setViolationCount(4)">4</button>
-    <button class="violation-button" ng-click="setViolationCount(5)">5</button>
+    <button class="violation-button" ng-click="setViolationCount(1)" ng-class="{ 'active': violationCount === 1 }">1</button>
+    <button class="violation-button" ng-click="setViolationCount(2)" ng-class="{ 'active': violationCount === 2 }">2</button>
+    <button class="violation-button" ng-click="setViolationCount(3)" ng-class="{ 'active': violationCount === 3 }">3</button>
+    <button class="violation-button" ng-click="setViolationCount(4)" ng-class="{ 'active': violationCount === 4 }">4</button>
+    <button class="violation-button" ng-click="setViolationCount(5)" ng-class="{ 'active': violationCount === 5 }">5</button>
   </div>
 
-  <ng-include src="'views/match.html'"></ng-include>
+  <button class="match-ticket-button" ng-click="continue()" ng-show="violationCount && !match">
+    Fight this ticket!
+  </button>
 </div>
 
+<ng-include src="'views/match.html'"></ng-include>

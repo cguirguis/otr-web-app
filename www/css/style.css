@@ -211,12 +211,50 @@ table.k-content {
   text-align: center;
 }
 .k-header {
-  background-color: #DEDEDE!important;
+  background-color: #5599F5!important
+}
+.confirm-date-button {
+  margin-top: 15px;
 }
 
 /*********** VIOLATION VIEW ******************/
 
-.violation-button {
-  margin-bottom: 10px;
-  background-color: silver;
+.page button.violation-button {
+  width: 19%;
+  background-color: rgb(245, 245, 245);
+  cursor: pointer;
+  color: rgb(26, 93, 162);
+  height: 80px;
+  font-size: 1.5em!important;
+  border: solid 1px rgb(31, 85, 142);
+  opacity: 0.6;
+}
+.page button.violation-button:hover {
+  background-color: rgb(245, 245, 245);
+  color: rgb(26, 93, 162);
+  opacity: 1;
+}
+.page button.violation-button:active, .page button.violation-button.active {
+  background-color: rgb(31, 85, 142);
+  color: white;
+  opacity: 1;
+}
+.match-ticket-button {
+  margin-top: 20px;
+}
+.match-odds-text {
+  float: left;
+  margin-top:13px;
+  margin-right: 20px;
+}
+.match-odds-value {
+  color: green;font-size:40px
+}
+.match-cost-text {
+  float: left;
+  margin-right: 20px;
+}
+.match-cost-value {
+  color: green;
+  font-size:40px
 }

@@ -23,3 +23,17 @@ WebApp.factory('FileService', function() {
       images: getImages
     }
   })
+
+WebApp.factory('ScopeCache', function($rootScope) {
+  var scopeCache = {};
+
+  return {
+    store: function(key, value) {
+      $rootScope.$emit('scope.stored', key);
+      scopeCache[key] = value;
+    },
+    get: function(key) {
+      return scopeCache[key];
+    }
+  }
+});

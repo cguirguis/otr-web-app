@@ -1,7 +1,7 @@
 
 controllers.controller('TicketCtrl',
-  ['$rootScope', '$scope', '$state', '$timeout', '$cordovaDevice', '$cordovaFile', '$ionicPlatform', '$ionicLoading', '$ionicActionSheet', 'ImageService', 'FileService',
-    function($rootScope, $scope, $state, $timeout, $cordovaDevice, $cordovaFile, $ionicPlatform, $ionicLoading, $ionicActionSheet, ImageService, FileService)
+  ['$rootScope', '$scope', '$state', '$timeout', '$cordovaDevice', '$cordovaFile', '$ionicPlatform', '$ionicLoading', '$ionicActionSheet', 'ImageService', 'FileService', 'ScopeCache',
+    function($rootScope, $scope, $state, $timeout, $cordovaDevice, $cordovaFile, $ionicPlatform, $ionicLoading, $ionicActionSheet, ImageService, FileService, ScopeCache)
     {
       console.log("Ticket controller loaded.");
       $rootScope.pageTitle = "Your Ticket";
@@ -119,12 +119,20 @@ controllers.controller('TicketCtrl',
       $scope.continue = function() {
         // Save citation image
         if (!$scope.images.length) {
-          alert("Please provide a photo of your citation.");
+          alert("You must provide a photo of your ticket to continue.");
         }
         $rootScope.citation.image = $scope.images[0].src;
-        console.log($rootScope.citation.image)
+        console.log($rootScope.citation.image);
+
+        // Cache current scope
+        ScopeCache.store('ticket', $scope);
+
+        // To go to Court view
         $state.go("court");
       }
+
+      // Load cached $scope if user is navigating back
+      $scope = ScopeCache.get("ticket") || $scope;
 }]);
 
 
