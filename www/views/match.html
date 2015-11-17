@@ -13,7 +13,8 @@
     <h3 class="match-cost-text">Your cost:</h3>
     <h2 class="match-cost-value">$249</h2>
 
-    <button class="confirm-match-button bottom" ng-click="confirmMatch()">Continue</button>
+    <br><br><br>
+    <button class="confirm-match-button" ng-click="confirmMatch()">Continue</button>
   </div>
 
   <div class="match-not-found" ng-if="!match" style="display:none;">
@@ -21,17 +22,3 @@
   </div>
 
 </div>
-
-<script id="login-modal.html" type="text/ng-template">
-  <ion-popover-view>
-    <ion-header-bar>
-      <h1 class="title">Please login to continue</h1>
-    </ion-header-bar>
-    <ion-content>
-      Please login or create an account using one of the following options:
-
-      <button class="email-login-buton" >Login with Email</button>
-      <button class="facebook-login-button" >Login via Facebook</button>
-    </ion-content>
-  </ion-popover-view>
-</script>

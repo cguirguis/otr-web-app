@@ -1,7 +1,7 @@
 
 controllers.controller('ViolationCtrl',
-  ['$rootScope', '$scope', '$state', '$timeout', '$ionicPopover', 'ScopeCache',
-    function($rootScope, $scope, $state, $timeout, $ionicPopover, ScopeCache) {
+  ['$rootScope', '$scope', '$state', '$timeout', '$ionicModal', 'ScopeCache',
+    function($rootScope, $scope, $state, $timeout, $ionicModal, ScopeCache) {
 
     console.log("Violation controller loaded.");
     $rootScope.pageTitle = "Ticket Violations";
@@ -46,11 +46,16 @@ controllers.controller('ViolationCtrl',
       }
     };
 
-
-    $scope.openPopover = function($event) {
-      $scope.loginModal.show($event);
+    $ionicModal.fromTemplateUrl('../views/login.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.loginModal = modal;
+    });
+    $scope.showModal = function() {
+      $scope.loginModal.show();
     };
-    $scope.closePopover = function() {
+    $scope.closeModal = function() {
       $scope.loginModal.hide();
     };
 
@@ -60,19 +65,14 @@ controllers.controller('ViolationCtrl',
       // Make sure user is logged in
       if (!$rootScope.user) {
         // Display login modal
-        $ionicPopover.fromTemplateUrl('../views/home.html', {
-          scope: $scope
-        }).then(function(popover) {
-          $scope.loading = false;
-          $scope.loginModal = popover;
-        });
+        $scope.loginModal.show();
       } else {
         // To go to Payment view
         $state.go("payment");
       }
     };
 
-    $scope.continue = function() {
+    $scope.fightThisTicket = function() {
       // Update citation with violation count
       $rootScope.citation = $rootScope.citation || {};
       $rootScope.citation.violationCount = $scope.violationCount;

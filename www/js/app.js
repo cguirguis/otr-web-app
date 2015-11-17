@@ -55,6 +55,11 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
             templateUrl: "../views/violations.html",
             controller: "ViolationCtrl"
           })
+          .state('payment', {
+            url: "/payment",
+            templateUrl: "../views/payment.html",
+            controller: "PaymentCtrl"
+          })
           .state('cases', {
             url: "/cases",
             templateUrl: "../views/cases.html",
