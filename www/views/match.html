@@ -3,6 +3,15 @@
 
   <div class="loading" ng-if="loading"></div>
 
+  <div class="match-not-found" ng-if="!match" style="display:none;">
+    <h3>We're sorry, we're currently unable to help you fight this ticket.</h3>
+
+    <h3>Please bear with us as we expand our area of coverage.</h3>
+
+    <!-- Request your area button -->
+    <!-- Cancel button -->
+  </div>
+
   <div class="match-found" ng-if="match">
     <h2>We can fight your ticket!</h2>
     <h4>You've been matched with one of the top traffic attorney in {{citation.lawyer.city}}.</h4>
@@ -15,10 +24,6 @@
 
     <br><br><br>
     <button class="confirm-match-button" ng-click="confirmMatch()">Continue</button>
-  </div>
-
-  <div class="match-not-found" ng-if="!match" style="display:none;">
-    <h2>No match found for the location you specified.</h2>
   </div>
 
 </div>

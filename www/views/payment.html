@@ -1,21 +1,169 @@
 
-<div class="page violation-view">
+<ion-view class="page payment-view">
 
-  <div ng-show="!matchRequested">
-    <h4>How many violations are listed on your ticket?</h4>
+  <div class="transaction-title">Transaction Details</div>
+  <ul class="transactions">
+    <li class="primary">
+      <div class="transaction-item">Legal services to contest traffic ticket, {{citation.violationCount}} moving violation{{citation.violationCount > 0 ? 's' : ''}}</div>
+      <div class="transaction-fee">$250</div>
+    </li>
+    <li class="secondary" ng-if="hasExtraViolations">
+      <div class="transaction-item">{{citation.violationCount - 1}} extra violations</div>
+      <div class="transaction-fee">$250</div>
+    </li>
+    <li class="secondary">
+      <div class="transaction-item light-text">No accident involved</div>
+    </li>
+    <li class="secondary">
+      <div class="transaction-item light-text">Ticket not overdue</div>
+    </li>
+    <li class="secondary total">
+      <div class="transaction-item">Total</div>
+      <div class="transaction-fee">$250</div>
+    </li>
+  </ul>
 
-    <button class="violation-button" ng-click="setViolationCount(1)" ng-class="{ 'active': violationCount === 1 }">1</button>
-    <button class="violation-button" ng-click="setViolationCount(2)" ng-class="{ 'active': violationCount === 2 }">2</button>
-    <button class="violation-button" ng-click="setViolationCount(3)" ng-class="{ 'active': violationCount === 3 }">3</button>
-    <button class="violation-button" ng-click="setViolationCount(4)" ng-class="{ 'active': violationCount === 4 }">4</button>
-    <button class="violation-button" ng-click="setViolationCount(5)" ng-class="{ 'active': violationCount === 5 }">5</button>
+  <div class="refund-note" ng-click="showRefundModal()">
+    If your case is not successful, we will refund this fee.
   </div>
 
-  <button class="match-ticket-button" ng-click="continue()" ng-show="violationCount && !match">
-    Fight this ticket!
+  <div class="next-step" ng-click="showNextStepModal()">
+    What happens next?
+  </div>
+
+  <h4 style="margin-top:30px;">To book this case, please provide a credit card:</h4>
+
+  <form action="" method="POST" id="stripe-cc-form">
+
+    <div class="form-row" style="width: 215px;margin-right: 20px;">
+      <input type="text" id="card-number" size="16" maxlength="16" data-stripe="number"
+             placeholder="Card number"/>
+    </div>
+
+    <div class="form-row" style="width: 55px;margin-right:20px;">
+      <input type="text" id="cvc" size="4" maxlength="4" data-stripe="cvc"
+             placeholder="CVC"/>
+    </div>
+
+    <div class="form-row" style="width:100px;">
+      <input type="text" maxlength="2" data-stripe="exp-month"
+        placeholder="mm" style="float:left;width:40px;"/>
+      <input type="text" maxlength="4" data-stripe="exp-year"
+             placeholder="yyyy" style="margin-left: 55px;width:65px;"/>
+    </div>
+
+    <div class="payment-errors" style="display:none;"></div>
+
+    <button type="submit" style="clear:both;margin-top:10px;" ng-if="!isCardVerified">Verify card</button>
+    <button type="button" style="clear:both;margin-top:10px;" ng-if="isCardVerified"
+      on-click="confirmPayment()">Confirm payment</button>
+  </form>
+
+  <button class="confirm-payment-button" ng-click="confirmPayment()" ng-if="false">
+    Confirm
   </button>
-</div>
+</ion-view>
 
-<ng-include src="'views/match.html'"></ng-include>
 
-<button ng-click="showPopover($event)">Show popup</button>
+
+
+
+<style>
+  .page.payment-view #stripe-cc-form {
+    margin-top: 15px;
+  }
+  .page.payment-view #stripe-cc-form .payment-errors {
+    clear:both;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    color: #cc0000;
+  }
+  .page.payment-view #stripe-cc-form .form-row {
+    position: relative;
+    float: left;
+    padding-bottom: 1.875em;
+    margin-bottom: 1.875em;
+  }
+  .page.payment-view #stripe-cc-form label {
+    display: block;
+    position: absolute;
+    top: -18px;
+    font-size: 0.75em;
+    line-height: 1.25em;
+    font-weight: bold;
+    color: #2996cc;
+  }
+  .page.payment-view #stripe-cc-form input{
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    font-size: 1.7em;
+    line-height: 1.25em;
+    padding: 0.3125em 0;
+    height: 1.875em;
+    width: 100%;
+    border: 0;
+    outline: none;
+    border-bottom: 1px solid #bbb;
+    font-weight: lighter;
+  }
+  .page.payment-view #stripe-cc-form input:valid {
+    position: relative;
+    top: 1.875em;
+    margin-top: -1.875em;
+   }
+  .page.payment-view #stripe-cc-form input:focus {
+     border-bottom-color: #2996cc;
+   }
+
+  .page.payment-view .transaction-title {
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: solid 1px #ccc;
+  }
+  .page.payment-view ul.transactions li {
+    overflow: auto;
+  }
+  .page.payment-view ul.transactions li.primary {
+    margin-top: 10px;
+    overflow: auto;
+  }
+  .page.payment-view ul.transactions li.secondary {
+    margin-bottom: 5px;
+    overflow: auto;
+    --list-style-type: disc;
+  }
+  .page.payment-view ul.transactions li.primary .transaction-item {
+    margin-left: 10px;
+    margin-bottom: 5px;
+    float: left;
+  }
+  .page.payment-view ul.transactions li.secondary .transaction-item {
+    margin-left: 20px;
+    float: left;
+  }
+  .page.payment-view ul.transactions .transaction-fee {
+    float: right;
+    width: 40px;
+    text-align: right;
+  }
+
+  .page.payment-view ul.transactions li.secondary.total {
+    font-weight: 500;
+    margin-left: -10px;
+  }
+  .page.payment-view .refund-note {
+    background-color: lightgreen;
+    padding: 10px;
+    margin: 25px 0 10px 0;
+  }
+  .page.payment-view .next-step {
+    background-color: skyblue;
+    padding: 10px;
+    margin: 10px 0px;
+  }
+  .page.payment-view .confirm-payment-button {
+    margin-top: 100px;
+  }
+
+</style>

@@ -6,6 +6,7 @@ WebApp.factory('DataService', function($http, Constants)
   var loginWithFacebookUrl = baseUrl + '/user/facebook/';
   var signupUrl = baseUrl + 'user/create';
   var matchCitationUrl = baseUrl + 'citation/match/{0}';
+  var chargeCardUrl = baseUrl + '/{0}';
 
   var login = function() {
     console.log(loginUrl);
@@ -28,10 +29,30 @@ WebApp.factory('DataService', function($http, Constants)
     return $http.post(url);
   };
 
+  var chargeCard = function(stripeToken, chargeAmount, ) {
+    var stripe = require("stripe")(Constants.ENV.stripeSecretKey);
+
+    var charge = stripe.charges.create({
+      amount: chargeAmount * 100, // amount in cents, again
+      currency: "usd",
+      source: stripeToken,
+      description: "OTR - Legal fee to fight traffic ticket"
+    }, function(err, charge) {
+      if (err && err.type === 'StripeCardError') {
+        // The card has been declined
+        return err;
+      }
+    });
+    var url = chargeCardUrl.format(tokenId);
+    console.log(url);
+    return $http.post(url);
+  };
+
   return {
     login : login,
     loginWithFacebookUrl : loginWithFacebookUrl,
     signup : signup,
-    matchCitation : matchCitation
+    matchCitation : matchCitation,
+    chargeCard: chargeCard
   }
 });

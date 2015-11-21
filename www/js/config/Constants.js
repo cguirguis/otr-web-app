@@ -6,7 +6,8 @@ WebApp.constant("Constants", {
   ENV: {
     'name': 'DEVO',
     'apiEndpoint': 'https://otr-backend-service-us-devo.offtherecord.com/api/v1/',
-    'stripeClientId': 'ca_6TCbA0GpnmIafv7SC53zClcFYNajc6st'
+    'stripeClientId': 'pk_test_fHIOKc7Sf7gNjwUIIT3XJfDt',
+    'stripeSecretKey': 'sk_test_PXxXARh65V2rLDBVXI9mj5mG' // TEST KEY
   },
   CONFIGS: {
     'DaysToRespondToTicket' : 15

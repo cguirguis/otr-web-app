@@ -68,8 +68,8 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
       }
     ])
     .run(
-    ['$rootScope', '$state', '$stateParams', '$ionicPlatform',
-      function ($rootScope, $state, $stateParams, $ionicPlatform) {
+    ['$rootScope', '$state', '$stateParams', '$ionicPlatform', 'Constants',
+      function ($rootScope, $state, $stateParams, $ionicPlatform, Constants) {
         console.log("loading app");
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
@@ -88,9 +88,9 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
         });
 
-        $rootScope.$on('scope.stored', function (event, data) {
-          // controller $scope was stored using ScopeCache service
-        });
+        // Initialize Stripe key
+        Stripe.setPublishableKey(Constants.ENV.stripeClientId);
+        $rootScope.user = "Chris";
       }
     ]);
 

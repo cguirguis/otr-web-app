@@ -1,20 +1,54 @@
 
 controllers.controller('PaymentCtrl',
   ['$rootScope', '$scope', '$state', '$timeout', '$ionicPopover', 'ScopeCache',
-    function($rootScope, $scope, $state, $timeout, $ionicPopover, ScopeCache) {
+    function($rootScope, $scope, $state, $timeout, $ionicPopover, ScopeCache)
+    {
+      $scope.isCardVerified = false;
 
-    console.log("Payment controller loaded.");
-    $rootScope.pageTitle = "Payment info";
+      console.log("Payment controller loaded.");
+      $rootScope.pageTitle = "Payment info";
 
-    $scope.loading = false;
+      var stripeForm = $('#stripe-cc-form');
 
-    $scope.continue = function() {
+      stripeForm.on("submit", function(event) {
+        stripeForm.find('.payment-errors').css('display', 'none');
 
-      // Cache current scope
-      ScopeCache.store('payment', $scope);
-    };
+        // If this is the second submission, prevent page reload
+        if (stripeForm.find("input[name='stripeToken']")) {
+          $scope.isCardVerified = true;
+          $scope.$apply();
+          return false;
+        }
 
-    // Load cached $scope if user is navigating back
-    $scope = ScopeCache.get("payment") || $scope;
+        // Disable the submit button to prevent repeated clicks
+        stripeForm.find('button').prop('disabled', true);
+
+        Stripe.card.createToken(stripeForm, stripeResponseHandler);
+
+        // Prevent the form from submitting with the default action
+        return false;
+      });
+
+      var stripeResponseHandler = function(status, response) {
+        // Handle response from Stripe
+        if (response.error) {
+          // Show the errors on the form
+          stripeForm.find('.payment-errors').text(response.error.message);
+          stripeForm.find('.payment-errors').css('display', 'block');
+          stripeForm.find('button').prop('disabled', false);
+        } else {
+          // response contains id and card, which contains additional card details
+          var token = response.id;
+          $scope.token = token;
+          // Insert the token into the form so it gets submitted to the server
+          stripeForm.append($('<input type="hidden" name="stripeToken" />').val(token));
+          // and submit
+          stripeForm.submit();
+        }
+      };
+
+      $scope.confirmPayment = function() {
+        DataService.chargeCard($scope.token);
+      };
 
 }]);

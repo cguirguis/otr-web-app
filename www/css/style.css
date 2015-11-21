@@ -46,6 +46,18 @@
   bottom: 50px;
   width: 100%;
 }
+.light-text {
+  font-weight: 300;
+}
+hr {
+  display: block;
+  clear: both;
+  margin: em(30) 0;
+  border: 0;
+  outline: 0;
+  height: 2px;
+  background: #ddd;
+}
 /************* TICKET VIEW ************/
 
 .page.ticket-view h4 {
