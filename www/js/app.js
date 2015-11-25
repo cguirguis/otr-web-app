@@ -90,7 +90,14 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
 
         // Initialize Stripe key
         Stripe.setPublishableKey(Constants.ENV.stripeClientId);
-        $rootScope.user = "Chris";
+        //$rootScope.user = "Chris";
+
+        String.prototype.format = function () {
+          var args = [].slice.call(arguments);
+          return this.replace(/(\{\d+\})/g, function (a){
+            return args[+(a.substr(1,a.length-2))||0];
+          });
+        };
       }
     ]);
 

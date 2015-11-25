@@ -4,8 +4,8 @@
     <h1 class="title">Login</h1>
   </ion-header-bar>
 
-  <ion-content>
-    <div class="page login-view" ng-controller="LoginCtrl">
+  <ion-content ng-controller="LoginCtrl">
+    <div class="page login-view">
       <div class="login-options" ng-if="showLoginOptions">
         <button class="facebook-login-button" ng-click="loginWithFacebook()">Login with Facebook</button>
         <button class="email-login-button" ng-click="loginWithEmail()">Login with Email</button>
@@ -15,39 +15,49 @@
       <div class="email-login-form" ng-if="showEmailLogin">
         <div class="row">
           <div class="label">Email</div>
-          <input type="text" />
+          <input type="text" name="email" ng-model="email" />
         </div>
         <div class="row">
           <div class="label">Password</div>
-          <input type="text" />
+          <input type="password" name="password" ng-model="password" />
         </div>
+        <div class="form-errors" ng-bind-html="errorMessage" ng-if="errorMessage.length"></div>
         <button class="cancel" ng-click="cancelEmailLogin()">Cancel</button>
-        <button class="login-button" ng-click="submitEmailLoginForm()">Login</button>
+        <button class="login-button" ng-click="submitEmailLoginForm(email, password)" ng-disabled="loading">
+          Login
+          <ion-spinner icon="spiral" class="button-spinner spinner-light" ng-if="loading"></ion-spinner>
+        </button>
       </div>
 
-      <div class="signup-form" ng-if="showSignup">
+      <div id="signup-form" ng-if="showSignup">
         <div class="row">
           <div class="label">First name</div>
-          <input type="text" />
+          <input type="text" ng-model="newUser.firstname"/>
         </div>
         <div class="row">
           <div class="label">Last name</div>
-          <input type="text" />
+          <input type="text" ng-model="newUser.lastname" />
         </div>
         <div class="row">
           <div class="label">Email</div>
-          <input type="text" />
+          <input type="text" ng-model="newUser.emailAddress" />
         </div>
         <div class="row">
           <div class="label">Password</div>
-          <input type="text" />
+          <input type="password" ng-model="newUser.password" />
         </div>
         <div class="row">
           <div class="label"></div>
-          <input type="text" placeholder="Confirm password" />
+          <input type="password" placeholder="Confirm password" ng-model="newUser.passwordConfirm" />
         </div>
+
+        <div class="form-errors" ng-bind-html="errorMessage" ng-if="errorMessage.length"></div>
+
         <button class="cancel" ng-click="cancelSignup()">Cancel</button>
-        <button class="signup-submit-button" ng-click="submitSignupForm()">Signup</button>
+        <button type="submit" class="signup-submit-button" ng-disabled="loading" ng-click="submitSignupForm(newUser)">
+          Signup
+          <ion-spinner icon="spiral" class="button-spinner spinner-light" ng-if="loading"></ion-spinner>
+        </button>
       </div>
       </div>
     </div>
@@ -84,10 +94,10 @@
     background-color: rgba(224, 5, 5, 0.68);
     opacity: 1;
   }
-  .email-login-form .row, .signup-form .row {
+  .email-login-form .row, #signup-form .row {
     margin-top: 7px;
   }
-  .email-login-form .label, .signup-form .label {
+  .email-login-form .label, #signup-form .label {
     float: left;
     width: 80px;
     line-height: 40px;
@@ -96,11 +106,19 @@
     font-weight: 200;
     color: #666;
   }
-  .signup-form .label {
+  .email-login-form .form-errors {
+    color: firebrick;
+    margin-top:13px;
+  }
+  #signup-form .form-errors {
+    color: firebrick;
+    margin-top:13px;
+  }
+  #signup-form .label {
     width: 100px;
     text-align: right;
   }
-  .email-login-form input, .signup-form input {
+  .email-login-form input, #signup-form input {
     width: 85%;
     height: 40px;
     line-height: 40px;
@@ -110,7 +128,7 @@
     color: #666;
     font-weight: 300;
   }
-  .signup-form input {
+  #signup-form input {
     width: 69%;
   }
   button.login-button, button.signup-submit-button {
@@ -127,5 +145,10 @@
   button.cancel:hover {
     background-color: #ccc;
     opacity: 1;
+  }
+  .button-spinner {
+    margin: 0px 0px -12px 10px;
+    display: inline-block;
+    overflow: auto;
   }
 </style>

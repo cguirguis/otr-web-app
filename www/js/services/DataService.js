@@ -2,15 +2,20 @@
 WebApp.factory('DataService', function($http, Constants)
 {
   var baseUrl = Constants.ENV.apiEndpoint;
-  var loginUrl = baseUrl + 'user/authenticate';
-  var loginWithFacebookUrl = baseUrl + '/user/facebook/';
-  var signupUrl = baseUrl + 'user/create';
-  var matchCitationUrl = baseUrl + 'citation/match/{0}';
-  var chargeCardUrl = baseUrl + '/{0}';
+  var loginUrl = baseUrl + 'authentication/login';
+  var loginWithFacebookUrl = baseUrl + 'user/facebook/';
+  var signupUrl = baseUrl + 'signup';
+  var citationImageUrl = baseUrl + 'citations';
+  var matchCitationUrl = baseUrl + 'citations/{0}/case';
+  var chargeCardUrl = baseUrl + 'cases/{0}/payment';
 
-  var login = function() {
+  var login = function(username, password) {
     console.log(loginUrl);
-    return $http.post(loginUrl);
+    var data = {
+      "username": username,
+      "password": password
+    };
+    return $http.post(loginUrl, data, { withCredentials: true });
   };
 
   var loginWithFacebook = function() {
@@ -18,34 +23,39 @@ WebApp.factory('DataService', function($http, Constants)
     return $http.post(loginWithFacebookUrl);
   };
 
-  var signup = function() {
+  var signup = function(newUser) {
     console.log(signupUrl);
-    return $http.post(signupUrl);
+
+    var headers = {
+      'Content-Type': "application/json",
+      "Access-Control-Allow-Credentials": true
+    };
+    var data = { "user" : newUser };
+    return $http.post(signupUrl, data, { headers: headers, withCredentials: true });
+  };
+
+  var postCitationImage = function(imageData) {
+    var headers = {
+      'Content-Type': "application/json",
+    };
+    var data = { "rawImageData": imageData };
+
+    return $http.post(citationImageUrl, data, { headers: headers });
   };
 
   var matchCitation = function(citationId) {
     var url = matchCitationUrl.format(citationId);
-    console.log(url);
     return $http.post(url);
   };
 
-  var chargeCard = function(stripeToken, chargeAmount, ) {
-    var stripe = require("stripe")(Constants.ENV.stripeSecretKey);
-
-    var charge = stripe.charges.create({
-      amount: chargeAmount * 100, // amount in cents, again
-      currency: "usd",
-      source: stripeToken,
-      description: "OTR - Legal fee to fight traffic ticket"
-    }, function(err, charge) {
-      if (err && err.type === 'StripeCardError') {
-        // The card has been declined
-        return err;
-      }
-    });
-    var url = chargeCardUrl.format(tokenId);
+  var chargeCard = function(stripeToken, caseId, callback) {
+    var url = chargeCardUrl.format(caseId);
+    var data = { "cardId" : stripeToken };
+    var headers = {
+      'Cookie': $rootScope.user["auth_token"]
+    };
     console.log(url);
-    return $http.post(url);
+    return $http.post(url, data, { headers: headers });
   };
 
   return {
@@ -53,6 +63,7 @@ WebApp.factory('DataService', function($http, Constants)
     loginWithFacebookUrl : loginWithFacebookUrl,
     signup : signup,
     matchCitation : matchCitation,
+    postCitationImage: postCitationImage,
     chargeCard: chargeCard
   }
 });

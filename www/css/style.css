@@ -52,14 +52,28 @@
 hr {
   display: block;
   clear: both;
-  margin: em(30) 0;
+  margin: 2em 0;
   border: 0;
   outline: 0;
   height: 2px;
   background: #ddd;
 }
+.loading-container .loading {
+  color: #666;
+}
+.loading-container .loading .loading-text {
+  margin: 10px 0 5px 0;
+}
+.loading-container .loading .loading-link {
+  cursor: pointer;
+  font-size: 16px;
+  position: relative;
+  top: -75px;
+  right: -85px;
+  color: #ccc;
+  height: 0;
+}
 /************* TICKET VIEW ************/
-
 .page.ticket-view h4 {
   margin-top: 20px;
   text-align:center;

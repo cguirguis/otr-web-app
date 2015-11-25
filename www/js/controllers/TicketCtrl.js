@@ -1,7 +1,7 @@
 
 controllers.controller('TicketCtrl',
-  ['$rootScope', '$scope', '$state', '$timeout', '$cordovaDevice', '$cordovaFile', '$ionicPlatform', '$ionicLoading', '$ionicActionSheet', 'ImageService', 'FileService', 'ScopeCache',
-    function($rootScope, $scope, $state, $timeout, $cordovaDevice, $cordovaFile, $ionicPlatform, $ionicLoading, $ionicActionSheet, ImageService, FileService, ScopeCache)
+  ['$rootScope', '$scope', '$state', '$timeout', '$cordovaDevice', '$cordovaFile', '$ionicPlatform', '$ionicLoading', '$ionicActionSheet', 'ImageService', 'FileService', 'ScopeCache', 'DataService',
+    function($rootScope, $scope, $state, $timeout, $cordovaDevice, $cordovaFile, $ionicPlatform, $ionicLoading, $ionicActionSheet, ImageService, FileService, ScopeCache, DataService)
     {
       console.log("Ticket controller loaded.");
       $rootScope.pageTitle = "Your Ticket";
@@ -123,6 +123,19 @@ controllers.controller('TicketCtrl',
         }
         $rootScope.citation.image = $scope.images[0].src;
         console.log($rootScope.citation.image);
+
+        // Post citation image
+        var imageData = "R0lGOD lhCwAOAMQfAP////7+/vj4+Hh4eHd3d/v7+/Dw8HV1dfLy8ubm5vX19e3t7fr 6+nl5edra2nZ2dnx8fMHBwYODg/b29np6eujo6JGRkeHh4eTk5LCwsN3d3dfX 13Jycp2dnevr6////yH5BAEAAB8ALAAAAAALAA4AAAVq4NFw1DNAX/o9imAsB tKpxKRd1+YEWUoIiUoiEWEAApIDMLGoRCyWiKThenkwDgeGMiggDLEXQkDoTh CKNLpQDgjeAsY7MHgECgx8YR8oHwNHfwADBACGh4EDA4iGAYAEBAcQIg0Dk gcEIQA7";
+        DataService.postCitationImage($rootScope.citation.image)
+          .error(function(data, status) {
+            console.log("Error uploading ticket image: " + JSON.stringify(data));
+          })
+          .success(function(data, status) {
+            console.log("Ticket image uploaded successfully: " + JSON.stringify(data));
+          })
+          .then(function(data) {
+            $rootScope.citation.citationId = data.citation.citationId;
+          });
 
         // Cache current scope
         ScopeCache.store('ticket', $scope);

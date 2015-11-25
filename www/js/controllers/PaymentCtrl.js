@@ -1,7 +1,7 @@
 
 controllers.controller('PaymentCtrl',
-  ['$rootScope', '$scope', '$state', '$timeout', '$ionicPopover', 'ScopeCache',
-    function($rootScope, $scope, $state, $timeout, $ionicPopover, ScopeCache)
+  ['$rootScope', '$scope', '$state', '$timeout', 'DataService', 'ScopeCache',
+    function($rootScope, $scope, $state, $timeout, DataService, ScopeCache)
     {
       $scope.isCardVerified = false;
 
@@ -48,7 +48,20 @@ controllers.controller('PaymentCtrl',
       };
 
       $scope.confirmPayment = function() {
-        DataService.chargeCard($scope.token);
+        $rootScope.citation = $rootScope.citation || {};
+        $rootScope.citation.caseId = $rootScope.citation.caseId || "OTR-123";
+
+        var caseId = $rootScope.citation.caseId;
+        DataService.chargeCard($scope.token, caseId)
+          .error(function(data, status, headers, config) {
+          })
+          .success(function(data, status, headers, config) {
+          })
+          .then(paymentResponseHandler);
+      };
+
+      var paymentResponseHandler = function(result) {
+        console.log(JSON.stringify(result));
       };
 
 }]);
