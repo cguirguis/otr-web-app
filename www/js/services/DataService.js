@@ -5,7 +5,7 @@ WebApp.factory('DataService', function($http, Constants)
   var loginUrl = baseUrl + 'authentication/login';
   var loginWithFacebookUrl = baseUrl + 'user/facebook/';
   var signupUrl = baseUrl + 'signup';
-  var citationImageUrl = baseUrl + 'citations';
+  var citationUrl = baseUrl + 'citations/';
   var matchCitationUrl = baseUrl + 'citations/{0}/case';
   var chargeCardUrl = baseUrl + 'cases/{0}/payment';
 
@@ -24,8 +24,6 @@ WebApp.factory('DataService', function($http, Constants)
   };
 
   var signup = function(newUser) {
-    console.log(signupUrl);
-
     var headers = {
       'Content-Type': "application/json",
       "Access-Control-Allow-Credentials": true
@@ -40,7 +38,27 @@ WebApp.factory('DataService', function($http, Constants)
     };
     var data = { "rawImageData": imageData };
 
-    return $http.post(citationImageUrl, data, { headers: headers });
+    return $http.post(citationUrl, data, { headers: headers });
+  };
+
+  var updateCitation = function(citation) {
+    var url = citationUrl + citation.citationId;
+
+    var data = { "citation" : {
+      "violationCount" : citation.violationCount,
+      "involvesAccident" : citation.involvesAccident || false,
+      "isPastDue" : citation.isPastDue,
+      "citationIssueDateUTC" : citation.date,
+      "court" : {
+        "courtId" : citation.court.courtId
+      }
+    }};
+
+    var headers = {
+      'Content-Type': "application/json"
+    };
+
+    return $http.put(url, data, { headers: headers });
   };
 
   var matchCitation = function(citationId) {
@@ -62,8 +80,9 @@ WebApp.factory('DataService', function($http, Constants)
     login : login,
     loginWithFacebookUrl : loginWithFacebookUrl,
     signup : signup,
-    matchCitation : matchCitation,
     postCitationImage: postCitationImage,
+    updateCitation: updateCitation,
+    matchCitation : matchCitation,
     chargeCard: chargeCard
   }
 });

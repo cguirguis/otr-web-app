@@ -11,8 +11,8 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
 
 (function() {
   WebApp
-    .config(['$stateProvider', '$urlRouterProvider',
-      function ($stateProvider, $urlRouterProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
+      function ($stateProvider, $urlRouterProvider, $httpProvider) {
         //
         // Redirects and otherwise
         //
@@ -65,11 +65,24 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
             templateUrl: "../views/cases.html",
             controller: "CasesCtrl"
           });
+
+        $httpProvider.interceptors.push(function($rootScope) {
+          return {
+            request: function(config) {
+              $rootScope.$broadcast('loading:show');
+              return config;
+            },
+            response: function(response) {
+              $rootScope.$broadcast('loading:hide');
+              return response;
+            }
+          };
+        })
       }
     ])
     .run(
-    ['$rootScope', '$state', '$stateParams', '$ionicPlatform', 'Constants',
-      function ($rootScope, $state, $stateParams, $ionicPlatform, Constants) {
+    ['$rootScope', '$state', '$stateParams', '$ionicPlatform', '$ionicLoading', 'Constants',
+      function ($rootScope, $state, $stateParams, $ionicPlatform, $ionicLoading, Constants) {
         console.log("loading app");
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
@@ -90,7 +103,35 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
 
         // Initialize Stripe key
         Stripe.setPublishableKey(Constants.ENV.stripeClientId);
+
         //$rootScope.user = "Chris";
+
+        $rootScope.$on('loading:show', function() {
+          $ionicLoading.show({template:
+            "<div class='loading-box'>" +
+              "<ion-spinner icon='android'></ion-spinner>" +
+              "<div class='loading-text'>Loading...</div>" +
+            "</div>"});
+        })
+
+        $rootScope.$on('loading:hide', function() {
+          $ionicLoading.hide();
+        })
+
+        // Display 'loading' modal
+        $rootScope.displayLoading = function(message) {
+          $ionicLoading.show({
+            template: "<div class='loading-box'>" +
+            "<ion-spinner icon='android'></ion-spinner>" +
+            "<div class='loading-text'>" + message + "</div>" +
+            "<div class='loading-link' ng-click='cancelMatch()'>x</div>" +
+            "</div>"
+          });
+        }
+        // Hide 'loading' modal
+        $rootScope.hideLoading = function() {
+          $ionicLoading.hide();
+        };
 
         String.prototype.format = function () {
           var args = [].slice.call(arguments);

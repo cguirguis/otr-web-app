@@ -17,7 +17,8 @@ controllers.controller('ViolationCtrl',
       if ($scope.waitingForCitationId) {
         // Now that citation image has been uploaded,
         // we can attempt to match the ticket again
-        matchTicket();
+        fightThisTicket();
+        $scope.waitingForCitationId = false;
       }
     });
 
@@ -33,6 +34,70 @@ controllers.controller('ViolationCtrl',
       $scope.loginModal.hide();
     };
 
+    $scope.fightThisTicket = function() {
+      if (!$scope.waitingForCitationId) {
+        $rootScope.displayLoading("Crunching your ticket info...");
+
+        // Update citation with violation count
+        $rootScope.citation = $rootScope.citation || {};
+        $rootScope.citation.violationCount = $scope.violationCount;
+
+        // Check that citation picture finished uploading to the server
+        // If so, update citation. If not, wait until we get the citationId
+        if (!$rootScope.citation.citationId) {
+          $scope.waitingForCitationId = true;
+          return;
+        }
+      }
+
+      // Save citation
+      DataService.updateCitation($rootScope.citation)
+        .error(function(data) {
+          console.log("Failed to update citation: " + JSON.stringify(data));
+          $rootScope.hideLoading();
+          // TODO: Display appropriate error message to user
+        })
+        .success(function(data) {
+          // Now try matching ticket
+          matchTicket();
+        });
+    };
+
+    var matchTicket = function() {
+      // Call match API with $rootScope.citation
+      DataService.matchCitation($rootScope.citation.citationId)
+        .error(function(data, status) {
+          console.log("Error matching citation: " + JSON.stringify(data));
+          matchReturned(null);
+        })
+        .success(function(data, status) {
+          console.log("Successfully matched citation: " + JSON.stringify(data));
+        })
+        .then(matchReturned);
+    };
+
+    var matchReturned = function(response) {
+      $rootScope.hideLoading();
+
+      if (response && response.data && response.data.theCase) {
+        $scope.match = response;
+        var newCase = response.data.theCase;
+        $rootScope.currentCase = {
+          caseId: newCase.caseId,
+          caseEstimatedCost: newCase.estimatedCost/100,
+          lawfirmId: newCase.lawfirmId,
+          citationResponse: newCase.citation
+        }
+      } else {
+        // TODO: Display 'no lawyer found' view
+      }
+    };
+
+    $rootScope.cancelMatch = function() {
+      $scope.waitingForCitationId = false;
+      $ionicLoading.hide();
+    };
+
     $scope.confirmMatch = function() {
       $scope.loading = true;
 
@@ -45,67 +110,6 @@ controllers.controller('ViolationCtrl',
         $state.go("payment");
       }
     };
-
-    $scope.fightThisTicket = function() {
-      // Update citation with violation count
-      $rootScope.citation = $rootScope.citation || {};
-      $rootScope.citation.violationCount = $scope.violationCount;
-
-      // Attempt to match ticket
-      matchTicket();
-    };
-
-    var matchTicket = function() {
-      //$scope.loading = true;
-      $ionicLoading.show({
-        template:
-        "<div class='loading-box'>" +
-          "<ion-spinner icon='android'></ion-spinner>" +
-          "<div class='loading-text'>Crunching your ticket info...</div>" +
-          "<div class='loading-link' ng-click='cancelMatch()'>x</div>" +
-        "</div>"
-      });
-
-      // Check that all required citation details available
-      // and that picture finished uploading to the server
-      if (!$rootScope.citation.citationId) {
-        $scope.waitingForCitationId = true;
-        return;
-      }
-
-      // Call match API with $rootScope.citation
-      DataService.matchCitation($rootScope.citation.citationId)
-        .error(function(data, status) {
-          console.log("Error matching citation: " + JSON.stringify(data));
-          $ionicLoading.hide();
-          matchReturned(null);
-        })
-        .success(function(data, status) {
-          console.log("Successfully matched citation: " + JSON.stringify(data));
-        })
-        .then(matchReturned);
-    };
-
-    var matchReturned = function(response) {
-      $ionicLoading.hide();
-
-      if (response) {
-        $scope.match = response;
-        $rootScope.currentCase = {
-          caseId: response.caseId,
-          caseEstimatedCost: response.caseEstimatedCost/100,
-          lawfirmId: response.lawfirmId,
-          citationResponse: response.citationResponse
-        }
-      } else {
-        // Display 'no lawyer found' view
-      }
-    };
-
-    $rootScope.cancelMatch = function() {
-      $scope.waitingForCitationId = false;
-      $ionicLoading.hide();
-    }
 
     // Load cached $scope if user is navigating back
     $scope = ScopeCache.get("violations") || $scope;
