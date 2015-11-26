@@ -73,6 +73,14 @@ hr {
   color: #ccc;
   height: 0;
 }
+
+/************* NAV ************/
+.step-completed {
+  margin: 0px 0px 0px 0px;
+  color: rgb(70,230,70);
+  float: right;
+}
+
 /************* TICKET VIEW ************/
 .page.ticket-view h4 {
   margin-top: 20px;

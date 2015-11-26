@@ -69,15 +69,19 @@
                 </ion-item>
                 <ion-item>
                   <a ui-sref="ticket">Your ticket</a>
+                  <i class="step-completed icon ion-checkmark" ng-if="citation && citation.image.length"></i>
                 </ion-item>
                 <ion-item>
                   <a ui-sref="court">Assigned court</a>
+                  <i class="step-completed icon ion-checkmark" ng-if="citation && citation.court"></i>
                 </ion-item>
                 <ion-item>
                   <a ui-sref="date">Date issued</a>
+                  <i class="step-completed icon ion-checkmark" ng-if="citation && citation.date"></i>
                 </ion-item>
                 <ion-item>
                   <a ui-sref="violations">Violations</a>
+                  <i class="step-completed icon ion-checkmark" ng-if="citation && citation.violationCount"></i>
                 </ion-item>
                 <ion-item>
                   <a ui-sref="payment">Payment info</a>
