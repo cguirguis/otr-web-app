@@ -2,7 +2,7 @@
 var controllers = angular.module('OTRControllers', []);
 
 controllers.controller('HomeCtrl',
-  function($rootScope, $scope, $http, $state, $location) {
+  function($rootScope, $scope, $http, $state, $location, $ionicSideMenuDelegate) {
 
   console.log("Home controller loaded.");
   $rootScope.pageTitle = "Home";
@@ -10,6 +10,10 @@ controllers.controller('HomeCtrl',
   $scope.fightNewTicket = function (path) {
     $location.path(path)
   }
+
+  $scope.toggleMenu = function() {
+    $ionicSideMenuDelegate.toggleLeft();
+  };
 
 });
 

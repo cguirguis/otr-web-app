@@ -66,6 +66,7 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
             controller: "CasesCtrl"
           });
 
+        // Displays spinner every time an HTTP request is made
         $httpProvider.interceptors.push(function($rootScope) {
           return {
             request: function(config) {

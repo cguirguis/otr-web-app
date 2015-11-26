@@ -1,10 +1,16 @@
 
 <ion-view class="page ticket-view">
   <ion-content scroll="false">
-    <div class="image-input-options" ng-show="!capturingImage || !images.length">
+    <div class="image-input-options" ng-show="(!capturingImage || !images.length) && !showFileInputView">
       <h4 ng-show="!images.length && !capturingImage">Please provide a clear photo of your ticket</h4>
 
       <button class="button camera-button" ng-click="addMedia()" ng-show="!capturingImage && !images.length"></button>
+    </div>
+
+    <div class="file-input-container" ng-show="showFileInputView">
+      <h4>Please upload a picture of your ticket:</h4>
+      <input type="file" id="ticket-photo-input" />
+      <div class="error-message" ng-if="inputErrorMessage.length">{{inputErrorMessage}}</div>
     </div>
 
     <div ng-show="capturingImage">
@@ -14,16 +20,15 @@
     </div>
 
     <div class="ticket-image-container" ng-show="images.length">
-      <img id="image-capture" src="" style="width:100%">
+      <img id="image-capture" src="" style="width:77%">
     </div>
 
     <canvas style="display:none;" width="1280" height="720"></canvas>
   </ion-content>
 
   <div class="bottom-bar" ng-show="images.length">
-    <button class="retake-picture" ng-click="retakePicture()">Retake picture</button>
+    <button class="retake-picture" ng-click="retakePicture()">{{!base64Image ? "Retake picture" : "Select another image"}}</button>
     <button class="continue" ng-click="continue()">Continue</button>
   </div>
 
 </ion-view>
-
