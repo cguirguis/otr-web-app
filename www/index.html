@@ -41,6 +41,7 @@
     <script src="js/services/FileService.js"></script>
     <script src="js/services/ImageService.js"></script>
     <script src="js/services/DataService.js"></script>
+    <script src="js/services/UtilitiesService.js"></script>
     <!-- Controllers -->
     <script src="js/controllers/HomeCtrl.js"></script>
     <script src="js/controllers/LoginCtrl.js"></script>
@@ -62,30 +63,40 @@
               <!--button class="button button-icon ion-plus" ng-click="newProject()"-->
               </button>
             </ion-header-bar>
-            <ion-content scroll="false">
+            <ion-content scroll="false" style="background-color: #222">
               <ion-list>
-                <ion-item>
-                  <a ui-sref="home">Home</a>
-                </ion-item>
-                <ion-item>
-                  <a ui-sref="ticket">Your ticket</a>
-                  <i class="step-completed icon ion-checkmark" ng-if="citation && citation.image.length"></i>
-                </ion-item>
-                <ion-item>
-                  <a ui-sref="court">Assigned court</a>
-                  <i class="step-completed icon ion-checkmark" ng-if="citation && citation.court"></i>
-                </ion-item>
-                <ion-item>
-                  <a ui-sref="date">Date issued</a>
-                  <i class="step-completed icon ion-checkmark" ng-if="citation && citation.date"></i>
-                </ion-item>
-                <ion-item>
-                  <a ui-sref="violations">Violations</a>
-                  <i class="step-completed icon ion-checkmark" ng-if="citation && citation.violationCount"></i>
-                </ion-item>
-                <ion-item>
-                  <a ui-sref="payment">Payment info</a>
-                </ion-item>
+                <a ui-sref="home">
+                  <ion-item>Home</ion-item>
+                </a>
+                <a ui-sref="ticket">
+                  <ion-item>
+                    Your ticket
+                    <i class="step-completed icon ion-checkmark" ng-if="citation && citation.image.length"></i>
+                  </ion-item>
+                </a>
+                <a ui-sref="court">
+                  <ion-item>
+                    Assigned court
+                    <i class="step-completed icon ion-checkmark" ng-if="citation && citation.court"></i>
+                  </ion-item>
+                </a>
+                <a ui-sref="date">
+                  <ion-item>
+                    Date issued
+                    <i class="step-completed icon ion-checkmark" ng-if="citation && citation.date"></i>
+                  </ion-item>
+                </a>
+                <a ui-sref="violations">
+                  <ion-item>
+                    Violations
+                    <i class="step-completed icon ion-checkmark" ng-if="citation && citation.violationCount"></i>
+                  </ion-item>
+                </a>
+                <a ui-sref="payment">
+                  <ion-item>
+                    Payment info
+                  </ion-item>
+                </a>
               </ion-list>
             </ion-content>
           </ion-side-menu>
@@ -98,9 +109,15 @@
                   </button>
                   <h1 class="title">{{pageTitle}}</h1>
 
-                  <!--button class="button button-icon" ng-click="newTask()">
-                    <i class="icon ion-compose"></i>
-                  </button-->
+                <button class="button button-icon login-nav-button" ng-if="user == null" ng-click="login()">
+                  <i class="icon ion-log-in" style="margin-right:5px;"></i>
+                  <span style="font-size:14px;">Log in</span>
+                </button>
+                <button class="button button-icon login-nav-button" ng-if="user != null" ng-click="showUserDropdown($event)">
+                  <i class="icon ion-ios-person" style="margin-right:5px;"></i>
+                  <span class="nav-username">{{user.firstname}} {{user.lastname}} </span>
+                  <!--<span style="font-size:14px;">Log in</span>-->
+                </button>
               </ion-header-bar>
               <ion-content scroll="true" style="height:100%">
 
@@ -119,5 +136,6 @@
 
       </ion-side-menus>
 
+      <div id="fb-root"></div>
   </body>
 </html>

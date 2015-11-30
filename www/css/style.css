@@ -37,7 +37,7 @@
 }.menu-left ion-item:hover {
    background-color: #555;
  }
-.menu-left ion-item a {
+.menu-left a ion-item {
   color: white;
   text-decoration: none;
 }
@@ -73,12 +73,33 @@ hr {
   color: #ccc;
   height: 0;
 }
+.bar-dark button.button {
+  background-color: white;
+}
+.bar-dark button.button:hover {
+  background-color:#555;
+}
+.bar-dark button.button.login-nav-button i.icon:before {
+  font-size: 25px;
+}
 
 /************* NAV ************/
 .step-completed {
   margin: 0px 0px 0px 0px;
   color: rgb(70,230,70);
   float: right;
+}
+.popover.user-dropdown {
+  width: 200px;
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.4);
+  margin-top: 4px;
+  height: 158px;
+  background-color: transparent;
+  margin-left: 10px;
+}
+.user-actions a .item:hover {
+  background-color: #efefef;
+  cursor: pointer;
 }
 
 /************* TICKET VIEW ************/
@@ -198,7 +219,7 @@ button.retake-picture:hover {
   height: 30px;
   line-height: 30px;
   border: solid 3px #f0f0f0;
-  width: 100%;
+  width: 96%;
   font-size: 2em;
   color: #444;
   font-weight: lighter;
@@ -257,7 +278,7 @@ button.retake-picture:hover {
   font-size: 18px;
 }
 .page.court-view .confirm-court-button {
-  width: 100%;
+  width: 96%;
   cursor: pointer;
   color: white;
   height: 55px;

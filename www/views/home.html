@@ -1,10 +1,10 @@
 
 <div class="page home-view">
-  <div style="margin-top: 20px;text-align: center;background-color: white">
+  <div style="margin-top: 20px;text-align: center;">
 
-    <img src="../../img/ionic.png" style="margin-bottom:20px">
+    <img class="logo-img" src="../../img/otr-logo.png" style="margin-bottom:20px">
 
-    <h1>A traffic ticket follows you long after you've paid the fine...</h1>
+    <h1>A traffic ticket follows you long after you've paid the fine.</h1>
 
     <br><br>
 
@@ -65,3 +65,28 @@
     </ion-tab>
   </ion-tabs>
 -->
+
+
+<style>
+  .page.home-view {
+    background-image: url('../img/desert-road.jpg');
+    background-position-x: center;
+    background-repeat: no-repeat;
+    background-color:#333;
+    background-size: 100%;
+    border:none;
+    height: 100%;
+  }
+  .page.home-view h1 {
+    color: white;
+    font-size: 2em;
+    font-weight: 300;
+  }
+  .page.home-view .logo-img {
+    height: 40px;
+  }
+  ion-header-bar.bar.bar-dark.bar-header {
+    background-color: #3d3d3d;
+    background-image: url('../img/home-navbar-background.jpg');
+  }
+</style>

@@ -2,6 +2,7 @@
 WebApp.factory('DataService', function($http, Constants)
 {
   var baseUrl = Constants.ENV.apiEndpoint;
+  var userUrl = baseUrl + 'user';
   var loginUrl = baseUrl + 'authentication/login';
   var loginWithFacebookUrl = baseUrl + 'user/facebook/';
   var signupUrl = baseUrl + 'signup';
@@ -9,13 +10,21 @@ WebApp.factory('DataService', function($http, Constants)
   var matchCitationUrl = baseUrl + 'citations/{0}/case';
   var chargeCardUrl = baseUrl + 'cases/{0}/payment';
 
+  var jsonContentTypeHeader = {
+    'Content-Type': "application/json"
+  };
+
+  var getUser = function() {
+    return $http.get(userUrl);
+  };
+
   var login = function(username, password) {
     console.log(loginUrl);
-    var data = {
-      "username": username,
-      "password": password
-    };
-    return $http.post(loginUrl, data, { withCredentials: true });
+    var url = loginUrl + "?username={0}&password={1}".format(
+        encodeURIComponent(username),
+        encodeURIComponent(password)
+      );
+    return $http.post(url);
   };
 
   var loginWithFacebook = function() {
@@ -25,16 +34,16 @@ WebApp.factory('DataService', function($http, Constants)
 
   var signup = function(newUser) {
     var headers = {
-      'Content-Type': "application/json",
-      "Access-Control-Allow-Credentials": true
+      'Content-Type': "application/json"
     };
     var data = { "user" : newUser };
-    return $http.post(signupUrl, data, { headers: headers, withCredentials: true });
+
+    return $http.post(signupUrl, data, { headers: headers });
   };
 
   var postCitationImage = function(imageData) {
     var headers = {
-      'Content-Type': "application/json",
+      'Content-Type': "application/json"
     };
     var data = { "rawImageData": imageData };
 
@@ -69,14 +78,15 @@ WebApp.factory('DataService', function($http, Constants)
   var chargeCard = function(stripeToken, caseId, callback) {
     var url = chargeCardUrl.format(caseId);
     var data = { "cardId" : stripeToken };
-    var headers = {
+    /*var headers = {
       'Cookie': $rootScope.user["auth_token"]
-    };
+    };*/
     console.log(url);
     return $http.post(url, data, { headers: headers });
   };
 
   return {
+    getUser: getUser,
     login : login,
     loginWithFacebookUrl : loginWithFacebookUrl,
     signup : signup,

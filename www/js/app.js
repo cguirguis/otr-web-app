@@ -13,6 +13,10 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
   WebApp
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
       function ($stateProvider, $urlRouterProvider, $httpProvider) {
+
+        // Set this to get/send cookie info for all requests
+        $httpProvider.defaults.withCredentials = true;
+
         //
         // Redirects and otherwise
         //
@@ -78,13 +82,13 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
               return response;
             }
           };
-        })
+        });
       }
     ])
     .run(
-    ['$rootScope', '$state', '$stateParams', '$ionicPlatform', '$ionicLoading', 'Constants',
-      function ($rootScope, $state, $stateParams, $ionicPlatform, $ionicLoading, Constants) {
-        console.log("loading app");
+    ['$rootScope', '$state', '$stateParams', '$ionicPlatform', '$window', '$ionicModal', '$ionicLoading', 'Constants', 'UtilitiesService',
+      function ($rootScope, $state, $stateParams, $ionicPlatform, $window, $ionicModal, $ionicLoading, Constants, UtilitiesService) {
+
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
 
@@ -97,30 +101,76 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
           if (window.StatusBar) {
             StatusBar.styleDefault();
           }
-        });
 
-        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+          window.fbAsyncInit = function() {
+            // Executed when the SDK is loaded
+            FB.init({
+              appId       : '545669822241752',
+              //channelUrl  : 'views/channel.html',
+              //status      : true, // Set if you want to check the authentication status at the start up of the app
+              cookie      : true, // Enable cookies to allow the server to access the session
+              xfbml       : true,  // Parse XFBML
+              version     : 'v2.2'
+            });
+
+            // Now that we've initialized the JavaScript SDK, we call
+            // FB.getLoginStatus().  This function gets the state of the
+            // person visiting this page and can return one of three states to
+            // the callback you provide.  They can be:
+            //
+            // 1. Logged into your app ('connected')
+            // 2. Logged into Facebook, but not your app ('not_authorized')
+            // 3. Not logged into Facebook and can't tell if they are logged into
+            //    your app or not.
+            //
+            // These three cases are handled in the callback function.
+            FB.getLoginStatus(function(response) {
+              UtilitiesService.fbStatusChangeCallback(response);
+            });
+          };
+
+          // Load the SDK asynchronously
+          (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "http://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
         });
 
         // Initialize Stripe key
         Stripe.setPublishableKey(Constants.ENV.stripeClientId);
 
-        //$rootScope.user = "Chris";
+        // Create login modal
+        $ionicModal.fromTemplateUrl('views/login.html', {
+          animation: 'slide-in-up'
+        }).then(function(modal) {
+          $rootScope.loginModal = modal;
+        });
+        $rootScope.showLoginModal = function() {
+          $rootScope.loginModal.show();
+        };
+        $rootScope.closeLoginModal = function() {
+          $rootScope.loginModal.hide();
+        };
 
         $rootScope.$on('loading:show', function() {
-          $ionicLoading.show({template:
-            "<div class='loading-box'>" +
+            $ionicLoading.show({
+              template: "<div class='loading-box'>" +
               "<ion-spinner icon='android'></ion-spinner>" +
               "<div class='loading-text'>Loading...</div>" +
-            "</div>"});
-        })
+              "</div>"
+            });
+        });
 
         $rootScope.$on('loading:hide', function() {
           $ionicLoading.hide();
-        })
+        });
 
         // Display 'loading' modal
         $rootScope.displayLoading = function(message) {
+          $rootScope.showDefaultSpinner = true;
           $ionicLoading.show({
             template: "<div class='loading-box'>" +
             "<ion-spinner icon='android'></ion-spinner>" +
@@ -128,9 +178,11 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
             "<div class='loading-link' ng-click='cancelMatch()'>x</div>" +
             "</div>"
           });
-        }
+        };
+
         // Hide 'loading' modal
         $rootScope.hideLoading = function() {
+          $rootScope.showDefaultSpinner = false;
           $ionicLoading.hide();
         };
 

@@ -1,7 +1,7 @@
 
 controllers.controller('ViolationCtrl',
-  ['$rootScope', '$scope', '$state', '$timeout', '$ionicModal', '$ionicLoading', 'ScopeCache', 'DataService',
-    function($rootScope, $scope, $state, $timeout, $ionicModal, $ionicLoading, ScopeCache, DataService) {
+  ['$rootScope', '$scope', '$state', '$timeout', '$ionicLoading', 'ScopeCache', 'DataService',
+    function($rootScope, $scope, $state, $timeout, $ionicLoading, ScopeCache, DataService) {
 
     console.log("Violation controller loaded.");
     $rootScope.pageTitle = "Ticket Violations";
@@ -21,18 +21,6 @@ controllers.controller('ViolationCtrl',
         $scope.waitingForCitationId = false;
       }
     });
-
-    $ionicModal.fromTemplateUrl('../views/login.html', {
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.loginModal = modal;
-    });
-    $scope.showModal = function() {
-      $scope.loginModal.show();
-    };
-    $scope.closeModal = function() {
-      $scope.loginModal.hide();
-    };
 
     $scope.fightThisTicket = function() {
       if (!$scope.waitingForCitationId) {
@@ -101,12 +89,11 @@ controllers.controller('ViolationCtrl',
     $scope.confirmMatch = function() {
       $scope.loading = true;
 
-      // Make sure user is logged in
+      // If user not logged in, show login modal
+      // otherwise, go to payment view
       if (!$rootScope.user) {
-        // Display login modal
-        $scope.loginModal.show();
+        $rootScope.showLoginModal();
       } else {
-        // To go to Payment view
         $state.go("payment");
       }
     };
