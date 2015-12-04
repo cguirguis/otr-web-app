@@ -41,6 +41,7 @@
     <script src="js/services/FileService.js"></script>
     <script src="js/services/ImageService.js"></script>
     <script src="js/services/DataService.js"></script>
+    <script src="js/services/FacebookService.js"></script>
     <script src="js/services/UtilitiesService.js"></script>
     <!-- Controllers -->
     <script src="js/controllers/HomeCtrl.js"></script>
@@ -118,6 +119,11 @@
                   <span class="nav-username">{{user.firstname}} {{user.lastname}} </span>
                   <!--<span style="font-size:14px;">Log in</span>-->
                 </button>
+
+<!--
+                <fb:login-button scope="public_profile,email" onlogin="checkFacebookLoginState();"></fb:login-button>
+-->
+
               </ion-header-bar>
               <ion-content scroll="true" style="height:100%">
 
@@ -131,11 +137,11 @@
 
                   <ion-nav-view></ion-nav-view>
 
+                  <div id="status"></div>
+
               </ion-content>
           </ion-side-menu-content>
 
       </ion-side-menus>
-
-      <div id="fb-root"></div>
   </body>
 </html>

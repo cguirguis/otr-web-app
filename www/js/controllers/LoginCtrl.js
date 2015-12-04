@@ -1,7 +1,7 @@
 
 controllers.controller('LoginCtrl',
-  ['$rootScope', '$scope', 'DataService', 'UtilitiesService',
-    function($rootScope, $scope, DataService, UtilitiesService)
+  ['$rootScope', '$scope', 'DataService', 'UtilitiesService', 'FacebookService',
+    function($rootScope, $scope, DataService, UtilitiesService, FacebookService)
   {
     console.log("Login controller loaded.");
     $scope.showLoginOptions = true;
@@ -27,16 +27,14 @@ controllers.controller('LoginCtrl',
     };
 
     $scope.loginWithFacebook = function() {
-      DataService.loginWithFacebook()
-      .then(function(response) {
-
-        });
+      FacebookService.login(UtilitiesService.statusChangeCallback);
     };
 
     $scope.checkFacebookLoginState = function() {
       // This function is called when someone finishes with the Login
-      // Button.  See the onlogin handler attached to it in the sample
+      // Button. See the onlogin handler attached to it in the sample
       // code below.
+      alert("checkFacebookLoginState");
       FB.getLoginStatus(function(response) {
         UtilitiesService.fbStatusChangeCallback(response);
       });
@@ -112,6 +110,7 @@ controllers.controller('LoginCtrl',
       DataService.getUser()
         .then(function(response) {
           $rootScope.user = response.data.user;
+
         });
     };
 

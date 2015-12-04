@@ -4,6 +4,7 @@ WebApp.factory('DataService', function($http, Constants)
   var baseUrl = Constants.ENV.apiEndpoint;
   var userUrl = baseUrl + 'user';
   var loginUrl = baseUrl + 'authentication/login';
+  var logoutUrl = baseUrl + "authentication/logout";
   var loginWithFacebookUrl = baseUrl + 'user/facebook/';
   var signupUrl = baseUrl + 'signup';
   var citationUrl = baseUrl + 'citations/';
@@ -25,6 +26,10 @@ WebApp.factory('DataService', function($http, Constants)
         encodeURIComponent(password)
       );
     return $http.post(url);
+  };
+
+  var logout = function() {
+    return $http.post(logoutUrl);
   };
 
   var loginWithFacebook = function() {
@@ -88,6 +93,7 @@ WebApp.factory('DataService', function($http, Constants)
   return {
     getUser: getUser,
     login : login,
+    logout: logout,
     loginWithFacebookUrl : loginWithFacebookUrl,
     signup : signup,
     postCitationImage: postCitationImage,

@@ -7,8 +7,7 @@
   <ion-content ng-controller="LoginCtrl">
     <div class="page login-view">
       <div class="login-options" ng-if="showLoginOptions">
-        <fb:login-button scope="public_profile,email" onlogin="checkFacebookLoginState();" style="height:0px;border:solid 1px blue;display:block"></fb:login-button>
-        <button class="facebook-login-button" ng-click="loginWithFacebook()">Login with Facebook</button>
+        <button class="facebook-login-button" ng-click="loginWithFacebook()">{{ !user || !user.isFbAuthed ? 'Login with Facebook' : 'Logout from Facebook' }}</button>
         <button class="email-login-button" ng-click="loginWithEmail()">Login with Email</button>
         <button class="signup-button" ng-click="signup()">Sign up</button>
       </div>

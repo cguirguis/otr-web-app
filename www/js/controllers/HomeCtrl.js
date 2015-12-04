@@ -2,7 +2,7 @@
 var controllers = angular.module('OTRControllers', []);
 
 controllers.controller('HomeCtrl',
-  function($rootScope, $scope, $http, $state, $location, $ionicSideMenuDelegate, $ionicPopover, UtilitiesService)
+  function($rootScope, $scope, $http, $state, $location, $ionicSideMenuDelegate, $ionicPopover, UtilitiesService, DataService)
   {
     console.log("Home controller loaded.");
     $rootScope.pageTitle = "Home";
@@ -21,12 +21,14 @@ controllers.controller('HomeCtrl',
 
     $scope.logout = function() {
       // Log out
-      UtilitiesService.deleteCookies();
-      $rootScope.user = null;
-      $rootScope.citation = null;
-      $rootScope.currentCase = null;
-      $scope.hideUserDropdown();
-      $state.go("home");
+      DataService.logout()
+        .then(function(response) {
+          $rootScope.user = null;
+          $rootScope.citation = null;
+          $rootScope.currentCase = null;
+          $scope.hideUserDropdown();
+          $state.go("home");
+        });
     };
 
     // Load user dropdown
@@ -45,6 +47,6 @@ controllers.controller('HomeCtrl',
     };
 
     // Check if user is logged in
-    // TODO: move this to app's run method
-    UtilitiesService.isUserAuthenticated();
+    // TODO: move this to app's run method?
+    UtilitiesService.authenticateUser();
 });

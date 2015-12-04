@@ -86,8 +86,8 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
       }
     ])
     .run(
-    ['$rootScope', '$state', '$stateParams', '$ionicPlatform', '$window', '$ionicModal', '$ionicLoading', 'Constants', 'UtilitiesService',
-      function ($rootScope, $state, $stateParams, $ionicPlatform, $window, $ionicModal, $ionicLoading, Constants, UtilitiesService) {
+    ['$rootScope', '$state', '$stateParams', '$ionicPlatform', '$window', '$ionicModal', '$ionicLoading', 'Constants', 'FacebookService',
+      function ($rootScope, $state, $stateParams, $ionicPlatform, $window, $ionicModal, $ionicLoading, Constants, FacebookService) {
 
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
@@ -109,8 +109,8 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
               //channelUrl  : 'views/channel.html',
               //status      : true, // Set if you want to check the authentication status at the start up of the app
               cookie      : true, // Enable cookies to allow the server to access the session
-              xfbml       : true,  // Parse XFBML
-              version     : 'v2.2'
+              xfbml       : false,  // parses DOM to find/initialize any social plugins that have been added using XFBML
+              version     : 'v2.5'
             });
 
             // Now that we've initialized the JavaScript SDK, we call
@@ -125,8 +125,8 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
             //
             // These three cases are handled in the callback function.
             FB.getLoginStatus(function(response) {
-              UtilitiesService.fbStatusChangeCallback(response);
-            });
+              FacebookService.statusChangeCallback(response);
+            }, {scope: 'public_profile,email'});
           };
 
           // Load the SDK asynchronously
