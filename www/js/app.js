@@ -168,6 +168,10 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
           $ionicLoading.hide();
         });
 
+        $rootScope.hideLoader = function() {
+          $ionicLoading.hide();
+        };
+
         // Display 'loading' modal
         $rootScope.displayLoading = function(message) {
           $rootScope.showDefaultSpinner = true;

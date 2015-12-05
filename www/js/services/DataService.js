@@ -5,7 +5,7 @@ WebApp.factory('DataService', function($http, Constants)
   var userUrl = baseUrl + 'user';
   var loginUrl = baseUrl + 'authentication/login';
   var logoutUrl = baseUrl + "authentication/logout";
-  var loginWithFacebookUrl = baseUrl + 'user/facebook/';
+  var loginWithFacebookUrl = baseUrl + 'connect/facebook/';
   var signupUrl = baseUrl + 'signup';
   var citationUrl = baseUrl + 'citations/';
   var matchCitationUrl = baseUrl + 'citations/{0}/case';
@@ -32,9 +32,13 @@ WebApp.factory('DataService', function($http, Constants)
     return $http.post(logoutUrl);
   };
 
-  var loginWithFacebook = function() {
-    console.log(loginUrl);
-    return $http.post(loginWithFacebookUrl);
+  var loginWithFacebook = function(auth) {
+    var data = {
+      "userAccessToken": auth.accessToken,
+      "expirationDate": new Date(new Date().getTime() + (auth.expiresIn * 1000))
+    };
+
+    return $http.post(loginWithFacebookUrl, data);
   };
 
   var signup = function(newUser) {
@@ -94,7 +98,7 @@ WebApp.factory('DataService', function($http, Constants)
     getUser: getUser,
     login : login,
     logout: logout,
-    loginWithFacebookUrl : loginWithFacebookUrl,
+    loginWithFacebook: loginWithFacebook,
     signup : signup,
     postCitationImage: postCitationImage,
     updateCitation: updateCitation,

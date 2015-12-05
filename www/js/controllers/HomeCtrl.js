@@ -2,7 +2,7 @@
 var controllers = angular.module('OTRControllers', []);
 
 controllers.controller('HomeCtrl',
-  function($rootScope, $scope, $http, $state, $location, $ionicSideMenuDelegate, $ionicPopover, UtilitiesService, DataService)
+  function($rootScope, $scope, $http, $state, $location, $ionicSideMenuDelegate, $ionicPopover, UtilitiesService)
   {
     console.log("Home controller loaded.");
     $rootScope.pageTitle = "Home";
@@ -21,14 +21,10 @@ controllers.controller('HomeCtrl',
 
     $scope.logout = function() {
       // Log out
-      DataService.logout()
-        .then(function(response) {
-          $rootScope.user = null;
-          $rootScope.citation = null;
-          $rootScope.currentCase = null;
-          $scope.hideUserDropdown();
-          $state.go("home");
-        });
+      UtilitiesService.logout(function() {
+        $scope.hideUserDropdown();
+        $state.go("home");
+      });
     };
 
     // Load user dropdown

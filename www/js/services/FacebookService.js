@@ -1,5 +1,5 @@
 
-WebApp.factory('FacebookService', function($q, $rootScope)
+WebApp.factory('FacebookService', function($q, $rootScope, DataService)
 {
   var statusChangeCallback = function(response) {
     // This is called with the results from from FB.getLoginStatus().
@@ -10,26 +10,44 @@ WebApp.factory('FacebookService', function($q, $rootScope)
     // Full docs on the response object can be found in the documentation
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
-      // Logged into your app and Facebook.
+      // Logged into Facebook and authorized for app
       getUserInfo()
         .then(function(userResponse) {
           $rootScope.user = userResponse;
           $rootScope.user.firstname = userResponse.first_name;
           $rootScope.user.lastname = userResponse.last_name;
-          $rootScope.user.isFbAuthed = true;
+          $rootScope.fbAuth = {
+            "accessToken": response.authResponse.accessToken,
+            "expiresIn" : response.authResponse.expiresIn,
+            "userID": response.authResponse.userID
+          };
 
-          $rootScope.user.auth = response;
-        });
-      console.log("logged into fb: " + JSON.stringify($rootScope.user));
+          console.log("logged into fb: " + JSON.stringify($rootScope.fbAuth));
+
+          // Authenticate user to our service
+          return DataService.loginWithFacebook($rootScope.fbAuth);
+        })
+        .then(
+          function(otrResponse){
+            console.log("\n\nLogged in to OTR via Facebook.");
+            $rootScope.hideLoader();
+          },
+          function(response) {
+            console.log(JSON.stringify(response.data.error.uiErrorMsg));
+            $rootScope.errorMessage = response.data.error.uiErrorMsg;
+            $rootScope.hideLoader();
+          });
     }
     else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       //document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
       //FB.login()
+      console.log("FB AUTH STATUS: not_authorized");
     }
     else {
       // The person is not logged into Facebook, prompt them to login
       //FB.login();
+      console.log("FB AUTH STATUS: not_connected");
     };
   };
 
@@ -46,8 +64,11 @@ WebApp.factory('FacebookService', function($q, $rootScope)
     return deferred.promise;
   };
 
-  var login = function() {
-    FB.login();
+  var login = function(callback) {
+    return FB.login(
+      callback,
+      { scope: 'public_profile', auth_type: 'rerequest' }
+    );
   };
 
   var logout = function() {

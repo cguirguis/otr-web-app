@@ -27,16 +27,10 @@ controllers.controller('LoginCtrl',
     };
 
     $scope.loginWithFacebook = function() {
-      FacebookService.login(UtilitiesService.statusChangeCallback);
-    };
-
-    $scope.checkFacebookLoginState = function() {
-      // This function is called when someone finishes with the Login
-      // Button. See the onlogin handler attached to it in the sample
-      // code below.
-      alert("checkFacebookLoginState");
-      FB.getLoginStatus(function(response) {
-        UtilitiesService.fbStatusChangeCallback(response);
+      FacebookService.login(function(response) {
+        FacebookService.statusChangeCallback(response);
+        $rootScope.closeLoginModal();
+        $rootScope.hideLoader();
       });
     };
 
@@ -110,8 +104,6 @@ controllers.controller('LoginCtrl',
       DataService.getUser()
         .then(function(response) {
           $rootScope.user = response.data.user;
-
         });
     };
-
   }]);
