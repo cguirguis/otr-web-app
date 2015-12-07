@@ -1,20 +1,9 @@
 
 <div class="page match-view">
 
-  <div class="loading" ng-if="loading"></div>
-
-  <div class="match-not-found" ng-if="!match" style="display:none;">
-    <h3>We're sorry, we're currently unable to help you fight this ticket.</h3>
-
-    <h3>Please bear with us as we expand our area of coverage.</h3>
-
-    <!-- Request your area button -->
-    <!-- Cancel button -->
-  </div>
-
-  <div class="match-found" ng-if="match">
+  <div class="match-found" ng-if="match && !matchErrorMessage">
     <h2>We can fight your ticket!</h2>
-    <h4>You've been matched with one of the top traffic attorney in {{citation.lawyer.city}}.</h4>
+    <h4>You've been matched with one of the top traffic attorney in {{citation.court.city}}.</h4>
 
     <h3 class="match-odds-text">Your chance of getting the ticket off your record:</h3>
     <h2 class="match-odds-value">93%</h2>
@@ -26,4 +15,24 @@
     <button class="confirm-match-button" ng-click="confirmMatch()">Continue</button>
   </div>
 
+  <div class="no-match-found" ng-if="!match && matchErrorMessage">
+    <h2>Hmm...</h2>
+    <h4>Looks like we don't have any attorneys fighting in this court.</h4>
+    <br>
+    <h4>We're working hard to expand quickly. Please request your area to make sure we're there next time!</h4>
+
+    <button class="request-coverage-button" ng-click="requestMyArea()">Request my area</button>
+    <button class="request-coverage-button cancel" ng-click="goBack()">Cancel</button>
+  </div>
+
 </div>
+
+<style>
+.page.match-view .request-coverage-button {
+  width:68%;
+}
+.page.match-view .request-coverage-button.cancel {
+  margin-left: 0px;
+  width: 30%;
+}
+</style>

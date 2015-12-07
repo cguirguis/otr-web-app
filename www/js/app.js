@@ -168,10 +168,6 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
           $ionicLoading.hide();
         });
 
-        $rootScope.hideLoader = function() {
-          $ionicLoading.hide();
-        };
-
         // Display 'loading' modal
         $rootScope.displayLoading = function(message) {
           $rootScope.showDefaultSpinner = true;
@@ -185,10 +181,23 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
         };
 
         // Hide 'loading' modal
-        $rootScope.hideLoading = function() {
+        $rootScope.hideLoader = function() {
           $rootScope.showDefaultSpinner = false;
           $ionicLoading.hide();
         };
+
+        $rootScope.isLoggedIn = function() {
+          return $rootScope.user != null;
+        };
+
+        $rootScope.$on('user:logged-in', function() {
+          // If the calling controller specified a view to take
+          // the user to following login, navigate to the view
+          if ($rootScope.nextStep) {
+            $state.go($rootScope.nextStep);
+            $rootScope.nextStep = null;
+          }
+        });
 
         String.prototype.format = function () {
           var args = [].slice.call(arguments);

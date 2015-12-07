@@ -87,23 +87,29 @@ controllers.controller('LoginCtrl',
 
       $rootScope.user = response.data.user;
       $rootScope.$apply();
-
-      $rootScope.closeLoginModal();
       $scope.loading = false;
       $rootScope.showDefaultSpinner = false;
 
-      $rootScope.broadcast('user:login');
+      $rootScope.closeLoginModal();
+
+      $rootScope.broadcast('user:logged-in');
     };
 
     var loginResponseHandler = function(response) {
       // Logged in successfully
-      $rootScope.user = {}; // user info doesn't come back in this response
-      $rootScope.closeLoginModal();
+      $rootScope.user = {}; // (user info doesn't come back in this response)
 
-      // Get user info
+      // Now get user info
       DataService.getUser()
         .then(function(response) {
           $rootScope.user = response.data.user;
         });
+
+      $rootScope.closeLoginModal();
+      $rootScope.broadcast('user:logged-in');
+    };
+
+    $scope.closeLoginModal = function() {
+      $rootScope.closeLoginModal();
     };
   }]);

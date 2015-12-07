@@ -9,7 +9,7 @@ controllers.controller('DateCtrl',
       var today = new Date();
 
       $("#calendar").kendoCalendar({
-        max: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+        //max: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
         value: today,
         change: function() {
           $scope.selectedDate = this.value();

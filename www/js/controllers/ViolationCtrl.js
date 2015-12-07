@@ -22,6 +22,17 @@ controllers.controller('ViolationCtrl',
       }
     });
 
+    $scope.goBack = function() {
+      $scope.matchErrorMessage = $scope.match = null;
+      $state.go("court");
+    };
+
+    $scope.requestMyArea = function() {
+      // Display service coverage view
+      $scope.matchErrorMessage = $scope.match = null;
+      $state.go("court");
+    };
+
     $scope.fightThisTicket = function() {
       if (!$scope.waitingForCitationId) {
         $rootScope.displayLoading("Crunching your ticket info...");
@@ -42,7 +53,7 @@ controllers.controller('ViolationCtrl',
       DataService.updateCitation($rootScope.citation)
         .error(function(data) {
           console.log("Failed to update citation: " + JSON.stringify(data));
-          $rootScope.hideLoading();
+          $rootScope.hideLoader();
           // TODO: Display appropriate error message to user
         })
         .success(function(data) {
@@ -56,7 +67,12 @@ controllers.controller('ViolationCtrl',
       DataService.matchCitation($rootScope.citation.citationId)
         .error(function(data, status) {
           console.log("Error matching citation: " + JSON.stringify(data));
-          matchReturned(null);
+
+          if (data.error.errorType = "MATCH_NOT_FOUND") {
+            displayNoMatchView(data.error.uiErrorMsg);
+          } else if (data.error.errorType == "CASE_ALREADY_EXISTS") {
+            $rootScope.errorMessage = data.error.uiErrorMsg;
+          }
         })
         .success(function(data, status) {
           console.log("Successfully matched citation: " + JSON.stringify(data));
@@ -65,7 +81,7 @@ controllers.controller('ViolationCtrl',
     };
 
     var matchReturned = function(response) {
-      $rootScope.hideLoading();
+      $rootScope.hideLoader();
 
       if (response && response.data && response.data.theCase) {
         $scope.match = response;
@@ -77,8 +93,14 @@ controllers.controller('ViolationCtrl',
           citationResponse: newCase.citation
         }
       } else {
-        // TODO: Display 'no lawyer found' view
+        // Display 'no lawyer found' view
+        displayNoMatchView(data.error.uiErrorMsg);
       }
+    };
+
+    var displayNoMatchView = function(errorMsg) {
+      $rootScope.$broadcast('loading:hide');
+      $scope.matchErrorMessage = errorMsg;
     };
 
     $rootScope.cancelMatch = function() {
@@ -91,11 +113,13 @@ controllers.controller('ViolationCtrl',
 
       // If user not logged in, show login modal
       // otherwise, go to payment view
-      if (!$rootScope.user) {
+      if ($rootScope.isLoggedIn()) {
+        $rootScope.nextStep = "payment";
         $rootScope.showLoginModal();
-      } else {
-        $state.go("payment");
+        return;
       }
+
+      $state.go("payment");
     };
 
     // Load cached $scope if user is navigating back

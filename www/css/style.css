@@ -24,11 +24,36 @@
   position: fixed;
   bottom: 50px;
 }
+button.cancel {
+  width: 48%;
+  background-color: white;
+  height: 60px;
+  border: solid 1px #cdcdcd;
+  color: #333;
+  margin-top: 30px;
+  cursor: pointer
+}
+button.cancel:hover {
+  background-color: #efefef;
+  color: #333;
+}
 .scroll {
   height: 100%;
 }
 .loading {
   background-image: url("../img/loading.gif");
+}
+.menu-left .logo-container {
+  margin-top: 4px;
+  width: 100%;
+  text-align: center;
+}
+.menu-left .logo-container img {
+  width: 210px;
+  height: 27px;
+}
+.menu-left a {
+  text-decoration: none;
 }
 .menu-left ion-item {
   background-color: #444;
@@ -100,6 +125,38 @@ hr {
 .user-actions a .item:hover {
   background-color: #efefef;
   cursor: pointer;
+}
+.button.login-nav-button {
+  max-width: 25%;
+  padding-right: 0px;
+}
+@media (min-width: 500px) {
+
+}
+
+/************* LOGIN MODAL ************/
+.button.close-login-modal {
+  position: absolute;
+  right: 23px;
+  top: 16px;
+  color: #a9a9a9;
+  font-size: 18px;
+  font-weight: lighter;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  padding: 0px 15px;
+}
+.button.close-login-modal:hover {
+  color: #999;
+  font-weight: normal;
+}
+i.icon.button-icon {
+  font-size: 31px;
+  top: 2px;
+  position: relative;
+  right: 15px;
+  line-height: 0px;
 }
 
 /************* TICKET VIEW ************/

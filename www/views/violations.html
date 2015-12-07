@@ -1,6 +1,6 @@
 
 <ion-view class="page violation-view">
-  <div ng-if="!match">
+  <div ng-if="!match && !matchErrorMessage">
     <h4>How many violations are listed on your ticket?</h4>
 
     <button class="violation-button" ng-click="setViolationCount(1)" ng-class="{ 'active': violationCount === 1 }">1</button>
@@ -8,11 +8,11 @@
     <button class="violation-button" ng-click="setViolationCount(3)" ng-class="{ 'active': violationCount === 3 }">3</button>
     <button class="violation-button" ng-click="setViolationCount(4)" ng-class="{ 'active': violationCount === 4 }">4</button>
     <button class="violation-button" ng-click="setViolationCount(5)" ng-class="{ 'active': violationCount === 5 }">5</button>
-  </div>
 
-  <button class="match-ticket-button" ng-click="fightThisTicket()" ng-show="violationCount && !match">
-    Fight this ticket!
-  </button>
+    <button class="match-ticket-button" ng-click="fightThisTicket()" ng-show="violationCount && !match">
+      Fight this ticket!
+    </button>
+  </div>
 
   <ng-include src="'views/match.html'"></ng-include>
 </ion-view>
