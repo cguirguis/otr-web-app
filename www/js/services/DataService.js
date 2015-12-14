@@ -9,6 +9,10 @@ WebApp.factory('DataService', function($http, Constants)
   var signupUrl = baseUrl + 'signup';
   var citationUrl = baseUrl + 'citations/';
   var matchCitationUrl = baseUrl + 'citations/{0}/case';
+  var associateCaseUrl = baseUrl + 'cases/{0}/owner';
+  var rematchCitationUrl = baseUrl + 'cases/{0}/match';
+  var confirmCaseUrl = baseUrl + 'cases/{0}';
+  var addCardUrl = baseUrl + 'users/stripe/account/cards';
   var chargeCardUrl = baseUrl + 'cases/{0}/payment';
 
   var jsonContentTypeHeader = {
@@ -72,11 +76,7 @@ WebApp.factory('DataService', function($http, Constants)
       }
     }};
 
-    var headers = {
-      'Content-Type': "application/json"
-    };
-
-    return $http.put(url, data, { headers: headers });
+    return $http.put(url, data, { headers: jsonContentTypeHeader });
   };
 
   var matchCitation = function(citationId) {
@@ -84,14 +84,31 @@ WebApp.factory('DataService', function($http, Constants)
     return $http.post(url);
   };
 
-  var chargeCard = function(stripeToken, caseId, callback) {
+  var rematchCitation = function(caseId) {
+    var url = rematchCitationUrl.format(caseId);
+    return $http.post(url, null, { headers: jsonContentTypeHeader });
+  };
+
+  var associateCase = function(caseId) {
+    var url = associateCaseUrl.format(caseId);
+    return $http.post(url);
+  }
+
+  var confirmCase = function(caseId) {
+    var url = confirmCaseUrl.format(caseId);
+    return $http.post(url);
+  }
+
+  var addCard = function(params) {
+    return $http.post(addCardUrl, params, jsonContentTypeHeader);
+  }
+
+  var chargeCard = function(caseId, cardId) {
     var url = chargeCardUrl.format(caseId);
-    var data = { "cardId" : stripeToken };
-    /*var headers = {
-      'Cookie': $rootScope.user["auth_token"]
-    };*/
+    var data = { "cardId" : cardId };
+
     console.log(url);
-    return $http.post(url, data, { headers: headers });
+    return $http.post(url, data);
   };
 
   return {
@@ -103,6 +120,10 @@ WebApp.factory('DataService', function($http, Constants)
     postCitationImage: postCitationImage,
     updateCitation: updateCitation,
     matchCitation : matchCitation,
+    rematchCitation : rematchCitation,
+    associateCase: associateCase,
+    confirmCase: confirmCase,
+    addCard: addCard,
     chargeCard: chargeCard
   }
 });

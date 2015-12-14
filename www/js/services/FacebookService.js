@@ -67,7 +67,7 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
   var login = function(callback) {
     return FB.login(
       callback,
-      { scope: 'public_profile', auth_type: 'rerequest' }
+      { scope: 'public_profile' }
     );
   };
 

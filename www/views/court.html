@@ -4,14 +4,14 @@
 
   <ion-header-bar class="bar-subheader">
     <i class="icon ion-ios7-search placeholder-icon"></i>
-    <input type="search" placeholder="Search" ng-change="filterCourts()" ng-model="query">
+    <input type="search" id="court-search" placeholder="Search" ng-change="filterCourts()" ng-model="query">
   </ion-header-bar>
 
   <ion-content>
     <ion-list>
-      <ion-item ng-hide="selectedCourt" ng-repeat="court in results" class="court-result-container" ng-class="{ 'selected': court.selected }">
+      <ion-item ng-hide="selectedCourt && !isEditing" ng-repeat="court in results" class="court-result-container" ng-class="{ 'selected': court.selected }">
         <img src="../../img/court-icon.png" class="court-icon">
-        <div class="court-result" ng-click="selectCourt(court)">
+        <div clasps="court-result" ng-click="selectCourt(court)">
           <div class="court-name">{{court.courtName}}</div>
           <div class="court-city">{{court.city}}, {{court.state}}</div>
         </div>

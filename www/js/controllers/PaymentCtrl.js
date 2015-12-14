@@ -14,7 +14,7 @@ controllers.controller('PaymentCtrl',
         stripeForm.find('.payment-errors').css('display', 'none');
 
         // If this is the second submission, prevent page reload
-        if (stripeForm.find("input[name='stripeToken']")) {
+        if (stripeForm.find("input[name='stripeToken']").length) {
           $scope.isCardVerified = true;
           $scope.$apply();
           return false;
@@ -40,27 +40,31 @@ controllers.controller('PaymentCtrl',
           // response contains id and card, which contains additional card details
           var token = response.id;
           $scope.token = token;
-          // Insert the token into the form so it gets submitted to the server
-          stripeForm.append($('<input type="hidden" name="stripeToken" />').val(token));
-          // and submit
-          stripeForm.submit();
+
+          // Add this card to the user's Stripe account
+          var params = { "sourceToken": token, "makeDefault": true }
+          DataService.addCard(params)
+            .then(function(success) {
+              // Insert the token into the form so it gets submitted to the server and submit
+              stripeForm.append($('<input type="hidden" name="stripeToken" />').val(token));
+              stripeForm.submit();
+            }, function(error) {
+              console.log(JSON.stringify(error));
+            });
         }
       };
 
       $scope.confirmPayment = function() {
-        $rootScope.citation = $rootScope.citation || {};
-        $rootScope.citation.caseId = $rootScope.citation.caseId || "OTR-123";
-
-        var caseId = $rootScope.citation.caseId;
-        DataService.chargeCard($scope.token, caseId)
+        var cardId = $rootScope.currentCase.caseId;
+        DataService.chargeCard(cardId, $scope.token)
           .error(function(data, status, headers, config) {
+            $rootScope.hideLoader();
+            console.log(JSON.stringify(data));
           })
-          .success(function(data, status, headers, config) {
-          })
-          .then(paymentResponseHandler);
+          .then(paymentSuccess);
       };
 
-      var paymentResponseHandler = function(result) {
+      var paymentSuccess = function(result) {
         console.log(JSON.stringify(result));
       };
 

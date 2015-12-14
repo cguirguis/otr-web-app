@@ -109,7 +109,7 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
               //channelUrl  : 'views/channel.html',
               //status      : true, // Set if you want to check the authentication status at the start up of the app
               cookie      : true, // Enable cookies to allow the server to access the session
-              xfbml       : false,  // parses DOM to find/initialize any social plugins that have been added using XFBML
+              xfbml       : true,  // parses DOM to find/initialize any social plugins that have been added using XFBML
               version     : 'v2.5'
             });
 
@@ -189,15 +189,6 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
         $rootScope.isLoggedIn = function() {
           return $rootScope.user != null;
         };
-
-        $rootScope.$on('user:logged-in', function() {
-          // If the calling controller specified a view to take
-          // the user to following login, navigate to the view
-          if ($rootScope.nextStep) {
-            $state.go($rootScope.nextStep);
-            $rootScope.nextStep = null;
-          }
-        });
 
         String.prototype.format = function () {
           var args = [].slice.call(arguments);

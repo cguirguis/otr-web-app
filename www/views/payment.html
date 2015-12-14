@@ -55,8 +55,7 @@
     <div class="payment-errors" style="display:none;"></div>
 
     <button type="submit" style="clear:both;margin-top:10px;" ng-if="!isCardVerified">Verify card</button>
-    <button type="button" style="clear:both;margin-top:10px;" ng-if="isCardVerified"
-      ng-click="confirmPayment()">Confirm payment</button>
+    <button type="button" ng-if="isCardVerified" ng-click="confirmPayment()">Confirm payment</button>
   </form>
 
 </ion-view>

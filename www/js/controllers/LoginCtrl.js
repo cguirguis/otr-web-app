@@ -106,7 +106,7 @@ controllers.controller('LoginCtrl',
         });
 
       $rootScope.closeLoginModal();
-      $rootScope.broadcast('user:logged-in');
+      $scope.$emit('user:logged-in');
     };
 
     $scope.closeLoginModal = function() {

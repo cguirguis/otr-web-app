@@ -98,11 +98,14 @@ hr {
   color: #ccc;
   height: 0;
 }
+.bar.bar-dark, ion-header-bar.bar.bar-dark.bar-header  {
+  background-color: #2C6EBA;
+}
 .bar-dark button.button {
   background-color: white;
 }
 .bar-dark button.button:hover {
-  background-color:#555;
+  background-color:#3D7EC7;
 }
 .bar-dark button.button.login-nav-button i.icon:before {
   font-size: 25px;
@@ -128,7 +131,19 @@ hr {
 }
 .button.login-nav-button {
   max-width: 25%;
-  padding-right: 0px;
+  padding-right: 5px;
+}
+.button.login-nav-button i {
+  float: left;
+  padding-right: 5px;
+}
+.button.login-nav-button div {
+  width: 80%;
+  height: 100%;
+  overflow: hidden;
+  text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 @media (min-width: 500px) {
 
@@ -298,6 +313,7 @@ button.retake-picture:hover {
   float: left;
   margin-top: -2px;
   opacity: 0.3;
+  margin-right: 10px;
 }
 .page.court-view .court-result {
   margin-left: 50px;
@@ -359,8 +375,17 @@ table.k-content {
 .k-calendar .k-content, .k-calendar .k-content th {
   text-align: center;
 }
+.k-calendar .k-header .k-link:hover {
+  background-color: #ddd;
+}
+.k-calendar td {
+  border-radius: 10px!important;
+}
+.k-calendar td.k-state-selected {
+  background-color: #A1CBFF!important; /*#FFA8A8!important;*/
+}
 .k-header {
-  background-color: #5599F5!important
+  background-color: #d0d0d0!important; /*#5599F5!important*/
 }
 .confirm-date-button {
   margin-top: 15px;
@@ -370,18 +395,16 @@ table.k-content {
 
 .page button.violation-button {
   width: 19%;
-  background-color: rgb(245, 245, 245);
+  background-color: rgb(250, 250, 250);
   cursor: pointer;
   color: rgb(26, 93, 162);
   height: 80px;
   font-size: 1.5em!important;
-  border: solid 1px rgb(31, 85, 142);
-  opacity: 0.6;
+  border: solid 1px rgb(26, 93, 162);
 }
 .page button.violation-button:hover {
-  background-color: rgb(245, 245, 245);
-  color: rgb(26, 93, 162);
-  opacity: 1;
+  background-color: rgb(245, 245, 255);
+  color: rgba(22, 109, 162, 1);
 }
 .page button.violation-button:active, .page button.violation-button.active {
   background-color: rgb(31, 85, 142);

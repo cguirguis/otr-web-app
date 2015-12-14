@@ -30,7 +30,7 @@ controllers.controller('ViolationCtrl',
     $scope.requestMyArea = function() {
       // Display service coverage view
       $scope.matchErrorMessage = $scope.match = null;
-      $state.go("court");
+      $state.go("requestArea");
     };
 
     $scope.fightThisTicket = function() {
@@ -49,6 +49,10 @@ controllers.controller('ViolationCtrl',
         }
       }
 
+      saveCitation();
+    };
+
+    var saveCitation = function() {
       // Save citation
       DataService.updateCitation($rootScope.citation)
         .error(function(data) {
@@ -63,24 +67,31 @@ controllers.controller('ViolationCtrl',
     };
 
     var matchTicket = function() {
-      // Call match API with $rootScope.citation
-      DataService.matchCitation($rootScope.citation.citationId)
-        .error(function(data, status) {
-          console.log("Error matching citation: " + JSON.stringify(data));
-
-          if (data.error.errorType = "MATCH_NOT_FOUND") {
-            displayNoMatchView(data.error.uiErrorMsg);
-          } else if (data.error.errorType == "CASE_ALREADY_EXISTS") {
-            $rootScope.errorMessage = data.error.uiErrorMsg;
-          }
-        })
-        .success(function(data, status) {
-          console.log("Successfully matched citation: " + JSON.stringify(data));
-        })
-        .then(matchReturned);
+        if ($rootScope.currentCase == null) {
+          // Call match API with $rootScope.citation
+          DataService.matchCitation($rootScope.citation.citationId)
+            .then(matchSuccess, matchError);
+        } else {
+          // Case already exists, rematch citation
+          DataService.rematchCitation($rootScope.currentCase.caseId)
+            .then(matchSuccess, matchError);
+        }
     };
 
-    var matchReturned = function(response) {
+    var matchError = function(response) {
+      $rootScope.hideLoader();
+
+      console.log("Error matching citation: " + JSON.stringify(data));
+
+      var data = response.data;
+      if (data.error.errorType == "MATCH_NOT_FOUND") {
+        displayNoMatchView(data.error.uiErrorMsg);
+      } else if (data.error.errorType == "CASE_ALREADY_EXISTS") {
+        $rootScope.errorMessage = data.error.uiErrorMsg;
+      }
+    };
+
+    var matchSuccess = function(response) {
       $rootScope.hideLoader();
 
       if (response && response.data && response.data.theCase) {
@@ -113,14 +124,33 @@ controllers.controller('ViolationCtrl',
 
       // If user not logged in, show login modal
       // otherwise, go to payment view
-      if ($rootScope.isLoggedIn()) {
-        $rootScope.nextStep = "payment";
+      if (!$rootScope.isLoggedIn()) {
+        $scope.actionPendingLogin = true;
         $rootScope.showLoginModal();
         return;
       }
 
-      $state.go("payment");
+      confirmCase();
     };
+
+    var confirmCase = function() {
+      DataService.confirmCase($rootScope.currentCase.caseId)
+      .then(function(success) {
+          $state.go("payment");
+        }, function(error) {
+          $rootScope.hideLoader();
+        });
+    };
+
+    $rootScope.$on("user:logged-in", function() {
+      // Now need to associate case with logged in user
+      if ($scope.actionPendingLogin) {
+        DataService.associateCase($rootScope.currentCase.caseId)
+        .then(function(success) {
+          confirmCase();
+        });
+      }
+    });
 
     // Load cached $scope if user is navigating back
     $scope = ScopeCache.get("violations") || $scope;

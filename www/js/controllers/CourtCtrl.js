@@ -44,8 +44,9 @@ var CourtCtrl = function($rootScope, $scope, $http, $timeout, $location, $ionicM
     }
 
     $scope.selectedCourt = court;
+    $scope.isEditing = false;
     court.selected = true;
-  }
+  };
 
   $scope.confirmCourt = function() {
     if (!$scope.selectedCourt) {
@@ -54,11 +55,18 @@ var CourtCtrl = function($rootScope, $scope, $http, $timeout, $location, $ionicM
     // Save selected court to citation
     $rootScope.citation = $rootScope.citation || {};
     $rootScope.citation.court = $scope.selectedCourt;
-  }
+  };
+
+  var searchField = document.querySelector('#court-search');
+  searchField.addEventListener('focus', function() {
+    $scope.isEditing = true;
+  }, false);
+
 
   if (!$scope.courts.length) {
     getCourts();
   }
+
 };
 
 CourtCtrl.prototype.newFunction = function() {
