@@ -10,10 +10,10 @@
     <link href="css/style.css" rel="stylesheet">
 
     <!-- calendar css -->
-    <link rel="stylesheet" href="https://cdn.kendostatic.com/2015.1.429/styles/kendo.common-material.min.css" />
-    <link rel="stylesheet" href="https://cdn.kendostatic.com/2015.1.429/styles/kendo.material.min.css" />
-    <link rel="stylesheet" href="https://cdn.kendostatic.com/2015.1.429/styles/kendo.dataviz.min.css" />
-    <link rel="stylesheet" href="https://cdn.kendostatic.com/2015.1.429/styles/kendo.dataviz.material.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.dataviz.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.dataviz.material.min.css" />
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -28,7 +28,7 @@
     <script src="lib/dist/require.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
     <script src="https://cdn.kendostatic.com/2015.1.429/js/jquery.min.js"></script>
-    <script src="https://cdn.kendostatic.com/2015.1.429/js/kendo.all.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.all.min.js"></script>
 
     <!-- Stripe -->
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
@@ -54,7 +54,7 @@
     <script src="js/controllers/CasesCtrl.js"></script>
 
   </head>
-  <body ng-app="OTRWebApp" ng-controller="HomeCtrl">
+  <body ng-app="OTRWebApp" ng-controller="HomeCtrl" ng-cloak>
 
       <ion-side-menus>
           <!-- Navigation menu -->
@@ -69,34 +69,42 @@
             <ion-content scroll="false" style="background-color: #222">
               <ion-list>
                 <a ui-sref="home">
-                  <ion-item>Home</ion-item>
+                  <ion-item ng-click="toggleMenu()">
+                    <i class="nav-icon ion-home"></i>
+                    Home
+                  </ion-item>
                 </a>
                 <a ui-sref="ticket">
-                  <ion-item>
+                  <ion-item ng-click="toggleMenu()">
+                    <i class="nav-icon ion-camera"></i>
                     Your ticket
                     <i class="step-completed icon ion-checkmark" ng-if="citation && citation.image.length"></i>
                   </ion-item>
                 </a>
                 <a ui-sref="court">
-                  <ion-item>
+                  <ion-item ng-click="toggleMenu()">
+                    <i class="nav-icon ion-android-pin"></i>
                     Assigned court
                     <i class="step-completed icon ion-checkmark" ng-if="citation && citation.court"></i>
                   </ion-item>
                 </a>
                 <a ui-sref="date">
-                  <ion-item>
+                  <ion-item ng-click="toggleMenu()">
+                    <i class="nav-icon ion-android-calendar"></i>
                     Date issued
                     <i class="step-completed icon ion-checkmark" ng-if="citation && citation.date"></i>
                   </ion-item>
                 </a>
                 <a ui-sref="violations">
-                  <ion-item>
+                  <ion-item ng-click="toggleMenu()">
+                    <i class="nav-icon ion-speedometer"></i>
                     Violations
                     <i class="step-completed icon ion-checkmark" ng-if="citation && citation.violationCount"></i>
                   </ion-item>
                 </a>
                 <a ui-sref="payment">
-                  <ion-item>
+                  <ion-item ng-click="toggleMenu()">
+                    <i class="nav-icon ion-card"></i>
                     Payment info
                   </ion-item>
                 </a>
@@ -117,8 +125,10 @@
                   <span style="font-size:15px;margin-right:5px;">Log in</span>
                 </button>
                 <button class="button button-icon login-nav-button" ng-if="user != null" ng-click="showUserDropdown($event)">
-                  <i class="icon ion-ios-person"></i>
-                  <span class="nav-username">{{user.firstname}} {{user.lastname}} </span>
+                  <div class="nav-username">
+                    <i class="icon ion-ios-person"></i>
+                    {{user.firstname}} {{user.lastname}}
+                  </div>
                   <!--<span style="font-size:14px;">Log in</span>-->
                 </button>
 

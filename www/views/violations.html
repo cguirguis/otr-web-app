@@ -1,5 +1,5 @@
 
-<ion-view class="page violation-view">
+<ion-view class="page violation-view" ng-class="{ 'match-background-img': match && !matchErrorMessage }">
   <div ng-if="!match && !matchErrorMessage">
     <h4>How many violations are listed on your ticket?</h4>
 

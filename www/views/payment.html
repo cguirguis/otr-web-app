@@ -5,11 +5,11 @@
   <ul class="transactions">
     <li class="primary">
       <div class="transaction-item">Legal services to contest traffic ticket, {{citation.violationCount}} moving violation{{citation.violationCount > 0 ? 's' : ''}}</div>
-      <div class="transaction-fee">$250</div>
+      <div class="transaction-fee">${{currentCase.caseEstimatedCost - (50*(citation.violationCount - 1))}}</div>
     </li>
     <li class="secondary" ng-if="hasExtraViolations">
       <div class="transaction-item">{{citation.violationCount - 1}} extra violations</div>
-      <div class="transaction-fee">$250</div>
+      <div class="transaction-fee">${{50 * (citation.violationCount - 1)}}</div>
     </li>
     <li class="secondary">
       <div class="transaction-item light-text">No accident involved</div>
@@ -17,68 +17,85 @@
     <li class="secondary">
       <div class="transaction-item light-text">Ticket not overdue</div>
     </li>
+  </ul>
+  <ul class="transactions transactions-total">
     <li class="secondary total">
       <div class="transaction-item">Total</div>
-      <div class="transaction-fee">$250</div>
+      <div class="transaction-fee">${{currentCase.caseEstimatedCost}}</div>
     </li>
   </ul>
 
   <div class="refund-note" ng-click="showRefundModal()">
+    <i class="ion-cash"></i>
     If your case is not successful, we will refund this fee.
   </div>
 
   <div class="next-step" ng-click="showNextStepModal()">
+    <i class="ion-arrow-right-a"></i>
     What happens next?
   </div>
 
-  <h4 style="margin-top:30px;">To book this case, please provide a credit card:</h4>
-
   <form action="" method="POST" id="stripe-cc-form">
 
-    <div class="form-row" style="width: 215px;margin-right: 20px;">
-      <input type="text" id="card-number" size="16" maxlength="16" data-stripe="number"
-             placeholder="Card number"/>
+    <h4>To book this case, please provide a credit card:</h4>
+
+    <div class="form-row" style="margin-right: 10px">
+      <input type="text" id="card-number" size="21" maxlength="16" data-stripe="number"
+             placeholder="Card number" style="font-size: 2.2em"/>
     </div>
 
-    <div class="form-row" style="width: 55px;margin-right:20px;">
+    <div class="form-row" style="margin-right:10px;">
       <input type="text" id="cvc" size="4" maxlength="4" data-stripe="cvc"
-             placeholder="CVC"/>
+             placeholder="CVC" style="font-size: 2.2em"/>
     </div>
 
-    <div class="form-row" style="width:100px;">
-      <input type="text" maxlength="2" data-stripe="exp-month"
-        placeholder="mm" style="float:left;width:40px;"/>
-      <input type="text" maxlength="4" data-stripe="exp-year"
-             placeholder="yyyy" style="margin-left: 55px;width:65px;"/>
+    <div class="form-row">
+      <input type="text" size="2" maxlength="2" data-stripe="exp-month"
+        placeholder="mm" style="float:left;font-size: 2.2em"/>
+    </div>
+    <div class="form-row" style="height: 10px;">
+      <div class="date-separator">/</div>
+    </div>
+    <div class="form-row">
+      <input type="text" size="4" maxlength="4" data-stripe="exp-year"
+             placeholder="yyyy" style="font-size: 2.2em"/>
     </div>
 
-    <div class="payment-errors" style="display:none;"></div>
+    <div class="payment-errors" ng-show="errorMessage">{{errorMessage}}</div>
 
     <button type="submit" style="clear:both;margin-top:10px;" ng-if="!isCardVerified">Verify card</button>
-    <button type="button" ng-if="isCardVerified" ng-click="confirmPayment()">Confirm payment</button>
+    <button type="button" style="margin-top: 10px;" ng-if="isCardVerified" ng-click="confirmPayment()">Confirm payment</button>
   </form>
 
 </ion-view>
 
 
-
-
-
 <style>
   .page.payment-view #stripe-cc-form {
     margin-top: 15px;
+    background-color: #FBFBFB;
+    border: solid 1px #dedede;
+    padding: 10px;
   }
   .page.payment-view #stripe-cc-form .payment-errors {
     clear:both;
-    padding-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    margin-left: 5px;
     color: #cc0000;
+    font-size: 1.1em;
   }
   .page.payment-view #stripe-cc-form .form-row {
     position: relative;
     float: left;
     padding-bottom: 1.875em;
-    margin-bottom: 1.875em;
+    margin-bottom: 3em;
+  }
+  .page.payment-view #stripe-cc-form .form-row .date-separator {
+    font-size: 3em;
+    line-height: 1.5em;
+    height: 2em;
+    color: #ccc;
+    font-weight: lighter;
   }
   .page.payment-view #stripe-cc-form label {
     display: block;
@@ -90,18 +107,18 @@
     color: #2996cc;
   }
   .page.payment-view #stripe-cc-form input{
-    position: absolute;
     display: block;
     box-sizing: border-box;
-    font-size: 1.7em;
+    font-size: 1.5em;
     line-height: 1.25em;
-    padding: 0.3125em 0;
+    padding: 0.3125em 0.3em;
+    color: #1f66ad;
     height: 1.875em;
     width: 100%;
-    border: 0;
     outline: none;
-    border-bottom: 1px solid #bbb;
+    border: 2px solid #EFEFEF;
     font-weight: lighter;
+    border-radius: 3px;
   }
   .page.payment-view #stripe-cc-form input:valid {
     position: relative;
@@ -113,9 +130,21 @@
    }
 
   .page.payment-view .transaction-title {
-    font-weight: bold;
+    font-size: 1.1em;
+    font-weight: 200;
     text-transform: uppercase;
-    border-bottom: solid 1px #ccc;
+    color: #666;
+    padding: 10px 0px 5px 3px;
+  }
+  .page.payment-view ul.transactions {
+    background-color: #fdfdfd;
+    border: solid 1px #dfdfdf;
+    padding: 5px 10px 15px 10px;
+    border-radius: 3px;
+  }
+  .page.payment-view ul.transactions-total {
+    margin-top: 5px;
+    padding-top: 10px;
   }
   .page.payment-view ul.transactions li {
     overflow: auto;
@@ -149,17 +178,38 @@
     margin-left: -10px;
   }
   .page.payment-view .refund-note {
-    background-color: lightgreen;
-    padding: 10px;
-    margin: 25px 0 10px 0;
+    background-color: #E6FFE6;
+    padding: 15px;
+    margin: 10px 0 5px 0;
+    border-radius: 3px;
+    color: #39ab39;
+    cursor: pointer;
+    border: solid 1px rgba(57,171,57,0.4);
+  }
+  .page.payment-view .refund-note:hover {
+    background-color: #DBFFDB;
+  }
+  .page.payment-view .refund-note i {
+    font-size: 1.6em;
+    margin-right: 12px;
+    float: left;
   }
   .page.payment-view .next-step {
-    background-color: skyblue;
-    padding: 10px;
-    margin: 10px 0px;
+    background-color: #FAF4FF;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    color: #417EEF;
+    cursor: pointer;
+    border: solid 1px rgba(65,126,239,0.4);
   }
-  .page.payment-view .confirm-payment-button {
-    margin-top: 100px;
+  .page.payment-view .next-step:hover {
+    background-color: #F0ECFF;
   }
-
+  .page.payment-view .next-step i {
+    font-size: 1.6em;
+    margin-right: 12px;
+    margin-left: 5px;
+    float: left;
+  }
 </style>

@@ -36,8 +36,7 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
           })
           .state('home', {
             url: "/",
-            templateUrl: "../views/home.html",
-            controller: 'HomeCtrl'
+            templateUrl: "../views/home.html"
           })
           .state('ticket', {
             url: "/ticket",
@@ -63,7 +62,12 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
             url: "/payment",
             templateUrl: "../views/payment.html",
             controller: "PaymentCtrl"
-          })
+          })/*
+          .state('caseCreated', {
+            url: "/caseCreated",
+            templateUrl: "../views/caseCreated.html",
+            controller: "PaymentCtrl"
+          })*/
           .state('cases', {
             url: "/cases",
             templateUrl: "../views/cases.html",
@@ -86,8 +90,8 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
       }
     ])
     .run(
-    ['$rootScope', '$state', '$stateParams', '$ionicPlatform', '$window', '$ionicModal', '$ionicLoading', 'Constants', 'FacebookService',
-      function ($rootScope, $state, $stateParams, $ionicPlatform, $window, $ionicModal, $ionicLoading, Constants, FacebookService) {
+    ['$rootScope', '$state', '$sce', '$stateParams', '$ionicPlatform', '$window', '$ionicModal', '$ionicLoading', 'Constants', 'FacebookService',
+      function ($rootScope, $state, $sce, $stateParams, $ionicPlatform, $window, $ionicModal, $ionicLoading, Constants, FacebookService) {
 
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
@@ -155,6 +159,26 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
           $rootScope.loginModal.hide();
         };
 
+        // Create popup view modal
+        $ionicModal.fromTemplateUrl('views/popupView.html', {
+          scope: $rootScope,
+          animation: 'slide-in-up'
+        }).then(function(modal) {
+          $rootScope.popupViewModal = modal;
+        });
+        $rootScope.showPopupView = function(url, title) {
+          $rootScope.popupViewUrl = $sce.trustAsResourceUrl(url);
+          $rootScope.popupViewTitle = title;
+          $rootScope.popupViewModal.show();
+
+          document.querySelector("iframe.popup-view-frame").addEventListener("load", function() {
+            console.log("iframe finished loading.");
+          });
+        };
+        $rootScope.hidePopupView = function() {
+          $rootScope.popupViewModal.hide();
+        };
+
         $rootScope.$on('loading:show', function() {
             $ionicLoading.show({
               template: "<div class='loading-box'>" +
@@ -198,6 +222,5 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
         };
       }
     ]);
-
 
 })();

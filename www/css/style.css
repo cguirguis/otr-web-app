@@ -15,6 +15,7 @@
   height: 60px;
   font-size: 1.5em!important;
   border: solid 1px rgb(31, 85, 142);
+  border-radius: 3px;
 }
 .page button:hover {
   opacity: 1;
@@ -138,12 +139,16 @@ hr {
   padding-right: 5px;
 }
 .button.login-nav-button div {
-  width: 80%;
   height: 100%;
   overflow: hidden;
   text-align: left;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  /*white-space: nowrap;
+  text-overflow: ellipsis;*/
+}
+.nav-icon {
+  font-size: 1.2em;
+  color: rgba(255,255,255,0.9);
+  margin-right: 5px;
 }
 @media (min-width: 500px) {
 
@@ -411,24 +416,50 @@ table.k-content {
   color: white;
   opacity: 1;
 }
-.match-ticket-button {
+
+/*************** MATCH VIEW *****************/
+.page.match-view .match-ticket-button {
   margin-top: 20px;
 }
-.match-odds-text {
+.page.match-view .match-title {
+  text-align: center;
+  width: 97%;
+}
+.page.match-view .match-subtitle {
+  clear: both;
+  text-align: center;
+  margin-top: 10px;
+}
+.page.match-view .match-odds-text {
   float: left;
-  margin-top:13px;
-  margin-right: 20px;
+  font-size: 1.5em;
+  margin-top:18px;
+  margin-right: 10px;
+  width: 69%;
 }
-.match-odds-value {
-  color: green;font-size:40px
+.page.match-view .match-odds-value {
+  float: right;
+  color: lightgreen;
+  font-size:40px;
+  width: 18%;
+  word-wrap: normal;
+  text-align: right;
+  min-width: 88px;
 }
-.match-cost-text {
+.page.match-view .match-cost-text {
   float: left;
-  margin-right: 20px;
+  font-size: 1.5em;
+  margin-right: 10px;
+  width: 150px;
 }
-.match-cost-value {
-  color: green;
-  font-size:40px
+.page.match-view .match-cost-value {
+  float: right;
+  color: lightgreen;
+  font-size:40px;
+  width: 18%;
+  word-wrap: normal;
+  text-align: right;
+  min-width: 92px;
 }
 .popover-backdrop.active {
   background-color: rgba(0, 0, 0, 0.3);

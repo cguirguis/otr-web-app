@@ -1,0 +1,49 @@
+
+<ion-modal-view class="popup-view">
+  <ion-header-bar class="popup-view-header">
+    <h1 class="title">{{popupViewTitle}}</h1>
+    <div class="close-login-modal button" ng-click="hidePopupView()">X</div>
+  </ion-header-bar>
+  <ion-content class="popup-view-content">
+    <ion-spinner class="popup-spinner" icon='android'></ion-spinner>
+    <iframe class="popup-view-frame" ng-src="{{popupViewUrl}}">
+    </iframe>
+  </ion-content>
+</ion-modal-view>
+
+<style>
+  @media (min-width: 680px) {
+    .modal.popup-view {
+      top: 10%;
+      right: 15%;
+      bottom: 10%;
+      left: 15%;
+      min-height: 240px;
+      width: 70%;
+    }
+  }
+  .popup-view-header {
+    background-color: #1B6794;
+  }
+  .popup-view-header h1 {
+    color: white;
+  }
+  .popup-view-header .close-login-modal {
+    color: white;
+    font-weight: normal;
+  }
+  .popup-view-content .popup-spinner {
+    position: absolute;
+    z-index: -1;
+    left: 45%;
+    top: 40%;
+  }
+  .popup-view-content .popup-spinner svg {
+    height: 70px;
+    width: 70px;
+  }
+  .popup-view-frame {
+    width: 100%;
+    height: 100%;
+  }
+</style>

@@ -2,16 +2,20 @@
 <div class="page match-view">
 
   <div class="match-found" ng-if="match && !matchErrorMessage">
-    <h2>We can fight your ticket!</h2>
-    <h4>You've been matched with one of the top traffic attorney in {{citation.court.city}}.</h4>
 
-    <h3 class="match-odds-text">Your chance of getting the ticket off your record:</h3>
+    <h2 class="match-title">
+      <i class="icon ion-checkmark"></i>
+      We can fight your ticket!
+    </h2>
+    <h4 class="match-subtitle">We were able to match you with one of the top-rated traffic attorneys in {{citation.court.city}}.</h4>
+
+    <h3 class="match-odds-text">Your chance of getting this ticket off your record:</h3>
     <h2 class="match-odds-value">93%</h2>
     <br>
     <h3 class="match-cost-text">Your cost:</h3>
     <h2 class="match-cost-value">${{currentCase.caseEstimatedCost}}</h2>
 
-    <br><br><br>
+    <br><br>
     <button class="confirm-match-button" ng-click="confirmMatch()">Continue</button>
   </div>
 
@@ -28,11 +32,36 @@
 </div>
 
 <style>
+.match-background-img {
+  background-image: url("../img/lawyer_tie_blur.jpg");
+}
+.page.match-view {
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 5px;
+  height: 100%;
+  padding: 10px 25px;
+}
+.page.match-view h2, .page.match-view h3, .page.match-view h4 {
+  color: white;
+}
+.page.match-view .ion-checkmark {
+  color: lightgreen;
+  font-size: 2.2em;
+  right: 5px;
+  top: 6px;
+  position: relative;
+}
 .page.match-view .request-coverage-button {
   width:68%;
 }
 .page.match-view .request-coverage-button.cancel {
   margin-left: 0px;
   width: 30%;
+}
+.page.match-view .confirm-match-button {
+  position: absolute;
+  bottom: 50px;
+  left: 1%;
+  width: 98%;
 }
 </style>
