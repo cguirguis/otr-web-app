@@ -6,15 +6,33 @@
   <ion-content scroll="false">
     <ion-list class="user-actions">
       <a>
-        <ion-item>Profile</ion-item>
+        <ion-item>
+          <i class="icon ion-person"></i>
+          Profile
+        </ion-item>
       </a>
       <a>
-        <ion-item>Settings</ion-item>
+        <ion-item>
+          <i class="icon ion-gear-a"></i>
+          Settings
+        </ion-item>
       </a>
       <a ng-click="logout()">
-        <ion-item>Log out</ion-item>
+        <ion-item>
+          <i class="icon ion-log-out"></i>
+          Log out
+        </ion-item>
       </a>
     </ion-list>
   </ion-content>
 
 </ion-popover-view>
+
+
+<style>
+  .user-actions a i {
+    margin-right: 8px;
+    font-size: 20px;
+    color: #555;
+  }
+</style>

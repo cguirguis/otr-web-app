@@ -1,5 +1,5 @@
 
-<div class="page match-view">
+<div class="page match-view" ng-if="match && !matchErrorMessage">
 
   <div class="match-found" ng-if="match && !matchErrorMessage">
 
@@ -34,6 +34,8 @@
 <style>
 .match-background-img {
   background-image: url("../img/lawyer_tie_blur.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 .page.match-view {
   background-color: rgba(0,0,0,0.3);

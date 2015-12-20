@@ -4,12 +4,12 @@
   <div class="transaction-title">Transaction Details</div>
   <ul class="transactions">
     <li class="primary">
-      <div class="transaction-item">Legal services to contest traffic ticket, {{citation.violationCount}} moving violation{{citation.violationCount > 0 ? 's' : ''}}</div>
-      <div class="transaction-fee">${{currentCase.caseEstimatedCost - (50*(citation.violationCount - 1))}}</div>
+      <div class="transaction-item">Legal services to contest traffic ticket, {{citation.violationCount - citation.extraViolations}} moving violation{{citation.violationCount > 0 ? 's' : ''}}</div>
+      <div class="transaction-fee">${{currentCase.caseEstimatedCost - (50*citation.extraViolations)}}</div>
     </li>
-    <li class="secondary" ng-if="hasExtraViolations">
-      <div class="transaction-item">{{citation.violationCount - 1}} extra violations</div>
-      <div class="transaction-fee">${{50 * (citation.violationCount - 1)}}</div>
+    <li class="secondary" ng-if="citation.extraViolations > 0">
+      <div class="transaction-item">{{citation.extraViolations}} extra violation{{citation.extraViolations > 1 ? 's' : ''}}</div>
+      <div class="transaction-fee">${{50 * citation.extraViolations}}</div>
     </li>
     <li class="secondary">
       <div class="transaction-item light-text">No accident involved</div>
@@ -143,8 +143,8 @@
     border-radius: 3px;
   }
   .page.payment-view ul.transactions-total {
-    margin-top: 5px;
-    padding-top: 10px;
+    margin-top: 10px;
+    padding-top: 15px;
   }
   .page.payment-view ul.transactions li {
     overflow: auto;
