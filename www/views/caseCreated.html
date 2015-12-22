@@ -1,8 +1,138 @@
 
-<div class="page match-view">
+<div class="page case-created" ng-if="paymentProcessed">
+  <ion-scroll class="scroll-view">
+    <h2>
+      <i class="icon ion-checkmark-circled"></i>
+      Your case has been created!
+    </h2>
 
-  <div class="case-created" ng-if="paymentProcessed && !errorMessage">
-    <h2>Your case has been created!</h2>
-  </div>
+    <div class="match-details">
+      <div class="matched-text">Your traffic ticket will be fought by</div>
+      <div class="lawfirm-name">Law Office of Jacques LeJeune</div>
+      <img class="lawfirm-image" src="../img/default-profile-pic.png" />
+    </div>
 
+    <div class="case-created-note">
+      You're all set. Now sit back and let your attorney do all the heavy lifting.
+      <div class="note">
+        (You don't need to mail anything in or show up in court)
+      </div>
+    </div>
+
+    <div class="facebook-share" ng-hide="sharedOnFacebook" ng-click="shareOnFacebook()">
+      <i class="icon ion-social-facebook"></i>
+      <div class="text">Share the news!
+        <span class="subtext">(friends don't let friends pay traffic tickets)</span>
+      </div>
+    </div>
+
+    <!--div ng-click="toggleFbButton()">Toggle</div-->
+  </ion-scroll>
+
+  <button class="view-case-button bottom" ng-click="viewCase">View Case Details</button>
 </div>
+
+
+<style>
+  .page.case-created {
+    background-color: #efefef;
+    text-align: center;
+  }
+  .page.case-created .scroll-view {
+    padding-bottom: 100px;
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+  .page.case-created h2 {
+    color: #7ad07a;
+  }
+  .page.case-created i.ion-checkmark-circled {
+    margin-right: 5px;
+    font-size: 1.2em;
+    color: #7ad07a;
+    position: relative;
+    top: 3px;
+  }
+  .page.case-created .match-details {
+    margin-top: 25px;
+    color: #999;
+    font-size: 1.3em;
+    font-weight: 300;
+  }
+  .page.case-created .lawfirm-name {
+    font-weight: 400;
+    color: #333;
+    margin-top: 10px;
+  }
+  .page.case-created .lawfirm-image {
+    width: 200px;
+    height: 200px;
+    margin: 10px 0 20px 0;
+    border-radius: 50%;
+  }
+  .page.case-created .case-created-note {
+    color: #70a2cc;
+    font-size: 1.6em;
+    line-height: 1.5em;
+    font-weight: 200;
+    margin-top: 30px;
+    width: 70%;
+    margin: auto;
+  }
+  .page.case-created .case-created-note .note {
+    font-size: 0.6em;
+    margin-top: 10px;
+    line-height: 1em;
+  }
+  .page.case-created .facebook-share {
+    width: 90%;
+    margin: auto;
+    background-color: #3b5185;
+    color: white;
+    font-size: 1.5em;
+    line-height: 2em;
+    padding: 10px;
+    margin-top: 45px;
+    font-weight: 200;
+    cursor: pointer;
+    border-radius: 3px;
+    overflow: auto;
+  }
+  .page.case-created .facebook-share:hover {
+    background-color: #5372bc;
+  }
+  .page.case-created .facebook-share i {
+    font-size: 1.7em;
+    float: left;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .page.case-created .facebook-share .text {
+    line-height: 2em;
+    float: left;
+  }
+  .page.case-created .facebook-share .subtext {
+    font-size: 1em;
+    font-weight: lighter;
+    margin-left: 5px;
+  }
+
+
+  .facebook-share {
+    -webkit-transition:all linear 1s;
+  }
+  .facebook-share.ng-hide {
+    opacity: 0;
+  }
+  .facebook-share.ng-hide-add {
+    -webkit-animation:0.5s hide;
+    animation:0.5s hide;
+  }
+
+
+</style>
+
+
+
+
+

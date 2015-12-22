@@ -9,7 +9,7 @@
     <button class="violation-button" ng-click="setViolationCount(4)" ng-class="{ 'active': violationCount === 4 }">4</button>
     <button class="violation-button" ng-click="setViolationCount(5)" ng-class="{ 'active': violationCount === 5 }">5</button>
 
-    <button class="match-ticket-button" ng-click="fightThisTicket()" ng-show="violationCount && !match">
+    <button class="match-ticket-button bottom" ng-click="fightThisTicket()" ng-show="violationCount && !match">
       Fight this ticket!
     </button>
   </div>

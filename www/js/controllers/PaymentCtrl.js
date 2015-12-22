@@ -74,7 +74,9 @@ controllers.controller('PaymentCtrl',
 
       var paymentSuccess = function(result) {
         console.log(JSON.stringify(result));
-        $state.go("caseCreated");
+
+        $scope.paymentProcessed = true;
+        $rootScope.pageTitle = "Case " + $rootScope.currentCase.caseId;
       };
 
       $scope.showRefundModal = function() {
@@ -83,6 +85,33 @@ controllers.controller('PaymentCtrl',
 
       $scope.showNextStepModal = function() {
         $rootScope.showPopupView(nextStepUrl, "What Happens Next?");
+      };
+
+      $scope.shareOnFacebook = function() {
+        FB.ui({
+            method: 'feed',
+            name: "I just contested my traffic ticket with OTR!",
+            link: "http://www.offtherecord.com",
+            caption: 'Always fight your ticket!',
+            picture: 'https://s3.amazonaws.com/offtherecord.com/assets/img/fightyourticket.jpg',
+            description: "#FightYourTicket #CleanRecord #OffTheRecordApp"
+          }, function(response) {
+            if(response && response.post_id){
+              console.log("SUCCESS" + JSON.stringify(response));
+              $scope.sharedOnFacebook = true;
+            }
+            else{
+              console.log("FAILED: " + JSON.stringify(response));
+            }
+          });
+      };
+
+      $scope.toggleFbButton = function() {
+        $scope.sharedOnFacebook = !$scope.sharedOnFacebook;
+      };
+
+      $scope.viewCase = function() {
+        $state.go("cases", { "caseId" : $rootScope.currentCase.caseId });
       };
 
       /*

@@ -6,6 +6,7 @@
 var WebApp = WebApp || angular.module('OTRWebApp', [
   'ionic',
   'ngCordova',
+  'ngAnimate',
   'OTRControllers'
 ]);
 
@@ -62,12 +63,7 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
             url: "/payment",
             templateUrl: "../views/payment.html",
             controller: "PaymentCtrl"
-          })/*
-          .state('caseCreated', {
-            url: "/caseCreated",
-            templateUrl: "../views/caseCreated.html",
-            controller: "PaymentCtrl"
-          })*/
+          })
           .state('cases', {
             url: "/cases",
             templateUrl: "../views/cases.html",

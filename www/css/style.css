@@ -22,8 +22,10 @@
   background-color: rgb(36, 103, 172);
 }
 .page button.bottom {
-  position: fixed;
+  position: absolute;
   bottom: 50px;
+  left: 1%;
+  width: 98%;
 }
 button.cancel {
   width: 48%;
