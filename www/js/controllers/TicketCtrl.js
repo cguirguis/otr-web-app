@@ -51,6 +51,7 @@ controllers.controller('TicketCtrl',
       var video = document.querySelector('video');
       var shutter = document.querySelector('.shutter-button');
       var canvas = document.querySelector('canvas');
+      var imgContainer = document.querySelector(".ticket-image-container");
       var img = document.querySelector('#image-capture');
       var ctx = canvas.getContext('2d');
       var localMediaStream = null;
@@ -67,7 +68,11 @@ controllers.controller('TicketCtrl',
           // "image/webp" works in Chrome.
           // Other browsers will fall back to image/png.
           img.src = canvas.toDataURL('image/webp');
-          img.width = '100%';
+          $timeout(function() {
+            $(img).css("height", "100%");
+            $(imgContainer).css("height", $(".bottom-bar").position().top + "px");
+          });
+
           $scope.images.push(img);
           $scope.capturingImage = false;
           $scope.$apply();
@@ -122,6 +127,9 @@ controllers.controller('TicketCtrl',
 
       function fallback(e) {
         console.log('navigator.getUserMedia rejected!', e);
+        $scope.base64Image = null;
+        $scope.showFileInputView = true;
+        $scope.capturingImage = false;
       }
 
       function handleFileSelect(event) {
@@ -141,9 +149,12 @@ controllers.controller('TicketCtrl',
             // Render image preview.
             img.src =  e.target.result;
             img.title = theFile.name;
-            img.width = '100%';
-            $scope.images.push(img);
+            $timeout(function() {
+              $(img).css("height", "100%");
+              $(imgContainer).css("height", $(".bottom-bar").position().top + "px");
+            });
 
+            $scope.images.push(img);
             $scope.base64Image = reader.result.slice(22);
             $scope.showFileInputView = false;
 

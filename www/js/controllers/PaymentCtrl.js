@@ -13,7 +13,13 @@ controllers.controller('PaymentCtrl',
 
       var stripeForm = $('#stripe-cc-form');
 
-      stripeForm.on("submit", function(event) {
+      /*stripeForm.on("submit", function(event) {
+        $scope.verifyCard();
+      });*/
+
+      $scope.verifyCard = function($event) {
+        stripeForm = $("#stripe-cc-form");
+        $event.preventDefault();
         $scope.errorMessage = null;
 
         // If this is the second submission, prevent page reload
@@ -29,15 +35,16 @@ controllers.controller('PaymentCtrl',
 
         // Prevent the form from submitting with the default action
         return false;
-      });
+      };
 
       var stripeResponseHandler = function(status, response) {
+        stripeForm = $("#stripe-cc-form");
+
         // Handle response from Stripe
         if (response.error) {
           // Show the errors on the form
           $scope.errorMessage = response.error.message;
           console.log($scope.errorMessage);
-          $scope.$apply();
           stripeForm.find('button').prop('disabled', false);
         } else {
           // response contains id and card, which contains additional card details
@@ -51,7 +58,10 @@ controllers.controller('PaymentCtrl',
             .then(function(success) {
               // Insert the token into the form so it gets submitted to the server and submit
               stripeForm.append($('<input type="hidden" name="stripeToken" />').val(token));
-              stripeForm.submit();
+
+              $timeout( function() {
+                stripeForm.submit();
+              });
             }, function(error) {
               console.log(JSON.stringify(error));
             });

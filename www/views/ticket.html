@@ -20,7 +20,7 @@
     </div>
 
     <div class="ticket-image-container" ng-show="images.length">
-      <img id="image-capture" src="" style="width:100%">
+      <img id="image-capture" src="" />
     </div>
 
     <canvas style="display:none;" width="1280" height="720"></canvas>
@@ -38,6 +38,8 @@
     background-color: #efefef;
   }
   #image-capture {
+    height: 100%;
+    width: auto;
     border: solid 1px #999;
     box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
   }
