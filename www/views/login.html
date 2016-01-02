@@ -108,7 +108,7 @@
   }
   .email-login-form .label, #signup-form .label {
     float: left;
-    width: 80px;
+    width: 85px;
     line-height: 40px;
     margin-right: 10px;
     font-size: 18px;
@@ -124,12 +124,12 @@
     margin-top:13px;
   }
   #signup-form .label {
-    width: 100px;
+    width: 85px;
     text-align: right;
   }
   .email-login-form input, #signup-form input {
     width: 85%;
-    height: 40px;
+    height: 25px;
     line-height: 40px;
     border: solid 1px #dedede;
     padding-left: 10px;
@@ -144,12 +144,21 @@
     margin-top: 20px;
     width: 69%;
   }
+  @media (max-width: 450px) {
+    button.login-button, button.signup-submit-button {
+      width: 68%;
+    }
+    #signup-form input {
+      width: 68%;
+    }
+  }
   button.cancel {
     margin-top: 20px;
     width: 30%;
     background-color: #ccc;
     opacity: 0.9;
     border: none;
+    float: left;
   }
   button.cancel:hover {
     background-color: #ccc;

@@ -1,88 +1,100 @@
 
-<ion-view class="page payment-view" scroll="true" ng-class="{ 'gray-background': paymentProcessed }">
+<ion-view class="page payment-view" ng-class="{ 'gray-background': paymentProcessed }">
+  <ion-content scroll="true">
+    <div class="payment-view" ng-if="!paymentProcessed">
+      <div class="transaction-title">Transaction Details</div>
+      <ul class="transactions">
+        <li class="primary">
+          <div class="transaction-item">Legal services to contest traffic ticket, {{citation.violationCount - citation.extraViolations}} moving violation{{citation.violationCount > 0 ? 's' : ''}}</div>
+          <div class="transaction-fee">${{currentCase.caseEstimatedCost - (50*citation.extraViolations)}}</div>
+        </li>
+        <li class="secondary" ng-if="citation.extraViolations > 0">
+          <div class="transaction-item">{{citation.extraViolations}} extra violation{{citation.extraViolations > 1 ? 's' : ''}}</div>
+          <div class="transaction-fee">${{50 * citation.extraViolations}}</div>
+        </li>
+        <li class="secondary">
+          <div class="transaction-item light-text">No accident involved</div>
+        </li>
+        <li class="secondary">
+          <div class="transaction-item light-text">Ticket not overdue</div>
+        </li>
+      </ul>
+      <ul class="transactions transactions-total">
+        <li class="secondary total">
+          <div class="transaction-item">Total</div>
+          <div class="transaction-fee">${{currentCase.caseEstimatedCost}}</div>
+        </li>
+      </ul>
 
-  <div class="payment-view" ng-if="!paymentProcessed">
-    <div class="transaction-title">Transaction Details</div>
-    <ul class="transactions">
-      <li class="primary">
-        <div class="transaction-item">Legal services to contest traffic ticket, {{citation.violationCount - citation.extraViolations}} moving violation{{citation.violationCount > 0 ? 's' : ''}}</div>
-        <div class="transaction-fee">${{currentCase.caseEstimatedCost - (50*citation.extraViolations)}}</div>
-      </li>
-      <li class="secondary" ng-if="citation.extraViolations > 0">
-        <div class="transaction-item">{{citation.extraViolations}} extra violation{{citation.extraViolations > 1 ? 's' : ''}}</div>
-        <div class="transaction-fee">${{50 * citation.extraViolations}}</div>
-      </li>
-      <li class="secondary">
-        <div class="transaction-item light-text">No accident involved</div>
-      </li>
-      <li class="secondary">
-        <div class="transaction-item light-text">Ticket not overdue</div>
-      </li>
-    </ul>
-    <ul class="transactions transactions-total">
-      <li class="secondary total">
-        <div class="transaction-item">Total</div>
-        <div class="transaction-fee">${{currentCase.caseEstimatedCost}}</div>
-      </li>
-    </ul>
+      <div class="refund-note" ng-click="showRefundModal()">
+        <i class="ion-cash"></i>
+        If your case is not successful, we will refund this fee.
+      </div>
 
-    <div class="refund-note" ng-click="showRefundModal()">
-      <i class="ion-cash"></i>
-      If your case is not successful, we will refund this fee.
+      <div class="next-step" ng-click="showNextStepModal()">
+        <i class="ion-arrow-right-a"></i>
+        What happens next?
+      </div>
+
+      <form method="POST" id="stripe-cc-form" ng-submit="verifyCard($event)">
+
+        <h4>To book this case, please provide a credit card:</h4>
+
+        <div class="form-row" style="margin-right: 10px">
+          <input type="text" id="card-number" size="21" maxlength="16" data-stripe="number"
+                 placeholder="Card number" style="font-size: 2.2em" value="4242424242424242"/>
+        </div>
+
+        <div class="form-row" style="margin-right:10px;">
+          <input type="text" id="cvc" size="4" maxlength="4" data-stripe="cvc"
+                 placeholder="CVC" style="font-size: 2.2em" value="242"/>
+        </div>
+
+        <div class="form-row">
+          <input type="text" size="2" maxlength="2" data-stripe="exp-month"
+            placeholder="mm" style="float:left;font-size: 2.2em" value="10"/>
+        </div>
+        <div class="form-row" style="height: 10px;">
+          <div class="date-separator">/</div>
+        </div>
+        <div class="form-row">
+          <input type="text" size="4" maxlength="4" data-stripe="exp-year"
+                 placeholder="yyyy" style="font-size: 2.2em" value="2019"/>
+        </div>
+
+        <div class="payment-errors" ng-show="errorMessage">{{errorMessage}}</div>
+
+        <button type="submit" name="submit" style="clear:both;margin-top:10px;" ng-if="!isCardVerified">Verify card</button>
+        <button type="button" style="margin-top: 10px;" ng-if="isCardVerified" ng-click="confirmPayment()">Confirm payment</button>
+      </form>
     </div>
 
-    <div class="next-step" ng-click="showNextStepModal()">
-      <i class="ion-arrow-right-a"></i>
-      What happens next?
-    </div>
-
-    <form method="POST" id="stripe-cc-form" ng-submit="verifyCard($event)">
-
-      <h4>To book this case, please provide a credit card:</h4>
-
-      <div class="form-row" style="margin-right: 10px">
-        <input type="text" id="card-number" size="21" maxlength="16" data-stripe="number"
-               placeholder="Card number" style="font-size: 2.2em" value="4242424242424242"/>
-      </div>
-
-      <div class="form-row" style="margin-right:10px;">
-        <input type="text" id="cvc" size="4" maxlength="4" data-stripe="cvc"
-               placeholder="CVC" style="font-size: 2.2em" value="242"/>
-      </div>
-
-      <div class="form-row">
-        <input type="text" size="2" maxlength="2" data-stripe="exp-month"
-          placeholder="mm" style="float:left;font-size: 2.2em" value="10"/>
-      </div>
-      <div class="form-row" style="height: 10px;">
-        <div class="date-separator">/</div>
-      </div>
-      <div class="form-row">
-        <input type="text" size="4" maxlength="4" data-stripe="exp-year"
-               placeholder="yyyy" style="font-size: 2.2em" value="2019"/>
-      </div>
-
-      <div class="payment-errors" ng-show="errorMessage">{{errorMessage}}</div>
-
-      <button type="submit" name="submit" style="clear:both;margin-top:10px;" ng-if="!isCardVerified">Verify card</button>
-      <button type="button" style="margin-top: 10px;" ng-if="isCardVerified" ng-click="confirmPayment()">Confirm payment</button>
-    </form>
-  </div>
-
-  <ng-include src="'views/caseCreated.html'"></ng-include>
-
+    <ng-include src="'views/caseCreated.html'"></ng-include>
+  </ion-content>
 </ion-view>
 
 
 <style>
+  .page.payment-view .payment-view {
+    padding: 10px 15px;
+  }
   .page.payment-view .gray-background {
     background-color: #EFEFEF;
+  }
+  @media (max-width: 450px) {
+    .page.payment-view #stripe-cc-form {
+      font-size: 10px;
+    }
   }
   .page.payment-view #stripe-cc-form {
     margin-top: 15px;
     background-color: #FBFBFB;
     border: solid 1px #dedede;
     padding: 10px;
+    margin-bottom: 50px;
+  }
+  .page.payment-view #stripe-cc-form h4 {
+    font-size: 1.4em!important;
   }
   .page.payment-view #stripe-cc-form .payment-errors {
     clear:both;
@@ -150,7 +162,7 @@
     border-radius: 3px;
   }
   .page.payment-view ul.transactions-total {
-    margin-top: 10px;
+    margin-top: 5px;
     padding-top: 15px;
   }
   .page.payment-view ul.transactions li {
@@ -161,13 +173,14 @@
     overflow: auto;
   }
   .page.payment-view ul.transactions li.secondary {
-    margin-bottom: 5px;
+    /*margin-bottom: 5px;*/
     overflow: auto;
     --list-style-type: disc;
   }
   .page.payment-view ul.transactions li.primary .transaction-item {
     margin-left: 10px;
     margin-bottom: 5px;
+    width: 80%;
     float: left;
   }
   .page.payment-view ul.transactions li.secondary .transaction-item {

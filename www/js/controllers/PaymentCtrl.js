@@ -7,6 +7,7 @@ controllers.controller('PaymentCtrl',
 
       console.log("Payment controller loaded.");
       $rootScope.pageTitle = "Confirm Case";
+      $scope.errorMessage = null;
 
       var refundUrl = "http://www.offtherecord.com/refund.html";
       var nextStepUrl = "http://www.offtherecord.com/nextStep.html";
@@ -69,6 +70,11 @@ controllers.controller('PaymentCtrl',
       };
 
       $scope.confirmPayment = function() {
+        if ($rootScope.currentCase == null) {
+          $rootScope.errorMessage = "Looks like you haven't created a case yet. Please go back and try again.";
+          return;
+        }
+
         var caseId = $rootScope.currentCase.caseId;
         var cardId = $rootScope.user.paymentCard.id;
         //console.log(response.card.brand  + " " + response.card.last4 + " exp: " + response.card.exp_month + "/" + response.card.exp_year + " (" + response.card.id  + ")");

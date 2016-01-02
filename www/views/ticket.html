@@ -1,7 +1,7 @@
 
 <ion-view class="page ticket-view">
   <ion-content scroll="false">
-    <div class="image-input-options" ng-show="(!capturingImage || !images.length) && !showFileInputView">
+    <div class="image-input-options" ng-show="!capturingImage && !images.length && !showFileInputView">
       <h4 ng-show="!images.length && !capturingImage">Please provide a clear photo of your ticket</h4>
 
       <button class="button camera-button" ng-click="addMedia()" ng-show="!capturingImage && !images.length"></button>
@@ -38,9 +38,15 @@
     background-color: #efefef;
   }
   #image-capture {
-    height: 100%;
-    width: auto;
     border: solid 1px #999;
     box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
+  }
+  #image-capture.portrait {
+    height: 100%;
+    width: auto;
+  }
+  #image-capture.landscape {
+    width: 100%;
+    height: auto;
   }
 </style>

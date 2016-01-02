@@ -68,10 +68,7 @@ controllers.controller('TicketCtrl',
           // "image/webp" works in Chrome.
           // Other browsers will fall back to image/png.
           img.src = canvas.toDataURL('image/webp');
-          $timeout(function() {
-            $(img).css("height", "100%");
-            $(imgContainer).css("height", $(".bottom-bar").position().top + "px");
-          });
+          setImageHeight();
 
           $scope.images.push(img);
           $scope.capturingImage = false;
@@ -149,10 +146,7 @@ controllers.controller('TicketCtrl',
             // Render image preview.
             img.src =  e.target.result;
             img.title = theFile.name;
-            $timeout(function() {
-              $(img).css("height", "100%");
-              $(imgContainer).css("height", $(".bottom-bar").position().top + "px");
-            });
+            setImageHeight();
 
             $scope.images.push(img);
             $scope.base64Image = reader.result.slice(22);
@@ -165,6 +159,20 @@ controllers.controller('TicketCtrl',
         // Read in the image file as a data URL
         reader.readAsDataURL(f);
       }
+
+      var setImageHeight = function() {
+        $timeout(function() {
+          var imgHeightToWidthRatio = $(img).css("height").slice(0,-2)/$(img).css("width").slice(0,-2);
+          var containerHeightToWidthRatio = $(".bottom-bar").position().top/$(imgContainer).width();
+          if (imgHeightToWidthRatio > containerHeightToWidthRatio) {
+            $(img).css("max-width", "100%");
+            $(img).removeClass("landscape").addClass("portrait");
+          } else {
+            $(img).removeClass("portrait").addClass("landscape");
+          }
+          $(imgContainer).css("height", $(".bottom-bar").position().top + "px");
+        });
+      };
 
       var root = fileInput.createShadowRoot();
       root.innerHTML = "<button tabindex='-1'>Select File</button>";

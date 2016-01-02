@@ -219,6 +219,7 @@ i.icon.button-icon {
 }
 .page.ticket-view .image-input-options {
   text-align: center;
+  height: 100%;
 }
 .page.ticket-view .ticket-image-container {
   padding: 25px;
@@ -226,12 +227,20 @@ i.icon.button-icon {
 }
 button.button.camera-button {
   background-image: url('../img/camera-icon.png');
-  background-position-x: center;
+  background-position-x: 45%;
   background-repeat: no-repeat;
-  background-color:transparent;
-  border:none;
-  height:420px;
-  width: 420px;
+  background-color: transparent;
+  background-size: 100%;
+  border: none;
+  margin: auto;
+  width: 35%;
+  cursor: pointer;
+  height: 60%;
+}
+@media (max-width:450px) {
+  button.button.camera-button {
+    width: 60%
+  }
 }
 button.button.camera-button:active {
   background-image: url('../img/camera-icon-hover.png');
@@ -279,8 +288,16 @@ button.retake-picture {
   height: 60px;
   border: solid 1px #cdcdcd;
   color: #333;
-  margin-top: 30px;
   cursor: pointer
+}
+@media (max-width: 450px) {
+  button.retake-picture {
+    width: 93%;
+    margin-bottom: 3px;
+  }
+  button.continue {
+    width: 93%;
+  }
 }
 button.retake-picture:hover {
   background-color: #efefef;
