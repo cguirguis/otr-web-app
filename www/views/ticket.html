@@ -9,7 +9,11 @@
 
     <div class="file-input-container" ng-show="showFileInputView">
       <h4>Please upload a picture of your ticket:</h4>
-      <input type="file" id="ticket-photo-input" />
+
+      <span class="btn btn-file">
+          Browse <input type="file" id="ticket-photo-input">
+      </span>
+
       <div class="error-message" ng-if="inputErrorMessage.length">{{inputErrorMessage}}</div>
     </div>
 
@@ -48,5 +52,45 @@
   #image-capture.landscape {
     width: 100%;
     height: auto;
+  }
+  @media (max-width:450px) {
+    #image-capture.landscape {
+      width: 85%;
+      height: auto;
+    }
+  }
+
+  .btn-file {
+    color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
+    display: block;
+    width: 40%;
+    margin-bottom: 0;
+    cursor: pointer;
+    background-image: none;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 2em;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    position: absolute;
+    top: 60px;
+    left: 30%;
+  }
+  .btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    /* font-size: 100px; */
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
   }
 </style>

@@ -34,17 +34,21 @@ controllers.controller('TicketCtrl',
       }
 
       $scope.addMedia = function() {
-        $scope.hideSheet = $ionicActionSheet.show({
-          buttons: [
-            { text: 'Take photo' },
-            { text: 'Photo from library' }
-          ],
-          titleText: 'Add images',
-          cancelText: 'Cancel',
-          buttonClicked: function(index) {
-            $scope.takePicture(index);
-          }
-        });
+        if (!isMobileDevice()) {
+          fileInput.click();
+        } else {
+          $scope.hideSheet = $ionicActionSheet.show({
+            buttons: [
+              {text: 'Take photo'},
+              {text: 'Photo from library'}
+            ],
+            titleText: 'Add images',
+            cancelText: 'Cancel',
+            buttonClicked: function (index) {
+              $scope.takePicture(index);
+            }
+          });
+        }
       }
 
       var fileInput = document.querySelector('#ticket-photo-input');
@@ -170,12 +174,12 @@ controllers.controller('TicketCtrl',
           } else {
             $(img).removeClass("portrait").addClass("landscape");
           }
-          $(imgContainer).css("height", $(".bottom-bar").position().top + "px");
+          $(imgContainer).css("height", ($(".bottom-bar").position().top - 10) + "px");
         });
       };
 
-      var root = fileInput.createShadowRoot();
-      root.innerHTML = "<button tabindex='-1'>Select File</button>";
+      //var root = fileInput.createShadowRoot();
+      //root.innerHTML = "<button tabindex='-1'>Select File</button>";
       fileInput.addEventListener('change', handleFileSelect, false);
 
       $scope.retakePicture = function() {

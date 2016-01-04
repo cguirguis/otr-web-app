@@ -19,6 +19,9 @@ var CourtCtrl = function($rootScope, $scope, $http, $timeout, $location, $ionicM
       },
       function(error) {
         console.log('Error retrieving courts: {0}', error);
+        $rootScope.hideLoader();
+        // TODO: display appropriate error message
+        $rootScope.errorMessage = "Unable to load courts. Please make sure you have an internet connection.";
       }
     );
   };
