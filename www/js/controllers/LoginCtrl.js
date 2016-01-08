@@ -39,7 +39,7 @@ controllers.controller('LoginCtrl',
       $rootScope.showDefaultSpinner = true;
       $scope.errorMessage = "";
 
-      if (!newUser.firstname.length) {
+      if (!newUser || !newUser.firstname.length) {
         $scope.errorMessage = "Please enter a first name.";
       } else if (!newUser.lastname.length) {
         $scope.errorMessage = "Please enter a last name.";
@@ -61,6 +61,7 @@ controllers.controller('LoginCtrl',
           }
           $scope.loading = false;
           $rootScope.showDefaultSpinner = false;
+          $rootScope.hideLoader();
         })
         .then(signupResponseHandler);
     };
@@ -77,6 +78,7 @@ controllers.controller('LoginCtrl',
             $scope.errorMessage = data.error.uiErrorMsg;
             $scope.loading = false;
             $rootScope.showDefaultSpinner = false;
+            $rootScope.hideLoader();
           })
           .then(loginResponseHandler);
       }
