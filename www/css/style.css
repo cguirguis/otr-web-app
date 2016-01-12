@@ -123,10 +123,14 @@ hr {
 }
 
 /************* NAV ************/
-.step-completed {
+.step-completed, .step-not-completed  {
   margin: 0px 0px 0px 0px;
   color: rgb(70,230,70);
   float: right;
+}
+.step-not-completed {
+  color: #FF5555;
+  font-size: 1.4em;
 }
 .popover.user-dropdown {
   width: 190px;
@@ -185,6 +189,39 @@ hr {
 }
 @media (min-width: 500px) {
 
+}
+
+/************* ERROR MODAL ************/
+.error-box {
+  padding: 10px;
+  text-align: center;
+}
+.error-box i {
+  float: left;
+  color: salmon;
+  font-size: 6em;
+}
+.error-box .error-text {
+  font-weight: lighter;
+  font-size: 1.4em;
+  color: salmon;
+  width: 80%;
+  margin: auto;
+  overflow: auto;
+  padding-bottom: 5px;
+}
+.error-box .error-button {
+  width: 120px;
+  margin-top: 10px;
+  background-color: transparent;
+  border-color: transparent;
+  color: salmon;
+  cursor: pointer;
+  margin-bottom: -10px;
+}
+.error-box .error-button:hover {
+  background-color: salmon;
+  color: white;
 }
 
 /************* LOGIN MODAL ************/

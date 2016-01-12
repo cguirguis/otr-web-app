@@ -89,6 +89,7 @@
                     <i class="nav-icon ion-camera"></i>
                     Your ticket
                     <i class="step-completed icon ion-checkmark" ng-if="citation && citation.image.length"></i>
+                    <i class="step-not-completed icon ion-ios-close-empty" ng-if="!citation || !citation.image.length"></i>
                   </ion-item>
                 </a>
                 <a ui-sref="court">
@@ -96,6 +97,7 @@
                     <i class="nav-icon ion-android-pin"></i>
                     Assigned court
                     <i class="step-completed icon ion-checkmark" ng-if="citation && citation.court"></i>
+                    <i class="step-not-completed icon ion-ios-close-empty" ng-if="!citation || !citation.court"></i>
                   </ion-item>
                 </a>
                 <a ui-sref="date">
@@ -103,6 +105,7 @@
                     <i class="nav-icon ion-android-calendar"></i>
                     Date issued
                     <i class="step-completed icon ion-checkmark" ng-if="citation && citation.date"></i>
+                    <i class="step-not-completed icon ion-ios-close-empty" ng-if="!citation || !citation.date"></i>
                   </ion-item>
                 </a>
                 <a ui-sref="violations">
@@ -110,6 +113,7 @@
                     <i class="nav-icon ion-speedometer"></i>
                     Violations
                     <i class="step-completed icon ion-checkmark" ng-if="citation && citation.violationCount"></i>
+                    <i class="step-not-completed icon ion-ios-close-empty" ng-if="!citation || !citation.violationCount"></i>
                   </ion-item>
                 </a>
                 <a ui-sref="payment">
@@ -132,7 +136,7 @@
 
                 <button class="button button-icon login-nav-button" ng-if="user == null" ng-click="login()">
                   <i class="icon ion-log-in"></i>
-                  <span style="font-size:15px;margin-right:5px;">Log in</span>
+                  <span style="font-size:15px;margin-right:5px;">Login</span>
                 </button>
                 <button class="button button-icon login-nav-button" ng-if="user != null" ng-click="showUserDropdown($event)">
                   <div class="nav-username">

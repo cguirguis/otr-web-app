@@ -206,6 +206,29 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
           $ionicLoading.hide();
         };
 
+
+        // Display error modal
+        $rootScope.displayError = function(message) {
+          $ionicLoading.show({
+            template:
+            "<div class='error-box'>" +
+              "<i class='icon ion-alert'></i>" +
+              "<div class='error-text'>" + message + "</div>" +
+              "<div class='button error-button' ng-click='dismissError()'>OK</div>" +
+            "</div>"
+          });
+        };
+
+        $rootScope.dismissError = function() {
+          $ionicLoading.hide();
+        }
+
+        $rootScope.$watch('errorMessage', function() {
+          if ($rootScope.errorMessage != null) {
+            $rootScope.displayError($rootScope.errorMessage);
+          }
+        });
+
         $rootScope.isLoggedIn = function() {
           return $rootScope.user != null;
         };

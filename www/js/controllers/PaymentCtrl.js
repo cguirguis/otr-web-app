@@ -19,24 +19,32 @@ controllers.controller('PaymentCtrl',
       });*/
 
       $scope.verifyCard = function($event) {
-        stripeForm = $("#stripe-cc-form");
-        $event.preventDefault();
+        $rootScope.displayLoading("");
         $scope.errorMessage = null;
+        stripeForm = $("#stripe-cc-form");
+        if ($event) {
+          $event.preventDefault();
+        }
 
         // If this is the second submission, prevent page reload
         if (stripeForm.find("input[name='stripeToken']").length) {
           $scope.isCardVerified = true;
+          $rootScope.hideLoader();
           return false;
         }
 
         // Disable the submit button to prevent repeated clicks
-        stripeForm.find('button').prop('disabled', true);
+        //stripeForm.find('button').prop('disabled', true);
 
         Stripe.card.createToken(stripeForm, stripeResponseHandler);
 
         // Prevent the form from submitting with the default action
         return false;
       };
+
+      /*$('#stripe-cc-form').submit(function(event) {
+        $scope.verifyCard(event);
+      });*/
 
       var stripeResponseHandler = function(status, response) {
         stripeForm = $("#stripe-cc-form");
@@ -47,6 +55,7 @@ controllers.controller('PaymentCtrl',
           $scope.errorMessage = response.error.message;
           console.log($scope.errorMessage);
           stripeForm.find('button').prop('disabled', false);
+          $rootScope.hideLoader();
         } else {
           // response contains id and card, which contains additional card details
           var token = response.id;
@@ -61,7 +70,7 @@ controllers.controller('PaymentCtrl',
               stripeForm.append($('<input type="hidden" name="stripeToken" />').val(token));
 
               $timeout( function() {
-                stripeForm.submit();
+                $scope.verifyCard(null);
               });
             }, function(error) {
               console.log(JSON.stringify(error));
