@@ -4,7 +4,7 @@ controllers.controller('ViolationCtrl',
     function($rootScope, $scope, $state, $timeout, $ionicLoading, ScopeCache, DataService) {
 
     console.log("Violation controller loaded.");
-    $rootScope.pageTitle = "Ticket Violations";
+    $rootScope.pageTitle = $scope.match && !$scope.matchErrorMessage ? "" : "Violations";
 
     $scope.loading = false;
     $scope.match = null;

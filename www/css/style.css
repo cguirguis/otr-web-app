@@ -62,7 +62,8 @@ button.cancel:hover {
   background-color: #444;
   border-color: #666;
   cursor: pointer;
-}.menu-left ion-item:hover {
+}
+.menu-left ion-item:hover {
    background-color: #555;
  }
 .menu-left ion-item.activated {
@@ -71,6 +72,12 @@ button.cancel:hover {
 .menu-left a ion-item {
   color: white;
   text-decoration: none;
+}
+.menu-left a.disabled ion-item {
+  color: #666;
+}
+.menu-left a.disabled ion-item i {
+  color: #666;
 }
 .bottom-bar {
   position: absolute;
@@ -130,7 +137,9 @@ hr {
 }
 .step-not-completed {
   color: #FF5555;
-  font-size: 1.4em;
+  font-size: 2em;
+  margin-top: -5px;
+  height: 0.8em;
 }
 .popover.user-dropdown {
   width: 190px;
@@ -171,10 +180,6 @@ hr {
   float: left;
   padding-right: 5px;
 }
-.button .login-nav-button .nav-username {
-  padding-top: 5px;
-  padding-right: 5px;
-}
 .button.login-nav-button div {
   height: 100%;
   overflow: hidden;
@@ -187,34 +192,48 @@ hr {
   color: rgba(255,255,255,0.9);
   margin-right: 5px;
 }
-@media (min-width: 500px) {
-
+@media (max-width: 500px) {
+  .button.login-nav-button i {
+    float: right;
+    padding-right: 5px;
+  }
+  .button.login-nav-button .nav-username {
+    padding-left: 15px;
+    padding-right: 0px;
+  }
+  .button.login-nav-button .nav-username .username
+  {
+    display: none;
+  }
 }
 
 /************* ERROR MODAL ************/
 .error-box {
   padding: 10px;
   text-align: center;
+  width: 70vh;
 }
 .error-box i {
   float: left;
   color: salmon;
-  font-size: 6em;
+  font-size: 6.5em;
 }
 .error-box .error-text {
-  font-weight: lighter;
+  font-weight: 200;
   font-size: 1.4em;
   color: salmon;
   width: 80%;
   margin: auto;
   overflow: auto;
   padding-bottom: 5px;
+  margin-bottom: 5px;
+  margin-top: -5px;
 }
 .error-box .error-button {
   width: 120px;
   margin-top: 10px;
   background-color: transparent;
-  border-color: transparent;
+  border-color: salmon;
   color: salmon;
   cursor: pointer;
   margin-bottom: -10px;

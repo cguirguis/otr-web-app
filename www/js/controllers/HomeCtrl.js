@@ -15,6 +15,44 @@ controllers.controller('HomeCtrl',
       $ionicSideMenuDelegate.toggleLeft();
     };
 
+    $scope.goToTicket = function() {
+      $state.go("ticket");
+      $scope.toggleMenu();
+    };
+
+    $scope.goToCourt = function() {
+      if ($rootScope.citation && $rootScope.citation.images.length) {
+        $state.go("court");
+        $scope.toggleMenu();
+      }
+    };
+
+    $scope.goToDate = function() {
+      if ($rootScope.citation && $rootScope.citation.images.length && $rootScope.citation.court) {
+        $state.go("date");
+        $scope.toggleMenu();
+      }
+    };
+
+    $scope.goToViolations = function() {
+      if ($rootScope.citation && $rootScope.citation.images.length && $rootScope.citation.court && $rootScope.citation.date) {
+        $state.go("violations");
+        $scope.toggleMenu();
+      }
+    };
+
+    $scope.goToOverview = function() {
+      if ($rootScope.citation && citation.image.length && citation.court && citation.date && citation.violationCount) {
+        $state.go("payment");
+        $scope.toggleMenu();
+      }
+    };
+
+    $scope.goToCases = function() {
+        $state.go("cases");
+        $scope.toggleMenu();
+    };
+
     $scope.login = function() {
       $rootScope.showLoginModal();
     };

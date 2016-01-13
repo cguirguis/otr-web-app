@@ -84,42 +84,49 @@
                     Home
                   </ion-item>
                 </a>
-                <a ui-sref="ticket">
-                  <ion-item ng-click="toggleMenu()">
+                <a>
+                  <ion-item ng-click="goToTicket()">
                     <i class="nav-icon ion-camera"></i>
                     Your ticket
                     <i class="step-completed icon ion-checkmark" ng-if="citation && citation.image.length"></i>
                     <i class="step-not-completed icon ion-ios-close-empty" ng-if="!citation || !citation.image.length"></i>
                   </ion-item>
                 </a>
-                <a ui-sref="court">
-                  <ion-item ng-click="toggleMenu()">
+                <a ng-class="{disabled: !(citation && citation.image.length)}">
+                  <ion-item ng-click="goToCourt()">
                     <i class="nav-icon ion-android-pin"></i>
                     Assigned court
                     <i class="step-completed icon ion-checkmark" ng-if="citation && citation.court"></i>
                     <i class="step-not-completed icon ion-ios-close-empty" ng-if="!citation || !citation.court"></i>
                   </ion-item>
                 </a>
-                <a ui-sref="date">
-                  <ion-item ng-click="toggleMenu()">
+                <a ng-class="{disabled: !(citation && citation.image.length && citation.court)}">
+                  <ion-item ng-click="goToDate()">
                     <i class="nav-icon ion-android-calendar"></i>
                     Date issued
                     <i class="step-completed icon ion-checkmark" ng-if="citation && citation.date"></i>
                     <i class="step-not-completed icon ion-ios-close-empty" ng-if="!citation || !citation.date"></i>
                   </ion-item>
                 </a>
-                <a ui-sref="violations">
-                  <ion-item ng-click="toggleMenu()">
+                <a ng-class="{disabled: !(citation && citation.image.length && citation.court && citation.date)}">
+                  <ion-item ng-click="goToViolations()">
                     <i class="nav-icon ion-speedometer"></i>
                     Violations
                     <i class="step-completed icon ion-checkmark" ng-if="citation && citation.violationCount"></i>
                     <i class="step-not-completed icon ion-ios-close-empty" ng-if="!citation || !citation.violationCount"></i>
                   </ion-item>
                 </a>
-                <a ui-sref="payment">
-                  <ion-item ng-click="toggleMenu()">
+                <a ng-class="{disabled: !(citation && citation.image.length && citation.court && citation.date && citation.violationCount )}">
+                  <ion-item ng-click="goToOverview()">
                     <i class="nav-icon ion-card"></i>
-                    Payment info
+                    Overview
+                  </ion-item>
+                </a>
+
+                <a ng-class="{disabled: false}">
+                  <ion-item ng-click="goToCases()">
+                    <i class="nav-icon ion-card"></i>
+                    Cases
                   </ion-item>
                 </a>
               </ion-list>
@@ -141,7 +148,7 @@
                 <button class="button button-icon login-nav-button" ng-if="user != null" ng-click="showUserDropdown($event)">
                   <div class="nav-username">
                     <i class="icon ion-ios-person"></i>
-                    {{user.firstname}} {{user.lastname}}
+                    <div class="username">{{user.firstname}} {{user.lastname}}</div>
                   </div>
                 </button>
 

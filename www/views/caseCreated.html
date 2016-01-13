@@ -1,37 +1,37 @@
 
 <div class="page case-created" ng-if="paymentProcessed">
-  <ion-scroll class="scroll-view">
-    <h2>
-      <i class="icon ion-checkmark-circled"></i>
-      Your case has been created!
-    </h2>
+  <ion-scroll class="scroll-view" style="height: 100vh">
+    <div style="height: 800px">
+      <h2>
+        <i class="icon ion-checkmark-circled"></i>
+        Your case has been created.
+      </h2>
 
-    <div class="match-details">
-      <div class="matched-text">Your traffic ticket will be fought by</div>
-      <div class="lawfirm-name">Law Office of Jacques LeJeune</div>
-      <img class="lawfirm-image" src="../img/default-profile-pic.png" />
-    </div>
+      <div class="match-details">
+        <div class="matched-text">Your traffic ticket will be fought by</div>
+        <div class="lawfirm-name">Law Office of Jacques LeJeune</div>
+        <img class="lawfirm-image" src="../img/default-profile-pic.png" />
+      </div>
 
-    <div class="case-created-note">
-      You're all set. Now sit back and let your attorney do all the heavy lifting.
-      <div class="note">
-        (You don't need to mail anything in or show up in court)
+      <div class="case-created-note">
+        You're all set. Now sit back and let your attorney do all the heavy lifting.
+        <div class="note">
+          You don't need to mail anything in or show up in court.
+        </div>
+      </div>
+
+      <div class="share-text">Friends don't let friends pay traffic tickets.</div>
+      <div class="facebook-share" ng-hide="sharedOnFacebook" ng-click="shareOnFacebook()">
+        <i class="icon ion-social-facebook"></i>
+        <div class="text">Share the news!
+        </div>
       </div>
     </div>
-
-    <div class="facebook-share" ng-hide="sharedOnFacebook" ng-click="shareOnFacebook()">
-      <i class="icon ion-social-facebook"></i>
-      <div class="text">Share the news!
-        <span class="subtext">(friends don't let friends pay traffic tickets)</span>
-      </div>
-    </div>
-
     <!--div ng-click="toggleFbButton()">Toggle</div-->
   </ion-scroll>
 
-  <button class="view-case-button bottom" ng-click="viewCase">View Case Details</button>
+  <button class="view-case-button bottom" ng-click="viewCase()">View Case</button>
 </div>
-
 
 <style>
   .page.case-created {
@@ -45,12 +45,12 @@
     margin-right: -10px;
   }
   .page.case-created h2 {
-    color: #7ad07a;
+    color: #5499E2;
   }
   .page.case-created i.ion-checkmark-circled {
     margin-right: 5px;
     font-size: 1.2em;
-    color: #7ad07a;
+    color: #5499E2;
     position: relative;
     top: 3px;
   }
@@ -66,13 +66,13 @@
     margin-top: 10px;
   }
   .page.case-created .lawfirm-image {
-    width: 200px;
-    height: 200px;
-    margin: 10px 0 20px 0;
+    width: 150px;
+    height: 150px;
+    margin: 15px 0 20px 0;
     border-radius: 50%;
   }
   .page.case-created .case-created-note {
-    color: #70a2cc;
+    color: #5499E2;
     font-size: 1.6em;
     line-height: 1.5em;
     font-weight: 200;
@@ -81,26 +81,27 @@
     margin: auto;
   }
   .page.case-created .case-created-note .note {
-    font-size: 0.6em;
+    color: #aaa;
+    font-size: 0.7em;
     margin-top: 10px;
     line-height: 1em;
   }
   .page.case-created .facebook-share {
-    width: 90%;
     margin: auto;
-    background-color: #3b5185;
+    background-color: #5372bc;
     color: white;
     font-size: 1.5em;
     line-height: 2em;
-    padding: 10px;
-    margin-top: 45px;
+    padding: 6px;
+    margin-top: 8px;
     font-weight: 200;
     cursor: pointer;
     border-radius: 3px;
     overflow: auto;
+    max-width: 250px;
   }
   .page.case-created .facebook-share:hover {
-    background-color: #5372bc;
+    background-color: #3b5185;
   }
   .page.case-created .facebook-share i {
     font-size: 1.7em;
@@ -112,10 +113,18 @@
     line-height: 2em;
     float: left;
   }
-  .page.case-created .facebook-share .subtext {
-    font-size: 1em;
-    font-weight: lighter;
+  .page.case-created .share-text {
+    margin-top: 30px;
     margin-left: 5px;
+    color: #5372bc;
+    font-size: 1.2em;
+  }
+  .page.case-created .view-case-button {
+    background-color: #f37272;
+    border: none;
+  }
+  .page.case-created .view-case-button:hover {
+    background-color: #f36464;
   }
 
 
