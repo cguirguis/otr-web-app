@@ -1,13 +1,137 @@
 
-<ion-view class="page cases-view">
+<ion-view ng-cloak style="background-color:#F0F3F4">
+  <ion-scroll class="page cases-view" style="height: 91vh">
+    <h1>Your cases</h1>
 
-  <h1>Your cases</h1>
+    <div ng-if="!casesLoaded" class='loading-box'>
+      <ion-spinner icon='ios'></ion-spinner>
+    </div>
 
-  Coming soon...
+    <div ng-show="casesLoaded && numCases == 0">You don't have any active cases. When you fight a ticket, your case details will appear here.</div>
+    <div ng-show="casesLoaded && numCases > 0">You have {{numCases}} active cases.</div>
 
-  <ion-list>
-    <ion-item>Case {{currentCase.caseId}}</ion-item>
-  </ion-list>
-
+    <ion-list>
+      <ion-item ng-repeat="case in cases">
+        <div class="ticket-image"><img ng-src="{{case.citation.signedImageUrl}}" /></div>
+        <div class="case-summary">
+          <div class="ticket-issued">Ticket from {{case.dateIssued}}</div>
+          <div class="status" ng-bind-html="case.status"></div>
+          <div class="case-id">Case: {{case.caseId}}</div>
+          <div class="court">{{case.citation.court.courtName}} ({{case.citation.court.address.city}}, {{case.citation.court.address.stateCode}})</div>
+          <div class="attorney">
+            <div class="image"><img ng-src="{{case.lawfirmCaseDecision.profilePictureUrl}}" /></div>
+            <div class="attorney-header">Your attorney</div>
+            <div class="attorney-name">{{case.lawfirmCaseDecision.lawfirmName}}</div>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-scroll>
 </ion-view>
 
+
+<style>
+  .page.cases-view {
+    padding: 10px 25px;
+    background-color: #F0F3F4;
+  }
+  .page.cases-view h1 {
+    font-family: 'Raleway', sans-serif;
+    color: #333;
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+  .page.cases-view div {
+    color: #777;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    line-height: 1.4em;
+    font-weight: 300;
+  }
+  .page.cases-view .loading-box {
+    margin-top: 15px;
+  }
+  .page.cases-view ion-item {
+    margin: 10px 0px;
+    border: solid 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 2px transparent;
+    cursor: pointer;
+  }
+  .page.cases-view ion-item:hover {
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2)
+  }
+  .page.cases-view ion-item .ticket-image {
+    float: left;
+    margin: -16px 20px -23px -16px;
+  }
+  @media (max-width: 600px) {
+    .page.cases-view ion-item .ticket-image {
+      display:none;
+    }
+    .page.cases-view ion-item .case-summary {
+      width: 100%;
+    }
+    .page.cases-view ion-item .status {
+      float: left;
+      position: inherit!important;
+      clear: both;
+    }
+  }
+  .page.cases-view ion-item .case-summary {
+    float: left;
+  }
+  .page.cases-view ion-item .ticket-issued {
+    font-size: 20px;
+    cursor: pointer;
+    color: #1f66ad;
+    font-weight: 400;
+    text-transform: uppercase;
+    float: left;
+  }
+  .page.cases-view ion-item .status {
+    position: absolute;
+    right: 27px;
+    top: 15px;
+  }
+  .page.cases-view ion-item .ticket-issued:hover {
+    text-decoration: underline;
+  }
+  .page.cases-view ion-item .case-id {
+    color: #bbb;
+    font-size: 16px;
+    margin-bottom: 7px;
+  }
+  .page.cases-view ion-item .court {
+    margin-bottom: 10px;
+  }
+  .page.cases-view ion-item .case-id,
+  .page.cases-view ion-item .court,
+  .page.cases-view ion-item .attorney {
+    clear: both;
+  }
+  .page.cases-view ion-item .attorney-header {
+    font-weight: 400;
+    font-size: 16px;
+  }
+  .page.cases-view ion-item .attorney-name {
+    font-size: 16px;
+  }
+  .page.cases-view ion-item .attorney .image img {
+    height: 70px;
+    width: 70px;
+    float: left;
+    margin-right: 10px;
+    border-radius: 35px;
+  }
+  .page.cases-view div.case-status-active {
+    color: green;
+    font-weight: 400;
+  }
+  .page.cases-view div.case-status-confirmed {
+    color: orange;
+    font-weight: 400;
+  }
+</style>

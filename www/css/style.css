@@ -1,5 +1,9 @@
 /* Empty. Add your own CSS if you like */
 
+body {
+  -webkit-font-smoothing: antialiased!important;
+}
+
 .page {
   padding: 10px 15px;
 }

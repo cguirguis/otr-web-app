@@ -38,8 +38,31 @@ WebApp.factory('UtilitiesService',
     });
   };
 
+  var convertUTCDateToLocalDate = function(date) {
+    var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
+
+    var offset = date.getTimezoneOffset() / 60;
+    var hours = date.getHours();
+
+    newDate.setHours(hours - offset);
+
+    return newDate;
+  };
+
+  var getShortDateString = function(date) {
+    var currDate = date.getDate();
+    var currMonth = date.getMonth();
+    var currYear = date.getFullYear();
+
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    return "{0} {1}, {2}".format(months[currMonth], currDate, currYear);
+  }
+
   return {
     authenticateUser: authenticateUser,
-    logout: logout
+    logout: logout,
+    convertUTCDateToLocalDate: convertUTCDateToLocalDate,
+    getShortDateString: getShortDateString
   }
 });

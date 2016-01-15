@@ -15,6 +15,8 @@ WebApp.factory('DataService', function($http, Constants)
   var addCardUrl = baseUrl + 'users/stripe/account/cards';
   var chargeCardUrl = baseUrl + 'cases/{0}/payment';
 
+  var getCasesUrl = baseUrl + 'cases';
+
   var jsonContentTypeHeader = {
     'Content-Type': "application/json"
   };
@@ -92,16 +94,16 @@ WebApp.factory('DataService', function($http, Constants)
   var associateCase = function(caseId) {
     var url = associateCaseUrl.format(caseId);
     return $http.post(url);
-  }
+  };
 
   var confirmCase = function(caseId) {
     var url = confirmCaseUrl.format(caseId);
     return $http.post(url);
-  }
+  };
 
   var addCard = function(params) {
     return $http.post(addCardUrl, params, jsonContentTypeHeader);
-  }
+  };
 
   var chargeCard = function(caseId, cardId) {
     var url = chargeCardUrl.format(caseId);
@@ -110,6 +112,11 @@ WebApp.factory('DataService', function($http, Constants)
     console.log(url);
     return $http.post(url, data);
   };
+
+  var getCases = function() {
+    var url = getCasesUrl;
+    return $http.get(url);
+  }
 
   return {
     getUser: getUser,
@@ -124,6 +131,7 @@ WebApp.factory('DataService', function($http, Constants)
     associateCase: associateCase,
     confirmCase: confirmCase,
     addCard: addCard,
-    chargeCard: chargeCard
+    chargeCard: chargeCard,
+    getCases: getCases
   }
 });

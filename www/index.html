@@ -18,6 +18,10 @@
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+
     <!-- calendar css -->
     <link rel="stylesheet" href="//kendo.cdn.telerik.com/2015.3.1111/styles/kendo.common-material.min.css" />
     <link rel="stylesheet" href="//kendo.cdn.telerik.com/2015.3.1111/styles/kendo.material.min.css" />
@@ -43,7 +47,10 @@
     <!-- Stripe -->
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
-    <!-- your app's js -->
+    <!-- AWS S3 -->
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.15.min.js"></script>
+
+    <!-- App code -->
     <script src="js/app.js"></script>
     <!-- Configs -->
     <script src="js/config/Constants.js"></script>
@@ -53,6 +60,8 @@
     <script src="js/services/DataService.js"></script>
     <script src="js/services/FacebookService.js"></script>
     <script src="js/services/UtilitiesService.js"></script>
+    <script src="js/services/AWSS3Service.js"></script>
+    <script src="js/services/AWSCredentialService.js"></script>
     <!-- Controllers -->
     <script src="js/controllers/HomeCtrl.js"></script>
     <script src="js/controllers/LoginCtrl.js"></script>
