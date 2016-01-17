@@ -116,7 +116,25 @@ WebApp.factory('DataService', function($http, Constants)
   var getCases = function() {
     var url = getCasesUrl;
     return $http.get(url);
-  }
+  };
+
+  var getCaseDetails = function(caseId) {
+    function findCase() {
+      return _.find($rootScope.cases, function(c) {
+        return caseId == caseId;
+      })
+    }
+
+    if (cases) {
+      return $q.when(findCase())
+    } else {
+      return getClientCases().then(
+        function() {
+          return findCase();
+        }
+      )
+    }
+  };
 
   return {
     getUser: getUser,
@@ -132,6 +150,7 @@ WebApp.factory('DataService', function($http, Constants)
     confirmCase: confirmCase,
     addCard: addCard,
     chargeCard: chargeCard,
-    getCases: getCases
+    getCases: getCases,
+    getCaseDetails: getCaseDetails
   }
 });

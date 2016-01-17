@@ -1,0 +1,130 @@
+
+<ion-view ng-cloak style="background-color:#F0F3F4">
+  <ion-scroll class="page cases-view" style="height: 91vh">
+    <div  ng-show="loadedCase">
+      <i class="icon ion-folder" style="font-size: 40px;margin-top: -3px;margin-right: 9px;float:left;color: #999;"></i>
+      <h1 class="ticket-issued">Your Ticket from {{loadedCase.dateIssued}}</h1>
+    </div>
+
+    <div ng-if="!loadedCase" class='loading-box'>
+      <ion-spinner icon='ios' style="float: left;"></ion-spinner>
+      <div style="margin-top: -4px;margin-left: 40px;">Loading case...</div>
+    </div>
+
+    <div ng-if="loadedCase">
+
+      <!-- Status section -->
+      <div class="section-title">
+        <i class="icon ion-ios-pulse-strong"></i><div>Status</div>
+      </div>
+      <div class="status-section">
+        <div class="status-title">{{loadedCase.statusTitle}}</div>
+        <div class="status-description">{{loadedCase.statusDescription}}</div>
+      </div>
+
+      <!-- History section -->
+      <div class="section-title">
+        <i class="icon ion-android-time"></i><div>Case History</div>
+      </div>
+      <div class="case-section" style="position: relative;padding-top: 30px;">
+        <div class="timeline-bar"></div>
+        <div class="update-row" ng-repeat="action in loadedCase.actions" ng-class="{'active': $index==0}">
+          <div class="action-bar"><div class="icon-bg"><i class="icon ion-record"></i></div></div>
+          <div class="action-text">
+            <div class="action-date">{{action.actionDate}}</div>
+            <span class="action-title">{{action.actionType.uiString}}</span>
+            <div class="action-description" ng-if="action.actionNote">{{action.actionNote}}</div>
+          </div>
+        </div>
+        <!--<div class="update-row">
+          <div class="action-bar"><div class="icon-bg"><i class="icon ion-record"></i></div></div>
+          <div class="action-text">
+            <div class="action-date">Dec 22, 2015</div>
+            <span class="action-title">Lawyer accepted case</span>
+            <div class="action-description"></div>
+          </div>
+        </div>
+        <div class="update-row">
+          <div class="action-bar"><div class="icon-bg"><i class="icon ion-record"></i></div></div>
+          <div class="action-text">
+            <div class="action-date">Dec 19, 2015</div>
+            <span class="action-title">Case created</span>
+            <div class="action-description"></div>
+          </div>
+        </div>-->
+      </div>
+
+      <!-- Lawyer section -->
+      <div class="section-title">
+        <i class="icon ion-android-person"></i><div>Your attorney</div>
+      </div>
+      <div class="case-section">
+        <div class="lawyer-image">
+          <img ng-src="{{loadedCase.lawfirmCaseDecision.profilePictureUrl}}" />
+        </div>
+        <div class="lawyer-details">
+          <div class="lawyer-name">{{loadedCase.lawfirmCaseDecision.lawfirmName}}</div>
+          <div class="lawyer-call">
+            <i class="icon ion-ios-telephone"></i> Call
+          </div>
+          <div class="lawyer-message" ng-click="viewMessages()">
+            <i class="icon ion-chatbubbles"></i> Message
+          </div>
+        </div>
+      </div>
+
+      <!-- Court section -->
+      <div class="section-title">
+        <div class="court-icon"></div><div>Assigned Court</div>
+      </div>
+      <div class="case-section">
+        <div class="court-name">{{loadedCase.court.name}}</div>
+        <div class="court-city">{{loadedCase.court.city}}</div>
+
+        <div class="court-date">
+          <i class="icon ion-android-calendar"></i>
+          <div ng-show="loadedCase.court.courtDate">Your court date is on {{loadedCase.court.courtDate}}</div>
+          <div ng-hide="loadedCase.court.courtDate">Your court date has not yet been set.</div>
+        </div>
+      </div>
+
+      <!-- Ticket section -->
+      <div class="section-title">
+        <i class="icon ion-document" style="margin-left:4px;"></i><div>Ticket details</div>
+      </div>
+      <div class="case-section">
+        <div class="ticket-image">
+          <img ng-src="{{loadedCase.citation.signedImageUrl}}" />
+        </div>
+        <div class="ticket-details">
+          <div class="case-row">
+            <div class="summary-label">Issued</div>
+            <div class="summary-value">{{loadedCase.ticket.dateIssued}}</div>
+          </div>
+          <div class="case-row">
+            <div class="summary-label">Fine amount</div>
+            <div class="summary-value ticket-fine">{{loadedCase.ticket.fineAmount}}</div>
+          </div>
+          <div class="case-row">
+            <div class="summary-label">Violations</div>
+            <div class="summary-value">{{loadedCase.ticket.violations}}</div>
+          </div>
+          <div class="case-row">
+            <div class="summary-label">Past due</div>
+            <div class="summary-value">{{loadedCase.ticket.isPastDue}}</div>
+          </div>
+          <div class="case-row">
+            <div class="summary-label">Accident</div>
+            <div class="summary-value">{{loadedCase.ticket.involvesAccident}}</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </ion-scroll>
+</ion-view>
+
+
+<style>
+</style>

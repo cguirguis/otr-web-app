@@ -10,7 +10,7 @@
   <ion-content>
     <ion-list>
       <ion-item ng-hide="selectedCourt && !isEditing" ng-repeat="court in results" class="court-result-container" ng-class="{ 'selected': court.selected }">
-        <img src="../../img/court-icon.png" class="court-icon">
+        <img src="../../img/court-icon.png" class="court-icon" />
         <div clasps="court-result" ng-click="selectCourt(court)">
           <div class="court-name">{{court.courtName}}</div>
           <div class="court-city">{{court.city}}, {{court.state}}</div>

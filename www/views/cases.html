@@ -1,7 +1,7 @@
 
 <ion-view ng-cloak style="background-color:#F0F3F4">
   <ion-scroll class="page cases-view" style="height: 91vh">
-    <h1>Your cases</h1>
+    <h1>Active cases</h1>
 
     <div ng-if="!casesLoaded" class='loading-box'>
       <ion-spinner icon='ios'></ion-spinner>
@@ -11,10 +11,10 @@
     <div ng-show="casesLoaded && numCases > 0">You have {{numCases}} active cases.</div>
 
     <ion-list>
-      <ion-item ng-repeat="case in cases">
+      <ion-item ng-repeat="case in cases" ng-click="viewCase(case.caseId)">
         <div class="ticket-image"><img ng-src="{{case.citation.signedImageUrl}}" /></div>
         <div class="case-summary">
-          <div class="ticket-issued">Ticket from {{case.dateIssued}}</div>
+          <div class="ticket-issued">Your ticket from {{case.dateIssued}}</div>
           <div class="status" ng-bind-html="case.status"></div>
           <div class="case-id">Case: {{case.caseId}}</div>
           <div class="court">{{case.citation.court.courtName}} ({{case.citation.court.address.city}}, {{case.citation.court.address.stateCode}})</div>
@@ -61,11 +61,17 @@
     cursor: pointer;
   }
   .page.cases-view ion-item:hover {
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2)
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2)
   }
   .page.cases-view ion-item .ticket-image {
     float: left;
-    margin: -16px 20px -23px -16px;
+    margin: -16px 25px -16px -16px;
+    height: 194px;
+    width: 150px;
+  }
+  .page.cases-view ion-item .ticket-image img {
+    width: 100%;
+    height: auto;
   }
   @media (max-width: 600px) {
     .page.cases-view ion-item .ticket-image {
@@ -78,6 +84,13 @@
       float: left;
       position: inherit!important;
       clear: both;
+    }
+    .page.cases-view ion-item .status div {
+      padding: 0 10px;
+      border-radius: 3px;
+      font-size: 14px;
+      text-transform: uppercase;
+      margin: 4px 0;
     }
   }
   .page.cases-view ion-item .case-summary {
@@ -95,6 +108,7 @@
     position: absolute;
     right: 27px;
     top: 15px;
+    border-radius: 2px;
   }
   .page.cases-view ion-item .ticket-issued:hover {
     text-decoration: underline;
@@ -106,6 +120,7 @@
   }
   .page.cases-view ion-item .court {
     margin-bottom: 10px;
+    font-size: 16px;
   }
   .page.cases-view ion-item .case-id,
   .page.cases-view ion-item .court,
@@ -115,6 +130,7 @@
   .page.cases-view ion-item .attorney-header {
     font-weight: 400;
     font-size: 16px;
+    padding-top: 10px;
   }
   .page.cases-view ion-item .attorney-name {
     font-size: 16px;
@@ -126,12 +142,16 @@
     margin-right: 10px;
     border-radius: 35px;
   }
-  .page.cases-view div.case-status-active {
-    color: green;
+  .page.cases-view .status div {
+    color: white;
+    padding: 5px 10px;
     font-weight: 400;
+    border-radius: 3px;
+  }
+  .page.cases-view div.case-status-active {
+    background-color: green;
   }
   .page.cases-view div.case-status-confirmed {
-    color: orange;
-    font-weight: 400;
+    background-color: orange;
   }
 </style>

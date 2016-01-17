@@ -7,7 +7,8 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
   'ionic',
   'ngCordova',
   'ngAnimate',
-  'OTRControllers'
+  'OTRControllers',
+  'angularMoment'
 ]);
 
 (function() {
@@ -68,6 +69,16 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
             url: "/cases",
             templateUrl: "../views/cases.html",
             controller: "CasesCtrl"
+          })
+          .state('case', {
+            url: "/case/:caseId",
+            templateUrl: "../views/case.html",
+            controller: "CaseCtrl"
+          })
+          .state('messages', {
+            url: "/messages/:caseId",
+            templateUrl: "../views/case-messages.html",
+            controller: "CaseMessagesCtrl"
           });
 
         // Displays spinner every time an HTTP request is made

@@ -57,12 +57,24 @@ WebApp.factory('UtilitiesService',
     var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     return "{0} {1}, {2}".format(months[currMonth], currDate, currYear);
-  }
+  };
+
+  var getShortDateStringFromUtcDate = function(utcDate) {
+    var date = convertUTCDateToLocalDate(new Date(utcDate));
+    var currDate = date.getDate();
+    var currMonth = date.getMonth();
+    var currYear = date.getFullYear();
+
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    return "{0} {1}, {2}".format(months[currMonth], currDate, currYear);
+  };
 
   return {
     authenticateUser: authenticateUser,
     logout: logout,
     convertUTCDateToLocalDate: convertUTCDateToLocalDate,
-    getShortDateString: getShortDateString
+    getShortDateString: getShortDateString,
+    getShortDateStringFromUtcDate: getShortDateStringFromUtcDate
   }
 });

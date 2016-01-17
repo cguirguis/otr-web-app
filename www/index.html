@@ -35,6 +35,10 @@
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.1/angular-moment.min.js"></script>
+
     <!-- Needed for Cordova/PhoneGap (this will be a 404 during development) -->
     <script src="lib/dist/ng-cordova.js"></script>
     <script src="cordova.js"></script>
@@ -62,6 +66,8 @@
     <script src="js/services/UtilitiesService.js"></script>
     <script src="js/services/AWSS3Service.js"></script>
     <script src="js/services/AWSCredentialService.js"></script>
+    <script src="js/services/CaseService.js"></script>
+    <script src="js/services/MessageService.js"></script>
     <!-- Controllers -->
     <script src="js/controllers/HomeCtrl.js"></script>
     <script src="js/controllers/LoginCtrl.js"></script>
@@ -71,6 +77,8 @@
     <script src="js/controllers/ViolationCtrl.js"></script>
     <script src="js/controllers/PaymentCtrl.js"></script>
     <script src="js/controllers/CasesCtrl.js"></script>
+    <script src="js/controllers/CaseCtrl.js"></script>
+    <script src="js/controllers/CaseMessagesCtrl.js"></script>
 
   </head>
   <body ng-app="OTRWebApp" ng-controller="HomeCtrl" ng-cloak>
@@ -96,7 +104,7 @@
                 <a>
                   <ion-item ng-click="goToTicket()">
                     <i class="nav-icon ion-camera"></i>
-                    Your ticket
+                    New ticket
                     <i class="step-completed icon ion-checkmark" ng-if="citation && citation.image.length"></i>
                     <i class="step-not-completed icon ion-ios-close-empty" ng-if="!citation || !citation.image.length"></i>
                   </ion-item>
@@ -135,7 +143,7 @@
                 <a ng-class="{disabled: false}">
                   <ion-item ng-click="goToCases()">
                     <i class="nav-icon ion-card"></i>
-                    Cases
+                    My Cases
                   </ion-item>
                 </a>
               </ion-list>
