@@ -1,0 +1,39 @@
+
+<ion-view ng-cloak style="background-color:#F0F3F4">
+  <ion-scroll  class="page profile-view cases-view">
+    <div class="view-wrapper">
+
+      <div class="page-header" style="margin-left: 0px;">
+        <i class="icon ion-person"></i>
+        <h1>User Profile</h1>
+      </div>
+
+      <div ng-if="!userLoaded" class='loading-box'>
+        <ion-spinner icon='ios'></ion-spinner>
+      </div>
+
+      <div ng-if="userLoaded">
+        <div class="user-photo">
+          <img ng-src="{{userPhoto}}" style="height:100px;with:100px">
+        </div>
+        <div class="user-details">
+          <div class="row">{{user.firstname}} {{user.lastname}}</div>
+          <div class="row">{{user.emailAddress}}</div>
+        </div>
+      </div>
+
+    </div>
+  </ion-scroll>
+</ion-view>
+
+<style>
+  .page.profile-view h1 {
+    font-family: 'Raleway', sans-serif;
+    color: #333;
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+</style>

@@ -24,6 +24,8 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
 
           console.log("logged into fb: " + JSON.stringify($rootScope.fbAuth));
 
+          getProfilePhoto();
+
           // Authenticate user to our service
           return DataService.loginWithFacebook($rootScope.fbAuth);
         })
@@ -80,11 +82,26 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
     });
   };
 
+  var getProfilePhoto = function(width, height) {
+    var width = width || 200;
+    var height = height || 200;
+    FB.api(
+      "/me/picture?width=" + width + "&height=" + height,
+      function (response) {
+        if (response && !response.error) {
+          /* handle the result */
+          $rootScope.userPhoto = response.data.url;
+        }
+      }
+    );
+  };
+
   return {
     statusChangeCallback: statusChangeCallback,
     getUserInfo: getUserInfo,
     logout: logout,
-    login: login
+    login: login,
+    getProfilePhoto: getProfilePhoto
   }
 });
 

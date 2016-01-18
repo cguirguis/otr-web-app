@@ -80,7 +80,12 @@ controllers.controller('HomeCtrl',
       $scope.userPopover.hide();
     };
 
+    $scope.viewProfile = function() {
+      $state.go("profile");
+      $scope.hideUserDropdown();
+    };
+
     // Check if user is logged in
-    // TODO: move this to app's run method?
+    // TODO: move this to app run method?
     UtilitiesService.authenticateUser();
 });

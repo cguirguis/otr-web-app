@@ -79,6 +79,11 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
             url: "/messages/:caseId",
             templateUrl: "../views/case-messages.html",
             controller: "CaseMessagesCtrl"
+          })
+          .state('profile', {
+            url: "/profile",
+            templateUrl: "../views/profile.html",
+            controller: "ProfileCtrl"
           });
 
         // Displays spinner every time an HTTP request is made
