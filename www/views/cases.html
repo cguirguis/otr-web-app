@@ -1,31 +1,37 @@
 
 <ion-view ng-cloak style="background-color:#F0F3F4">
   <ion-scroll class="page cases-view" style="height: 91vh">
-    <h1>Active cases</h1>
+    <div class="view-wrapper">
 
-    <div ng-if="!casesLoaded" class='loading-box'>
-      <ion-spinner icon='ios'></ion-spinner>
-    </div>
+      <div class="page-header" style="margin-left: 0px;">
+        <i class="icon ion-ios-albums"></i>
+        <h1>Active Cases</h1>
+      </div>
 
-    <div ng-show="casesLoaded && numCases == 0">You don't have any active cases. When you fight a ticket, your case details will appear here.</div>
-    <div ng-show="casesLoaded && numCases > 0">You have {{numCases}} active cases.</div>
+      <div ng-if="!casesLoaded" class='loading-box'>
+        <ion-spinner icon='ios'></ion-spinner>
+      </div>
 
-    <ion-list>
-      <ion-item ng-repeat="case in cases" ng-click="viewCase(case.caseId)">
-        <div class="ticket-image"><img ng-src="{{case.citation.signedImageUrl}}" /></div>
-        <div class="case-summary">
-          <div class="ticket-issued">Your ticket from {{case.dateIssued}}</div>
-          <div class="status" ng-bind-html="case.status"></div>
-          <div class="case-id">Case: {{case.caseId}}</div>
-          <div class="court">{{case.citation.court.courtName}} ({{case.citation.court.address.city}}, {{case.citation.court.address.stateCode}})</div>
-          <div class="attorney">
-            <div class="image"><img ng-src="{{case.lawfirmCaseDecision.profilePictureUrl}}" /></div>
-            <div class="attorney-header">Your attorney</div>
-            <div class="attorney-name">{{case.lawfirmCaseDecision.lawfirmName}}</div>
+      <div ng-show="casesLoaded && numCases == 0">You don't have any active cases. When you fight a ticket, your case details will appear here.</div>
+      <div ng-show="casesLoaded && numCases > 0">You have {{numCases}} active cases.</div>
+
+      <ion-list>
+        <ion-item ng-repeat="case in cases" ng-click="viewCase(case.caseId)">
+          <div class="ticket-image"><img ng-src="{{case.citation.signedImageUrl}}" /></div>
+          <div class="case-summary">
+            <div class="ticket-issued">Your ticket from {{case.dateIssued}}</div>
+            <div class="status" ng-bind-html="case.status"></div>
+            <div class="case-id">Case: {{case.caseId}}</div>
+            <div class="court">{{case.citation.court.courtName}} ({{case.citation.court.address.city}}, {{case.citation.court.address.stateCode}})</div>
+            <div class="attorney">
+              <div class="image"><img ng-src="{{case.lawfirmCaseDecision.profilePictureUrl}}" /></div>
+              <div class="attorney-header">Your attorney</div>
+              <div class="attorney-name">{{case.lawfirmCaseDecision.lawfirmName}}</div>
+            </div>
           </div>
-        </div>
-      </ion-item>
-    </ion-list>
+        </ion-item>
+      </ion-list>
+    </div>
   </ion-scroll>
 </ion-view>
 

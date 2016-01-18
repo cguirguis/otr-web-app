@@ -14,6 +14,7 @@ WebApp.factory('DataService', function($http, Constants)
   var confirmCaseUrl = baseUrl + 'cases/{0}';
   var addCardUrl = baseUrl + 'users/stripe/account/cards';
   var chargeCardUrl = baseUrl + 'cases/{0}/payment';
+  var postMessage = baseUrl + 'cases/{caseId}/conversation';
 
   var getCasesUrl = baseUrl + 'cases';
 
@@ -136,6 +137,32 @@ WebApp.factory('DataService', function($http, Constants)
     }
   };
 
+  var postNewCaseMessage = function(caseId, newMessage) {
+    var endpoint = postMessage.replace('{caseId}', caseId);
+
+    var msgDomain = {
+      messageBody : newMessage,
+      author: 'DEFENDANT'
+    };
+
+    var data = { messageDomain : msgDomain };
+
+    return $http.post(endpoint, data)
+      .then(
+        function(response) {
+          console.log('Result from posting new message: ', response);
+          return;
+        },
+        function(errorResponse) {
+          console.log('Error occured while trying to save msg to server: ', errorResponse);
+          if (errorResponse.data && errorResponse.data.error.errorCode == 2002) {
+            console.log('Could not send push notification to client!');
+            return;
+          }
+          $q.reject(errorResponse);
+      });
+  }
+
   return {
     getUser: getUser,
     login : login,
@@ -151,6 +178,7 @@ WebApp.factory('DataService', function($http, Constants)
     addCard: addCard,
     chargeCard: chargeCard,
     getCases: getCases,
-    getCaseDetails: getCaseDetails
+    getCaseDetails: getCaseDetails,
+    postNewCaseMessage: postNewCaseMessage
   }
 });

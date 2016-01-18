@@ -1,42 +1,75 @@
 
 <ion-view ng-cloak style="background-color:#F0F3F4">
-  <ion-scroll class="page messages-view" style="height: 91vh">
-    <div ng-show="messages">
-      <i class="icon ion-chatbubbles" style="font-size: 40px;margin-top: -3px;margin-right: 9px;float:left;color: #999;"></i>
-      <h1 class="case-message-title">Conversation with {{loadedCase.lawfirmCaseDecision.lawfirmName}}</h1>
-    </div>
+  <ion-scroll class="page messages-view" style="height: 91vh;">
+    <div class="view-wrapper" style="max-width: 800px;">
+      <div class="breadcrumb" ng-click="backToCase()">
+        <i class="icon ion-arrow-left-c"></i>
+        <div class="link-text">Back to Case</div>
+      </div>
 
-    <div ng-if="!messages && !errorMessage" class='loading-box'>
-      <ion-spinner icon='ios' style="float: left;"></ion-spinner>
-      <div style="margin-top: -4px;margin-left: 40px;">Loading messages...</div>
-    </div>
-    <div ng-show="errorMessage" style="margin:15px 10px;">Unable to retrieve conversation for this case. Please make sure you've selected a valid case.</div>
+      <div ng-show="messages" class="page-header">
+        <i class="icon ion-chatbubbles" style="font-size: 40px;margin-top: -3px;margin-right: 9px;float:left;color: #666;"></i>
+        <h1 class="case-message-title">Conversation with {{loadedCase.lawfirmCaseDecision.lawfirmName}}</h1>
+      </div>
 
-    <div class="send-message-box">
-      <div class="col-sm-12">
-        <div class="panel">
-          <form lpformnum="1">
-            <div class="panel-body text-left text-medium-gray">
-              <textarea class="send-message-textarea" placeholder="Send a new message" rows="3" ng-model="newMessageInput" ng-disabled="savingMessage"></textarea>
-            </div>
-            <button class="btn" ng-click="postNewMessage()" ng-disabled="savingMessage">
-              <span>
-                  Send Message
-                  <i class="fa fa-spinner fa-pulse fa-lg" ng-show="savingMessage"></i>
-              </span>
-            </button>
-          </form>
+      <div ng-if="!messages && !errorMessage" class='loading-box'>
+        <ion-spinner icon='ios' style="float: left;"></ion-spinner>
+        <div style="margin-top: -4px;margin-left: 40px;">Loading messages...</div>
+      </div>
+      <div ng-show="errorMessage" style="margin:15px 10px;">Unable to retrieve conversation for this case. Please make sure you've selected a valid case.</div>
+
+      <div class="send-message-box">
+        <div class="col-sm-12">
+          <div class="panel">
+            <form lpformnum="1">
+              <div class="panel-body text-left text-medium-gray">
+                <textarea class="send-message-textarea" placeholder="Send a new message" rows="3" ng-model="$parent.newMessageInput" ng-disabled="savingMessage"></textarea>
+              </div>
+              <button class="btn" ng-click="postNewMessage()" ng-disabled="savingMessage">
+                <span>
+                    Send Message
+                    <i class="fa fa-spinner fa-pulse fa-lg" ng-show="savingMessage"></i>
+                </span>
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div ng-if="messages" class="message-thread">
-      <div class="message" ng-repeat="m in messages">
-        <div ng-if="m.authorRoleType == 'DEFENDANT'" class="row row-condensed row-space-15 post">
-          <div class="col-sm-10">
-            <div class="panel-quote-flush panel-quote panel panel-quote-right panel-quote-dark">
-              <div class="panel-body panel-dark">
+      <div ng-if="messages" class="message-thread">
+        <div class="message" ng-repeat="m in messages">
+          <div ng-if="m.authorRoleType == 'DEFENDANT'" class="row row-condensed row-space-15 post">
+            <div class="col-sm-10">
+              <div class="panel-quote-flush panel-quote panel panel-quote-right panel-quote-dark">
+                <div class="panel-body panel-dark">
+                  <div>
+                    <span class="message-text pre">{{m.messageBody}}</span>
+                  </div>
+                  <div class="space-top-2 text-muted">
+                      <span class="time">
+                          <span am-time-ago="m.messageSentDateUtc"></span>
+                      </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 text-right">
+              <div class="media-photo media-round">
+                <img class="user-profile-photo" width="70" height="70" src="" />
+              </div>
+            </div>
+          </div>
+          <div ng-if="m.authorRoleType == 'LAWYER'" class="row row-condensed row-space-15 post">
+            <div class="col-sm-2 text-left">
+              <div class="media-photo media-round">
+                <img class="user-profile-photo" src="https://off-the-record-service.s3.amazonaws.com/lawfirms/10721/images/10721.jpg" width="70" height="70">
+              </div>
+            </div>
+            <div class="col-sm-10">
+            <div class="panel-quote-flush panel-quote panel panel-quote-left">
+              <div class="panel-body">
                 <div>
+                  <!-- Any text with the 'pre' class must be within its parent tag with no breaks or spaces -->
                   <span class="message-text pre">{{m.messageBody}}</span>
                 </div>
                 <div class="space-top-2 text-muted">
@@ -47,36 +80,9 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-2 text-right">
-            <div class="media-photo media-round">
-              <img class="user-profile-photo" width="70" height="70" src="" />
-            </div>
           </div>
-        </div>
-        <div ng-if="m.authorRoleType == 'LAWYER'" class="row row-condensed row-space-15 post">
-          <div class="col-sm-2 text-left">
-            <div class="media-photo media-round">
-              <img class="user-profile-photo" src="https://off-the-record-service.s3.amazonaws.com/lawfirms/10721/images/10721.jpg" width="70" height="70">
-            </div>
-          </div>
-          <div class="col-sm-10">
-          <div class="panel-quote-flush panel-quote panel panel-quote-left">
-            <div class="panel-body">
-              <div>
-                <!-- Any text with the 'pre' class must be within its parent tag with no breaks or spaces -->
-                <span class="message-text pre">{{m.messageBody}}</span>
-              </div>
-              <div class="space-top-2 text-muted">
-                  <span class="time">
-                      <span am-time-ago="m.messageSentDateUtc"></span>
-                  </span>
-              </div>
-            </div>
-          </div>
-        </div>
         </div>
       </div>
     </div>
-
   </ion-scroll>
 </ion-view>

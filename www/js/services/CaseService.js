@@ -70,11 +70,12 @@ function CaseService($q, $rootScope, DataService, UtilitiesService, AWSS3Service
   }
 
   function getStatusText(code) {
+    var text = getStatusTitle(code);
     switch (code) {
       case "CLIENT_CONFIRMED":
-        return "<div class='case-status-confirmed'>Confirmed</div>";
+        return "<div class='case-status-confirmed'>" + text + "</div>";
       default:
-        return "<div class='case-status-active'>Active</div>";
+        return "<div class='case-status-active'>" + text + "</div>";
     }
   }
 

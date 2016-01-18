@@ -13,7 +13,7 @@ body {
 }
 .page button {
   width: 100%;
-  background-color: rgb(26, 93, 162);
+  background-color: #1262be /*rgb(26, 93, 162)*/;
   cursor: pointer;
   color: white;
   height: 60px;
@@ -604,6 +604,7 @@ table.k-content {
   font-size: 18px;
   line-height: 1.4em;
   font-weight: 300;
+  text-align: left;
 }
 .page.cases-view .loading-box, .page.messages-view .loading-box {
   margin-top: 15px;
@@ -618,6 +619,8 @@ table.k-content {
   color: #888; /*#1f66ad;*/
   margin-top: 25px;
   margin-bottom: -5px;
+  margin-left: 15px;
+  text-align: left;
 }
 .page.cases-view .section-title i {
   float: left;
@@ -792,6 +795,7 @@ div.court-icon {
   margin: 10px 0px 10px 15px;
   border: solid 1px rgba(30, 200, 50, 1);
   border-radius: 2px;
+  margin-left: 30px;
 }
 .page.cases-view .status-section .status-title {
   background-color: rgba(30, 200, 50, 1);
@@ -816,6 +820,7 @@ div.court-icon {
   padding: 15px;
   border-radius: 2px;
   overflow: auto;
+  margin-left: 30px;
 }
 .page.cases-view .case-section .case-row {
   width: 100%;
@@ -859,6 +864,19 @@ div.court-icon {
 }
 
 
+@media (max-width: 850px) {
+  .page.cases-view {
+    text-align: left;
+  }
+  .view-wrapper {
+    max-width: 850px;
+    width: 100%!important;
+    text-align: left;
+  }
+}
+.page.cases-view .scroll {
+  text-align: center;
+}
 @media (max-width: 600px) {
   .page.cases-view .case-section .action-text {
     width: 100%;
@@ -878,6 +896,57 @@ div.court-icon {
 
 
 /* Messages */
+@media (max-width: 850px) {
+  .page.messages-view {
+    text-align: left;
+  }
+  .view-wrapper {
+    max-width: 850px;
+    width: 100%!important;
+  }
+}
+.page.messages-view {
+  text-align: center;
+}
+.view-wrapper {
+  width: 850px;
+  max-width: 850px;
+  display: inline-block;
+}
+.breadcrumb {
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-bottom: 25px;
+  width: 150px;
+  cursor: pointer;
+  text-align: left;
+}
+.breadcrumb:hover i {
+  color: #07c;
+}
+.breadcrumb:hover div {
+  color: #07c;
+}
+.breadcrumb i {
+  float: left;
+  margin-right: 10px;
+  color: #999;
+}
+.breadcrumb .link-text {
+  color: #999;
+  font-size: 16px;
+}
+.page-header {
+  margin-left: 15px;
+  text-align: left;
+}
+.page-header i {
+  font-size: 40px;
+  margin-top: -3px;
+  margin-right: 9px;
+  float:left;
+  color: #666;
+}
 .send-message-box {
   margin: 30px 30px;
   max-width: 800px;
@@ -893,10 +962,18 @@ div.court-icon {
 .send-message-box button {
   margin: 5px 0 0 0;
   width: 100%;
+  background-color: #1982c4;
+  border: none;
 }
-
+.send-message-box button:hover {
+  margin: 5px 0 0 0;
+  width: 100%;
+  background-color: #156ca3;
+}
 .send-message-textarea {
   width: 100%;
+  max-height:70px;
+  max-width: 770px;
 }
 .message-thread {
   margin: 40px 30px;
@@ -947,11 +1024,13 @@ div.court-icon {
 .panel-quote {
   position: relative;
   margin-left: 10px;
+  text-align: left;
 }
 .panel-quote-right {
   position: relative;
   margin-right: 10px;
   margin-left: 0;
+  text-align: right;
 }
 .pre {
   white-space: pre-wrap;

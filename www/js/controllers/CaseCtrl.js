@@ -87,6 +87,10 @@ controllers.controller('CaseCtrl',
       $state.go("messages", { caseId: $rootScope.loadedCase.caseId })
     };
 
+    $scope.backToCases = function() {
+      $state.go("cases");
+    };
+
     var caseId = $state.params.caseId;
     if (!$rootScope.loadedCase || $rootScope.loadedCase.caseId != caseId) {
       loadCase(caseId);
