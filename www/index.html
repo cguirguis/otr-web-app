@@ -165,7 +165,8 @@
                 </button>
                 <button class="button button-icon login-nav-button" ng-if="user != null" ng-click="showUserDropdown($event)">
                   <div class="nav-username">
-                    <i class="icon ion-ios-person"></i>
+                    <i class="icon ion-ios-person" ng-if="!userPhoto"></i>
+                    <img ng-src="{{userPhoto}}" ng-if="userPhoto"/>
                     <div class="username">{{user.firstname}} {{user.lastname}}</div>
                   </div>
                 </button>

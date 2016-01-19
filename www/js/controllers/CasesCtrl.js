@@ -30,6 +30,10 @@ controllers.controller('CasesCtrl',
       $state.go("case", { caseId: caseId });
     }
 
+    $scope.backToHome = function() {
+      $state.go("home");
+    }
+
     if (!$scope.cases.length) {
       getCases();
     }

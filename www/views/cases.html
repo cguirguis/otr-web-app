@@ -3,12 +3,17 @@
   <ion-scroll class="page cases-view" style="height: 91vh">
     <div class="view-wrapper">
 
+      <div class="breadcrumb" ng-click="backToHome()">
+        <i class="icon ion-arrow-left-c"></i>
+        <div class="link-text">Back Home</div>
+      </div>
+
       <div class="page-header" style="margin-left: 0px;">
         <i class="icon ion-ios-albums"></i>
         <h1>Active Cases</h1>
       </div>
 
-      <div ng-if="!casesLoaded" class='loading-box'>
+      <div ng-if="!casesLoaded && !cases && !cases.length" class='loading-box'>
         <ion-spinner icon='ios'></ion-spinner>
       </div>
 

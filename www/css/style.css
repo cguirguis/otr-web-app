@@ -184,6 +184,14 @@ hr {
   float: left;
   padding-right: 5px;
 }
+.button.login-nav-button img {
+  height: 30px;
+  width: 30px;
+  float: left;
+  margin-right: 10px;
+  margin-top: 1px;
+  border-radius: 1px;
+}
 .button.login-nav-button div {
   height: 100%;
   overflow: hidden;
@@ -923,7 +931,7 @@ div.court-icon {
 .breadcrumb:hover i {
   color: #07c;
 }
-.breadcrumb:hover div {
+.breadcrumb:hover .link-text {
   color: #07c;
 }
 .breadcrumb i {
@@ -1040,3 +1048,95 @@ div.court-icon {
 .message-thread .text-muted {
   color: #ccc;
 }
+
+
+/* Profile View */
+.page.profile-view .view-wrapper {
+  min-height: 500px;
+}
+.page.profile-view h1 {
+  font-family: 'Raleway', sans-serif;
+  color: #333;
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+.page.profile-view .user-photo {
+  text-align: center;
+}
+.page.profile-view .user-photo img {
+  border-radius: 100px;
+}
+.page.profile-view .left-col {
+  float: left;
+  width: 230px;
+  min-height: 500px;
+  border: solid 0px #ccc;
+  background-color: #eee;
+  border-radius: 3px;
+  padding: 10px 0;
+}
+.page.profile-view .right-col {
+  float: left;
+  width: 620px;
+}
+.page.profile-view .left-col .username {
+  width: 100%;
+  text-align: center;
+}
+.page.profile-view .right-col .user-details {
+  width: 100%;
+  min-height: 500px;
+  background-color: #f8f8f8;
+  padding: 15px 20px 10px 20px;
+  text-align: center;
+}
+.page.profile-view .right-col .user-details .row {
+  border: solid 1px #eee;
+  display:inline-block;
+  background-color: white;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  padding: 10px 5px 10px 15px;
+}
+.page.profile-view .right-col .user-details .row .label {
+  font-size: 14px;
+}
+.page.profile-view .right-col .user-details .row .value {
+  font-size: 30px;
+  margin-top: -5px;
+}
+
+@media (max-width: 850px) {
+  .page.profile-view {
+    text-align: left;
+  }
+  .view-wrapper {
+    max-width: 850px;
+    width: 100%!important;
+    text-align: left;
+  }
+  .page.profile-view .left-col,
+  .page.profile-view .right-col {
+    min-height: 0px;
+    width: 100%;
+  }
+}
+.page.profile-view .scroll {
+  text-align: center;
+}
+
+
+@media (min-width: 850px) {
+  ion-header-bar.bar:last-child {
+
+  }
+}
+
+
+
+
+
+

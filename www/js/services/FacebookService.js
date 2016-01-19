@@ -13,7 +13,7 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
       // Logged into Facebook and authorized for app
       getUserInfo()
         .then(function(userResponse) {
-          $rootScope.user = userResponse;
+          //$rootScope.user = userResponse;
           $rootScope.user.firstname = userResponse.first_name;
           $rootScope.user.lastname = userResponse.last_name;
           $rootScope.fbAuth = {
@@ -25,6 +25,7 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
           console.log("logged into fb: " + JSON.stringify($rootScope.fbAuth));
 
           getProfilePhoto();
+          getUserNavPhoto();
 
           // Authenticate user to our service
           return DataService.loginWithFacebook($rootScope.fbAuth);
@@ -90,18 +91,27 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
       function (response) {
         if (response && !response.error) {
           /* handle the result */
-          $rootScope.userPhoto = response.data.url;
+          if (width == 30) {
+            $rootScope.userNavPhoto = response.data.url;
+          } else {
+            $rootScope.userPhoto = response.data.url;
+          }
         }
       }
     );
   };
+
+  function getUserNavPhoto() {
+    getProfilePhoto(30, 30);
+  }
 
   return {
     statusChangeCallback: statusChangeCallback,
     getUserInfo: getUserInfo,
     logout: logout,
     login: login,
-    getProfilePhoto: getProfilePhoto
+    getProfilePhoto: getProfilePhoto,
+    getUserNavPhoto: getUserNavPhoto
   }
 });
 
