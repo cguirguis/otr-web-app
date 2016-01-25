@@ -5,12 +5,14 @@ controllers.controller('ViolationCtrl',
 
     console.log("Violation controller loaded.");
     $rootScope.pageTitle = $scope.match && !$scope.matchErrorMessage ? "" : "Violations";
+    $rootScope.showProgress = true;
 
     $scope.loading = false;
     $scope.match = null;
 
     $scope.setViolationCount = function(count) {
       $scope.violationCount = count;
+      $scope.citation.violationCount = count;
       $scope.extraViolations = Math.max(0, count - 2);
     };
 
@@ -95,6 +97,7 @@ controllers.controller('ViolationCtrl',
 
     var matchSuccess = function(response) {
       $rootScope.hideLoader();
+      $rootScope.showProgress = false;
 
       if (response && response.data && response.data.theCase) {
         $scope.match = response;

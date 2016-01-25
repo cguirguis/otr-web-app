@@ -4,6 +4,7 @@ controllers.controller('CasesCtrl',
   function($rootScope, $scope, $state, $timeout, $ionicModal, DataService, UtilitiesService, CaseService) {
     console.log("Cases controller loaded.");
     $rootScope.pageTitle = "Your Cases";
+    $rootScope.showProgress = false;
 
     $scope.casesLoaded = false;
     $scope.numCases = 0;

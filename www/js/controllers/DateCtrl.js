@@ -1,10 +1,11 @@
 
 controllers.controller('DateCtrl',
-  ['$rootScope', '$scope', '$state', 'Constants', 'ScopeCache',
-    function($rootScope, $scope, $state, Constants, ScopeCache) {
+  ['$rootScope', '$scope', '$state', '$timeout', 'Constants', 'ScopeCache',
+    function($rootScope, $scope, $state, $timeout, Constants, ScopeCache) {
 
       console.log("Date controller loaded.");
       $rootScope.pageTitle = "Ticket Date";
+      $rootScope.showProgress = true;
 
       var today = new Date();
 
@@ -13,7 +14,11 @@ controllers.controller('DateCtrl',
         value: null,
         change: function() {
           $scope.selectedDate = this.value();
+
           $scope.$apply();
+          $timeout(function() {
+            $('.page ion-content').animate({ scrollTop: $(document).height() }, 600);
+          });
         }
       });
 

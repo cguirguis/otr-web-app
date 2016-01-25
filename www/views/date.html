@@ -1,16 +1,23 @@
 
 <div class="page date-view">
-  <h4>When was your ticket issued?</h4>
-
-  <div id="example">
-    <div class="demo-section k-content">
-      <div id="calendar"></div>
+  <ion-content>
+    <div class="top-section">
+      <i class="icon ion-android-calendar"></i>
+      <h1 class="step-title">STEP 3</h1>
+      <h4 class="step-text">When was your ticket issued?</h4>
     </div>
-  </div>
+    <div class="bottom-section" style="margin-bottom: 40px;">
+      <div id="example">
+        <div class="demo-section k-content">
+          <div id="calendar"></div>
+        </div>
+      </div>
+    </div>
+    <div class="button-wrapper">
+      <button class="big-blue-button confirm-date-button" ng-click="continue()"
+              ng-hide="!selectedDate">Continue</button>
+    </div>
 
-
-  <button class="confirm-date-button bottom" ng-click="continue()"
-    ng-hide="!selectedDate">Continue</button>
-
+  </ion-content>
 </div>
 

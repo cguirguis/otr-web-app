@@ -14,19 +14,15 @@
     <!--meta property="og:image:width"         content="image/png" /-->
     <!--meta property="og:image:height"         content="image/png" /-->
 
-    <!-- compiled css output -->
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
     <!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
 
-    <!-- calendar css -->
+    <!-- CSS -->
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="//kendo.cdn.telerik.com/2015.3.1111/styles/kendo.common-material.min.css" />
     <link rel="stylesheet" href="//kendo.cdn.telerik.com/2015.3.1111/styles/kendo.material.min.css" />
-
-    <!-- Animate.css -->
     <link rel="stylesheet" href="https://raw.githubusercontent.com/daneden/animate.css/master/animate.min.css" />
 
     <!-- jQuery -->
@@ -34,8 +30,6 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.1/angular-moment.min.js"></script>
 
@@ -85,66 +79,36 @@
   <body ng-app="OTRWebApp" ng-controller="HomeCtrl" ng-cloak>
 
       <ion-side-menus>
+        <div class="nav-item-div home" ui-sref="home">Home</div>
+        <div class="nav-item-div ticket" ui-sref="ticket">New ticket</div>
+        <div class="nav-item-div cases" ui-sref="cases">My cases</div>
+
           <!-- Navigation menu -->
-          <ion-side-menu side="left">
-            <ion-header-bar class="bar-dark">
-              <div class="logo-container">
-                <img class="logo-img" src="../../img/otr-logo.png">
+          <ion-side-menu side="left" width="{{leftNavWidth}}" expose-aside-when="(min-width:768px)">
+            <ion-header-bar class="bar-dark left-nav">
+              <div class="logo-container" ui-sref="home">
+                <img class="logo-icon" src="../../img/otr-icon.png">
+                <img class="logo-img" src="../../img/otr-logo-V2.gif">
               </div>
-              <!--button class="button button-icon ion-plus" ng-click="newProject()"-->
-              </button>
             </ion-header-bar>
-            <ion-content scroll="false" style="background-color: #222;height:100%;">
-              <ion-list>
-                <a ui-sref="home">
-                  <ion-item ng-click="toggleMenu()">
+            <ion-content scroll="false" style="background-color: #1B1E24;height:100%;padding-top: 0px;">
+              <ion-list class="left-menu-list">
+                <a>
+                  <ion-item data-navid="home" ng-click="goHome()" ng-class="{ active : $state.is('home')}">
                     <i class="nav-icon ion-home"></i>
-                    Home
+                    <span class="nav-item-name">Home</span>
                   </ion-item>
                 </a>
                 <a>
-                  <ion-item ng-click="goToTicket()">
-                    <i class="nav-icon ion-camera"></i>
-                    New ticket
-                    <i class="step-completed icon ion-checkmark" ng-if="citation && citation.image.length"></i>
-                    <i class="step-not-completed icon ion-ios-close-empty" ng-if="!citation || !citation.image.length"></i>
+                  <ion-item data-navid="ticket" ng-click="goToTicket()" ng-class="{ active : showProgress }">
+                    <i class="nav-icon ion-plus-circled"></i>
+                    <span class="nav-item-name">New ticket</span>
                   </ion-item>
                 </a>
-                <a ng-class="{disabled: !(citation && citation.image.length)}">
-                  <ion-item ng-click="goToCourt()">
-                    <i class="nav-icon ion-android-pin"></i>
-                    Assigned court
-                    <i class="step-completed icon ion-checkmark" ng-if="citation && citation.court"></i>
-                    <i class="step-not-completed icon ion-ios-close-empty" ng-if="!citation || !citation.court"></i>
-                  </ion-item>
-                </a>
-                <a ng-class="{disabled: !(citation && citation.image.length && citation.court)}">
-                  <ion-item ng-click="goToDate()">
-                    <i class="nav-icon ion-android-calendar"></i>
-                    Date issued
-                    <i class="step-completed icon ion-checkmark" ng-if="citation && citation.date"></i>
-                    <i class="step-not-completed icon ion-ios-close-empty" ng-if="!citation || !citation.date"></i>
-                  </ion-item>
-                </a>
-                <a ng-class="{disabled: !(citation && citation.image.length && citation.court && citation.date)}">
-                  <ion-item ng-click="goToViolations()">
-                    <i class="nav-icon ion-speedometer"></i>
-                    Violations
-                    <i class="step-completed icon ion-checkmark" ng-if="citation && citation.violationCount"></i>
-                    <i class="step-not-completed icon ion-ios-close-empty" ng-if="!citation || !citation.violationCount"></i>
-                  </ion-item>
-                </a>
-                <a ng-class="{disabled: !(citation && citation.image.length && citation.court && citation.date && citation.violationCount )}">
-                  <ion-item ng-click="goToOverview()">
-                    <i class="nav-icon ion-card"></i>
-                    Overview
-                  </ion-item>
-                </a>
-
                 <a ng-class="{disabled: false}">
-                  <ion-item ng-click="goToCases()">
-                    <i class="nav-icon ion-card"></i>
-                    My Cases
+                  <ion-item data-navid="cases" ng-click="goToCases()" ng-class="{ active : $state.is('cases')}">
+                    <i class="nav-icon ion-ios-albums"></i>
+                    <span class="nav-item-name">My Cases</span>
                   </ion-item>
                 </a>
               </ion-list>
@@ -152,13 +116,11 @@
           </ion-side-menu>
 
           <!-- Main content -->
-          <ion-side-menu-content>
+          <ion-side-menu-content style="background-color:#F0F3F4;">
               <ion-header-bar class="bar-dark">
-                  <button class="button button-icon" ng-click="toggleMenu()">
-                    <i class="icon ion-navicon"></i>
-                  </button>
-                  <h1 class="title">{{pageTitle}}</h1>
-
+                <button class="button button-icon left-menu-button" ng-click="toggleMenu()">
+                  <i class="icon ion-navicon"></i>
+                </button>
                 <button class="button button-icon login-nav-button" ng-if="user == null" ng-click="login()">
                   <i class="icon ion-log-in"></i>
                   <span style="font-size:15px;margin-right:5px;">Login</span>
@@ -170,23 +132,45 @@
                     <div class="username">{{user.firstname}} {{user.lastname}}</div>
                   </div>
                 </button>
-
               </ion-header-bar>
-              <ion-content scroll="true" style="height:100%">
 
-                  <!--<ui-view></ui-view>-->
+              <div class="progress-section has-header">
+                <div class="progress-bar" ng-show="showProgress">
+                  <div class="step" ng-class="{ completed: citation && citation.image.length }">
+                    <div class="progress-line"></div>
+                    <i class="icon ion-ios-circle-filled"></i>
+                    <div class="step-name">Photo</div>
+                  </div>
+                  <div class="step" ng-class="{ completed: citation && citation.court }">
+                    <div class="progress-line"></div>
+                    <i class="icon ion-ios-circle-filled"></i>
+                    <div class="step-name">Court</div>
+                  </div>
+                  <div class="step" ng-class="{ completed: citation && citation.date }">
+                    <div class="progress-line"></div>
+                    <i class="icon ion-ios-circle-filled"></i>
+                    <div class="step-name">Date</div>
+                  </div>
+                  <div class="step" ng-class="{ completed: citation && citation.violationCount }">
+                    <div class="progress-line"></div>
+                    <i class="icon ion-ios-circle-filled"></i>
+                    <div class="step-name">Violation</div>
+                  </div>
+                </div>
+              </div>
 
-                  <!--<ion-nav-bar class="bar-positive">
-                    <ion-nav-buttons side="left">
-                      <button class="button" ng-click="goHome()">Home</button>
-                    </ion-nav-buttons>
-                  </ion-nav-bar>-->
+              <ion-nav-view></ion-nav-view>
 
-                  <ion-nav-view></ion-nav-view>
-
-                  <div id="status"></div>
-
-              </ion-content>
+              <ion-footer-bar align-title="left" class="bar-balanced" style="height: 50px!important;"
+                ng-show="displayFooter">
+                <div class="buttons">
+                  <button class="button">Left Button</button>
+                </div>
+                <h1 class="title">Title!</h1>
+                <div class="buttons" ng-click="doSomething()">
+                  <button class="button ion-camera">Right Button</button>
+                </div>
+              </ion-footer-bar>
           </ion-side-menu-content>
 
       </ion-side-menus>

@@ -194,7 +194,7 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
         $rootScope.$on('loading:show', function() {
             $ionicLoading.show({
               template: "<div class='loading-box'>" +
-              "<ion-spinner icon='android'></ion-spinner>" +
+              "<ion-spinner icon='ios'></ion-spinner>" +
               "<div class='loading-text'>Loading...</div>" +
               "</div>"
             });
@@ -209,7 +209,7 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
           $rootScope.showDefaultSpinner = true;
           $ionicLoading.show({
             template: "<div class='loading-box'>" +
-            "<ion-spinner icon='android'></ion-spinner>" +
+            "<ion-spinner icon='ios'></ion-spinner>" +
             "<div class='loading-text'>" + message + "</div>" +
             "<div class='loading-link' ng-click='cancelMatch()'>x</div>" +
             "</div>"
@@ -244,6 +244,13 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
             $rootScope.displayError($rootScope.errorMessage);
           }
         });
+
+        $rootScope.$on('$stateChangeStart',
+          function(event, toState, toParams, fromState, fromParams){
+            if (toState.name == "home") {
+              $rootScope.showProgress = false;
+            }
+          })
 
         $rootScope.isLoggedIn = function() {
           return $rootScope.user != null;

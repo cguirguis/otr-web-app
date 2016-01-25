@@ -3,6 +3,7 @@ controllers.controller('CaseCtrl',
   ['$rootScope', '$scope', '$state', 'CaseService', 'UtilitiesService',
   function($rootScope, $scope, $state, CaseService, UtilitiesService) {
     $rootScope.pageTitle = "Case " + $state.params.caseId;
+    $rootScope.showProgress = false;
 
     var loadCase = function(caseId) {
       function findCase() {

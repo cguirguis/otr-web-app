@@ -5,6 +5,7 @@ controllers.controller('TicketCtrl',
     {
       console.log("Ticket controller loaded.");
       $rootScope.pageTitle = "Your Ticket";
+      $rootScope.showProgress = true;
       $rootScope.citation = {};
 
       $ionicLoading.show({
@@ -166,15 +167,15 @@ controllers.controller('TicketCtrl',
 
       var setImageHeight = function() {
         $timeout(function() {
-          var imgHeightToWidthRatio = $(img).css("height").slice(0,-2)/$(img).css("width").slice(0,-2);
-          var containerHeightToWidthRatio = $(".bottom-bar").position().top/$(imgContainer).width();
-          if (imgHeightToWidthRatio > containerHeightToWidthRatio) {
-            $(img).css("max-width", "100%");
-            $(img).removeClass("landscape").addClass("portrait");
-          } else {
-            $(img).removeClass("portrait").addClass("landscape");
-          }
-          $(imgContainer).css("height", ($(".bottom-bar").position().top - 10) + "px");
+          //var imgHeightToWidthRatio = $(img).css("height").slice(0,-2)/$(img).css("width").slice(0,-2);
+          //var containerHeightToWidthRatio = $(".bottom-bar").position().top/$(imgContainer).width();
+          //if (imgHeightToWidthRatio > containerHeightToWidthRatio) {
+          //  $(img).css("max-width", "100%");
+          //  $(img).removeClass("landscape").addClass("portrait");
+          //} else {
+          //  $(img).removeClass("portrait").addClass("landscape");
+          //}
+          //$(imgContainer).css("height", ($(".bottom-bar").position().top - 10) + "px");
         });
       };
 
@@ -188,7 +189,7 @@ controllers.controller('TicketCtrl',
         if ($scope.base64Image) {
           // Show file input
           $scope.base64Image = null;
-          $scope.showFileInputView = true;
+          fileInput.click();
         } else {
           // Show camera stream
           $scope.capturingImage = true;

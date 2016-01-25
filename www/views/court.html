@@ -1,33 +1,39 @@
 
 <ion-view class="page court-view">
-  <h4>What is the court listed on your ticket?</h4>
 
-  <ion-header-bar class="bar-subheader">
-    <i class="icon ion-ios7-search placeholder-icon"></i>
-    <input type="search" id="court-search" placeholder="Search" ng-change="filterCourts()" ng-model="query">
-  </ion-header-bar>
+    <ion-header-bar class="bar-subheader">
+      <div class="top-section">
+        <i class="icon ion-android-pin"></i>
+        <h1 class="step-title">STEP 2</h1>
+        <h4 class="step-text">What court is listed on your ticket?</h4>
+        <div class="step-notes">This is where your case will be fought.
+          Our matching algorithm will determine the most successful lawyers for this court.</div>
+      </div>
+      <div class="bottom-section" style="text-align: center;">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input type="search" id="court-search" placeholder="Search" ng-change="filterCourts()" ng-model="query">
+        <button class="big-blue-button button" ng-click="confirmCourt()"
+                ng-show="selectedCourt">Continue</button>
+      </div>
+    </ion-header-bar>
 
-  <ion-content>
-    <ion-list>
-      <ion-item ng-hide="selectedCourt && !isEditing" ng-repeat="court in results" class="court-result-container" ng-class="{ 'selected': court.selected }">
-        <img src="../../img/court-icon.png" class="court-icon" />
-        <div clasps="court-result" ng-click="selectCourt(court)">
-          <div class="court-name">{{court.courtName}}</div>
-          <div class="court-city">{{court.city}}, {{court.state}}</div>
-        </div>
-      </ion-item>
-    </ion-list>
+    <ion-content class="results-container">
+      <ion-list>
+        <ion-item ng-hide="selectedCourt && !isEditing" ng-repeat="court in results" class="court-result-container" ng-class="{ 'selected': court.selected }">
+          <img src="../../img/court-icon.png" class="court-icon" />
+          <div class="court-result" ng-click="selectCourt(court)">
+            <div class="court-name">{{court.courtName}}</div>
+            <div class="court-city">{{court.city}}, {{court.state}}</div>
+          </div>
+        </ion-item>
+      </ion-list>
 
-    <div class="selected-court-details" ng-if="selectedCourt">
-      <div class="selected-court-text">You've selected the following court. Please make sure this matches the court specified on your ticket.</div>
-      <img class="selected-court-icon" src="../../img/court-icon.png" />
-      <div class="selected-court-name">{{selectedCourt.courtName}}</div>
-      <div class="selected-court-city">{{selectedCourt.city}}, {{selectedCourt.state}}</div>
-    </div>
-  </ion-content>
+      <div class="selected-court-details" ng-if="selectedCourt">
+        <div class="selected-court-text">You've selected the following court. Please make sure this matches the court specified on your ticket.</div>
+        <img class="selected-court-icon" src="../../img/court-icon.png" />
+        <div class="selected-court-name">{{selectedCourt.courtName}}</div>
+        <div class="selected-court-city">{{selectedCourt.city}}, {{selectedCourt.state}}</div>
+      </div>
+    </ion-content>
 
-  <button class="confirm-court-button bottom"
-          ng-click="confirmCourt()"
-          ng-show="selectedCourt"
-          ui-sref="date">Continue</button>
 </ion-view>

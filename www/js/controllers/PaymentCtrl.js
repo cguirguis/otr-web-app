@@ -7,6 +7,8 @@ controllers.controller('PaymentCtrl',
 
       console.log("Payment controller loaded.");
       $rootScope.pageTitle = $scope.paymentProcessed ? "" : "Case Overview";
+      $rootScope.showProgress = false;
+
       $scope.errorMessage = null;
 
       var refundUrl = "http://www.offtherecord.com/refund.html";

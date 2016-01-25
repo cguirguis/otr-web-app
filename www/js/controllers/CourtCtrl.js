@@ -1,5 +1,5 @@
 
-var CourtCtrl = function($rootScope, $scope, $http, $timeout, $location, $ionicModal, Constants)
+var CourtCtrl = function($rootScope, $scope, $state, $http, $timeout, $location, $ionicModal, Constants)
 {
   var _this = this;
   $rootScope.pageTitle = "Assigned court";
@@ -7,6 +7,7 @@ var CourtCtrl = function($rootScope, $scope, $http, $timeout, $location, $ionicM
   $scope.results = [];
   $scope.query = "";
   $scope.selectedCourt;
+  $rootScope.showProgress = true;
 
   var getCourts = function() {
     console.log("loading courts..");
@@ -32,7 +33,7 @@ var CourtCtrl = function($rootScope, $scope, $http, $timeout, $location, $ionicM
     );
   };
 
-  $scope.filterCourts = function() {
+  $scope.filterCourts = function(value) {
     var query = $scope.query.toLowerCase();
 
     if (query.length > 2) {
@@ -55,15 +56,22 @@ var CourtCtrl = function($rootScope, $scope, $http, $timeout, $location, $ionicM
     $scope.selectedCourt = court;
     $scope.isEditing = false;
     court.selected = true;
+
+    var viewWidth = $(".court-view .bottom-section").width();
+    $(searchField).width(viewWidth - 230);
   };
 
   $scope.confirmCourt = function() {
     if (!$scope.selectedCourt) {
-      alert("You must select a court to continue.");
+      $rootScope.errorMessage = "Please select a court to continue.";
+      return;
     }
     // Save selected court to citation
-    $rootScope.citation = $rootScope.citation || {};
+    if ($rootScope.citation == null) {
+      $rootScope.citation = {};
+    }
     $rootScope.citation.court = $scope.selectedCourt;
+    $state.go("date");
   };
 
   var searchField = document.querySelector('#court-search');
@@ -81,6 +89,6 @@ var CourtCtrl = function($rootScope, $scope, $http, $timeout, $location, $ionicM
 CourtCtrl.prototype.newFunction = function() {
 };
 
-CourtCtrl.$inject =   ['$rootScope', '$scope', '$http', '$timeout', '$location', '$ionicModal', 'Constants'];
+CourtCtrl.$inject =   ['$rootScope', '$scope', '$state', '$http', '$timeout', '$location', '$ionicModal', 'Constants'];
 
 controllers.controller('CourtCtrl', CourtCtrl);

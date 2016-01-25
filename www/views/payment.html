@@ -64,8 +64,8 @@
 
         <div class="payment-errors" ng-show="errorMessage">{{errorMessage}}</div>
 
-        <button type="submit" name="submit" style="clear:both;margin-top:10px;" ng-if="!isCardVerified">Verify card</button>
-        <button type="button" style="margin-top: 10px;" ng-if="isCardVerified" ng-click="confirmPayment()">Confirm payment</button>
+        <button type="submit" name="submit" style="clear:both;margin-top:10px;width: 100%" class="big-blue-button" ng-if="!isCardVerified">Verify card</button>
+        <button type="button" style="margin-top: 10px;width: 100%;" class="big-blue-button" ng-if="isCardVerified" ng-click="confirmPayment()">Confirm payment</button>
       </form>
     </div>
 
@@ -75,9 +75,6 @@
 
 
 <style>
-  .page.payment-view .payment-view {
-    padding: 10px 15px;
-  }
   .page.payment-view .gray-background {
     background-color: #EFEFEF;
   }

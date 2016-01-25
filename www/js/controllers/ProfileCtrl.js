@@ -3,6 +3,7 @@ controllers.controller('ProfileCtrl',
   ['$rootScope', '$scope', '$state', '$timeout', '$ionicModal', 'DataService', 'FacebookService',
   function($rootScope, $scope, $state, $timeout, $ionicModal, DataService, FacebookService) {
     $rootScope.pageTitle = "User Profile";
+    $rootScope.showProgress = false;
 
     $scope.userLoaded = false;
 

@@ -16,7 +16,7 @@
     <h2 class="match-cost-value">${{currentCase.caseEstimatedCost}}</h2>
 
     <br><br>
-    <button class="confirm-match-button" ng-click="confirmMatch()">Continue</button>
+    <button class="big-blue-button confirm-match-button" ng-click="confirmMatch()">Continue</button>
   </div>
 
   <div class="no-match-found" ng-if="!match && matchErrorMessage">
@@ -30,64 +30,3 @@
   </div>
 
 </div>
-
-<style>
-.match-background-img {
-  background-image: url("../img/lawyer_tie_blur.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-.page.match-view {
-  /*background-color: rgba(0,0,0,0.3);*/
-  border-radius: 5px;
-  height: 100%;
-  padding: 10px 25px;
-}
-.page.match-view h2, .page.match-view h3, .page.match-view h4 {
-  color: white;
-}
-.page.match-view .ion-checkmark {
-  color: lightgreen;
-  font-size: 2.2em;
-  right: 5px;
-  top: 6px;
-  position: relative;
-}
-.page.match-view .request-coverage-button {
-  width:68%;
-}
-.page.match-view .request-coverage-button.cancel {
-  margin-left: 0px;
-  width: 30%;
-}
-.page.match-view .confirm-match-button {
-  position: absolute;
-  bottom: 50px;
-  left: 1%;
-  width: 98%;
-}
-@media (max-width: 450px) {
-  .page.match-view {
-    font-size: 10px;
-  }
-  .page.match-view .match-title  {
-    font-size: 2.1em;
-  }
-  .page.match-view h4 {
-    font-size: 1.6em;
-  }
-  .page.match-view .match-odds-text {
-    width: 65%;
-  }
-  .page.match-view .match-odds-value {
-    line-height: 1.6em;
-    font-size: 3em;
-  }
-  .page.match-view .match-cost-value {
-    font-size: 3em;
-  }
-  /*.page.match-view button {
-    font-size: 2em!important;
-  }*/
-}
-</style>
