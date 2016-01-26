@@ -1,7 +1,7 @@
 
 controllers.controller('DateCtrl',
-  ['$rootScope', '$scope', '$state', '$timeout', 'Constants', 'ScopeCache',
-    function($rootScope, $scope, $state, $timeout, Constants, ScopeCache) {
+  ['$rootScope', '$scope', '$state', '$timeout', 'Constants', 'ScopeCache', '$ionicScrollDelegate',
+    function($rootScope, $scope, $state, $timeout, Constants, ScopeCache, $ionicScrollDelegate) {
 
       console.log("Date controller loaded.");
       $rootScope.pageTitle = "Ticket Date";
@@ -17,7 +17,7 @@ controllers.controller('DateCtrl',
 
           $scope.$apply();
           $timeout(function() {
-            $('.page ion-content').animate({ scrollTop: $(document).height() }, 600);
+            $ionicScrollDelegate.scrollBottom();
           });
         }
       });

@@ -160,7 +160,7 @@ controllers.controller('HomeCtrl',
     });
     $("ion-side-menu .list, .nav-item-div").on('mouseout', function(event) {
       var targetClass = $(event.target).attr("class");
-      if ((w.width() < 768 || initialNavWidth != 50 )|| targetClass == "item" || targetClass.indexOf("nav-icon") == 0) {
+      if ((w.width() < 768 || initialNavWidth != 50 ) || targetClass.indexOf("nav-icon") == 0) {
         return;
       }
       $(".nav-item-div").hide();

@@ -2,10 +2,12 @@
 <ion-view class="page ticket-view">
   <ion-content>
     <div class="top-section">
-      <i class="icon ion-camera"></i>
-      <h1 class="step-title">STEP 1</h1>
+      <div class="step-container">
+        <i class="icon ion-camera"></i>
+        <h1 class="step-title">STEP 1</h1>
+      </div>
       <h4 class="step-text">Take a clear photo of your ticket.</h4>
-      <div class="step-notes">This will tell us almost everything we need to know about your ticket. Please make sure the text is legible.</div>
+      <div class="step-notes">This will tell us almost everything we need to know about your ticket. Make sure the photo is clear and legible.</div>
     </div>
     <div class="bottom-section">
       <div class="image-input-options" ng-show="!capturingImage && !images.length && !showFileInputView">

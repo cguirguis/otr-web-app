@@ -3,8 +3,10 @@
 
     <ion-header-bar class="bar-subheader">
       <div class="top-section">
-        <i class="icon ion-android-pin"></i>
-        <h1 class="step-title">STEP 2</h1>
+        <div class="step-container">
+          <i class="icon ion-android-pin"></i>
+          <h1 class="step-title">STEP 2</h1>
+        </div>
         <h4 class="step-text">What court is listed on your ticket?</h4>
         <div class="step-notes">This is where your case will be fought.
           Our matching algorithm will determine the most successful lawyers for this court.</div>
@@ -34,6 +36,8 @@
         <div class="selected-court-name">{{selectedCourt.courtName}}</div>
         <div class="selected-court-city">{{selectedCourt.city}}, {{selectedCourt.state}}</div>
       </div>
+
+      <div style="height: 110px;"></div>
     </ion-content>
 
 </ion-view>
