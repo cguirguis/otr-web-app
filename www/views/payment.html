@@ -30,7 +30,6 @@
         <i class="ion-cash"></i>
         If your case is not successful, we will refund this fee.
       </div>
-
       <div class="next-step" ng-click="showNextStepModal()">
         <i class="ion-arrow-right-a"></i>
         What happens next?
@@ -68,6 +67,7 @@
         <button type="button" style="margin-top: 10px;width: 100%;" class="big-blue-button" ng-if="isCardVerified" ng-click="confirmPayment()">Confirm payment</button>
       </form>
     </div>
+    <div style="height:70px"></div>
 
     <ng-include src="'views/caseCreated.html'"></ng-include>
   </ion-content>

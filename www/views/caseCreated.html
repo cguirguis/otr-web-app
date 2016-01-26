@@ -16,7 +16,7 @@
       <div class="case-created-note">
         You're all set. Now sit back and let your attorney do all the heavy lifting.
         <div class="note">
-          You don't need to mail anything in or show up in court.
+          You don't need to mail your ticket in or show up in court.
         </div>
       </div>
 
@@ -45,12 +45,12 @@
     margin-right: -10px;
   }
   .page.case-created h2 {
-    color: #5499E2;
+    color: rgba(23, 158, 49, 0.75);
   }
   .page.case-created i.ion-checkmark-circled {
     margin-right: 5px;
     font-size: 1.2em;
-    color: #5499E2;
+    color: rgba(23, 158, 49, 0.75);
     position: relative;
     top: 3px;
   }
@@ -79,6 +79,11 @@
     margin-top: 30px;
     width: 70%;
     margin: auto;
+  }
+  @media (max-width: 500px) {
+    .page.case-created .case-created-note {
+      width: 85%;
+    }
   }
   .page.case-created .case-created-note .note {
     color: #aaa;

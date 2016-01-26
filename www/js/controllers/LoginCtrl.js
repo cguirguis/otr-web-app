@@ -75,7 +75,7 @@ controllers.controller('LoginCtrl',
       } else {
         DataService.login(email, password)
           .error(function(data, status, headers, config) {
-            $scope.errorMessage = data.error.uiErrorMsg;
+            $scope.errorMessage = data && data.error ? data.error.uiErrorMsg : "Unable to log in.";
             $scope.loading = false;
             $rootScope.showDefaultSpinner = false;
             $rootScope.hideLoader();
