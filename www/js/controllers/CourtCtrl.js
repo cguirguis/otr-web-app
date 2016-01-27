@@ -59,6 +59,11 @@ var CourtCtrl = function($rootScope, $scope, $state, $http, $timeout, $location,
 
     var viewWidth = $(".court-view .bottom-section").width();
     $(searchField).width(viewWidth - 230);
+
+
+    $(".page.court-view ion-content").scrollTop(0);
+
+    $('.page.court-view ion-content').animate({ scrollTop: 0 }, 100);
   };
 
   $scope.confirmCourt = function() {

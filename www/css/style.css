@@ -237,15 +237,18 @@ i.icon.button-icon {
   position: relative;
   opacity: 0.5;
 }
+.progress-section .progress-bar .step .step-name {
+  word-wrap: normal;
+}
 .progress-section .progress-bar .step .progress-line {
-   border-bottom: solid 1px #777;
-   height: 10px;
-   position: absolute;
-   top: 3px;
-   left: 0;
-   width: 100%;
-   z-index: 1000;
- }
+  border-bottom: solid 1px #777;
+  height: 10px;
+  position: absolute;
+  top: 3px;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
 .progress-section .progress-bar .step i {
   color: #777;
   font-size: 25px;
@@ -413,10 +416,10 @@ video {
   height: auto;
 }
 /*@media (max-width:450px) {*/
-  /*#image-capture.landscape {*/
-    /*width: 85%;*/
-    /*height: auto;*/
-  /*}*/
+/*#image-capture.landscape {*/
+/*width: 85%;*/
+/*height: auto;*/
+/*}*/
 /*}*/
 button.continue {
   font-family: "Lato", sans-serif;
@@ -455,6 +458,14 @@ button.retake-picture:hover {
 @media (max-width: 400px) {
   button.retake-picture, button.continue {
     margin: 5px;
+  }
+}
+@media (max-width: 350px) {
+  button.retake-picture, button.continue {
+    margin: -15px 9px;
+    padding: 10px 20px;
+    font-size: 14px!important;
+    font-weight: inherit;
   }
 }
 .btn-file {
@@ -537,7 +548,7 @@ button.retake-picture:hover {
 .page.court-view ion-header-bar input {
   line-height: 30px;
   border: solid 3px #f0f0f0;
-  width: 82%;
+  width: 90%;
   font-size: 2em;
   color: #444;
   font-weight: lighter;
@@ -552,20 +563,99 @@ button.retake-picture:hover {
   .page.court-view ion-content.has-subheader {
     top: 137px;
   }
+  .page.court-view ion-header-bar input {
+    width: 88%;
+  }
 }
 @media (max-width: 600px) {
   .page.court-view ion-content.has-subheader {
     top: 155px;
   }
+  .page.court-view ion-header-bar input {
+    width: 84%;
+  }
 }
 @media (max-width: 450px) {
   .page.court-view ion-content.has-subheader {
-    top: 175px;
+    top: 73px;
+  }
+  .page.court-view ion-header-bar input {
+    width: 78%;
+  }
+  .page.court-view .top-section {
+    padding-bottom: 10px!important;
+  }
+  .page.court-view .top-section .step-container {
+    margin-top: 0px;
+  }
+  .page.court-view .top-section .step-text {
+    margin: 3px -10px 5px -10px;
+    font-size: 20px;
+  }
+  .page.court-view .top-section .step-notes {
+    font-size: 12px;
+    margin: 0 -10px 5px -10px;
+  }
+  .page.court-view .bottom-section {
+    padding: 10px 30px;
+  }
+  .page.court-view ion-header-bar i.ion-ios-search {
+    top: 17px;
+  }
+  .page.court-view .button {
+    top: 9px!important;
+  }
+  .page.court-view .selected-court-details {
+    padding: 15px 15px;
+    margin: 10px 10px;
+  }
+  .page.court-view .selected-court-text {
+    font-size: 12px;
+    margin-bottom: 15px;
+    color: #999;
+    line-height: 16px;
+  }
+  .page.court-view .selected-court-name {
+    font-size: 16px;
+    margin-top: -6px;
+  }
+  .page.court-view .selected-court-city {
+    font-size: 14px;
+    margin-top: -7px;
+  }
+  .page.court-view .selected-court-icon {
+    height: 35px;
+    width: 35px;
+    margin: -6px 10px 0 5px;
   }
 }
-@media (max-width: 381px) {
+@media (max-width: 373px) {
   .page.court-view ion-content.has-subheader {
-    top: 205px;
+    top: 93px;
+  }
+  .page.court-view ion-header-bar input {
+    width: 75%;
+  }
+  .page.court-view .top-section .step-text {
+    margin: 3px -10px 5px -10px;
+    font-size: 18px;
+  }
+  .page.court-view .selected-court-details {
+    padding: 10px 15px;
+    margin: 5px 10px;
+  }
+  .page.court-view .selected-court-name {
+    font-size: 14px;
+    margin-top: -6px;
+  }
+  .page.court-view .selected-court-city {
+    font-size: 12px;
+    margin-top: -10px;
+  }
+  .page.court-view .selected-court-icon {
+    height: 30px;
+    width: 30px;
+    margin: -5px 10px 0 5px;
   }
 }
 .page.court-view .results-container {
@@ -675,7 +765,7 @@ table.k-content {
 /*********** VIOLATION VIEW ******************/
 
 .page button.violation-button {
-  width: 19%;
+  width: 18%;
   background-color: rgb(250, 250, 250);
   cursor: pointer;
   color: rgb(26, 93, 162);
@@ -695,6 +785,7 @@ table.k-content {
 
 /*************** MATCH VIEW *****************/
 .page.violation-view {
+  top: 0px;
 }
 .page.match-view .match-title {
   text-align: center;
@@ -744,22 +835,37 @@ table.k-content {
 .match-background-img {
   background-image: url("../img/lawyer_tie_blur.jpg");
   background-repeat: no-repeat;
-  /*background-size: 100% 100%;*/
+  background-size: 100% auto;
+}
+@media (min-width: 850px) {
+  .match-background-img {
+    background-size: 100% 100%;
+  }
+  .page.violation-view {
+    /*text-align: center; need this for match view? */
+  }
+  .page.match-view {
+    display: inline-block;
+    padding: 10px 65px;
+  }
+  .page.match-view .match-found {
+    text-align: left;
+  }
 }
 .page.match-view {
   background-color: rgba(0,0,0,0.3);
   border-radius: 5px;
-  height: 100%;
-  padding: 10px 25px;
+  height: 85%;
+  padding: 10px 35px;
 }
 .page.match-view h2, .page.match-view h3, .page.match-view h4 {
   color: white;
 }
-.page.match-view .ion-checkmark {
+.page.match-view .ion-android-checkmark-circle, .page.match-view .ion-checkmark {
   color: lightgreen;
   font-size: 2.2em;
-  right: 5px;
-  top: 6px;
+  right: 13px;
+  top: 13px;
   position: relative;
 }
 .page.match-view .request-coverage-button {
@@ -774,7 +880,6 @@ table.k-content {
   bottom: 70px; /*50px;*/
   left: 1%;
   width: 98%;
-  opacity: 1!important;
   min-width: 300px;
 }
 @media (max-width: 450px) {
@@ -1589,8 +1694,6 @@ div.court-icon {
   margin-top: 5px;
   margin-bottom: 10px;
 }
-
-
 
 
 

@@ -30,8 +30,8 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.1/angular-moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.1/angular-moment.min.js"></script>
 
     <!-- Needed for Cordova/PhoneGap (this will be a 404 during development) -->
     <script src="lib/dist/ng-cordova.js"></script>
@@ -134,7 +134,7 @@
                 </button>
               </ion-header-bar>
 
-              <div class="progress-section has-header">
+              <div class="progress-section has-header" ng-style="{ 'margin-top': showProgress ? '52px' : '35px' }">
                 <div class="progress-bar" ng-show="showProgress">
                   <div class="step" ng-class="{ completed: citation && citation.image.length }">
                     <div class="progress-line"></div>

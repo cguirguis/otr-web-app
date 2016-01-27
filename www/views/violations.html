@@ -1,27 +1,29 @@
 
-<ion-view class="page violation-view" ng-class="{ 'match-background-img': match && !matchErrorMessage }">
-  <ion-content ng-if="!match && !matchErrorMessage">
-    <div class="top-section">
-      <div class="step-container">
-        <i class="icon ion-speedometer"></i>
-        <h1 class="step-title">STEP 4</h1>
+<ion-view class="page violation-view" ng-class="{ 'match-background-img': match && !matchErrorMessage }"
+  ng-style="{ 'text-align': match && !matchErrorMessage ? 'center' : 'left' }">
+  <ion-content>
+    <div class="" ng-if="!match && !matchErrorMessage">
+      <div class="top-section">
+        <div class="step-container">
+          <i class="icon ion-speedometer"></i>
+          <h1 class="step-title">STEP 4</h1>
+        </div>
+        <h4 class="step-text">How many violations are listed on your ticket?</h4>
       </div>
-      <h4 class="step-text">How many violations are listed on your ticket?</h4>
-    </div>
-    <div class="bottom-section">
-      <button class="violation-button" ng-click="setViolationCount(1)" ng-class="{ 'active': violationCount === 1 }">1</button>
-      <button class="violation-button" ng-click="setViolationCount(2)" ng-class="{ 'active': violationCount === 2 }">2</button>
-      <button class="violation-button" ng-click="setViolationCount(3)" ng-class="{ 'active': violationCount === 3 }">3</button>
-      <button class="violation-button" ng-click="setViolationCount(4)" ng-class="{ 'active': violationCount === 4 }">4</button>
-      <button class="violation-button" ng-click="setViolationCount(5)" ng-class="{ 'active': violationCount === 5 }">5</button>
-    </div>
+      <div class="bottom-section">
+        <button class="violation-button" ng-click="setViolationCount(1)" ng-class="{ 'active': violationCount === 1 }">1</button>
+        <button class="violation-button" ng-click="setViolationCount(2)" ng-class="{ 'active': violationCount === 2 }">2</button>
+        <button class="violation-button" ng-click="setViolationCount(3)" ng-class="{ 'active': violationCount === 3 }">3</button>
+        <button class="violation-button" ng-click="setViolationCount(4)" ng-class="{ 'active': violationCount === 4 }">4</button>
+        <button class="violation-button" ng-click="setViolationCount(5)" ng-class="{ 'active': violationCount === 5 }">5</button>
+      </div>
 
-    <div class="button-wrapper">
-      <button class="big-blue-button match-ticket-button" ng-click="fightThisTicket()" ng-show="violationCount && !match">
-        Fight this ticket!
-      </button>
+      <div class="button-wrapper">
+        <button class="big-blue-button match-ticket-button" ng-click="fightThisTicket()" ng-show="violationCount && !match">
+          Fight this ticket!
+        </button>
+      </div>
     </div>
-
   </ion-content>
 
   <ng-include src="'views/match.html'"></ng-include>
