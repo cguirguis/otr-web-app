@@ -1,34 +1,63 @@
 
-<div class="page match-view" ng-if="match && !matchErrorMessage">
+<ion-view class="page match-view" ng-if="match && !matchErrorMessage">
+  <ion-content>
+    <div class="match-found" ng-if="match && !matchErrorMessage">
 
-  <div class="match-found" ng-if="match && !matchErrorMessage">
+      <h2 class="match-title">
+        <i class="icon ion-checkmark"></i>
+        We can fight your ticket!
+      </h2>
+      <h4 class="match-subtitle ng-binding">We were able to match you with one of the top-rated traffic attorneys in Bellevue.</h4>
 
-    <h2 class="match-title">
-      <i class="icon ion-checkmark"></i>
-      We can fight your ticket!
-    </h2>
-    <h4 class="match-subtitle">We were able to match you with one of the top-rated traffic attorneys in {{citation.court.city}}.</h4>
+      <div class="match-details-row">
+        <h2 class="match-odds-value">93%</h2>
+        <h3 class="match-odds-text">Your chance of success:</h3>
+        <div class="match-odds-note">Based on historical performance</div>
+      </div>
+      <div class="match-details-row" ng-click="viewRefundPolicy()">
+        <h2 class="match-cost-value ng-binding">${{currentCase.caseEstimatedCost}}</h2>
+        <h3 class="match-cost-text">Your cost:</h3>
+        <div class="match-cost-note">You'll get a full refund if the ticket is not kept off your record</div>
+      </div>
+      <div class="match-details-row">
+        <h2 class="match-insurance-value ng-binding">$540</h2>
+        <h3 class="match-insurance-text">Cost of not fighting your ticket:</h3>
+        <div class="match-insurance-note">Estimate based on average insurance premium increase over 3 years</div>
+      </div>
 
-    <h3 class="match-odds-text">Your chance of getting this ticket off your record:</h3>
-    <h2 class="match-odds-value">93%</h2>
-    <br>
-    <h3 class="match-cost-text">Your cost:</h3>
-    <h2 class="match-cost-value">${{currentCase.caseEstimatedCost}}</h2>
+      <div class="included-title">What's included?</div>
+      <ion-slide-box>
+        <ion-slide>Legal representation to contest your ticket in court.</ion-slide>
+        <ion-slide>No hidden fees. Cancel anytime within 24 hours.</ion-slide>
+        <ion-slide>Full refund if your ticket is not dismissed, deferred, or reduced to a non-moving violation.
+          <a ng-click="viewRefundPolicy()">Read our money-back guarantee</a>.</ion-slide>
+        <ion-slide>Stress-free experience. No need to mail in your ticket. No need to show up in court.</ion-slide>
+        <ion-slide>Peace of mind. We handle everything from here.</ion-slide>
+      </ion-slide-box>
 
-    <br><br>
-    <button class="big-blue-button confirm-match-button" ng-click="confirmMatch()">
-      Fight This Ticket!
-    </button>
-  </div>
+      <div class="phone-info">
+        <div class="phone-text">Questions? Call us!</div>
+        <div class="phone-value">
+          <i class="icon ion-ios-telephone"></i>
+          <div>1 (844) OTR-2-WIN</div>
+        </div>
+      </div>
 
-  <div class="no-match-found" ng-if="!match && matchErrorMessage">
-    <h2>Hmm...</h2>
-    <h4>Looks like we don't have any attorneys fighting in this court.</h4>
-    <br>
-    <h4>We're working hard to expand quickly. Please request your area to make sure we're there next time!</h4>
+      <button class="big-blue-button confirm-match-button" ng-click="confirmMatch()">
+        Fight This Ticket!
+      </button>
+    </div>
 
-    <button class="request-coverage-button" ng-click="requestMyArea()">Request my area</button>
-    <button class="request-coverage-button cancel" ng-click="goBack()">Cancel</button>
-  </div>
+    <div class="no-match-found" ng-if="!match && matchErrorMessage">
+      <h2>Hmm...</h2>
+      <h4>Looks like we don't have any attorneys fighting in this court.</h4>
+      <br>
+      <h4>We're working hard to expand quickly. Please request your area to make sure we're there next time!</h4>
 
-</div>
+      <button class="request-coverage-button" ng-click="requestMyArea()">Request my area</button>
+      <button class="request-coverage-button cancel" ng-click="goBack()">Cancel</button>
+    </div>
+
+    <div style="height: 110px;"></div>
+  </ion-content>
+</ion-view>

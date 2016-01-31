@@ -12,7 +12,7 @@ controllers.controller('ViolationCtrl',
 
     $scope.setViolationCount = function(count) {
       $scope.violationCount = count;
-      $scope.citation.violationCount = count;
+      $rootScope.citation.violationCount = count;
       $scope.extraViolations = Math.max(0, count - 2);
     };
 
@@ -117,6 +117,11 @@ controllers.controller('ViolationCtrl',
     var displayNoMatchView = function(errorMsg) {
       $rootScope.$broadcast('loading:hide');
       $scope.matchErrorMessage = errorMsg;
+    };
+
+    $scope.viewRefundPolicy = function() {
+      $rootScope.showPopupView("http://blog.offtherecord.com/post/121486685047/faqs#moneyback",
+        "Long-term savings");
     };
 
     $rootScope.cancelMatch = function() {
