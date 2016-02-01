@@ -45,6 +45,17 @@ controllers.controller('DateCtrl',
         $state.go("violations");
       };
 
+      $('#calendar').unbind('mouseup');
+      //$('#calendar div').unbind('click');
+      //$('#calendar a').unbind('click');
+
+      //$("#calendar").on("click", function () {
+      //  debugger;
+      //  event.preventDefault();
+      //  event.stopPropagation();
+      //  event.stopImmediatePropagation();
+      //});
+
       // Cache current scope
       ScopeCache.store('date', $scope);
 }]);

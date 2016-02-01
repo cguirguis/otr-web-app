@@ -25,6 +25,14 @@
           <div class="transaction-fee">${{currentCase.caseEstimatedCost}}</div>
         </li>
       </ul>
+      <ul class="transactions transactions-discount">
+        <li class="secondary discount">
+          <div class="discount-code">Discount code</div>
+          <button class="button apply-discount" ng-click="validateDiscount()">Apply</button>
+          <input type="text" class="discount-code">
+          <div class="error-message" ng-if="discountErrorMsg">{{discountErrorMsg}}</div>
+        </li>
+      </ul>
 
       <div class="refund-note" ng-click="showRefundModal()">
         <i class="ion-cash"></i>
@@ -153,7 +161,7 @@
     padding: 10px 0px 5px 3px;
   }
   .page.payment-view ul.transactions {
-    background-color: #fdfdfd;
+    background-color: white;
     border: solid 1px #dfdfdf;
     padding: 5px 10px 15px 10px;
     border-radius: 3px;

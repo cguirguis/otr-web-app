@@ -561,10 +561,18 @@ button.retake-picture:hover {
 }
 @media (max-width: 1080px) {
   .page.court-view ion-content.has-subheader {
-    top: 137px;
+    top: 117px;
   }
   .page.court-view ion-header-bar input {
     width: 88%;
+  }
+}
+@media (max-width: 855px) {
+  .page.court-view ion-content.has-subheader {
+    top: 137px;
+  }
+  .page.court-view ion-header-bar input {
+    width: 84%;
   }
 }
 @media (max-width: 600px) {
@@ -789,6 +797,7 @@ table.k-content {
 }
 .page.match-view .match-found {
   max-width: 800px;
+  margin: auto;
 }
 .page.match-view .match-title {
   text-align: center;
@@ -832,6 +841,13 @@ table.k-content {
 .match-insurance-value {
   color: #c5243b !important;
   font-size: 33px;
+  text-align: right;
+}
+.match-insurance-value div {
+  font-size: 14px;
+  color: #666;
+  position: absolute;
+  margin-top: -2px;
 }
 .popover-backdrop.active {
   background-color: rgba(0, 0, 0, 0.3);
@@ -865,10 +881,10 @@ table.k-content {
   margin-bottom: -4px!important;
   border: solid 1px #eee;
 }
-.page.match-view .match-details-row:hover {
-  border: solid 1px #ddd;
+.match-details-row:nth-of-type(2):hover {
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2)
 }
-.match-details-row:nth-child(2) {
+.match-details-row:nth-of-type(2) {
   cursor: pointer;
 }
 .match-details-row .match-odds-text, .match-cost-text, .match-insurance-text  {
@@ -934,6 +950,10 @@ table.k-content {
   cursor: pointer;
   font-size: 16px;
 }
+.page.match-view .slider-slide a {
+  text-decoration: underline!important;
+  color: #0077cc!important;
+}
 .page.match-view .slider-pager {
   font-size: 9px;
   top: 10px;
@@ -964,10 +984,12 @@ table.k-content {
   margin-right: 10px;
   float: left;
   margin-top: -11px;
+  color: #0060a3;
 }
 .page.match-view .phone-value div {
   float: left;
   font-size: 20px;
+  color: #0060a3;
 }
 @media (max-width: 450px) {
   .page.match-view {
@@ -1000,6 +1022,64 @@ table.k-content {
 }
 .popup-view-header h1.title {
   color: white!important;
+}
+.page.payment-view ul.transactions {
+  background-color: white;
+}
+.page.payment-view ul.transactions-discount {
+  margin-top: 5px;
+  border-color: rgba(127, 179, 251, 0.81) !important;
+}
+.page.payment-view ul.transactions-discount li.discount {
+  margin-top: 5px;
+  margin-bottom: -5px;
+  margin-left: -10px;
+  display: inline-block;
+  overflow: inherit!important;
+  width: 100%;
+}
+.page.payment-view ul.transactions-discount li div.discount-code {
+  margin-top: 5px;
+  margin-left: 20px;
+  float: left;
+}
+.page.payment-view ul.transactions-discount li input {
+  width: 100px!important;
+  border: solid 1px #ccc;
+  text-align: left!important;
+  padding: 10px 10px;
+  color: #0077cc;
+  float: right;
+}
+.page.payment-view button.apply-discount {
+  width: 70px;
+  min-height: 10px!important;
+  float: right;
+  margin-left: 5px;
+  background-color: #0077cc;
+  font-size: 15px!important;
+  line-height: 12px;
+  padding: 0px!important;
+  height: 34px;
+  border: none;
+}
+.page.payment-view button.apply-discount:hover {
+  color: white;
+  background-color: #0084e2;
+}
+.page.payment-view ul.transactions-discount .error-message {
+  clear: left;
+  font-size: 12px;
+  color: red;
+  font-weight: 200;
+  margin-top: 0px;
+  margin-left: 20px;
+}
+@media (min-width: 850px) {
+  .page.payment-view .payment-view {
+    width: 800px;
+    margin: auto;
+  }
 }
 @media (max-width: 500px) {
   .page.payment-view .payment-view {

@@ -16,9 +16,14 @@ controllers.controller('PaymentCtrl',
 
       var stripeForm = $('#stripe-cc-form');
 
-      /*stripeForm.on("submit", function(event) {
-        $scope.verifyCard();
-      });*/
+      $scope.validateDiscount = function() {
+        // Validate discount
+        if (discountCode == null || discountCode.length < 4) {
+          $scope.discountErrorMsg = "Discount code not recognized.";
+        } else {
+          $scope.discountErrorMsg = "";
+        }
+      };
 
       $scope.verifyCard = function($event) {
         $rootScope.$emit('loading:show');
