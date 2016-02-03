@@ -9,8 +9,8 @@
 
       <div class="match-details">
         <div class="matched-text">Your traffic ticket will be fought by</div>
-        <div class="lawfirm-name">Law Office of Jacques LeJeune</div>
-        <img class="lawfirm-image" src="../img/default-profile-pic.png" />
+        <div class="lawfirm-name">{{currentCase.lawfirmCaseDecision.lawfirmName}}</div>
+        <img class="lawfirm-image" ng-src="{{currentCase.lawfirmCaseDecision.profilePictureUrl}}" />
       </div>
 
       <div class="case-created-note">
@@ -20,134 +20,18 @@
         </div>
       </div>
 
-      <div class="share-text">Friends don't let friends pay traffic tickets.</div>
-      <div class="facebook-share" ng-hide="sharedOnFacebook" ng-click="shareOnFacebook()">
-        <i class="icon ion-social-facebook"></i>
-        <div class="text">Share the news!
+      <button class="view-case-button bottom" ng-click="viewCase()">View Case</button>
+
+      <div class="share-text">
+        <div class="share-blurb">Friends don't let friends pay traffic tickets.</div>
+        <div class="facebook-share" ng-hide="sharedOnFacebook" ng-click="shareOnFacebook()">
+          <i class="icon ion-social-facebook"></i>
+          <div class="text">Share the news!</div>
         </div>
       </div>
     </div>
-    <!--div ng-click="toggleFbButton()">Toggle</div-->
   </ion-scroll>
 
-  <button class="view-case-button bottom" ng-click="viewCase()">View Case</button>
 </div>
-
-<style>
-  .page.case-created {
-    background-color: #efefef;
-    text-align: center;
-    padding-top: 15px;
-  }
-  .page.case-created .scroll-view {
-    padding-bottom: 100px;
-    margin-left: -10px;
-    margin-right: -10px;
-  }
-  .page.case-created h2 {
-    color: rgba(23, 158, 49, 0.75);
-  }
-  .page.case-created i.ion-checkmark-circled {
-    margin-right: 5px;
-    font-size: 1.2em;
-    color: rgba(23, 158, 49, 0.75);
-    position: relative;
-    top: 3px;
-  }
-  .page.case-created .match-details {
-    margin-top: 25px;
-    color: #999;
-    font-size: 1.3em;
-    font-weight: 300;
-  }
-  .page.case-created .lawfirm-name {
-    font-weight: 400;
-    color: #333;
-    margin-top: 10px;
-  }
-  .page.case-created .lawfirm-image {
-    width: 150px;
-    height: 150px;
-    margin: 15px 0 20px 0;
-    border-radius: 50%;
-  }
-  .page.case-created .case-created-note {
-    color: #5499E2;
-    font-size: 1.6em;
-    line-height: 1.5em;
-    font-weight: 200;
-    margin-top: 30px;
-    width: 70%;
-    margin: auto;
-  }
-  @media (max-width: 500px) {
-    .page.case-created .case-created-note {
-      width: 85%;
-    }
-  }
-  .page.case-created .case-created-note .note {
-    color: #aaa;
-    font-size: 0.7em;
-    margin-top: 10px;
-    line-height: 1em;
-  }
-  .page.case-created .facebook-share {
-    margin: auto;
-    background-color: #5372bc;
-    color: white;
-    font-size: 1.5em;
-    line-height: 2em;
-    padding: 6px;
-    margin-top: 8px;
-    font-weight: 200;
-    cursor: pointer;
-    border-radius: 3px;
-    overflow: auto;
-    max-width: 250px;
-  }
-  .page.case-created .facebook-share:hover {
-    background-color: #3b5185;
-  }
-  .page.case-created .facebook-share i {
-    font-size: 1.7em;
-    float: left;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-  .page.case-created .facebook-share .text {
-    line-height: 2em;
-    float: left;
-  }
-  .page.case-created .share-text {
-    margin-top: 30px;
-    margin-left: 5px;
-    color: #5372bc;
-    font-size: 1.2em;
-  }
-  .page.case-created .view-case-button {
-    background-color: #f37272;
-    border: none;
-  }
-  .page.case-created .view-case-button:hover {
-    background-color: #f36464;
-  }
-
-
-  .facebook-share {
-    -webkit-transition:all linear 1s;
-  }
-  .facebook-share.ng-hide {
-    opacity: 0;
-  }
-  .facebook-share.ng-hide-add {
-    -webkit-animation:0.5s hide;
-    animation:0.5s hide;
-  }
-
-
-</style>
-
-
-
 
 

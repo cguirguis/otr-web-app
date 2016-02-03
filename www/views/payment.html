@@ -5,32 +5,47 @@
       <div class="transaction-title">Transaction Details</div>
       <ul class="transactions">
         <li class="primary">
-          <div class="transaction-item">Legal services to contest traffic ticket, {{citation.violationCount - citation.extraViolations}} moving violation{{citation.violationCount > 0 ? 's' : ''}}</div>
-          <div class="transaction-fee">${{currentCase.caseEstimatedCost - (50*citation.extraViolations)}}</div>
+          <div class="transaction-item">Legal services to contest traffic ticket,
+            {{citation.violationCount - citation.extraViolations}} moving violation{{citation.violationCount != 1 ? 's' : ''}}</div>
+          <div class="transaction-fee">${{currentCase.baseCost}}</div>
         </li>
         <li class="secondary" ng-if="citation.extraViolations > 0">
-          <div class="transaction-item">{{citation.extraViolations}} extra violation{{citation.extraViolations > 1 ? 's' : ''}}</div>
-          <div class="transaction-fee">${{50 * citation.extraViolations}}</div>
+          <div class="transaction-item">{{citation.extraViolations}} additional violation{{citation.extraViolations != 1 ? 's' : ''}}</div>
+          <div class="transaction-fee">${{currentCase.violationSurcharge}}</div>
         </li>
         <li class="secondary">
-          <div class="transaction-item light-text">No accident involved</div>
+          <div class="transaction-item light-text">
+            <span ng-if="currentCase.citation.involvesAccident">Accident involved</span>
+            <span ng-if="!currentCase.citation.involvesAccident">No accident involved</span>
+          </div>
         </li>
         <li class="secondary">
-          <div class="transaction-item light-text">Ticket not overdue</div>
+          <div class="transaction-item light-text">
+            <span ng-if="currentCase.citation.isPastDue">Ticket overdue</span>
+            <span ng-if="!currentCase.citation.isPastDue">Ticket not overdue</span>
+          </div>
+        </li>
+        <li class="secondary discount-applied" ng-if="discountValue">
+          <div class="transaction-item discount-applied">Referral code applied ({{discountCode}})</div>
+          <div class="transaction-fee discount-value">{{discountApplied}}</div>
+        </li>
+        <li class="secondary matched-lawyer" ng-if="isLawyerMatch">
+          <i class="icon ion-android-star"></i>
+          <div>Your case will be assigned to <span>{{currentCase.lawfirmCaseDecision.lawfirmName}}</span>.</div>
+        </li>
+      </ul>
+      <ul class="transactions transactions-discount">
+        <li class="secondary discount">
+          <div class="discount-code">Referral code</div>
+          <button class="button apply-discount" ng-click="validateDiscount()">Apply</button>
+          <input type="text" class="discount-code">
+          <div class="error-message" ng-if="discountErrorMsg">{{discountErrorMsg}}</div>
         </li>
       </ul>
       <ul class="transactions transactions-total">
         <li class="secondary total">
           <div class="transaction-item">Total</div>
-          <div class="transaction-fee">${{currentCase.caseEstimatedCost}}</div>
-        </li>
-      </ul>
-      <ul class="transactions transactions-discount">
-        <li class="secondary discount">
-          <div class="discount-code">Discount code</div>
-          <button class="button apply-discount" ng-click="validateDiscount()">Apply</button>
-          <input type="text" class="discount-code">
-          <div class="error-message" ng-if="discountErrorMsg">{{discountErrorMsg}}</div>
+          <div class="transaction-fee">${{currentCase.totalCost}}</div>
         </li>
       </ul>
 
@@ -49,33 +64,38 @@
 
         <div class="form-row" style="margin-right: 10px">
           <input type="text" id="card-number" size="21" maxlength="16" data-stripe="number"
-                 placeholder="Card number" style="font-size: 2.2em" value="4242424242424242"/>
+                 placeholder="Card number" style="font-size: 2.1em" value="4242424242424242"/>
         </div>
 
         <div class="form-row" style="margin-right:10px;">
           <input type="text" id="cvc" size="4" maxlength="4" data-stripe="cvc"
-                 placeholder="CVC" style="font-size: 2.2em" value="242"/>
+                 placeholder="CVC" style="font-size: 2.1em" value="242"/>
         </div>
 
         <div class="form-row">
           <input type="text" size="2" maxlength="2" data-stripe="exp-month"
-            placeholder="mm" style="float:left;font-size: 2.2em" value="10"/>
+            placeholder="mm" style="float:left;font-size: 2.1em" value="10"/>
         </div>
         <div class="form-row" style="height: 10px;">
           <div class="date-separator">/</div>
         </div>
         <div class="form-row">
-          <input type="text" size="4" maxlength="4" data-stripe="exp-year"
-                 placeholder="yyyy" style="font-size: 2.2em" value="2019"/>
+          <input type="text" size="5" maxlength="4" data-stripe="exp-year"
+                 placeholder="yyyy" style="font-size: 2.1em" value="2019"/>
         </div>
 
         <div class="payment-errors" ng-show="errorMessage">{{errorMessage}}</div>
 
+        <div class="terms-disclaimer" ng-if="isCardVerified">By clicking on “Confirm payment”, you agree to pay the total amount
+          shown above, and to the <a href="javascript:void(0);" ng-click="viewTerms()">Terms of Service</a>
+          and <a href="javascript:void(0);" ng-click="viewCancelPolicy()">Cancellation Policy</a>.
+        </div>
+
         <button type="submit" name="submit" style="clear:both;margin-top:10px;width: 100%" class="big-blue-button" ng-if="!isCardVerified">Verify card</button>
         <button type="button" style="margin-top: 10px;width: 100%;" class="big-blue-button" ng-if="isCardVerified" ng-click="confirmPayment()">Confirm payment</button>
       </form>
+      <div style="height:70px"></div>
     </div>
-    <div style="height:70px"></div>
 
     <ng-include src="'views/caseCreated.html'"></ng-include>
   </ion-content>
@@ -84,7 +104,7 @@
 
 <style>
   .page.payment-view .gray-background {
-    background-color: #EFEFEF;
+    background-color: #F0F3F4;
   }
   @media (max-width: 450px) {
     .page.payment-view #stripe-cc-form {
@@ -93,13 +113,13 @@
   }
   .page.payment-view #stripe-cc-form {
     margin-top: 15px;
-    background-color: #FBFBFB;
+    background-color: white;
     border: solid 1px #dedede;
     padding: 10px;
     margin-bottom: 50px;
   }
   .page.payment-view #stripe-cc-form h4 {
-    font-size: 1.4em!important;
+    font-size: 16px;
   }
   .page.payment-view #stripe-cc-form .payment-errors {
     clear:both;
@@ -203,16 +223,15 @@
     margin-left: -10px;
   }
   .page.payment-view .refund-note {
-    background-color: #E6FFE6;
-    padding: 15px;
+    padding: 7px;
     margin: 10px 0 5px 0;
     border-radius: 3px;
     color: #39ab39;
     cursor: pointer;
-    border: solid 1px rgba(57,171,57,0.4);
+    border: solid 1px transparent;
   }
   .page.payment-view .refund-note:hover {
-    background-color: #DBFFDB;
+    border: solid 1px rgba(57,171,57,0.4);
   }
   .page.payment-view .refund-note i {
     font-size: 1.6em;
@@ -220,16 +239,15 @@
     float: left;
   }
   .page.payment-view .next-step {
-    background-color: #FAF4FF;
-    padding: 15px;
+    padding: 7px;
     margin-bottom: 10px;
     border-radius: 3px;
     color: #417EEF;
     cursor: pointer;
-    border: solid 1px rgba(65,126,239,0.4);
+    border: solid 1px transparent;
   }
   .page.payment-view .next-step:hover {
-    background-color: #F0ECFF;
+    border: solid 1px rgba(65,126,239,0.4);
   }
   .page.payment-view .next-step i {
     font-size: 1.6em;

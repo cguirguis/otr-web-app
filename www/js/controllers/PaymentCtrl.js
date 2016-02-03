@@ -11,18 +11,71 @@ controllers.controller('PaymentCtrl',
 
       $scope.errorMessage = null;
 
-      var refundUrl = "http://www.offtherecord.com/refund.html";
-      var nextStepUrl = "http://www.offtherecord.com/nextStep.html";
+      var refundUrl = "https://offtherecord.com/refund.html";
+      var nextStepUrl = "https://offtherecord.com/nextStep.html";
 
       var stripeForm = $('#stripe-cc-form');
 
       $scope.validateDiscount = function() {
         // Validate discount
+        var discountCode = $("input.discount-code").val();
+
         if (discountCode == null || discountCode.length < 4) {
           $scope.discountErrorMsg = "Discount code not recognized.";
         } else {
-          $scope.discountErrorMsg = "";
+          DataService.getReferralCode(discountCode)
+            .then(
+              // Success
+              function(response) {
+                $scope.discountErrorMsg = "";
+                $scope.discountCode = discountCode
+                if ((response.data.numberOfReferrals + 1 >= response.data.referralCountLimit)
+                  && (new Date() < new Date(response.data.endDate))) {
+                  $scope.discountErrorMessage = "Discount code is expired.";
+                  return;
+                }
+                $rootScope.discount = response.data;
+                $scope.discountValue = response.data.refereeCreditValue / 100;
+                var updatedEstimate = $rootScope.currentCase.estimatedCost - $scope.discountValue;
+                $scope.isLawyerMatch = response.data.ownerType == "LAWFIRM";
+
+                // Apply referral code to case
+                DataService.applyReferralCode($rootScope.currentCase.caseId, discountCode)
+                  .then(applyCodeSuccess, applyCodeFailure);
+              },
+              // Failure
+              function(response) {
+                $rootScope.displayError(response.data.error.uiErrorMsg);
+              });
         }
+      };
+
+      var applyCodeSuccess = function(response) {
+        $rootScope.currentCase.oldEstimatedCost = $rootScope.currentCase.estimatedCost;
+        if (response && response.data && response.data.theCase) {
+          var newCase = response.data.theCase;
+          $rootScope.currentCase = {
+            chanceOfSuccess: newCase.chanceOfSuccess,
+            caseId: newCase.caseId,
+            estimatedCost: newCase.estimatedCost/100,
+            baseCost: newCase.lawfirmCaseDecision.caseFinancials.caseBaseCost/100,
+            violationSurcharge: newCase.lawfirmCaseDecision.caseFinancials.multipleViolationSurcharge/100,
+            totalCost: newCase.lawfirmCaseDecision.caseFinancials.clientTotalCost/100,
+            costBeforeReferrals: newCase.lawfirmCaseDecision.caseFinancials.clientCostBeforeReferrals/100,
+            lawfirmId: newCase.lawfirmId,
+            citationResponse: newCase.citation
+          }
+          var appliedDiscount = $rootScope.currentCase.costBeforeReferrals - $rootScope.currentCase.totalCost;
+          $scope.appliedDiscountString = appliedDiscount < 0
+            ? "($" + appliedDiscount + ")"
+            : "$" + appliedDiscount + ")";
+        }
+      };
+
+      var applyCodeFailure = function(response) {
+        $rootScope.hideLoader();
+        var errorMsg = response.data.error.uiErrorMsg;
+        $rootScope.displayError(errorMsg);
       };
 
       $scope.verifyCard = function($event) {
@@ -81,8 +134,18 @@ controllers.controller('PaymentCtrl',
               });
             }, function(error) {
               console.log(JSON.stringify(error));
+              $rootScope.hideLoader();
+              $rootScope.displayError("Card could not be verified. Please verify card information.");
             });
         }
+      };
+
+      $scope.viewTerms = function() {
+        $rootScope.showPopupView("https://offtherecord.com/terms.html", "Terms of Service");
+      };
+
+      $scope.viewCancelPolicy = function() {
+        $rootScope.showPopupView("https://offtherecord.com/cancellation-policy.html", "Cancelling Your Case");
       };
 
       $scope.confirmPayment = function() {
@@ -144,9 +207,12 @@ controllers.controller('PaymentCtrl',
 
       $scope.viewCase = function() {
         $state.go("cases", { "caseId" : $rootScope.currentCase.caseId });
+      };
+
+      $scope.$on("$destroy", function() {
         $rootScope.currentCase = null;
         $rootScope.citation = null;
-      };
+      });
 
       /*
       // For testing

@@ -15,6 +15,8 @@ WebApp.factory('DataService', function($http, Constants)
   var addCardUrl = baseUrl + 'users/stripe/account/cards';
   var chargeCardUrl = baseUrl + 'cases/{0}/payment';
   var postMessage = baseUrl + 'cases/{caseId}/conversation';
+  var getReferralCodeUrl = baseUrl + 'referrals/codes/{0}';
+  var applyReferralCodeUrl = baseUrl + 'cases/{0}/referralcode/{1}';
 
   var getCasesUrl = baseUrl + 'cases';
 
@@ -161,6 +163,18 @@ WebApp.factory('DataService', function($http, Constants)
           }
           $q.reject(errorResponse);
       });
+  };
+
+  var getReferralCode = function(code) {
+    var url = getReferralCodeUrl.format(code);
+
+    return $http.get(url);
+  };
+
+  var applyReferralCode = function(caseId, code) {
+    var url = applyReferralCodeUrl.format(caseId, code);
+
+    return $http.post(url);
   }
 
   return {
@@ -179,6 +193,8 @@ WebApp.factory('DataService', function($http, Constants)
     chargeCard: chargeCard,
     getCases: getCases,
     getCaseDetails: getCaseDetails,
-    postNewCaseMessage: postNewCaseMessage
+    postNewCaseMessage: postNewCaseMessage,
+    getReferralCode: getReferralCode,
+    applyReferralCode: applyReferralCode
   }
 });

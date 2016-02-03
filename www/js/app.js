@@ -225,18 +225,20 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
 
         // Display error modal
         $rootScope.displayError = function(message) {
+          $rootScope.hideLoader();
           $ionicLoading.show({
             template:
             "<div class='error-box'>" +
-              "<i class='icon ion-alert'></i>" +
               "<div class='error-text'>" + message + "</div>" +
               "<div class='button error-button' ng-click='dismissError()'>OK</div>" +
             "</div>"
           });
+          $(".loading").addClass("error-modal");
         };
 
         $rootScope.dismissError = function() {
           $ionicLoading.hide();
+          $(".loading").removeClass("error-modal");
         }
 
         $rootScope.$watch('errorMessage', function() {

@@ -10,12 +10,12 @@
       <h4 class="match-subtitle ng-binding">We were able to match you with one of the top-rated traffic attorneys in Bellevue.</h4>
 
       <div class="match-details-row">
-        <h2 class="match-odds-value">93%</h2>
+        <h2 class="match-odds-value">{{currentCase.changeOfSuccess}}%</h2>
         <h3 class="match-odds-text">Your chance of success:</h3>
         <div class="match-odds-note">Based on historical performance</div>
       </div>
       <div class="match-details-row" ng-click="viewRefundPolicy()">
-        <h2 class="match-cost-value ng-binding">${{currentCase.caseEstimatedCost}}</h2>
+        <h2 class="match-cost-value ng-binding">${{currentCase.estimatedCost}}</h2>
         <h3 class="match-cost-text">Your cost:</h3>
         <div class="match-cost-note">You'll get a full refund if the ticket is not kept off your record</div>
       </div>

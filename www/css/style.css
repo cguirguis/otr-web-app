@@ -61,10 +61,18 @@ hr {
   height: 2px;
   background: #ddd;
 }
+
 .loading-container .loading {
+  background-color: rgba(255,255,255,0.7);
+}
+.loading-container .loading.error-modal {
+  width: 90%!important;
+  max-width: 380px!important;
+  background-color: white;
 }
 .loading-container .loading .loading-text {
   margin: 10px 0 5px 0;
+  color: #333;
 }
 .loading-container .loading .loading-link {
   cursor: pointer;
@@ -147,44 +155,38 @@ hr {
 /************* ERROR MODAL ************/
 .error-box {
   padding: 10px;
-  text-align: center;
-  width: 70vh;
-}
-.error-box i {
-  float: left;
-  color: salmon;
-  font-size: 6.5em;
+  text-align: left;
+  width: 100%;
 }
 .error-box .error-text {
   font-weight: 200;
-  font-size: 1.4em;
-  color: salmon;
-  width: 80%;
-  margin: auto;
+  font-size: 1.1em;
+  color: #666;
+  width: 93%;
   overflow: auto;
   padding-bottom: 5px;
-  margin-bottom: 5px;
-  margin-top: -5px;
+  margin-bottom: 10px;
+  margin-left: 0;
+  padding-left: 10px;
 }
 .error-box .error-button {
-  width: 120px;
+  width: 100%;
   margin-top: 10px;
-  background-color: transparent;
-  border-color: salmon;
-  color: salmon;
+  background-color: rgba(70, 193, 255, 0.90);
+  border-color: transparent;
+  color: white;
   cursor: pointer;
   margin-bottom: -10px;
 }
 .error-box .error-button:hover {
-  background-color: salmon;
-  color: white;
+  background-color: rgba(70, 193, 255, 0.70);
 }
 @media (max-width: 500px) {
   .error-box .error-text {
     padding: 5px 15px 5px 5px;
   }
   .error-box .error-button {
-    margin: 10px 0px 0px -100px;
+    margin: 10px 0px 0px 0px;
   }
 }
 
@@ -349,20 +351,26 @@ button.big-blue-button:hover {
 .button-wrapper {
   margin-top: 20px;
   text-align: center;
+  padding-bottom: 130px;
 }
 
 /************* TICKET VIEW ************/
-
+.ticket-view .bottom-section.image-review {
+  margin-top: -140px;
+}
 .ticket-view .image-input-options {
   text-align: center;
   height: 100%;
 }
 .ticket-view .ticket-image-container {
-  margin: -20px -20px 60px -20px;
+  margin: -20px -20px 90px -20px;
 }
 @media (max-width:450px) {
   button.button.camera-button {
     width: 60%
+  }
+  .ticket-view .bottom-section.image-review {
+    margin-top: -180px;
   }
 }
 button.button.camera-button:active {
@@ -423,7 +431,7 @@ video {
 /*}*/
 button.continue {
   font-family: "Lato", sans-serif;
-  padding: 15px 25px;
+  padding: 15px 20px;
   background-color: rgb(34, 210, 104);
   border: solid 1px transparent;
   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.1);
@@ -439,7 +447,7 @@ button.continue:hover {
 }
 button.retake-picture {
   font-family: "Lato", sans-serif;
-  padding: 15px 25px;
+  padding: 15px 20px;
   background-color: white;
   color: #555;
   border: solid 1px transparent;
@@ -1026,13 +1034,46 @@ table.k-content {
 .page.payment-view ul.transactions {
   background-color: white;
 }
+.page.payment-view ul.transactions li.discount-applied {
+  margin-top: 5px;
+  margin-left: 10px;
+  padding: 5px 10px 5px 0;
+  background-color: rgba(71, 250, 114, 0.08);
+}
+.page.payment-view ul.transactions li.matched-lawyer {
+  margin-top: 1px;
+  margin-left: 10px;
+  padding: 7px 10px;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+.page.payment-view ul.transactions li.matched-lawyer i {
+  float: left;
+  margin-right: 8px;
+  font-size: 20px;
+  color: #ff7b2e;
+}
+.page.payment-view ul.transactions li.matched-lawyer div {
+  color: #333;
+  font-weight: 200;
+}
+.page.payment-view ul.transactions li.matched-lawyer div span {
+  font-weight: 400;
+}
+.page.payment-view ul.transactions li.discount-applied div.discount-applied {
+  color: #00890b;
+  font-weight: 200;
+  margin-left: 10px;
+}
+.page.payment-view ul.transactions li.discount-applied div.discount-value {
+  color: #0781e9;
+}
 .page.payment-view ul.transactions-discount {
   margin-top: 5px;
   border-color: rgba(127, 179, 251, 0.81) !important;
 }
 .page.payment-view ul.transactions-discount li.discount {
   margin-top: 5px;
-  margin-bottom: -5px;
+  margin-bottom: -10px;
   margin-left: -10px;
   display: inline-block;
   overflow: inherit!important;
@@ -1044,28 +1085,32 @@ table.k-content {
   float: left;
 }
 .page.payment-view ul.transactions-discount li input {
-  width: 100px!important;
+  width: 150px!important;
+  font-size: 22px;
+  font-weight: 200;
   border: solid 1px #ccc;
-  text-align: left!important;
   padding: 10px 10px;
-  color: #0077cc;
+  color: #333;
   float: right;
+  height: 40px;
+  margin: -1px 4px -2px 0;
 }
 .page.payment-view button.apply-discount {
-  width: 70px;
+  width: 80px;
   min-height: 10px!important;
   float: right;
-  margin-left: 5px;
-  background-color: #0077cc;
+  margin: -1px -12px -20px 0;
+  background-color: #147bd8;
   font-size: 15px!important;
   line-height: 12px;
   padding: 0px!important;
-  height: 34px;
+  border-radius: 2px;
+  height: 40px;
   border: none;
 }
 .page.payment-view button.apply-discount:hover {
   color: white;
-  background-color: #0084e2;
+  background-color: #147bd8;
 }
 .page.payment-view ul.transactions-discount .error-message {
   clear: left;
@@ -1074,6 +1119,13 @@ table.k-content {
   font-weight: 200;
   margin-top: 0px;
   margin-left: 20px;
+}
+.page.payment-view .terms-disclaimer {
+  font-weight: 200;
+  float: left;
+  padding: 5px;
+  padding-right: 10px;
+  color: #666;
 }
 @media (min-width: 850px) {
   .page.payment-view .payment-view {
@@ -1742,14 +1794,17 @@ div.court-icon {
   }
 }
 .nav-item-div {
+  width: 110px;
   position: absolute;
-  left: 50px;
+  left: 51px;
+  margin-top: 2px;
+  height: 53px;
   z-index: 90;
   font-size: 12px;
-  background-color: #222;
-  padding: 17px 30px;
+  background-color: #004c6e;
+  padding: 16px 30px 16px 20px;
   color: white;
-  border: solid 1px white;
+  border: solid 1px transparent;
   display: none;
   cursor: pointer;
   opacity: 0.9;
@@ -1861,7 +1916,127 @@ div.court-icon {
 }
 
 
+/* Case created view */
 
+.page.case-created {
+  background-color: #F0F3F4;
+  text-align: center;
+  padding-top: 15px;
+}
+.page.case-created .scroll-view {
+  padding-bottom: 100px;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+.page.case-created h2 {
+  color: rgba(23, 158, 49, 0.75);
+}
+.page.case-created i.ion-checkmark-circled {
+  margin-right: 5px;
+  font-size: 1.2em;
+  color: rgba(23, 158, 49, 0.75);
+  position: relative;
+  top: 3px;
+}
+.page.case-created .match-details {
+  margin-top: 25px;
+  color: #999;
+  font-size: 1.3em;
+  font-weight: 300;
+  background-color: white;
+  padding-top: 30px;
+}
+.page.case-created .lawfirm-name {
+  font-weight: 400;
+  color: #333;
+  margin-top: 10px;
+}
+.page.case-created .lawfirm-image {
+  width: 150px;
+  height: 150px;
+  margin: 15px 0 20px 0;
+  border-radius: 50%;
+}
+.page.case-created .case-created-note {
+  color: #5499E2;
+  font-size: 1.6em;
+  line-height: 1.5em;
+  font-weight: 200;
+  margin: auto;
+  margin-top: 30px;
+  background-color: white;
+  width: 100%;
+  padding-bottom: 40px;
+}
+@media (max-width: 500px) {
+  .page.case-created .case-created-note {
+    width: 85%;
+  }
+}
+.page.case-created .case-created-note .note {
+  color: #aaa;
+  font-size: 0.7em;
+  margin-top: 10px;
+  line-height: 1em;
+}
+.page.case-created .facebook-share {
+  margin: auto;
+  background-color: #5372bc;
+  color: white;
+  font-size: 1.5em;
+  line-height: 2em;
+  padding: 6px;
+  margin-top: 8px;
+  font-weight: 200;
+  cursor: pointer;
+  border-radius: 3px;
+  overflow: auto;
+  max-width: 250px;
+}
+.page.case-created .facebook-share:hover {
+  background-color: #3b5185;
+}
+.page.case-created .facebook-share i {
+  font-size: 1.7em;
+  float: left;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.page.case-created .facebook-share .text {
+  line-height: 2em;
+  float: left;
+}
+.page.case-created .share-text {
+  margin-top: 30px;
+  margin-left: 5px;
+  color: #5372bc;
+  font-size: 1.2em;
+  background-color: white;
+  padding-bottom: 30px;
+}
+.page.case-created .share-blurb {
+  padding-top: 20px;
+  padding-bottom: 5px;
+}
+.page.case-created .view-case-button {
+  background-color: #f37272;
+  border: none;
+  margin-top: 25px;
+  max-width: 50%;
+}
+.page.case-created .view-case-button:hover {
+  background-color: #f36464;
+}
+.facebook-share {
+  -webkit-transition:all linear 1s;
+}
+.facebook-share.ng-hide {
+  opacity: 0;
+}
+.facebook-share.ng-hide-add {
+  -webkit-animation:0.5s hide;
+  animation:0.5s hide;
+}
 
 
 

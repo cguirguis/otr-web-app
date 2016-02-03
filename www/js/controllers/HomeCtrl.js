@@ -84,17 +84,17 @@ controllers.controller('HomeCtrl',
     };
 
     $scope.showAction1Modal = function() {
-      $rootScope.showPopupView("http://blog.offtherecord.com/post/121486685047/faqs#whyfight",
+      $rootScope.showPopupView("https://offtherecord.com/whyfight.html",
         "Should I fight it?");
     };
 
     $scope.showAction2Modal = function() {
-      $rootScope.showPopupView("http://blog.offtherecord.com/post/121486685047/faqs#whyfight",
+      $rootScope.showPopupView("https://offtherecord.com/whyfight.html",
         "Long-term savings");
     };
 
     $scope.showAction3Modal = function() {
-      $rootScope.showPopupView("http://blog.offtherecord.com/post/121486685047/faqs#whyfight",
+      $rootScope.showPopupView("https://offtherecord.com/whyfight.html",
         "How does it work?");
     };
 

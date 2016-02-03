@@ -103,8 +103,13 @@ controllers.controller('ViolationCtrl',
         $scope.match = response;
         var newCase = response.data.theCase;
         $rootScope.currentCase = {
+          chanceOfSuccess: newCase.chanceOfSuccess,
           caseId: newCase.caseId,
-          caseEstimatedCost: newCase.estimatedCost/100,
+          estimatedCost: newCase.estimatedCost/100,
+          baseCost: newCase.lawfirmCaseDecision.caseFinancials.caseBaseCost/100,
+          violationSurcharge: newCase.lawfirmCaseDecision.caseFinancials.multipleViolationSurcharge/100,
+          totalCost: newCase.lawfirmCaseDecision.caseFinancials.clientTotalCost/100,
+          costBeforeReferrals: newCase.lawfirmCaseDecision.caseFinancials.clientCostBeforeReferrals/100,
           lawfirmId: newCase.lawfirmId,
           citationResponse: newCase.citation
         }
@@ -120,8 +125,7 @@ controllers.controller('ViolationCtrl',
     };
 
     $scope.viewRefundPolicy = function() {
-      $rootScope.showPopupView("http://blog.offtherecord.com/post/121486685047/faqs#moneyback",
-        "Long-term savings");
+      $rootScope.showPopupView("https://offtherecord.com/refund.html", "Long-term savings");
     };
 
     $rootScope.cancelMatch = function() {
