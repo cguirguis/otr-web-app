@@ -88,14 +88,23 @@ controllers.controller('HomeCtrl',
         "Should I fight it?");
     };
 
-    $scope.showAction2Modal = function() {
-      $rootScope.showPopupView("https://offtherecord.com/whyfight.html",
-        "Long-term savings");
+    $scope.showCalculator = function() {
+      $(".action.insurance").addClass("expanded");
+      $(".action.whyfight").hide();
+      $(".action.promise").hide();
+      $(".close-calculator").show();
+    };
+
+    $scope.closeCalculator = function() {
+      $(".action.insurance").removeClass("expanded");
+      $(".action.whyfight").show();
+      $(".action.promise").show();
+      $(".close-calculator").hide();
     };
 
     $scope.showAction3Modal = function() {
-      $rootScope.showPopupView("https://offtherecord.com/whyfight.html",
-        "How does it work?");
+      $rootScope.showPopupView("https://offtherecord.com/refund.html",
+        "Our refund policy");
     };
 
     // Load user dropdown
@@ -174,4 +183,106 @@ controllers.controller('HomeCtrl',
     UtilitiesService.authenticateUser();
     adjustLeftNav();
 
-}]);
+    // Insurance calculator code
+    $scope.minAge = 16;
+    $scope.maxAge = 70;
+    $scope.age = 16;
+
+    $scope.minPremium = 30;
+    $scope.maxPremium = 700;
+    $scope.monthlyPremium = 100;
+    $scope.percentIncreaseString = 0;
+
+    $scope.selectedViolation = 21.05;
+    $scope.ageRanges = [
+      { name: '16-29', value: 0.95 },
+      { name: '30-49', value: 1.05 },
+      { name: '50-70', value: 0.85 }];
+    /*$scope.stateOptions = [
+      { "name": "Alabama", "value": "AL" },
+      { "name": "Alaska", "value": "AK" },
+      { "name": "Arizona", "value": "AZ" },
+      { "name": "Arkansas", "value": "AR" },
+      { "name": "California", "value": "CA" },
+      { "name": "Colorado", "value": "CO" },
+      { "name": "Connecticut", "value": "CT" },
+      { "name": "Delaware", "value": "DE" },
+      { "name": "District Of Columbia", "value": "DC" },
+      { "name": "Florida", "value": "FL" },
+      { "name": "Georgia", "value": "GA" },
+      { "name": "Hawaii", "value": "HI" },
+      { "name": "Idaho", "value": "ID" },
+      { "name": "Illinois", "value": "IL" },
+      { "name": "Indiana", "value": "IN" },
+      { "name": "Iowa", "value": "IA" },
+      { "name": "Kansas", "value": "KS" },
+      { "name": "Kentucky", "value": "KY" },
+      { "name": "Louisiana", "value": "LA" },
+      { "name": "Maine", "value": "ME" },
+      { "name": "Maryland", "value": "MD" },
+      { "name": "Massachusetts", "value": "MA" },
+      { "name": "Michigan", "value": "MI" },
+      { "name": "Minnesota", "value": "MN" },
+      { "name": "Mississippi", "value": "MS" },
+      { "name": "Missouri", "value": "MO" },
+      { "name": "Montana", "value": "MT" },
+      { "name": "Nebraska", "value": "NE" },
+      { "name": "Nevada", "value": "NV" },
+      { "name": "New Hampshire", "value": "NH" },
+      { "name": "New Jersey", "value": "NJ" },
+      { "name": "New Mexico", "value": "NM" },
+      { "name": "New York", "value": "NY" },
+      { "name": "North Carolina", "value": "NC" },
+      { "name": "North Dakota", "value": "ND" },
+      { "name": "Ohio", "value": "OH" },
+      { "name": "Oklahoma", "value": "OK" },
+      { "name": "Oregon", "value": "OR" },
+      { "name": "Pennsylvania", "value": "PA" },
+      { "name": "Rhode Island", "value": "RI" },
+      { "name": "South Carolina", "value": "SC" },
+      { "name": "South Dakota", "value": "SD" },
+      { "name": "Tennessee", "value": "TN" },
+      { "name": "Texas", "value": "TX" },
+      { "name": "Utah", "value": "UT" },
+      { "name": "Vermont", "value": "VT" },
+      { "name": "Virginia", "value": "VA" },
+      { "name": "Washington", "value": "WA" },
+      { "name": "West Virginia", "value": "WV" },
+      { "name": "Wisconsin", "value": "WI" }
+    ];*/
+    $scope.violationOptions = [
+      { "name": "Speeding (1-15 mph over limit)", "value": 21.05 },
+      { "name": "Speeding (16-30 mph over limit)", "value": 28 },
+      { "name": "Speeding (31+ mph over limit)", "value": 30 },
+      { "name": "Failure to stop", "value": 19 },
+      { "name": "Failure to yield", "value": 19 },
+      { "name": "Following too closely (tailgating)", "value": 13.37 },
+      { "name": "Improper pass", "value": 13.65 },
+      { "name": "Improper turn+", "value": 14.33 },
+      { "name": "Seatbelt infraction", "value": 5 },
+      { "name": "HOV lane violation", "value": 18 },
+      { "name": "Careless driving", "value": 27 },
+      { "name": "Reckless driving", "value": 82 }
+    ];
+
+    $scope.calculatePremium = function(age, selectedViolation, monthlyPremium) {
+      var ageFactor = age >= 50 ? 0.85 : (age >= 30 ? 1.05 : 0.95);
+      var violationFactor = (selectedViolation/100) + 1;
+      var percentIncrease = Math.max((violationFactor * ageFactor) - 1, 0);
+      var currentAnnualPremium = 12 * monthlyPremium;
+      $scope.premiumIncrease = UtilitiesService.numberWithCommas(Math.round(currentAnnualPremium * percentIncrease * 3));
+      var newAnnualPremium = currentAnnualPremium + $scope.premiumIncrease;
+
+      $scope.percentIncreaseString = Math.round(percentIncrease * 100 * 100) / 100;
+
+      // Calculator needle rotation on percentage premium increase
+      // 0% is unchanged (-95deg), maximum of 140% (90deg)
+      var degreeValue = "rotate(" + ((percentIncrease / 1.40) * 185 - 95) + "deg)";
+      $(".gauge-needle").css("transform", degreeValue + "deg)");
+      $(".gauge-needle").css("-webkit-transform", degreeValue);
+      $(".gauge-needle").css("-moz-transform", degreeValue);
+      $(".gauge-needle").css("-ms-transform", degreeValue);
+      $(".gauge-needle").css("-o-transform", degreeValue);
+    };
+
+  }]);

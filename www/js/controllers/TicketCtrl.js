@@ -137,12 +137,18 @@ controllers.controller('TicketCtrl',
       function handleFileSelect(event) {
         var f = event.target.files[0]; // FileList object
 
+        $scope.showSelectSpinner = true;
+
         // Only process image files.
         if (!f.type.match('image.*')) {
-          $scope.inputErrorMessage = "This doesn't seem to be a valid image. Please make sure you've selected the right file.";
+          $scope.$apply(function() {
+            $scope.inputErrorMessage = "File not recognized. Please make sure you select a valid image file.";
+            $scope.showSelectSpinner = false;
+          });
           return;
         }
 
+        $scope.inputErrorMessage = "";
         var reader = new FileReader();
 
         // Closure to capture the file information.
@@ -156,6 +162,7 @@ controllers.controller('TicketCtrl',
             $scope.images.push(img);
             $scope.base64Image = reader.result.slice(22);
             $scope.showFileInputView = false;
+            $scope.showSelectSpinner = false;
 
             $scope.$apply();
           };

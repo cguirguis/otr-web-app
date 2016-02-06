@@ -44,6 +44,7 @@ controllers.controller('ViolationCtrl',
         $rootScope.citation = $rootScope.citation || {};
         $rootScope.citation.violationCount = $scope.violationCount;
         $rootScope.citation.extraViolations = $scope.extraViolations || 0;
+        $rootScope.citation.involvesAccident = $scope.involvesAccident;
 
         // Check that citation picture finished uploading to the server
         // If so, update citation. If not, wait until we get the citationId

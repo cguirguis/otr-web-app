@@ -20,6 +20,16 @@
         <button class="violation-button" ng-click="setViolationCount(3)" ng-class="{ 'active': violationCount === 3 }">3</button>
         <button class="violation-button" ng-click="setViolationCount(4)" ng-class="{ 'active': violationCount === 4 }">4</button>
         <button class="violation-button" ng-click="setViolationCount(5)" ng-class="{ 'active': violationCount === 5 }">5</button>
+
+        <div style="display: block;margin-top: 30px;">
+          <section title=".squaredTwo" style="display:inline-block">
+            <div class="squaredTwo">
+              <input type="checkbox" value="None" id="squaredTwo" name="check" ng-model="involvesAccident" />
+              <label for="squaredTwo"></label>
+            </div>
+            <div class="checkbox-description">Involved an accident</div>
+          </section>
+        </div>
       </div>
 
       <div class="button-wrapper">
@@ -32,6 +42,3 @@
 
   <ng-include src="'views/match.html'"></ng-include>
 </ion-view>
-
-
-

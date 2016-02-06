@@ -9,23 +9,78 @@
 
     <div class="action-section">
       <div class="actions">
-          <div class="action" ng-click="showAction1Modal()">
+          <div class="action whyfight" ng-click="showAction1Modal()">
             <i class="icon ion-android-car" style="color: #e44b43;"></i>
-            <h1>Should I fight it?</h1>
-            <div>What type of infraction did you commit? We'll tell you when to contest and when to
-              just pay the fine.</div>
+            <h1>Should you fight it?</h1>
+            <div>If you get a traffic ticket, it's tempting to just pay the fine and make the ticket
+              go away. But admitting guilt isn't always the smart choice.</div>
           </div>
-          <div class="action" ng-click="showAction2Modal()">
+          <div class="action insurance" ng-click="showCalculator()">
+            <div class="close-calculator hide" ng-click="closeCalculator()">X</div>
             <i class="icon ion-cash" style="color:#11a951"></i>
-            <h1>Long-term savings</h1>
-            <div>When your insurance company finds out about your ticket, they will almost certainly
-              raise your premiums. Find out much it'll cost you.</div>
+            <h1>Insurance Calculator</h1>
+            <div class="insurance-text">By better understanding the true consequences of a traffic
+              violation conviction, you'll see the benefit of having a good driving record.
+              Find out much you'll save.</div>
+
+            <div class="insurance-calculator-wrapper hide">
+              <div class="insurance-calc-note">
+                Our insurance premium calculator shows you average percentage increase
+                to your car insurance for 12 common infractions.
+                <span class="disclaimer">Numbers based on the national average.</span>
+              </div>
+              <div class="insurance-calculator">
+                <div class="calculator-form">
+                  <div class="row">
+                    <div class="label">Age</div>
+                    <div class="slider-container">
+                      <div wn-slider ng-model="age" min="minAge" max="maxAge" class="slider-wrapper"></div>
+                    </div>
+                    <div class="age-value">{{age}}<span> yrs old</span></div>
+                  </div>
+                  <div class="row">
+                    <div class="label">Violation</div>
+                    <div class="list" style="width:310px;margin-top:-10px;">
+                      <label class="item item-input item-select" style="height:40px;">
+                        <select ng-model="selectedViolation"
+                                ng-options="violation.value as violation.name for violation in violationOptions">
+                        </select>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="label">Current insurance premium</div>
+                    <div class="slider-container">
+                      <div wn-slider ng-model="monthlyPremium" min="minPremium" max="maxPremium" class="slider-wrapper premium"></div>
+                    </div>
+                    <div class="premium-value">${{monthlyPremium}}<span>/month</span></div>
+                  </div>
+                  <button class="calculate-insurance-button" ng-click="calculatePremium(age, selectedViolation, monthlyPremium)">Calculate</button>
+                </div>
+                <div class="calculator-results">
+                  <div class="price-gauge">
+                    <img src="../../img/color-gauge.png">
+                  </div>
+                  <div class="gauge-needle">
+                    <img src="../../img/gauge-needle.png">
+                  </div>
+                  <div class="gauge-label">
+                    <div class="rate-label">Est. rate increase</div>
+                    <div class="rate-value">{{percentIncreaseString}}%</div>
+                  </div>
+                </div>
+                <div class="increase-text" ng-if="premiumIncrease">
+                  <div class="increase-label">What this ticket could cost you in insurance premiums over the next three years: </div>
+                  <div class="increase-value">${{premiumIncrease}}</div>
+                </div></div>
+            </div>
           </div>
-          <div class="action" ng-click="showAction3Modal()">
+
+          <div class="action promise" ng-click="showAction3Modal()">
             <i class="icon ion-help-circled"></i>
-            <h1>How does it work?</h1>
-            <div>Fighting a ticket can be intimidating. We break down the process and explain some of
-              the magic behind our high success rates.</div>
+            <h1>Our promise</h1>
+            <div>Fighting a ticket shouldn't be risk prone. If we fail to get your ticket dismissed
+              or amended, we'll issue you a full refund. No questions asked.</div>
           </div>
       </div>
     </div>
@@ -36,3 +91,10 @@
     </div>
   </ion-content>
 </ion-view>
+
+<style>
+  select {
+    font-size: 20px;
+    max-width: 100%!important;
+  }
+</style>

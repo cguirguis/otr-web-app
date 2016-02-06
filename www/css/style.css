@@ -21,6 +21,10 @@ body {
   border: solid 1px rgb(31, 85, 142);
   border-radius: 3px;
 }
+.page button.activated {
+  box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.3);
+  font-size: 20.5px!important;
+}
 .page button:hover {
   opacity: 1;
   background-color: rgb(36, 103, 172);
@@ -327,16 +331,6 @@ i.icon.button-icon {
 button.big-blue-button {
   width: 50%;
   min-width: 250px;
-  border-radius: 2px;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 22px;
-  opacity: 0.7;
-  transition-timing-function: ease-in-out;
-  transition-duration: .1s;
-  transition-property: opacity;
-  border: 2px solid #147bd8;
-  background-color: #147bd8;
   color: white;
 }
 button.big-blue-button.inverted {
@@ -364,6 +358,26 @@ button.big-blue-button:hover {
 }
 .ticket-view .ticket-image-container {
   margin: -20px -20px 90px -20px;
+}
+@media (min-width:1020px) {
+  .ticket-view .bottom-section.image-review {
+    margin-top: -140px;
+  }
+}
+@media (max-width:1020px) {
+  .ticket-view .bottom-section.image-review {
+    margin-top: -160px;
+  }
+}
+@media (max-width:768px) {
+  .ticket-view .bottom-section.image-review {
+    margin-top: -160px;
+  }
+}
+@media (max-width:600px) {
+  .ticket-view .bottom-section.image-review {
+    margin-top: -180px;
+  }
 }
 @media (max-width:450px) {
   button.button.camera-button {
@@ -1631,7 +1645,7 @@ div.court-icon {
 }
 .page.profile-view .right-col {
   float: left;
-  width: 620px;
+  width: calc(100% - 230px);
 }
 .page.profile-view .left-col .username {
   width: 100%;
@@ -1735,6 +1749,17 @@ div.court-icon {
   margin-left: 7px;
   float: left;
   margin-top: 6px;
+}
+.logo-container:hover .logo-icon {
+  -webkit-transition: all 0.7s ease;
+  -moz-transition: all 0.7s ease;
+  -o-transition: all 0.7s ease;
+  transition: all 0.7s ease;
+  -webkit-transform: rotateY(360deg);
+  -moz-transform: rotateY(360deg);
+  -ms-transform: rotateY(360deg);
+  -o-transform: rotateY(360deg);
+  transform: rotateY(360deg);
 }
 .menu-left ion-item {
   background-color: #22262E;
@@ -1877,6 +1902,24 @@ div.court-icon {
   font-weight: 300;
   font-size: 13px;
   cursor: pointer;
+}
+.action.insurance.expanded {
+  width: 100%;
+}
+.action.insurance.expanded i {
+  width: 70px!important;
+  margin-right: 5px;
+  float: left;
+}
+.action.insurance.expanded h1 {
+  float: left;
+  width: auto!important;
+}
+.action.insurance.expanded .insurance-text {
+  display: none;
+}
+.action.insurance.expanded .insurance-calculator-wrapper {
+  display: block;
 }
 @media (max-width: 599px) {
   .top-section {
@@ -2037,6 +2080,378 @@ div.court-icon {
   -webkit-animation:0.5s hide;
   animation:0.5s hide;
 }
+
+
+
+/* Checkbox */
+.squaredTwo {
+  float: left;
+  width: 23px;
+  height: 23px;
+  position: relative;
+  margin-left: 26px;
+  margin-right: 10px;
+  background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+.squaredTwo label {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  background: linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%);
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
+}
+.squaredTwo label:after {
+  content: '';
+  width: 17px;
+  height: 7px;
+  position: absolute;
+  top: 3px;
+  left: 0px;
+  border: 3px solid #2566A6;
+  border-top: none;
+  border-right: none;
+  background: transparent;
+  opacity: 0;
+  -webkit-transform: rotate(-53deg);
+  transform: rotate(-53deg);
+}
+.squaredTwo input[type=checkbox] {
+  visibility: hidden;
+}
+.squaredTwo input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}
+.checkbox-description {
+  margin-top: 2px;
+  float: left;
+  font-size: 16px;
+  color: #333;
+}
+
+
+
+
+.insurance-calculator-wrapper {
+  text-align: left!important;
+}
+.close-calculator {
+  float: right;
+  font-size: 35px;
+  color: #ccc;
+  margin-top: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.close-calculator:hover {
+  color: #999;
+}
+.insurance-calculator-wrapper .disclaimer {
+  /*color: #ccc;*/
+}
+.insurance-calculator {
+  width: 100%;
+  margin: auto;
+  display: inline-block;
+  height: auto;
+  border: solid 1px #efefef;
+  float: left;
+  clear: both;
+  padding: 20px;
+  padding-top: 30px;
+}
+.insurance-calc-note {
+  float: left;
+  font-size: 16px;
+  color: #888;
+  padding: 10px 10px 20px 10px;
+}
+.insurance-calculator .calculator-form {
+  width: 55%;
+  float: left;
+}
+.insurance-calculator .row {
+  height: 40px;
+  margin-bottom: 40px;
+  font-family: "Raleway", sans-serif;
+}
+.insurance-calculator .label {
+  margin-right: 20px;
+  float: left;
+  clear: left;
+  width: 80px;
+  text-align: right;
+  font-size: 16px;
+  color: #666;
+  clear: right;
+}
+.insurance-calculator .row .age-value,
+.insurance-calculator .row .premium-value{
+  font-size: 26px;
+  margin-left: 20px;
+  color: #333;
+}
+.insurance-calculator .row span {
+  font-size: 14px;
+}
+.insurance-calculator select {
+  float: left;
+}
+.insurance-calculator .calculator-results {
+  padding: 0 0 0 20px;
+  float: right;
+  position: relative;
+}
+.calculator-results .price-gauge img {
+  width: 376px;
+  height: 170px;
+}
+.calculator-results .gauge-needle {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  -webkit-transition: transform 1s ease-in-out;
+  -moz-transition: transform 1s ease-in-out;
+  -o-transition: transform 1s ease-in-out;
+  transition: transform 1s ease-in-out;
+  -webkit-transform: rotate(-95deg);
+  -moz-transform: rotate(-95deg);
+  -ms-transform: rotate(-95deg);
+  -o-transform: rotate(-95deg);
+  transform: rotate(-95deg);
+}
+.gauge-label {
+  position: absolute;
+  top: 70px;
+  left: 155px;
+  text-align: center;
+}
+.gauge-label .rate-label {
+  color: #666;
+}
+.gauge-label .rate-value {
+  margin-top: 5px;
+  font-size: 26px;
+}
+@media (max-width: 1050px) {
+  .calculator-form {
+    width: 100%!important;
+  }
+  .calculate-insurance-button {
+    margin-left: 0!important;
+    width: 100%!important;
+    margin-bottom: 40px!important;
+  }
+  .calculator-results {
+    text-align: center;
+    width: 100%;
+  }
+  .price-gauge img {
+    width: 100%!important;
+    max-width: 376px;
+    height: auto!important;
+  }
+  .gauge-needle {
+    transform: rotate(-91.1778deg);
+    top: 40px!important;
+    left: calc(50% - 190px)!important;
+  }
+  .gauge-label {
+    top: 60px!important;
+    left: calc(50% - 40px)!important;
+  }
+  .calculator-results {
+    float: none!important;
+    padding: 0!important;
+    margin-top: 310px;
+  }
+  .increase-text {
+    text-align: center;
+    padding: 25px 10px!important;
+  }
+  .increase-label {
+    width: 100%!important;
+  }
+  .increase-value {
+    width: 100%!important;
+    margin-top: 20px!important;
+  }
+}
+@media (max-width: 530px) {
+  .insurance-calculator .row {
+    display: inline-block;
+    text-align: left;
+    height: auto;
+  }
+  .insurance-calculator .row .label {
+    float: none;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  .slider-container {
+    width: 100%!important;
+  }
+  .gauge-needle {
+    top: 50%!important;
+  }
+  .gauge-label {
+    top: 210px!important;
+    font-size: .85em;
+  }
+  div.list {
+    width: 100%!important;
+  }
+}
+.increase-text {
+  margin: 30px 0 10px 0;
+  width: 100%;
+  float: left;
+  padding: 30px 20px;
+  background-color: rgba(231, 236, 221, 0.20);
+}
+.increase-text .increase-label {
+  color: #666;
+  font-size: 19px;
+  float: left;
+  width: calc(100% - 150px);
+}
+.increase-text .increase-value {
+  color: #00ac56;
+  font-size: 40px;
+  float: right;
+  margin-left: 20px;
+  margin-top: 0px;
+  font-weight: 400;
+}
+button.calculate-insurance-button {
+  clear: both;
+  width: 400px;
+  display: block;
+  background: #f6737d;
+  -moz-box-shadow: inset 0 1px 0 0 #ff808c;
+  -webkit-box-shadow: inset 0 1px 0 0 #da747d;
+  border-color: #c85c62;
+  text-shadow: 0 -1px 1px #de3c4f;
+  font-size: 21px!important;
+  margin: 15px 0 0 60px;
+  z-index: 10000;
+}
+button.calculate-insurance-button:hover {
+  background: -moz-linear-gradient(0% 100% 90deg, #f35d76, #f3555d);
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f2857f), to(#e76072));
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+
+
+
+button {
+  background: #2a81d7;
+  background: -moz-linear-gradient(0% 100% 90deg, #206bcb, #3e9ee5);
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3e9ee5), to(#206bcb));
+  border-top: 1px solid #2a73a6;
+  border-right: 1px solid #165899;
+  border-bottom: 1px solid #07428f;
+  border-left: 1px solid #165899;
+  -moz-box-shadow: inset 0 1px 0 0 #62b1e9;
+  -webkit-box-shadow: inset 0 1px 0 0 #62b1e9;
+  cursor: pointer;
+  text-shadow: 0 -1px 1px #3275bc;
+}
+button:hover {
+  -moz-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+  -webkit-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+  background: -moz-linear-gradient(0% 100% 90deg, #10386a, #3e9ee5);
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#42a8f3), to(#1e64bd));
+}
+
+/* Slider CSS */
+
+.slider-container {
+  position: relative;
+  width: 300px;
+  margin-top: -14px;
+}
+.slider-wrapper {
+  padding: 20px 0 20px;
+}
+.slider {
+  background-color: #DFF0D8!important;
+  box-shadow: rgb(201, 216, 194) 0px 1px 0px 0px inset!important;
+  height: 12px!important;
+  width: 100%!important;
+  visibility: visible!important;
+  overflow: inherit!important;
+}
+.premium .slider {
+  background-color: #D5E4F9!important;
+}
+.premium .slider-selected {
+  background-color: #3882C3;
+  box-shadow: rgb(51, 94, 145) 0px 1px 0px 0px inset;
+}
+.slider-selected {
+  background-color: #5CB85C;
+  box-shadow: rgb(97, 145, 97) 0px 1px 0px 0px inset;
+  float: left;
+  height: 10px;
+}
+.slider-pointer {
+  background: #fff;
+  background: linear-gradient(#fff,#f6f6f6) #fff;
+  background: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#f6f6f6)) #fff;
+  background: -webkit-linear-gradient(#fff,#f6f6f6) #fff;
+  border-radius: 50%;
+  webkit-border-radius: 50%;
+  box-shadow: -2px 2px 4px rgba(25, 70, 94, 0.6), 0px 2px 8px rgba(25, 70, 94, 0.1);
+  webkit-box-shadow: -2px 2px 4px rgba(25, 70, 94, 0.6), 0px 2px 8px rgba(25, 70, 94, 0.1);
+  cursor: pointer;
+  float: right;
+  height: 30px;
+  margin-right: -25px;
+  margin-top: -11px;
+  width: 30px;
+}
+.slider-pointer:focus {
+  outline: 0;
+}
+.slider-pointer:after {
+  content: '';
+  display: block;
+  height: 25px;
+  left: 12px;
+  position: relative;
+  top: 12px;
+  width: 25px;
+}
+.slider-pointer:hover {
+  box-shadow: -2px 2px 4px rgba(25, 70, 94, 1), 0px 2px 8px rgba(25, 70, 94, 1);
+  webkit-box-shadow: -2px 2px 4px rgba(25, 70, 94, 1), 0px 2px 8px rgba(25, 70, 94, 1);
+}
+.slider-wrapper {
+  padding: 20px 0 20px;
+}
+.slider-container {
+  position: relative;
+}
+@media screen and (max-width: 500px) {
+  .slider-demo form input {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+}
+
+
+
+
+
 
 
 

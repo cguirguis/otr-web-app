@@ -70,11 +70,16 @@ WebApp.factory('UtilitiesService',
     return "{0} {1}, {2}".format(months[currMonth], currDate, currYear);
   };
 
+  var numberWithCommas = function(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   return {
     authenticateUser: authenticateUser,
     logout: logout,
     convertUTCDateToLocalDate: convertUTCDateToLocalDate,
     getShortDateString: getShortDateString,
-    getShortDateStringFromUtcDate: getShortDateStringFromUtcDate
+    getShortDateStringFromUtcDate: getShortDateStringFromUtcDate,
+    numberWithCommas: numberWithCommas
   }
 });

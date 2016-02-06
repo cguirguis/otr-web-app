@@ -8,7 +8,8 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
   'ngCordova',
   'ngAnimate',
   'OTRControllers',
-  'angularMoment'
+  'angularMoment',
+  'angular-pure-slider'
 ]);
 
 (function() {
