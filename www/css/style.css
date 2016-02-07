@@ -2168,7 +2168,7 @@ div.court-icon {
   color: #999;
 }
 .insurance-calculator-wrapper .disclaimer {
-  /*color: #ccc;*/
+  font-weight: lighter;
 }
 .insurance-calculator {
   width: 100%;
@@ -2223,6 +2223,9 @@ div.court-icon {
   float: right;
   position: relative;
 }
+.calculator-results {
+  float: left!important;
+}
 .calculator-results .price-gauge img {
   width: 376px;
   height: 170px;
@@ -2261,7 +2264,7 @@ div.court-icon {
   .calculate-insurance-button {
     margin-left: 0!important;
     width: 100%!important;
-    margin-bottom: 40px!important;
+    margin-bottom: 25px!important;
   }
   .calculator-results {
     text-align: center;
@@ -2274,17 +2277,15 @@ div.court-icon {
   }
   .gauge-needle {
     transform: rotate(-91.1778deg);
-    top: 40px!important;
+    top: 10px!important;
     left: calc(50% - 190px)!important;
   }
   .gauge-label {
     top: 60px!important;
-    left: calc(50% - 40px)!important;
+    left: calc(50% - 45px)!important;
   }
   .calculator-results {
-    float: none!important;
     padding: 0!important;
-    float: left!important;
   }
   .increase-text {
     text-align: center;
@@ -2314,14 +2315,26 @@ div.court-icon {
     width: 100%!important;
   }
   .gauge-needle {
-    top: 50%!important;
+    top: 10%!important;
   }
   .gauge-label {
-    top: 210px!important;
+    top: 70px!important;
     font-size: .85em;
   }
   div.list {
     width: 100%!important;
+  }
+}
+@media (max-width: 530px) {
+  .gauge-needle {
+    top: 10%!important;
+    left: 0%!important;
+  }
+  .gauge-needle img {
+    width: 100%;
+  }
+  .gauge-label {
+    top: 50px!important;
   }
 }
 .increase-text {
