@@ -13,7 +13,7 @@
       <div class="image-input-options" ng-show="!capturingImage && !images.length && !showFileInputView">
         <button class="button big-blue-button" ng-click="addMedia()" ng-show="!capturingImage && !images.length">
           Add a picture
-          <ion-spinner ng-show="showSelectSpinner" icon='ios' style="stroke:white;margin:6px 0 0 25px;position:absolute;"></ion-spinner>
+          <ion-spinner ng-show="showSelectSpinner" icon='ios' style="stroke:white;top:15px;right:40px;position:absolute;"></ion-spinner>
         </button>
         <div ng-if="inputErrorMessage" style="color: #FF4D4D;margin-top:20px;">{{inputErrorMessage}}</div>
       </div>

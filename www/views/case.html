@@ -4,7 +4,7 @@
     <div class="view-wrapper">
       <div class="breadcrumb" ng-click="backToCases()">
         <i class="icon ion-arrow-left-c"></i>
-        <div class="link-text">Back to Cases</div>
+        <div class="link-text">My Cases</div>
       </div>
 
       <div class="page-header">
@@ -13,7 +13,7 @@
         <h1 class="ticket-issued" ng-if="!loadedCase">Your Ticket</h1>
       </div>
 
-      <div ng-if="!loadedCase" class='loading-box'>
+      <div ng-if="!loadedCase" class='loading-box' style="margin: 30px 0 0 20px;">
         <ion-spinner icon='ios' style="float: left;"></ion-spinner>
         <div style="margin-top: -4px;margin-left: 40px;">Loading case...</div>
       </div>
@@ -34,11 +34,11 @@
         </div>
         <div class="case-section" style="position: relative;padding-top: 30px;">
           <div class="timeline-bar"></div>
-          <div class="update-row" ng-repeat="action in loadedCase.actions" ng-class="{'active': $index==0}">
+          <div class="update-row" ng-repeat="action in loadedCase.actions" ng-class="{'active': action.isLatest }">
             <div class="action-bar"><div class="icon-bg"><i class="icon ion-record"></i></div></div>
             <div class="action-text">
               <div class="action-date">{{action.actionDate}}</div>
-              <span class="action-title">{{action.actionType.uiString}}</span>
+              <span class="action-title" ng-class="{'future-action': action.isFutureAction }">{{action.actionType.uiString}}</span>
               <div class="action-description" ng-if="action.actionNote">{{action.actionNote}}</div>
             </div>
           </div>
@@ -70,7 +70,10 @@
           </div>
           <div class="lawyer-details">
             <div class="lawyer-name">{{loadedCase.lawfirmCaseDecision.lawfirmName}}</div>
-            <div class="lawyer-call">
+            <div class="lawyer-number">
+              (206) 458-4413
+            </div>
+            <div class="lawyer-call" ng-click="callAttorney()">
               <i class="icon ion-ios-telephone"></i> Call
             </div>
             <div class="lawyer-message" ng-click="viewMessages()">

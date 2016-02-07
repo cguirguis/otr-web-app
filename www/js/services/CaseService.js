@@ -84,7 +84,7 @@ function CaseService($q, $rootScope, DataService, UtilitiesService, AWSS3Service
       case "CLIENT_CONFIRMED":
         return "Pending Lawfirm Review";
       default:
-        return "In Progress";
+        return "Case In Progress";
     }
   }
 
@@ -93,7 +93,7 @@ function CaseService($q, $rootScope, DataService, UtilitiesService, AWSS3Service
       case "CLIENT_CONFIRMED":
         return "Your attorney is reviewing your case and will contact you within 24 hours.";
       default:
-        return "Your attorney is working on your case. Feel free to message your attorney to request an update.";
+        return "Your attorney is working on your case. You can message your attorney at any time to request an update.";
     }
   }
 }

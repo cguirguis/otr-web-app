@@ -27,11 +27,11 @@
         </li>
         <li class="secondary discount-applied" ng-if="discountValue">
           <div class="transaction-item discount-applied">Referral code applied ({{discountCode}})</div>
-          <div class="transaction-fee discount-value">{{discountApplied}}</div>
+          <div class="transaction-fee discount-value">{{appliedDiscountString}}</div>
         </li>
         <li class="secondary matched-lawyer" ng-if="isLawyerMatch">
           <i class="icon ion-android-star"></i>
-          <div>Your case will be assigned to <span>{{currentCase.lawfirmCaseDecision.lawfirmName}}</span>.</div>
+          <div>Your case will be assigned to <span>{{currentCase.lawfirmName}}</span>.</div>
         </li>
       </ul>
       <ul class="transactions transactions-discount">

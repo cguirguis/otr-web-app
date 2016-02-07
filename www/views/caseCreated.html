@@ -9,18 +9,18 @@
 
       <div class="match-details">
         <div class="matched-text">Your traffic ticket will be fought by</div>
-        <div class="lawfirm-name">{{currentCase.lawfirmCaseDecision.lawfirmName}}</div>
-        <img class="lawfirm-image" ng-src="{{currentCase.lawfirmCaseDecision.profilePictureUrl}}" />
+        <div class="lawfirm-name">{{currentCase.lawfirmName}}</div>
+        <img class="lawfirm-image" ng-src="{{currentCase.lawfirmImageUrl}}" />
       </div>
 
       <div class="case-created-note">
-        You're all set. Now sit back and let your attorney do all the heavy lifting.
+        Now you're all set. Just sit back and let your attorney do all the heavy lifting.
         <div class="note">
           You don't need to mail your ticket in or show up in court.
         </div>
       </div>
 
-      <button class="view-case-button bottom" ng-click="viewCase()">View Case</button>
+      <button class="view-case-button" ng-click="viewCase()">View Case</button>
 
       <div class="share-text">
         <div class="share-blurb">Friends don't let friends pay traffic tickets.</div>

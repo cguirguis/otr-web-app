@@ -55,7 +55,7 @@ controllers.controller('PaymentCtrl',
         if (response && response.data && response.data.theCase) {
           var newCase = response.data.theCase;
           $rootScope.currentCase = {
-            chanceOfSuccess: newCase.chanceOfSuccess,
+            chanceOfSuccess: response.data.chanceOfSuccess,
             caseId: newCase.caseId,
             estimatedCost: newCase.estimatedCost/100,
             baseCost: newCase.lawfirmCaseDecision.caseFinancials.caseBaseCost/100,
@@ -63,12 +63,13 @@ controllers.controller('PaymentCtrl',
             totalCost: newCase.lawfirmCaseDecision.caseFinancials.clientTotalCost/100,
             costBeforeReferrals: newCase.lawfirmCaseDecision.caseFinancials.clientCostBeforeReferrals/100,
             lawfirmId: newCase.lawfirmId,
+            lawfirmName: newCase.lawfirmCaseDecision.lawfirmName,
+            lawfirmImageUrl: newCase.lawfirmCaseDecision.profilePictureUrl,
             citationResponse: newCase.citation
-          }
+          };
           var appliedDiscount = $rootScope.currentCase.costBeforeReferrals - $rootScope.currentCase.totalCost;
           $scope.appliedDiscountString = appliedDiscount < 0
-            ? "($" + appliedDiscount + ")"
-            : "$" + appliedDiscount + ")";
+            ? "($" + appliedDiscount + ")" : "$" + appliedDiscount;
         }
       };
 
@@ -175,7 +176,7 @@ controllers.controller('PaymentCtrl',
       };
 
       $scope.showRefundModal = function() {
-        $rootScope.showPopupView(refundUrl, "Our Money-back Guarantee");
+        $rootScope.showPopupView(refundUrl, "Our Money-Back Guarantee");
       };
 
       $scope.showNextStepModal = function() {
@@ -213,11 +214,4 @@ controllers.controller('PaymentCtrl',
         $rootScope.currentCase = null;
         $rootScope.citation = null;
       });
-
-      /*
-      // For testing
-      $rootScope.citation = {"extraViolations": 1, "image":"C","citationId":1191,"court":{"courtId":363,"courtName":"Seattle Municipal Court","state":"WA","city":"Seattle","county":"King","$$hashKey":"object:98","selected":true},"date":"2015-12-16T05:59:45.300Z","isPastDue":false,"violationCount":3};
-      $scope.match = {"data":{"theCase":{"caseId":"OTR-TXC8LEA","userId":50,"user":{"firstname":"Chris","lastname":"Guirguis","emailAddress":"cguirguis@gmail.com","password":null,"profilePicture":null,"loginProvider":null,"address":null,"phoneNumbers":null,"roles":null},"citation":{"citationId":1191,"citationIssueDateUTC":1450245585000,"ticketImageUrl":"https://off-the-record-service-devo.s3.amazonaws.com/citations/images/2015/12/17/1191-EUBNB.jpeg","fineAmount":null,"ticketNumber":null,"involvesAccident":false,"isPastDue":false,"isDeleted":false,"violationCount":3,"violations":[],"court":{"courtId":363,"courtName":"Seattle Municipal Court","courtType":"MUNICIPAL","county":"King","address":{"addressLine1":"600 5th Ave","addressLine2":"Seattle Justice Center","city":"Seattle","stateCode":"WA","postalCode":"98104","countryCode":"US","phoneNumber":"206-684-5600"}}},"lawfirmCaseDecision":{"lawfirmId":10713,"lawfirmName":"Alex Firm 1","profilePictureUrl":"https://off-the-record-service.s3.amazonaws.com/lawfirms/washington/emeraldlawfirm.png","caseDecisionStatus":"CREATED","caseFinancials":null},"actions":null,"estimatedCost":30000,"caseEstimatedCost":300,"bookingConfirmedDate":null,"caseStatus":"UNCONFIRMED","courtAppointmentDate":null,"caseCreationDate":1450331989788,"cancellationExpiryDate":null,"adjustedFineAmount":null,"resolutionSummary":null}},"status":201,"config":{"method":"POST","transformRequest":[null],"transformResponse":[null],"url":"https://otr-backend-service-us-devo.offtherecord.com/api/v1/citations/1191/case","headers":{"Accept":"application/json, text/plain"},"withCredentials":true},"statusText":"Created"};
-      $rootScope.currentCase = $scope.match.data.theCase;
-      */
 }]);

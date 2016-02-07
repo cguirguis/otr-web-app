@@ -36,7 +36,7 @@ controllers.controller('ViolationCtrl',
       $state.go("requestArea");
     };
 
-    $scope.fightThisTicket = function() {
+    $scope.fightThisTicket = function(involvesAccident) {
       if (!$scope.waitingForCitationId) {
         $rootScope.displayLoading("Crunching your ticket info...");
 
@@ -44,7 +44,7 @@ controllers.controller('ViolationCtrl',
         $rootScope.citation = $rootScope.citation || {};
         $rootScope.citation.violationCount = $scope.violationCount;
         $rootScope.citation.extraViolations = $scope.extraViolations || 0;
-        $rootScope.citation.involvesAccident = $scope.involvesAccident;
+        $rootScope.citation.involvesAccident = involvesAccident;
 
         // Check that citation picture finished uploading to the server
         // If so, update citation. If not, wait until we get the citationId
@@ -104,7 +104,7 @@ controllers.controller('ViolationCtrl',
         $scope.match = response;
         var newCase = response.data.theCase;
         $rootScope.currentCase = {
-          chanceOfSuccess: newCase.chanceOfSuccess,
+          chanceOfSuccess: response.data.chanceOfSuccess,
           caseId: newCase.caseId,
           estimatedCost: newCase.estimatedCost/100,
           baseCost: newCase.lawfirmCaseDecision.caseFinancials.caseBaseCost/100,
@@ -112,6 +112,8 @@ controllers.controller('ViolationCtrl',
           totalCost: newCase.lawfirmCaseDecision.caseFinancials.clientTotalCost/100,
           costBeforeReferrals: newCase.lawfirmCaseDecision.caseFinancials.clientCostBeforeReferrals/100,
           lawfirmId: newCase.lawfirmId,
+          lawfirmName: newCase.lawfirmCaseDecision.lawfirmName,
+          lawfirmImageUrl: newCase.lawfirmCaseDecision.profilePictureUrl,
           citationResponse: newCase.citation
         }
       } else {
@@ -126,7 +128,7 @@ controllers.controller('ViolationCtrl',
     };
 
     $scope.viewRefundPolicy = function() {
-      $rootScope.showPopupView("https://offtherecord.com/refund.html", "Long-term savings");
+      $rootScope.showPopupView("https://offtherecord.com/refund.html", "Our Money Back Guarantee");
     };
 
     $rootScope.cancelMatch = function() {

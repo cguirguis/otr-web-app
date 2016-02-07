@@ -27,7 +27,8 @@
             <div class="ticket-issued">Your ticket from {{case.dateIssued}}</div>
             <div class="status" ng-bind-html="case.status"></div>
             <div class="case-id">Case: {{case.caseId}}</div>
-            <div class="court">{{case.citation.court.courtName}} ({{case.citation.court.address.city}}, {{case.citation.court.address.stateCode}})</div>
+            <div class="court">{{case.citation.court.courtName}}</div>
+            <!--<div>({{case.citation.court.address.city}}, {{case.citation.court.address.stateCode}})</div>-->
             <div class="attorney">
               <div class="image"><img ng-src="{{case.lawfirmCaseDecision.profilePictureUrl}}" /></div>
               <div class="attorney-header">Your attorney</div>
@@ -112,7 +113,6 @@
     cursor: pointer;
     color: #1f66ad;
     font-weight: 400;
-    text-transform: uppercase;
     float: left;
   }
   .page.cases-view ion-item .status {
@@ -127,11 +127,13 @@
   .page.cases-view ion-item .case-id {
     color: #bbb;
     font-size: 16px;
-    margin-bottom: 7px;
+    margin-bottom: 5px;
+    margin-top: 8px;
   }
   .page.cases-view ion-item .court {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     font-size: 16px;
+    font-weight: 400;
   }
   .page.cases-view ion-item .case-id,
   .page.cases-view ion-item .court,

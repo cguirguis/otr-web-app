@@ -8,6 +8,8 @@ controllers.controller('TicketCtrl',
       $rootScope.showProgress = true;
       $rootScope.citation = {};
 
+      $scope.showSelectSpinner = false;
+
       $ionicLoading.show({
         template: "<span style='color:black;>Loading...</span>"
       });
@@ -35,6 +37,8 @@ controllers.controller('TicketCtrl',
       }
 
       $scope.addMedia = function() {
+        $scope.showSelectSpinner = true;
+
         if (!isMobileDevice()) {
           fileInput.click();
         } else {
@@ -136,8 +140,6 @@ controllers.controller('TicketCtrl',
 
       function handleFileSelect(event) {
         var f = event.target.files[0]; // FileList object
-
-        $scope.showSelectSpinner = true;
 
         // Only process image files.
         if (!f.type.match('image.*')) {

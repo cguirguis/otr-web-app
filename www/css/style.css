@@ -349,6 +349,7 @@ button.big-blue-button.inverted {
   background-color: transparent;
 }
 button.big-blue-button:hover {
+  color: white;
   background-color: #147bd8;
   -moz-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
   -webkit-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
@@ -379,12 +380,12 @@ button.big-blue-button:hover {
 }
 @media (max-width:1020px) {
   .ticket-view .bottom-section.image-review {
-    margin-top: -160px;
+    margin-top: -150px;
   }
 }
 @media (max-width:768px) {
   .ticket-view .bottom-section.image-review {
-    margin-top: -160px;
+    margin-top: -155px;
   }
 }
 @media (max-width:600px) {
@@ -465,8 +466,8 @@ button.continue {
   float: right;
   margin: 20px;
   width: auto;
-  font-size: 20px!important;
-  font-weight: 300;
+  font-size: 16px!important;
+  font-weight: 400;
 }
 button.continue:hover {
   background-color: rgb(34, 210, 104);
@@ -482,13 +483,16 @@ button.retake-picture {
   float: left;
   margin: 20px;
   width: auto;
-  font-size: 20px;
-  font-weight: 300;
+  font-size: 16px!important;
+  font-weight: 400;
 }
 button.retake-picture:hover {
   color: black;
   background-color: #f5f5f5;
   border: solid 1px transparent;
+}
+button.retake-picture.activated, button.continue.activated {
+  font-size: 15.5px!important;
 }
 @media (max-width: 400px) {
   button.retake-picture, button.continue {
@@ -956,7 +960,7 @@ table.k-content {
 }
 .page.match-view .confirm-match-button {
   margin-top: 20px;
-  width: 100%;
+  width: calc(100% - 20px);
   min-width: 300px;
 }
 .page.match-view .included-title {
@@ -999,7 +1003,7 @@ table.k-content {
 
 }
 .page.match-view .phone-info {
-  margin-top: 30px;
+  margin-top: 120px;
   margin-bottom: 10px;
   text-align: center;
   color: #333;
@@ -1092,7 +1096,8 @@ table.k-content {
   margin-left: 10px;
 }
 .page.payment-view ul.transactions li.discount-applied div.discount-value {
-  color: #0781e9;
+  color: #00890b;
+  font-weight: 500;
 }
 .page.payment-view ul.transactions-discount {
   margin-top: 5px;
@@ -1198,8 +1203,10 @@ table.k-content {
 .page.cases-view .case-section:hover {
   box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2)
 }
-.page.cases-view .case-section .case-summary {
+.page.cases-view .case-summary {
   float: left;
+  width: calc(100% - 160px);
+  display: inline-block;
 }
 .page.cases-view .section-title {
   color: #888; /*#1f66ad;*/
@@ -1260,7 +1267,6 @@ table.k-content {
   width: 70%;
   font-size: 16px;
   padding-bottom: 20px;
-
   margin-left: -20px;
 }
 .page.cases-view .case-section .action-date {
@@ -1276,6 +1282,10 @@ table.k-content {
   font-weight: 400;
   font-size: 16px;
   color: #333;
+}
+.page.cases-view .case-section .action-title.future-action {
+  color: #ccc;
+  font-weight: 300;
 }
 .page.cases-view .case-section .action-description {
   font-size: 16px;
@@ -1326,6 +1336,16 @@ table.k-content {
 .page.cases-view .case-section .lawyer-details .lawyer-message:hover {
   color: white;
   background-color: #059de2;
+}
+.lawyer-number {
+  display: none;
+  margin-top: -15px!important;
+  margin-bottom: 15px;
+  color: #333!important;
+  background-color: #f3f3f3;
+  border-radius: 2px;
+  padding: 5px 15px;
+  width: 96%;
 }
 /* Court section */
 div.court-icon {
@@ -1418,10 +1438,9 @@ div.court-icon {
   width: 80px;
   text-align: right;
   margin-right: 30px;
-  font-size: 14px;
+  font-size: 17px;
   font-family: 'Lato', sans-serif;
-  text-transform: uppercase;
-  line-height: 1.8em;
+  line-height: 1.4em;
   color: #999;
 }
 .page.cases-view .case-section .case-row .summary-value {
@@ -1432,7 +1451,12 @@ div.court-icon {
   margin-top: 0px;
   z-index: 1000;
 }
-
+@media (max-width: 1080px) and (min-width: 601px) {
+  .status {
+    margin-top: 30px!important;
+    position: inherit!important;
+  }
+}
 .page.cases-view .status div {
   color: white;
   padding: 3px 10px;
@@ -1981,7 +2005,7 @@ div.court-icon {
 .page.case-created {
   background-color: #F0F3F4;
   text-align: center;
-  padding-top: 15px;
+  padding-top: 160px;
 }
 .page.case-created .scroll-view {
   padding-bottom: 100px;
@@ -2018,25 +2042,26 @@ div.court-icon {
   border-radius: 50%;
 }
 .page.case-created .case-created-note {
+  font-family: "Lato", sans-serif;
   color: #5499E2;
-  font-size: 1.6em;
+  font-size: 1.7em;
   line-height: 1.5em;
-  font-weight: 200;
-  margin: auto;
+  font-weight: 400;
   margin-top: 30px;
-  background-color: white;
   width: 100%;
-  padding-bottom: 40px;
+  padding: 0px 20px 30px 20px;
 }
 @media (max-width: 500px) {
   .page.case-created .case-created-note {
-    width: 85%;
+    /*width: 85%;*/
   }
 }
 .page.case-created .case-created-note .note {
-  color: #aaa;
-  font-size: 0.7em;
-  margin-top: 10px;
+  color: #999;
+  font-size: 0.9em;
+  font-family: "Lato", sans-serif;
+  font-weight: lighter;
+  margin-top: 20px;
   line-height: 1em;
 }
 .page.case-created .facebook-share {
@@ -2069,6 +2094,7 @@ div.court-icon {
 .page.case-created .share-text {
   margin-top: 30px;
   margin-left: 5px;
+  margin-bottom: 100px;
   color: #5372bc;
   font-size: 1.2em;
   background-color: white;
@@ -2081,7 +2107,8 @@ div.court-icon {
 .page.case-created .view-case-button {
   background-color: #f37272;
   border: none;
-  margin-top: 25px;
+  margin-top:10px;
+  margin-bottom: 20px;
   max-width: 50%;
 }
 .page.case-created .view-case-button:hover {

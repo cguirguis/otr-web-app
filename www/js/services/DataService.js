@@ -17,6 +17,7 @@ WebApp.factory('DataService', function($http, Constants)
   var postMessage = baseUrl + 'cases/{caseId}/conversation';
   var getReferralCodeUrl = baseUrl + 'referrals/codes/{0}';
   var applyReferralCodeUrl = baseUrl + 'cases/{0}/referralcode/{1}';
+  var getCaseActionsUrl = baseUrl + 'cases/{0}/actions/timeline';
 
   var getCasesUrl = baseUrl + 'cases';
 
@@ -139,6 +140,12 @@ WebApp.factory('DataService', function($http, Constants)
     }
   };
 
+  var getCaseActions = function(caseId) {
+    var url = getCaseActionsUrl.format(caseId);
+
+    return $http.get(url);
+  };
+
   var postNewCaseMessage = function(caseId, newMessage) {
     var endpoint = postMessage.replace('{caseId}', caseId);
 
@@ -193,6 +200,7 @@ WebApp.factory('DataService', function($http, Constants)
     chargeCard: chargeCard,
     getCases: getCases,
     getCaseDetails: getCaseDetails,
+    getCaseActions: getCaseActions,
     postNewCaseMessage: postNewCaseMessage,
     getReferralCode: getReferralCode,
     applyReferralCode: applyReferralCode
