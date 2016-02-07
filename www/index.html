@@ -38,7 +38,7 @@
     <script src="cordova.js"></script>
 
     <script src="lib/dist/require.js"></script>
-    <script src="lib/dist/angular-pure-slider/angular-pure-slider.js"></script>
+    <script src="lib/dist/angular-pure-slider/angular-pure-slider.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
     <script src="//kendo.cdn.telerik.com/2015.3.1111/js/jquery.min.js"></script>
     <script src="//kendo.cdn.telerik.com/2015.3.1111/js/kendo.all.min.js"></script>
@@ -117,7 +117,7 @@
           </ion-side-menu>
 
           <!-- Main content -->
-          <ion-side-menu-content style="background-color:#F0F3F4;">
+          <ion-side-menu-content style="background-color:#F0F3F4;" edge-drag-threshold="true">
               <ion-header-bar class="bar-dark">
                 <button class="button button-icon left-menu-button" ng-click="toggleMenu()">
                   <i class="icon ion-navicon"></i>
@@ -161,17 +161,6 @@
               </div>
 
               <ion-nav-view></ion-nav-view>
-
-              <ion-footer-bar align-title="left" class="bar-balanced" style="height: 50px!important;"
-                ng-show="displayFooter">
-                <div class="buttons">
-                  <button class="button">Left Button</button>
-                </div>
-                <h1 class="title">Title!</h1>
-                <div class="buttons" ng-click="doSomething()">
-                  <button class="button ion-camera">Right Button</button>
-                </div>
-              </ion-footer-bar>
           </ion-side-menu-content>
 
       </ion-side-menus>

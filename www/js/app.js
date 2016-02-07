@@ -185,7 +185,7 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
           $rootScope.popupViewModal.show();
 
           document.querySelector("iframe.popup-view-frame").addEventListener("load", function() {
-            console.log("iframe finished loading.");
+            //console.log("iframe finished loading.");
           });
         };
         $rootScope.hidePopupView = function() {
@@ -222,7 +222,6 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
           $rootScope.showDefaultSpinner = false;
           $ionicLoading.hide();
         };
-
 
         // Display error modal
         $rootScope.displayError = function(message) {
