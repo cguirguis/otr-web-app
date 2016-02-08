@@ -28,13 +28,13 @@
       </div>
 
       <div class="included-title">What's included?</div>
-      <ion-slide-box>
-        <ion-slide>Legal representation to contest your ticket in court.</ion-slide>
-        <ion-slide>No hidden fees. Cancel anytime within 24 hours.</ion-slide>
-        <ion-slide>Full refund if your ticket is not dismissed, deferred, or reduced to a non-moving violation.
-          <a ng-click="viewRefundPolicy()">Read our money-back guarantee</a>.</ion-slide>
-        <ion-slide>Stress-free experience. No need to mail in your ticket. No need to show up in court.</ion-slide>
-        <ion-slide>Peace of mind. We handle everything from here.</ion-slide>
+      <ion-slide-box does-continue="true">
+        <ion-slide><div class="slide-box-card">Legal representation to contest your ticket in court.</div></ion-slide>
+        <ion-slide><div class="slide-box-card">No hidden fees. Cancel anytime within 24 hours.</div></ion-slide>
+        <ion-slide><div class="slide-box-card">Full refund if your ticket is not dismissed, deferred, or reduced to a non-moving violation.
+          <a ng-click="viewRefundPolicy()">Read our money-back guarantee</a>.</div></ion-slide>
+        <ion-slide><div class="slide-box-card">Stress-free experience. No need to mail in your ticket. No need to show up in court.</div></ion-slide>
+        <ion-slide><div class="slide-box-card">Peace of mind. We handle everything from here.</div></ion-slide>
       </ion-slide-box>
 
       <div class="phone-info">
@@ -46,7 +46,7 @@
       </div>
 
       <button class="big-blue-button confirm-match-button" ng-click="confirmMatch()">
-        Fight This Ticket!
+        Fight My Ticket
       </button>
     </div>
 
