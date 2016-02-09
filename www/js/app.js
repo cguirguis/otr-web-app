@@ -91,7 +91,9 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
         $httpProvider.interceptors.push(function($rootScope) {
           return {
             request: function(config) {
-              $rootScope.$broadcast('loading:show');
+              if (!$rootScope.preventLoadingModal) {
+                $rootScope.$broadcast('loading:show');
+              }
               return config;
             },
             response: function(response) {

@@ -977,6 +977,12 @@ table.k-content {
   background-color: white;
   padding: 10px;
 }
+.page.match-view .slider-slides {
+  width: 800px!important;
+  display: -webkit-box;
+  overflow-x: hidden;
+  height: 127px!important;
+}
 .page.match-view .slider-slide {
   width: 575px;
   left: 0px;
@@ -989,6 +995,12 @@ table.k-content {
   cursor: pointer;
   font-size: 16px;
 }
+@media (max-width: 500px) {
+  .page.match-view .slider-slide {
+    margin-top: -10px!important;
+    font-size: 13px;
+  }
+}
 .page.match-view .slider-slide a {
   text-decoration: underline!important;
   color: #0077cc!important;
@@ -1000,7 +1012,6 @@ table.k-content {
 }
 .slider-pager-page {
   color: #0077cc!important;
-
 }
 .page.match-view .phone-info {
   margin-top: 120px;
@@ -1710,6 +1721,10 @@ div.court-icon {
   font-size: 30px;
   margin-top: -5px;
 }
+.user-profile-photo {
+  background-image: url('../img/default-profile-pic.png');
+  background-size: 100% 100%;
+}
 
 @media (max-width: 850px) {
   .page.profile-view {
@@ -2005,7 +2020,7 @@ div.court-icon {
 .page.case-created {
   background-color: #F0F3F4;
   text-align: center;
-  padding-top: 160px;
+  padding-top: 20px;
 }
 .page.case-created .scroll-view {
   padding-bottom: 100px;

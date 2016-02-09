@@ -17,10 +17,16 @@ controllers.controller('CasesCtrl',
           function(response) {
             $scope.numCases = response.length;
             $scope.cases = response;
+            $rootScope.cases = response;
             $scope.casesLoaded = true;
           },
           // Error
           function(response) {
+            if (response.status == 401) {
+              // This is expected (user not logged in)
+              $scope.casesLoaded = true;
+              return;
+            }
             $rootScope.errorMessage = "Failed to retrieve your cases. Please make sure your phone is connected and try again.";
             $scope.casesLoaded = true;
           }

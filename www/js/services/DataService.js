@@ -1,5 +1,5 @@
 
-WebApp.factory('DataService', function($http, Constants)
+WebApp.factory('DataService', function($http, $q, Constants)
 {
   var baseUrl = Constants.ENV.apiEndpoint;
   var userUrl = baseUrl + 'user';

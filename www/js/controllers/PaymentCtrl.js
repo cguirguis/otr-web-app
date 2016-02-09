@@ -207,7 +207,7 @@ controllers.controller('PaymentCtrl',
       };
 
       $scope.viewCase = function() {
-        $state.go("cases", { "caseId" : $rootScope.currentCase.caseId });
+        $state.go("case", { "caseId" : $rootScope.currentCase.caseId });
       };
 
       $scope.$on("$destroy", function() {

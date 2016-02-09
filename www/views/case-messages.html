@@ -12,23 +12,23 @@
         <h1 class="case-message-title">Conversation with {{loadedCase.lawfirmCaseDecision.lawfirmName}}</h1>
       </div>
 
-      <div ng-if="!messages && !errorMessage" class='loading-box'>
+      <div ng-if="loading" class='loading-box'>
         <ion-spinner icon='ios' style="float: left;"></ion-spinner>
         <div style="margin-top: -4px;margin-left: 40px;">Loading messages...</div>
       </div>
-      <div ng-show="errorMessage" style="margin:15px 10px;">Unable to retrieve conversation for this case. Please make sure you've selected a valid case.</div>
+      <div ng-show="errorMessage" style="color: #da453d;margin:15px 30px;">Unable to retrieve conversation for this case. Please make sure you've selected a valid case.</div>
 
-      <div class="send-message-box">
+      <div class="send-message-box" ng-if="!loading && !errorMessage">
         <div class="col-sm-12">
           <div class="panel">
             <form lpformnum="1">
               <div class="panel-body text-left text-medium-gray">
-                <textarea class="send-message-textarea" placeholder="Send a new message" rows="3" ng-model="$parent.newMessageInput" ng-disabled="savingMessage"></textarea>
+                <textarea class="send-message-textarea" placeholder="Send a new message" rows="3" ng-model="newMessageInput" ng-disabled="savingMessage"></textarea>
               </div>
-              <button class="btn" ng-click="postNewMessage()" ng-disabled="savingMessage">
+              <button class="btn" ng-click="postNewMessage(newMessageInput)" ng-disabled="savingMessage" style="position:relative">
                 <span>
                     Send Message
-                    <i class="fa fa-spinner fa-pulse fa-lg" ng-show="savingMessage"></i>
+                    <ion-spinner ng-show="savingMessage" icon='ios' style="stroke:white;top:15px;right:40px;position:absolute;"></ion-spinner>
                 </span>
               </button>
             </form>

@@ -69,8 +69,13 @@
                   </div>
                 </div>
                 <div class="increase-text" ng-if="premiumIncrease">
-                  <div class="increase-label">What this ticket could cost you in insurance premiums over the next three years: </div>
-                  <div class="increase-value">${{premiumIncrease}}</div>
+                  <div class="increase-label">How much this ticket could cost you in extra insurance premiums: </div>
+                  <div class="increase-value">
+                    <div style="display:inline-block;color: #DA2B2B;width:300px;">
+                      <i class="icon ion-android-arrow-up" style="color: #DA2B2B;margin-top: -16px;margin-right: -30px;font-size: 50px;"></i>
+                      <div>${{premiumIncrease}}<span style="font-size: 22px;"> over 3 years</span></div>
+                    </div>
+                  </div>
                 </div></div>
             </div>
           </div>

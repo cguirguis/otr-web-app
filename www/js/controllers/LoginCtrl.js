@@ -41,18 +41,25 @@ controllers.controller('LoginCtrl',
 
       if (!newUser || !newUser.firstname.length) {
         $scope.errorMessage = "Please enter a first name.";
+        return;
       } else if (!newUser.lastname.length) {
         $scope.errorMessage = "Please enter a last name.";
+        return;
       } else if (!newUser.emailAddress.length) {
         $scope.errorMessage = "Please enter an email address.";
+        return;
       } else if (!newUser.password.length) {
         $scope.errorMessage = "Please enter a password.";
+        return;
       } else if (!newUser.passwordConfirm.length) {
         $scope.errorMessage = "Please confirm your password.";
+        return;
       } else if (newUser.password != newUser.passwordConfirm) {
         $scope.errorMessage = "Your passwords do not match.";
+        return;
       }
 
+      $rootScope.preventLoadingModal = true;
       DataService.signup(newUser)
         .error(function(data, status, headers, config) {
           if (data) {
@@ -62,6 +69,7 @@ controllers.controller('LoginCtrl',
           $scope.loading = false;
           $rootScope.showDefaultSpinner = false;
           $rootScope.hideLoader();
+          $rootScope.preventLoadingModal = false;
         })
         .then(signupResponseHandler);
     };
@@ -73,12 +81,14 @@ controllers.controller('LoginCtrl',
       if (!email.length || !password.length) {
         $scope.errorMessage = "Please provide a valid email and password.";
       } else {
+        $rootScope.preventLoadingModal = true;
         DataService.login(email, password)
           .error(function(data, status, headers, config) {
             $scope.errorMessage = data && data.error ? data.error.uiErrorMsg : "Unable to log in.";
             $scope.loading = false;
             $rootScope.showDefaultSpinner = false;
             $rootScope.hideLoader();
+            $rootScope.preventLoadingModal = false;
           })
           .then(loginResponseHandler);
       }
@@ -95,6 +105,8 @@ controllers.controller('LoginCtrl',
       $rootScope.closeLoginModal();
 
       $rootScope.broadcast('user:logged-in');
+
+      $rootScope.preventLoadingModal = false;
     };
 
     var loginResponseHandler = function(response) {
@@ -109,6 +121,9 @@ controllers.controller('LoginCtrl',
 
       $rootScope.closeLoginModal();
       $scope.$emit('user:logged-in');
+      $scope.loading = false;
+
+      $rootScope.preventLoadingModal = false;
     };
 
     $scope.closeLoginModal = function() {

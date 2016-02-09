@@ -15,14 +15,14 @@
         </li>
         <li class="secondary">
           <div class="transaction-item light-text">
-            <span ng-if="currentCase.citation.involvesAccident">Accident involved</span>
-            <span ng-if="!currentCase.citation.involvesAccident">No accident involved</span>
+            <span ng-if="citation.involvesAccident">Accident involved</span>
+            <span ng-if="!citation.involvesAccident">No accident involved</span>
           </div>
         </li>
         <li class="secondary">
           <div class="transaction-item light-text">
-            <span ng-if="currentCase.citation.isPastDue">Ticket overdue</span>
-            <span ng-if="!currentCase.citation.isPastDue">Ticket not overdue</span>
+            <span ng-if="citation.isPastDue">Ticket overdue</span>
+            <span ng-if="!citation.isPastDue">Ticket not overdue</span>
           </div>
         </li>
         <li class="secondary discount-applied" ng-if="discountValue">

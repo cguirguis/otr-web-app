@@ -28,6 +28,28 @@
           <div class="status-description">{{loadedCase.statusDescription}}</div>
         </div>
 
+        <!-- Lawyer section -->
+        <div class="section-title">
+          <i class="icon ion-android-person"></i><div>Your attorney</div>
+        </div>
+        <div class="case-section">
+          <div class="lawyer-image">
+            <img ng-src="{{loadedCase.lawfirmCaseDecision.profilePictureUrl}}" />
+          </div>
+          <div class="lawyer-details">
+            <div class="lawyer-name">{{loadedCase.lawfirmCaseDecision.lawfirmName}}</div>
+            <div class="lawyer-number">
+              (206) 458-4413
+            </div>
+            <div class="lawyer-call" ng-click="callAttorney()">
+              <i class="icon ion-ios-telephone"></i> Call
+            </div>
+            <div class="lawyer-message" ng-click="viewMessages()">
+              <i class="icon ion-chatbubbles"></i> Message
+            </div>
+          </div>
+        </div>
+
         <!-- History section -->
         <div class="section-title">
           <i class="icon ion-android-time"></i><div>Case History</div>
@@ -58,28 +80,6 @@
               <div class="action-description"></div>
             </div>
           </div>-->
-        </div>
-
-        <!-- Lawyer section -->
-        <div class="section-title">
-          <i class="icon ion-android-person"></i><div>Your attorney</div>
-        </div>
-        <div class="case-section">
-          <div class="lawyer-image">
-            <img ng-src="{{loadedCase.lawfirmCaseDecision.profilePictureUrl}}" />
-          </div>
-          <div class="lawyer-details">
-            <div class="lawyer-name">{{loadedCase.lawfirmCaseDecision.lawfirmName}}</div>
-            <div class="lawyer-number">
-              (206) 458-4413
-            </div>
-            <div class="lawyer-call" ng-click="callAttorney()">
-              <i class="icon ion-ios-telephone"></i> Call
-            </div>
-            <div class="lawyer-message" ng-click="viewMessages()">
-              <i class="icon ion-chatbubbles"></i> Message
-            </div>
-          </div>
         </div>
 
         <!-- Court section -->

@@ -7,14 +7,17 @@ controllers.controller('CaseMessagesCtrl',
     $scope.messages = null;
     $scope.newMessageInput = "";
     $scope.savingMessage = false;
+    $scope.loading = true;
 
-    $scope.postNewMessage = function() {
+    $scope.postNewMessage = function(newMessageInput) {
       // verify there is a message
+      $scope.newMessageInput = newMessageInput;
       if (!$scope.newMessageInput) {
         return;
       }
       $scope.savingMessage = true;
 
+      $rootScope.preventLoadingModal = true;
       DataService.postNewCaseMessage($scope.loadedCase.caseId, $scope.newMessageInput)
         .then(
           // Success
@@ -28,11 +31,15 @@ controllers.controller('CaseMessagesCtrl',
             $scope.messages.unshift(newMsg);
             $scope.newMessageInput = "";
             $scope.savingMessage = false;
+            $rootScope.hideLoader();
+            $rootScope.preventLoadingModal = false;
           },
           // Error
           function(error) {
             $rootScope.errorMessage = "Error occured when attempting to save new message: ";
             $scope.savingMessage = false;
+            $rootScope.hideLoader();
+            $rootScope.preventLoadingModal = false;
           }
         );
     };
@@ -43,29 +50,49 @@ controllers.controller('CaseMessagesCtrl',
 
     var caseId = $state.params.caseId;
     if (!$rootScope.loadedCase || $rootScope.loadedCase.caseId != caseId) {
-      console.log("ERROR: CASE NOT LOADED.");
-      $rootScope.errorMessage = "Unable to load messages for this case.";
-    } else {
-      // Load case messages
-      //$rootScope.pageTitle = "Conv. with " + $rootScope.loadedCase.lawfirmCaseDecision.lawfirmName;
+      CaseService.getUserCases()
+        .then(
+          // Success
+          function(response) {
+            $rootScope.cases = response;
 
+            // Find case
+            angular.forEach($rootScope.cases, function(value) {
+              if (value.caseId == caseId) {
+                $rootScope.loadedCase = value;
+              }
+            });
+
+            loadCaseMessages();
+            $scope.casesLoaded = true;
+          },
+          // Error
+          function(response) {
+            if (response.status == 401) {
+              // This is expected (user not logged in)
+              $rootScope.errorMessage = "Unable to retrieve this case. Please make sure you are logged in and try again.";
+              return;
+            }
+            $scope.casesLoaded = true;
+          }
+        );
+    } else {
+      loadCaseMessages();
+    }
+
+    var loadCaseMessages = function() {
       MessageService.setCurrentConversation(caseId, false)
         .then(
           // Success
-        function(response) {
-          $scope.messages = response.messages;
-          // Testing only
-          $scope.messages = [
-            {"messageId":893,"authorFirstname":"Mark","authorLastname":"Mikhail","authorRoleType":"DEFENDANT","messageSentDateUtc":1452848014000,"messageBody":"Test message"},
-            {"messageId":850,"authorFirstname":"Alex","authorLastname":"Guirguis","authorRoleType":"LAWYER","messageSentDateUtc":1450482761000,"messageBody":"one more time"},
-            {"messageId":849,"authorFirstname":"Alex","authorLastname":"Guirguis","authorRoleType":"LAWYER","messageSentDateUtc":1450482735000,"messageBody":"and again"},
-            {"messageId":848,"authorFirstname":"Alex","authorLastname":"Guirguis","authorRoleType":"LAWYER","messageSentDateUtc":1450482726000,"messageBody":"Woohoo"},
-            {"messageId":844,"authorFirstname":"Mark","authorLastname":"Mikhail","authorRoleType":"DEFENDANT","messageSentDateUtc":1450400117000,"messageBody":"Works"}];
-        },
-        // Error
-        function(response) {
-          $scope.errorMessage = $rootScope.errorMessage = "Failed to load messages for this case. Please make sure your phone is connected.";
-        }
-      )
+          function(response) {
+            $scope.messages = response.messages;
+            $scope.loading = false;
+          },
+          // Error
+          function(response) {
+            $scope.errorMessage = $rootScope.errorMessage = "Failed to load messages for this case. Please make sure your phone is connected.";
+            $scope.loading = false;
+          }
+        );
     }
 }]);

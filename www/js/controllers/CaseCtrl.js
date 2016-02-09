@@ -9,8 +9,9 @@ controllers.controller('CaseCtrl',
       function findCase() {
         var result;
         angular.forEach($rootScope.cases, function(value) {
-          if (value.caseId == caseId);
-          result = value;
+          if (value.caseId == caseId) {
+            result = value;
+          }
         });
         if (result) {
           // Get case timeline (for future actions)

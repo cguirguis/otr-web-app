@@ -22,20 +22,20 @@
       </div>
 
       <div class="email-login-form" ng-if="showEmailLogin">
-        <div class="row">
-          <div class="label">Email</div>
-          <input type="text" name="email" ng-model="email" />
-        </div>
-        <div class="row">
-          <div class="label">Password</div>
-          <input type="password" name="password" ng-model="password" />
-        </div>
-        <div class="form-errors" ng-bind-html="errorMessage" ng-if="errorMessage.length"></div>
-        <button class="cancel" ng-click="cancelEmailLogin()">Cancel</button>
-        <button class="login-button" ng-click="submitEmailLoginForm(email, password)" ng-disabled="loading">
-          Login
-          <ion-spinner icon="spiral" class="button-spinner spinner-light" ng-if="loading"></ion-spinner>
-        </button>
+          <div class="row">
+            <div class="label">Email</div>
+            <input type="text" name="email" ng-model="email" />
+          </div>
+          <div class="row">
+            <div class="label">Password</div>
+            <input type="password" name="password" ng-model="password" ng-enter="submitEmailLoginForm(email, password)" />
+          </div>
+          <div class="form-errors" ng-bind-html="errorMessage" ng-if="errorMessage.length"></div>
+          <button class="cancel" ng-click="cancelEmailLogin()">Cancel</button>
+          <button class="login-button" ng-disabled="loading" ng-click="submitEmailLoginForm(email, password)">
+            Login
+            <ion-spinner icon="spiral" class="button-spinner spinner-light" ng-if="loading"></ion-spinner>
+          </button>
       </div>
 
       <div id="signup-form" ng-if="showSignup">
@@ -57,7 +57,7 @@
         </div>
         <div class="row">
           <div class="label"></div>
-          <input type="password" placeholder="Confirm password" ng-model="newUser.passwordConfirm" />
+          <input type="password" placeholder="Confirm password" ng-model="newUser.passwordConfirm" ng-enter="submitSignupForm(newUser)" />
         </div>
 
         <div class="form-errors" ng-bind-html="errorMessage" ng-if="errorMessage.length"></div>
@@ -130,7 +130,7 @@
     margin-top:13px;
   }
   #signup-form .label {
-    width: 85px;
+    width: 95px;
     text-align: right;
   }
   .email-login-form input, #signup-form input {
