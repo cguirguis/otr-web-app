@@ -64,24 +64,24 @@
 
         <div class="form-row" style="margin-right: 10px">
           <input type="text" id="card-number" size="21" maxlength="16" data-stripe="number"
-                 placeholder="Card number" style="font-size: 2.1em" value="4242424242424242"/>
+                 placeholder="Card number" style="font-size: 2.1em" value=""/>
         </div>
 
         <div class="form-row" style="margin-right:10px;">
           <input type="text" id="cvc" size="4" maxlength="4" data-stripe="cvc"
-                 placeholder="CVC" style="font-size: 2.1em" value="242"/>
+                 placeholder="CVC" style="font-size: 2.1em" value=""/>
         </div>
 
         <div class="form-row">
           <input type="text" size="2" maxlength="2" data-stripe="exp-month"
-            placeholder="mm" style="float:left;font-size: 2.1em" value="10"/>
+            placeholder="mm" style="float:left;font-size: 2.1em" value=""/>
         </div>
         <div class="form-row" style="height: 10px;">
           <div class="date-separator">/</div>
         </div>
         <div class="form-row">
           <input type="text" size="5" maxlength="4" data-stripe="exp-year"
-                 placeholder="yyyy" style="font-size: 2.1em" value="2019"/>
+                 placeholder="yyyy" style="font-size: 2.1em" value=""/>
         </div>
 
         <div class="payment-errors" ng-show="errorMessage">{{errorMessage}}</div>
