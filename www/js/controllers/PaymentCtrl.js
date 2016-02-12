@@ -11,8 +11,8 @@ controllers.controller('PaymentCtrl',
 
       $scope.errorMessage = null;
 
-      var refundUrl = "https:////offtherecord.com/refund.html";
-      var nextStepUrl = "https:////offtherecord.com/nextStep.html";
+      var refundUrl = "http:////offtherecord.com/refund.html";
+      var nextStepUrl = "http:////offtherecord.com/nextStep.html";
 
       var stripeForm = $('#stripe-cc-form');
 
@@ -142,11 +142,11 @@ controllers.controller('PaymentCtrl',
       };
 
       $scope.viewTerms = function() {
-        $rootScope.showPopupView("https:////offtherecord.com/terms.html", "Terms of Service");
+        $rootScope.showPopupView("http:////offtherecord.com/terms.html", "Terms of Service");
       };
 
       $scope.viewCancelPolicy = function() {
-        $rootScope.showPopupView("https:////offtherecord.com/cancellation-policy.html", "Cancelling Your Case");
+        $rootScope.showPopupView("http:////offtherecord.com/cancellation-policy.html", "Cancelling Your Case");
       };
 
       $scope.confirmPayment = function() {

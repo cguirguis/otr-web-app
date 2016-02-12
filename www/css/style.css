@@ -35,6 +35,9 @@ body {
   left: 1%;
   width: 98%;
 }
+.scroll-content {
+  background-color: #F0F3F4;
+}
 button.cancel {
   width: 48%;
   background-color: white;
@@ -116,42 +119,46 @@ hr {
   padding-top: 0;
 }
 .user-actions a .item {
-  background-color: rgb(239, 239, 239);
   color: #333;
   padding: 17px 15px 17px 25px;
   margin-bottom: 1px;
   font-weight: 300;
+  cursor: pointer;
 }
 .user-actions a .item:hover {
-  background-color: rgb(220, 220, 220);
-  color: #333;
-  cursor: pointer;
+  background-color: rgb(254, 254, 254);
+  color: #058ecc;
+}
+.user-actions a .item:hover i {
+  color: #058ecc;
 }
 .button.login-nav-button {
   max-width: 30%;
-  padding-right: 15px;
   padding-top: 5px;
+  padding-right: 0;
   right: 0!important;
   top: 0!important;
   bottom: 0!important;
   color: #1262be;
 }
 .button.login-nav-button i {
-  float: left;
-  padding-right: 5px;
+  float: right;
+  padding: 0 2px;
 }
 .button.login-nav-button img {
   height: 30px;
   width: 30px;
-  float: left;
-  margin-right: 10px;
+  float: right;
+  margin-right: 4px;
+  margin-left: 4px;
   margin-top: 1px;
   border-radius: 1px;
 }
 .button.login-nav-button div {
   height: 100%;
   overflow: hidden;
-  text-align: left;
+  text-align: right;
+  padding-right: 5px;
   /*white-space: nowrap;
   text-overflow: ellipsis;*/
 }
@@ -196,27 +203,27 @@ hr {
 
 /************* LOGIN MODAL ************/
 .login-view {
-  min-height: 600px;
+  min-height: 550px;
 }
 .button.close-login-modal {
   position: absolute;
   right: 23px;
   top: 16px;
-  color: #a9a9a9;
+  color: #ccc!important;
   font-size: 18px;
-  font-weight: lighter;
   cursor: pointer;
   background-color: transparent;
   border: none;
   padding: 0px 15px;
 }
 .button.close-login-modal:hover {
-  color: #999;
-  font-weight: normal;
+  color: white;
+  font-weight: 500;
+  margin-top: -1px;
 }
 i.icon.button-icon {
   font-size: 31px;
-  top: 2px;
+  top: 4px;
   position: relative;
   right: 15px;
   line-height: 0px;
@@ -1698,6 +1705,7 @@ div.court-icon {
 .page.profile-view .left-col .username {
   width: 100%;
   text-align: center;
+  color: #333;
 }
 .page.profile-view .right-col .user-details {
   width: 100%;
@@ -1779,7 +1787,7 @@ div.court-icon {
   }
   .button.login-nav-button .nav-username .username
   {
-    display: none;
+    /*display: none;*/
   }
 }
 /* Left nav */
@@ -1947,6 +1955,7 @@ div.court-icon {
   border: 1px solid rgba(0,0,0,.07);
   display: inline-block;
   width: 31%;
+  min-width: 190px!important;
   border-radius: 0px;
   padding: 15px;
   text-align: center;
@@ -1954,6 +1963,7 @@ div.court-icon {
   font-weight: 300;
   font-size: 13px;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 .action.insurance.expanded {
   width: 100%;
@@ -1976,6 +1986,13 @@ div.court-icon {
 }
 .action.insurance.expanded .insurance-calculator-wrapper {
   display: block;
+}
+@media (max-width: 800px) {
+  .action-section .actions .action {
+    min-width: 500px;
+    margin-bottom: 15px;
+    margin-left: 0 !important;
+  }
 }
 @media (max-width: 599px) {
   .top-section {
@@ -2504,13 +2521,110 @@ button.calculate-insurance-button:hover {
 }
 
 
-
-
-
-
-
-
-
+/* Login/Signup View */
+.page.login-view {
+  text-align: center;
+  padding: 20px;
+}
+.page.login-view hr {
+  margin: 17px 0;
+  color:#666;
+  height: 1px;
+}
+button.facebook-login-button {
+  margin-bottom: 5px;
+  opacity: 0.85;
+  border:none;
+  line-height: 50px;
+}
+button.facebook-login-button:hover {
+  margin-bottom: 5px;
+  opacity: 1;
+}
+button.email-login-button {
+  margin-bottom: 5px;
+  background-color: rgb(45, 162, 218);
+  opacity: 0.85;
+  border:none;
+  line-height: 50px;
+}
+button.email-login-button i {
+  top: 5px!important;
+}
+button.email-login-button:hover {
+  background-color: rgb(45, 162, 218);
+  opacity: 1;
+}
+button.signup-button {
+  margin-top: 5px;
+  background-color: rgba(224, 5, 5, 0.68);
+  opacity: 0.85;
+  border:none;
+  line-height: 50px;
+}
+button.signup-button:hover {
+  background-color: rgba(224, 5, 5, 0.68);
+  opacity: 1;
+}
+#signup-form, .email-login-form {
+  text-align: center;
+}
+.email-login-form .row, #signup-form .row {
+  margin-top: 5px;
+  width: 100%;
+  text-align: center!important;
+  dislay: inline-block;
+}
+.email-login-form .form-errors {
+  color: firebrick;
+  margin-top:13px;
+}
+#signup-form .form-errors {
+  color: firebrick;
+  margin-top:13px;
+}
+.email-login-form input, #signup-form input {
+  width: 100%!important;
+  max-width: 600px;
+  height: 60px;
+  line-height: 60px;
+  border: solid 1px #dedede;
+  padding-left: 10px;
+  font-size: 20px;
+  color: #666;
+  font-weight: 300;
+  margin: auto;
+}
+button.login-button, button.signup-submit-button {
+  margin: 10px auto;
+  width: 100%!important;
+  max-width: 600px;
+}
+button.cancel {
+  margin-top: -3px;
+  margin-right: 3px;
+  width: 100%;
+  background-color: #e9e9e9;
+  border: solid 1px #ccc;
+  opacity: 0.8;
+}
+button.cancel:hover {
+  background-color: #e5e5e5;
+  border: solid 1px #bbb;
+  opacity: 1;
+}
+.button-spinner {
+  margin: 0px 0px -12px 10px;
+  display: inline-block;
+  overflow: auto;
+}
+/* Modal styling */
+.modal .bar.bar-header {
+  background-color: #353535;
+}
+.modal .bar.bar-header h1 {
+  color: white!important;
+}
 
 
 

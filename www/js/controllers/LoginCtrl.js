@@ -95,8 +95,6 @@ controllers.controller('LoginCtrl',
     };
 
     var signupResponseHandler = function(response) {
-      console.log("Success: " + JSON.stringify(data));
-
       $rootScope.user = response.data.user;
       $rootScope.$apply();
       $scope.loading = false;
