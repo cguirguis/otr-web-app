@@ -141,6 +141,9 @@ hr {
   bottom: 0!important;
   color: #1262be;
 }
+.button.login-nav-button.activated {
+  opacity: 1;
+}
 .button.login-nav-button i {
   float: right;
   padding: 0 2px;

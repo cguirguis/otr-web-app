@@ -84,8 +84,7 @@ controllers.controller('HomeCtrl',
     };
 
     $scope.showAction1Modal = function() {
-      $rootScope.showPopupView("http:////offtherecord.com/whyfight.html",
-        "Should I fight it?");
+      $rootScope.showPopupView("http://blog.offtherecord.com/post/121486685047/faqs#whyfight", "Should I fight it?");
     };
 
     $scope.showCalculator = function() {
@@ -105,8 +104,7 @@ controllers.controller('HomeCtrl',
     };
 
     $scope.showAction3Modal = function() {
-      $rootScope.showPopupView("http:////offtherecord.com/refund.html",
-        "Our refund policy");
+      $rootScope.showPopupView("http:////offtherecord.com/refund.html", "Our refund policy");
     };
 
     // Load user dropdown
@@ -130,8 +128,6 @@ controllers.controller('HomeCtrl',
     };
 
     var adjustLeftNav = function() {
-      console.log(w.width());
-
       if (w.width() > 768) {
 
         if (!initialNavWidth) {
