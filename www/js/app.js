@@ -189,7 +189,7 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
           $rootScope.popupViewModal = modal;
         });
         $rootScope.showPopupView = function(url, title) {
-          $rootScope.popupViewUrl = $sce.trustAsResourceUrl(url);
+          $rootScope.popupViewUrl = $sce.trustAsUrl(url);
           $rootScope.popupViewTitle = title;
           $rootScope.popupViewModal.show();
 
