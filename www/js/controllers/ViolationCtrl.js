@@ -128,7 +128,7 @@ controllers.controller('ViolationCtrl',
     };
 
     $scope.viewRefundPolicy = function() {
-      $rootScope.showPopupView("http:////offtherecord.com/refund.html", "Our Money Back Guarantee");
+      $rootScope.showPopupView("https://m-devo.offtherecord.com/faq.html#moneyback", "Our Money Back Guarantee");
     };
 
     $rootScope.cancelMatch = function() {

@@ -78,13 +78,13 @@ controllers.controller('HomeCtrl',
     $scope.logout = function() {
       // Log out
       UtilitiesService.logout(function() {
-        $scope.hideUserDropdown();ap
+        $scope.hideUserDropdown();
         $state.go("home");
       });
     };
 
     $scope.showAction1Modal = function() {
-      $rootScope.showPopupView("//offtherecord.com/whyfight.html", "Should I fight it?");
+      $rootScope.showPopupView("//me-devo.offtherecord.com/faq.html#whyfight", "Should I fight it?");
     };
 
     $scope.showCalculator = function() {
@@ -104,7 +104,7 @@ controllers.controller('HomeCtrl',
     };
 
     $scope.showAction3Modal = function() {
-      $rootScope.showPopupView("//offtherecord.com/refund.html", "Our refund policy");
+      $rootScope.showPopupView("//m-devo.offtherecord.com/faq.html#moneyback", "Our refund policy");
     };
 
     // Load user dropdown

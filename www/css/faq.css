@@ -1,0 +1,23 @@
+
+body {
+  background-color: #fefefe!important;
+  font-family: "Raleway", sans-serif;
+}
+h1.title {
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+  margin-top: 20px;
+  color: #31497d;
+  font-weight: 400;
+  margin-bottom: -10px;
+}
+h2 {
+  font-size: 18px;
+  background-color: rgba(0, 0, 0, 0.57);
+  color: white;
+  font-weight: 300;
+  padding: 10px;
+  border-radius: 3px;
+  margin-top: 30px;
+}
