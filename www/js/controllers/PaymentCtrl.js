@@ -11,8 +11,8 @@ controllers.controller('PaymentCtrl',
 
       $scope.errorMessage = null;
 
-      var refundUrl = "//offtherecord.com/refund.html";
-      var nextStepUrl = "//offtherecord.com/nextStep.html";
+      var refundUrl = "https:////offtherecord.com/refund.html";
+      var nextStepUrl = "https:////offtherecord.com/nextStep.html";
 
       var stripeForm = $('#stripe-cc-form');
 
@@ -142,11 +142,11 @@ controllers.controller('PaymentCtrl',
       };
 
       $scope.viewTerms = function() {
-        $rootScope.showPopupView("//offtherecord.com/terms.html", "Terms of Service");
+        $rootScope.showPopupView("https:////offtherecord.com/terms.html", "Terms of Service");
       };
 
       $scope.viewCancelPolicy = function() {
-        $rootScope.showPopupView("//offtherecord.com/cancellation-policy.html", "Cancelling Your Case");
+        $rootScope.showPopupView("https:////offtherecord.com/cancellation-policy.html", "Cancelling Your Case");
       };
 
       $scope.confirmPayment = function() {
@@ -187,7 +187,7 @@ controllers.controller('PaymentCtrl',
         FB.ui({
             method: 'feed',
             name: "I just contested my traffic ticket with OTR!",
-            link: "http://www.offtherecord.com",
+            link: "https://www.offtherecord.com",
             caption: 'Always fight your ticket!',
             picture: 'https://s3.amazonaws.com/offtherecord.com/assets/img/fightyourticket.jpg',
             description: "#FightYourTicket #CleanRecord #OffTheRecordApp"

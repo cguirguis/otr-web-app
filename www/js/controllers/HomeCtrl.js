@@ -84,7 +84,7 @@ controllers.controller('HomeCtrl',
     };
 
     $scope.showAction1Modal = function() {
-      $rootScope.showPopupView("//offtherecord.com/whyfight.html",
+      $rootScope.showPopupView("https:////offtherecord.com/whyfight.html",
         "Should I fight it?");
     };
 
@@ -105,7 +105,7 @@ controllers.controller('HomeCtrl',
     };
 
     $scope.showAction3Modal = function() {
-      $rootScope.showPopupView("//offtherecord.com/refund.html",
+      $rootScope.showPopupView("https:////offtherecord.com/refund.html",
         "Our refund policy");
     };
 
