@@ -104,7 +104,7 @@ controllers.controller('HomeCtrl',
     };
 
     $scope.showAction3Modal = function() {
-      $rootScope.showPopupView("http:////offtherecord.com/refund.html", "Our refund policy");
+      $rootScope.showPopupView("https:////offtherecord.com/refund.html", "Our refund policy");
     };
 
     // Load user dropdown
@@ -144,8 +144,6 @@ controllers.controller('HomeCtrl',
       } else {
         if (!initialNavWidth) {
           initialNavWidth = 275;
-        } else {
-          $(".menu-left").addClass("condensed");
         }
 
         $rootScope.leftNavWidth = 275;

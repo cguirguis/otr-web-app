@@ -37,7 +37,7 @@ function CaseService($q, $rootScope, DataService, UtilitiesService, AWSS3Service
               numCases = response.data.numCases;
 
               angular.forEach(cases, function(value) {
-                value.dateIssued = UtilitiesService.getShortDateStringFromUtcDate(value.citation.citationIssueDateUTC);
+                value.dateIssued = UtilitiesService.getShortDateStringFromUtcDate(value.citation.citationIssueDateUTC || value.caseCreationDate);
                 value.citation.signedImageUrl = getSignedUrl(value.citation.ticketImageUrl);
                 value.status = getStatusText(value.caseStatus);
               });

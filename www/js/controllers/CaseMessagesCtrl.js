@@ -39,7 +39,6 @@ controllers.controller('CaseMessagesCtrl',
             $rootScope.errorMessage = "Error occured when attempting to save new message: ";
             $scope.savingMessage = false;
             $rootScope.hideLoader();
-            $rootScope.preventLoadingModal = false;
           }
         );
     };
@@ -80,7 +79,7 @@ controllers.controller('CaseMessagesCtrl',
       loadCaseMessages();
     }
 
-    var loadCaseMessages = function() {
+    function loadCaseMessages() {
       MessageService.setCurrentConversation(caseId, false)
         .then(
           // Success
