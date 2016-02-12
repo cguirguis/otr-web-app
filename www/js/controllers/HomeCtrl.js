@@ -78,7 +78,7 @@ controllers.controller('HomeCtrl',
     $scope.logout = function() {
       // Log out
       UtilitiesService.logout(function() {
-        $scope.hideUserDropdown();
+        $scope.hideUserDropdown();ap
         $state.go("home");
       });
     };

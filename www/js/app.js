@@ -14,8 +14,15 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
 
 (function() {
   WebApp
-    .config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
-      function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$sceDelegateProvider',
+      function ($stateProvider, $urlRouterProvider, $httpProvider, $sceDelegateProvider) {
+
+        $sceDelegateProvider.resourceUrlWhitelist([
+          // Allow same origin resource loads.
+          'self',
+          'http://offtherecord.com/**',
+          'https://offtherecord.com/**',
+          'http://blog.offtherecord.com/**']);
 
         // Set this to get/send cookie info for all requests
         $httpProvider.defaults.withCredentials = true;
