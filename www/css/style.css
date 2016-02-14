@@ -1508,6 +1508,20 @@ div.court-icon {
   text-align: center;
 }
 @media (max-width: 600px) {
+  .page.cases-view .case-section {
+    margin-left: 0;
+  }
+  .page.cases-view .case-section .timeline-bar {
+    left: 20px;
+  }
+  .page.cases-view .case-section .update-row .icon-bg {
+    margin-left: 57px;
+  }
+  .page.cases-view .action-title {
+    float: left;
+    width: calc(100% - 98px);
+    margin-left: -10px;
+  }
   .page.cases-view .case-section .action-text {
     width: 100%;
     margin-top: -30px;
@@ -1516,9 +1530,10 @@ div.court-icon {
   .page.cases-view .case-section .action-date {
     width: 75px;
     float: left;
+    height: 1px;
   }
   .page.cases-view .case-section .action-description {
-    margin-left: 95px;
+    margin-left: 85px;
   }
 }
 
