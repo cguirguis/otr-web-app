@@ -1,7 +1,7 @@
 
 controllers.controller('PaymentCtrl',
-  ['$rootScope', '$scope', '$state', '$timeout', '$ionicModal', 'DataService', 'ScopeCache',
-    function($rootScope, $scope, $state, $timeout, $ionicModal, DataService, ScopeCache)
+  ['$rootScope', '$scope', '$state', '$timeout', '$ionicModal', 'DataService', 'Constants',
+    function($rootScope, $scope, $state, $timeout, $ionicModal, DataService, Constants)
     {
       $scope.isCardVerified = false;
 
@@ -10,9 +10,6 @@ controllers.controller('PaymentCtrl',
       $rootScope.showProgress = false;
 
       $scope.errorMessage = null;
-
-      var refundUrl = "https://m-devo.offtherecord.com/faq.html#moneyback";
-      var nextStepUrl = "https://m-devo.offtherecord.com/faq.html#possible-outcomes";
 
       var stripeForm = $('#stripe-cc-form');
 
@@ -142,11 +139,11 @@ controllers.controller('PaymentCtrl',
       };
 
       $scope.viewTerms = function() {
-        $rootScope.showPopupView("http:////offtherecord.com/terms.html", "Terms of Service");
+        $rootScope.showPopupView(Constants.URLS.terms, "Terms of Service");
       };
 
       $scope.viewCancelPolicy = function() {
-        $rootScope.showPopupView("https://m-devo.offtherecord.com/faq.html#cancel-policy", "Cancelling Your Case");
+        $rootScope.showPopupView(Constants.URLS.cancellationPolicy, "Cancelling Your Case");
       };
 
       $scope.confirmPayment = function() {
@@ -176,11 +173,11 @@ controllers.controller('PaymentCtrl',
       };
 
       $scope.showRefundModal = function() {
-        $rootScope.showPopupView(refundUrl, "Our Money-Back Guarantee");
+        $rootScope.showPopupView(Constants.URLS.refund, "Our Money-Back Guarantee");
       };
 
       $scope.showNextStepModal = function() {
-        $rootScope.showPopupView(nextStepUrl, "What Happens Next?");
+        $rootScope.showPopupView(Constants.URLS.nextStep, "What Happens Next?");
       };
 
       $scope.shareOnFacebook = function() {

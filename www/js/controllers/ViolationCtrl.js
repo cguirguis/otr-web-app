@@ -1,7 +1,7 @@
 
 controllers.controller('ViolationCtrl',
-  ['$rootScope', '$scope', '$state', '$timeout', '$ionicLoading', 'ScopeCache', 'DataService',
-    function($rootScope, $scope, $state, $timeout, $ionicLoading, ScopeCache, DataService) {
+  ['$rootScope', '$scope', '$state', '$timeout', '$ionicLoading', 'ScopeCache', 'DataService', 'Constants',
+    function($rootScope, $scope, $state, $timeout, $ionicLoading, ScopeCache, DataService, Constants) {
 
     console.log("Violation controller loaded.");
     $rootScope.pageTitle = $scope.match && !$scope.matchErrorMessage ? "" : "Violations";
@@ -128,7 +128,7 @@ controllers.controller('ViolationCtrl',
     };
 
     $scope.viewRefundPolicy = function() {
-      $rootScope.showPopupView("https://m-devo.offtherecord.com/faq.html#moneyback", "Our Money Back Guarantee");
+      $rootScope.showPopupView(Constants.URLS.refund, "Our Money Back Guarantee");
     };
 
     $rootScope.cancelMatch = function() {

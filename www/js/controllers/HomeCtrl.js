@@ -2,8 +2,8 @@
 var controllers = angular.module('OTRControllers', []);
 
 controllers.controller('HomeCtrl',
-  ['$state', '$rootScope', '$scope', '$http', '$location', '$timeout', '$ionicSideMenuDelegate', '$ionicPopover', 'UtilitiesService',
-  function($state, $rootScope, $scope, $http, $location, $timeout, $ionicSideMenuDelegate, $ionicPopover, UtilitiesService)
+  ['$state', '$rootScope', '$scope', '$http', '$location', '$timeout', '$ionicSideMenuDelegate', '$ionicPopover', 'UtilitiesService', 'Constants',
+  function($state, $rootScope, $scope, $http, $location, $timeout, $ionicSideMenuDelegate, $ionicPopover, UtilitiesService, Constants)
   {
     console.log("Home controller loaded.");
     $rootScope.pageTitle = "Home";
@@ -84,7 +84,7 @@ controllers.controller('HomeCtrl',
     };
 
     $scope.showAction1Modal = function() {
-      $rootScope.showPopupView("//me-devo.offtherecord.com/faq.html#whyfight", "Should I fight it?");
+      $rootScope.showPopupView(Constants.URLS.whyFight, "Should I fight it?");
     };
 
     $scope.showCalculator = function() {
@@ -104,7 +104,7 @@ controllers.controller('HomeCtrl',
     };
 
     $scope.showAction3Modal = function() {
-      $rootScope.showPopupView("//m-devo.offtherecord.com/faq.html#moneyback", "Our refund policy");
+      $rootScope.showPopupView(Constants.URLS.refund, "Our refund policy");
     };
 
     // Load user dropdown
