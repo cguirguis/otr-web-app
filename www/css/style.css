@@ -2282,7 +2282,7 @@ div.court-icon {
   float: left;
 }
 .insurance-calculator .calculator-results {
-  padding: 0 0 0 20px;
+  padding: 20px 0 0 20px;
   float: right;
   position: relative;
 }
@@ -2330,6 +2330,7 @@ div.court-icon {
     margin-bottom: 25px!important;
   }
   .calculator-results {
+    padding: 0 0 0 20px;
     text-align: center;
     width: 100%;
   }
@@ -2357,12 +2358,18 @@ div.court-icon {
   .increase-label {
     width: 100%!important;
   }
-  .increase-value {
+  .increase-text .increase-value {
     width: 100%!important;
     margin-top: 20px!important;
+    text-align: center;
+    padding-right: 22px;
   }
 }
 @media (max-width: 530px) {
+  .increase-text .increase-value {
+    text-align: center;
+    padding-right: 22px;
+  }
   .insurance-calculator .row {
     display: inline-block;
     text-align: left;
@@ -2414,7 +2421,7 @@ div.court-icon {
   color: #666;
   font-size: 19px;
   float: left;
-  width: calc(100% - 150px);
+  width: calc(100% - 320px);
 }
 .increase-text .increase-value {
   color: #00ac56;
@@ -2422,7 +2429,8 @@ div.court-icon {
   float: right;
   margin-left: 20px;
   margin-top: 0px;
-  font-weight: 400;
+  min-width: 270px;
+  text-align: center;
 }
 button.calculate-insurance-button {
   clear: both;
