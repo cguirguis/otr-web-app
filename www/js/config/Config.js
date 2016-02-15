@@ -9,7 +9,7 @@ WebApp.constant("Constants", {
     'stripeClientId': 'pk_test_fHIOKc7Sf7gNjwUIIT3XJfDt',
     'debug': true,*/
     'name': 'PROD',
-    'apiEndpoint': 'https://otr-backend-service-us-devo.offtherecord.com/api/v1/',
+    'apiEndpoint': 'https://otr-backend-service-us-prod.offtherecord.com/api/v1/',
     'stripeClientId': 'pk_live_tfkS6orQi9EW3DePjrkHNLMT',
     'debug': false
   },
