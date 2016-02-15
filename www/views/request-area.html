@@ -1,0 +1,47 @@
+
+<ion-view class="page request-area">
+  <ion-content>
+    <div class="top-section">
+      <div class="step-container">
+        <i class="icon ion-location"></i>
+        <h1 class="step-title">Request Your Area</h1>
+      </div>
+      <h4 class="step-text">We'd love to come to your city. Tell us a bit about you, and we'll keep you updated when we come to your area.</h4>
+    </div>
+    <div class="bottom-section">
+      <div class="request-area-form" ng-if="!formSubmitted">
+        <div class="row">
+          <input type="text" name="firstName" ng-model="firstName" placeholder="First name" />
+        </div>
+        <div class="row">
+          <input type="text" name="lastName" ng-model="lastName" placeholder="Last name" />
+        </div>
+        <div class="row">
+          <input type="text" name="email" ng-model="email" placeholder="Email" />
+        </div>
+        <div class="row">
+          <input type="text" name="zipCode" ng-model="zipCode" placeholder="Zip code" size="5" maxlength="6" />
+        </div>
+        <div class="row hasTicket">
+          <div>
+            <input type="checkbox" name="hasTicket" ng-model="hasTicket" />
+            <div style="width:300px;line-height: 60px;color: #333">I have a ticket I'd like to fight</div>
+          </div>
+        </div>
+        <div class="form-errors" ng-bind-html="errorMessage" ng-if="errorMessage.length"></div>
+        <button class="request-area-button big-blue-button" ng-disabled="loading" ng-click="requestArea(firstName, lastName, email, zipCode, hasTicket)">
+            Submit
+            <ion-spinner icon="spiral" class="button-spinner spinner-light" ng-if="loading"></ion-spinner>
+        </button>
+        <button class="cancel" ng-click="goBack()">Cancel</button>
+      </div>
+      <div ng-if="formSubmitted">
+        <div class="success-message">Thank you! We've registered your information.</div>
+        <a class="x" ui-sref="home">
+          <i class="icon ion-arrow-left-c"></i>
+          Back
+        </a>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

@@ -14,6 +14,7 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
       getUserInfo()
         .then(function(userResponse) {
           //$rootScope.user = userResponse;
+          $rootScope.user = $rootScope.user || {};
           $rootScope.user.firstname = userResponse.first_name;
           $rootScope.user.lastname = userResponse.last_name;
           $rootScope.fbAuth = {

@@ -3,7 +3,6 @@ controllers.controller('TicketCtrl',
   ['$rootScope', '$scope', '$state', '$timeout', '$cordovaDevice', '$cordovaFile', '$ionicPlatform', '$ionicLoading', '$ionicActionSheet', 'ImageService', 'FileService', 'ScopeCache', 'DataService', 'Constants',
     function($rootScope, $scope, $state, $timeout, $cordovaDevice, $cordovaFile, $ionicPlatform, $ionicLoading, $ionicActionSheet, ImageService, FileService, ScopeCache, DataService, Constants)
     {
-      console.log("Ticket controller loaded.");
       $rootScope.pageTitle = "Your Ticket";
       $rootScope.showProgress = true;
       $rootScope.citation = {};

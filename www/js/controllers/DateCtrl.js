@@ -3,7 +3,6 @@ controllers.controller('DateCtrl',
   ['$rootScope', '$scope', '$state', '$timeout', 'Constants', 'ScopeCache', '$ionicScrollDelegate',
     function($rootScope, $scope, $state, $timeout, Constants, ScopeCache, $ionicScrollDelegate) {
 
-      console.log("Date controller loaded.");
       $rootScope.pageTitle = "Ticket Date";
       $rootScope.showProgress = true;
 

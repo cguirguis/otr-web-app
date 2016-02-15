@@ -3,7 +3,6 @@ controllers.controller('ViolationCtrl',
   ['$rootScope', '$scope', '$state', '$timeout', '$ionicLoading', 'ScopeCache', 'DataService', 'Constants',
     function($rootScope, $scope, $state, $timeout, $ionicLoading, ScopeCache, DataService, Constants) {
 
-    console.log("Violation controller loaded.");
     $rootScope.pageTitle = $scope.match && !$scope.matchErrorMessage ? "" : "Violations";
     $rootScope.showProgress = true;
 
@@ -86,10 +85,11 @@ controllers.controller('ViolationCtrl',
     var matchError = function(response) {
       $rootScope.hideLoader();
 
-      console.log("Error matching citation: " + JSON.stringify(data));
+      console.log("Error matching citation: " + JSON.stringify(response.data));
 
       var data = response.data;
       if (data.error.errorType === "MATCH_NOT_FOUND" || data.error.errorType === "NO_LAWFIRM_AVAILABLE") {
+        $scope.matchErrorMessage = data.error.uiErrorMsg;
         displayNoMatchView(data.error.uiErrorMsg);
       } else if (data.error.errorType === "CASE_ALREADY_EXISTS") {
         $rootScope.errorMessage = data.error.uiErrorMsg;

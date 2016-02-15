@@ -9,11 +9,13 @@ controllers.controller('LoginCtrl',
     $scope.loginWithEmail = function() {
       $scope.showLoginOptions = false;
       $scope.showEmailLogin = true;
+      $scope.loginModalTitle = "Log in";
     };
 
     $scope.signup = function() {
       $scope.showLoginOptions = false;
       $scope.showSignup = true;
+      $scope.loginModalTitle = "Sign up";
     };
 
     $scope.cancelEmailLogin = function() {

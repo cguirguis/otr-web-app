@@ -5,7 +5,6 @@ controllers.controller('HomeCtrl',
   ['$state', '$rootScope', '$scope', '$http', '$location', '$timeout', '$ionicSideMenuDelegate', '$ionicPopover', 'UtilitiesService', 'Constants',
   function($state, $rootScope, $scope, $http, $location, $timeout, $ionicSideMenuDelegate, $ionicPopover, UtilitiesService, Constants)
   {
-    console.log("Home controller loaded.");
     $rootScope.pageTitle = "Home";
     $rootScope.showProgress = false;
 

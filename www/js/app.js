@@ -85,6 +85,11 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
             url: "/profile",
             templateUrl: "../views/profile.html",
             controller: "ProfileCtrl"
+          })
+          .state('requestArea', {
+            url: "/requestarea",
+            templateUrl: "../views/request-area.html",
+            controller: "FeedbackCtrl"
           });
 
         // Displays spinner every time an HTTP request is made

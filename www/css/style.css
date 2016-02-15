@@ -22,7 +22,7 @@ body {
   border-radius: 3px;
 }
 .page button.activated {
-  box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.3);
+  box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.1);
   font-size: 20.5px!important;
 }
 .page button:hover {
@@ -844,7 +844,10 @@ table.k-content {
 .page.violation-view {
   top: 0px;
 }
-.page.match-view .match-found {
+.page.match-view .scroll-content {
+  padding: 10px 40px;
+}
+.page.match-view .match-found, .page.match-view .no-match-found {
   max-width: 800px;
   margin: auto;
 }
@@ -910,7 +913,7 @@ table.k-content {
     display: inline-block;
     padding: 10px 65px;
   }
-  .page.match-view .match-found {
+  .page.match-view .match-found, .page.match-view .no-match-found {
     text-align: left;
   }
 }
@@ -1050,6 +1053,17 @@ table.k-content {
   float: left;
   font-size: 20px;
   color: #0060a3;
+}
+.page.match-view .no-match-found h2 {
+  margin-top: 10px;
+}
+.page.match-view .no-match-found .big-blue-button {
+  float: left;
+}
+.page.match-view .no-match-found .cancel {
+  float: left;
+  width: 30%;
+  margin:0 4px;
 }
 @media (max-width: 450px) {
   .page.match-view {
@@ -1982,6 +1996,8 @@ div.court-icon {
   font-size: 13px;
   cursor: pointer;
   margin-bottom: 20px;
+  color: #666;
+  font-size: 14px;
 }
 .action.insurance.expanded {
   width: 100%;
@@ -2653,12 +2669,91 @@ button.cancel:hover {
 }
 
 
-
-
-
-
-
-
+/* Request Area */
+.page.request-area .top-section {
+  margin-top: 20px;
+}
+.page.request-area .bottom-section {
+  margin-bottom: 140px;
+}
+button.request-area-button {
+  margin-bottom: 5px;
+  background-color: rgb(45, 162, 218);
+  opacity: 0.85;
+  border:none;
+  line-height: 50px;
+}
+.request-area-form {
+  text-align: center;
+}
+.request-area-form .row {
+  margin-top: 5px;
+  width: 100%;
+  text-align: center!important;
+  dislay: inline-block;
+}
+.request-area-form .row.hasTicket {
+  text-align: center!important;
+}
+.request-area-form .row.hasTicket div:first-child {
+  max-width: 300px!important;
+  text-align: left;
+  margin: auto;
+}
+.request-area-form .row.hasTicket input {
+  width:20px!important;
+  padding:0;
+  margin:0 10px;
+  float: left;
+}
+.request-area-form .form-errors {
+  color: firebrick;
+}
+.request-area-form input {
+  width: 100%!important;
+  max-width: 600px;
+  height: 60px;
+  line-height: 60px;
+  border: solid 1px #dedede;
+  padding-left: 10px;
+  font-size: 20px;
+  color: #666;
+  font-weight: 300;
+  margin: auto;
+}
+.request-coverage-button .button-spinner {
+  margin: 7px 20px 0 -20px!important;
+  float: right;
+}
+.request-area-form button.cancel {
+  width: 100%!important;
+  max-width: 600px;
+}
+@media (max-width: 479px) {
+  .request-coverage-button {
+    float: none;
+    width: 100%!important;
+  }
+  .no-match-found button.cancel {
+    width: 100%!important;
+    margin: 4px 0px!important;
+  }
+}
+.request-area .success-message {
+  color: rgb(131, 209, 125);
+  font-size: 18px;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+}
+.request-area .x {
+  margin-top: 24px;
+  font-size: 16px;
+  font-weight: 300;
+  display: block;
+  color: #999;
+  cursor: pointer;
+  text-decoration: none;
+}
 
 
 

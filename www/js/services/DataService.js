@@ -18,6 +18,7 @@ WebApp.factory('DataService', function($http, $q, Constants)
   var getReferralCodeUrl = baseUrl + 'referrals/codes/{0}';
   var applyReferralCodeUrl = baseUrl + 'cases/{0}/referralcode/{1}';
   var getCaseActionsUrl = baseUrl + 'cases/{0}/actions/timeline';
+  var subscribeUrl = baseUrl + 'subscribe';
 
   var getCasesUrl = baseUrl + 'cases';
 
@@ -182,7 +183,11 @@ WebApp.factory('DataService', function($http, $q, Constants)
     var url = applyReferralCodeUrl.format(caseId, code);
 
     return $http.post(url);
-  }
+  };
+
+  var subscribe = function(params) {
+    return $http.post(subscribeUrl, params, { headers: jsonContentTypeHeader });
+  };
 
   return {
     getUser: getUser,
@@ -203,6 +208,7 @@ WebApp.factory('DataService', function($http, $q, Constants)
     getCaseActions: getCaseActions,
     postNewCaseMessage: postNewCaseMessage,
     getReferralCode: getReferralCode,
-    applyReferralCode: applyReferralCode
+    applyReferralCode: applyReferralCode,
+    subscribe: subscribe
   }
 });

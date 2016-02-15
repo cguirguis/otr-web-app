@@ -5,7 +5,6 @@ controllers.controller('PaymentCtrl',
     {
       $scope.isCardVerified = false;
 
-      console.log("Payment controller loaded.");
       $rootScope.pageTitle = $scope.paymentProcessed ? "" : "Case Overview";
       $rootScope.showProgress = false;
 
@@ -154,7 +153,6 @@ controllers.controller('PaymentCtrl',
 
         var caseId = $rootScope.currentCase.caseId;
         var cardId = $rootScope.user.paymentCard.id;
-        //console.log(response.card.brand  + " " + response.card.last4 + " exp: " + response.card.exp_month + "/" + response.card.exp_year + " (" + response.card.id  + ")");
 
         DataService.chargeCard(caseId, cardId)
           .error(function(data, status, headers, config) {
@@ -166,8 +164,6 @@ controllers.controller('PaymentCtrl',
       };
 
       var paymentSuccess = function(result) {
-        console.log(JSON.stringify(result));
-
         $scope.paymentProcessed = true;
         $rootScope.pageTitle = "Case " + $rootScope.currentCase.caseId;
       };
@@ -190,7 +186,6 @@ controllers.controller('PaymentCtrl',
             description: "#FightYourTicket #CleanRecord #OffTheRecordApp"
           }, function(response) {
             if(response && response.post_id){
-              console.log("SUCCESS" + JSON.stringify(response));
               $scope.sharedOnFacebook = true;
             }
             else{
