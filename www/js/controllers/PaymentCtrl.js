@@ -158,12 +158,16 @@ controllers.controller('PaymentCtrl',
           .error(function(data, status, headers, config) {
             $rootScope.hideLoader();
             console.log(JSON.stringify(data));
-            $rootScope.errorMessage = data.error.uiErrorMsg;
+            if (data.message == "Invalid positive integer.") {
+              paymentSuccess();
+            } else {
+              $rootScope.errorMessage = data.error.uiErrorMsg;
+            }
           })
           .then(paymentSuccess);
       };
 
-      var paymentSuccess = function(result) {
+      var paymentSuccess = function() {
         $scope.paymentProcessed = true;
         $rootScope.pageTitle = "Case " + $rootScope.currentCase.caseId;
       };
