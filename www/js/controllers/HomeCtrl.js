@@ -33,7 +33,9 @@ controllers.controller('HomeCtrl',
     };
 
     $scope.goToTicket = function() {
+
       $state.go("ticket");
+      $rootScope.showProgress = true;
       $scope.toggleMenu();
     };
 

@@ -2510,7 +2510,21 @@ div.court-icon {
 }
 @media (max-width: 430px) {
   .gauge-label {
-    top: 40px!important;
+    top: 30px!important;
+  }
+  .gauge-label .rate-value {
+    font-size: 20px!important;
+    margin-top: 0px;
+  }
+  .increase-text .increase-value {
+    min-width: inherit!important;
+  }
+  .increase-value div {
+    width: 100%!important;
+    float: right;
+  }
+  .increase-value i {
+    display: none;
   }
 }
 .increase-text {
