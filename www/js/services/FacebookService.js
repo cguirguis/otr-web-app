@@ -3,7 +3,6 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
 {
   var statusChangeCallback = function(response) {
     // This is called with the results from from FB.getLoginStatus().
-    console.log(response);
 
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
@@ -23,7 +22,7 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
             "userID": response.authResponse.userID
           };
 
-          console.log("logged into fb: " + JSON.stringify($rootScope.fbAuth));
+          //console.log("logged into fb: " + JSON.stringify($rootScope.fbAuth));
 
           getProfilePhoto();
           getUserNavPhoto();

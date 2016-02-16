@@ -15,6 +15,7 @@ controllers.controller('CaseCtrl',
         });
         if (result) {
           // Get case timeline (for future actions)
+          $rootScope.preventLoadingModal = true;
           DataService.getCaseActions(result.caseId)
             .then(
               // Success
@@ -44,6 +45,11 @@ controllers.controller('CaseCtrl',
                 );
 
                 $scope.loadedCase.actions = actions;
+                $rootScope.preventLoadingModal = false;
+              },
+              // Error
+              function(response) {
+                $rootScope.errorMessage = response.data.error.uiErrorMsg;
               });
 
           // Parse case details

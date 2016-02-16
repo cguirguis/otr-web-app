@@ -53,7 +53,7 @@ controllers.controller('TicketCtrl',
             }
           });
         }
-      }
+      };
 
       var fileInput = document.querySelector('#ticket-photo-input');
       var video = document.querySelector('video');
