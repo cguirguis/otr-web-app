@@ -3,16 +3,16 @@
   <ion-scroll  class="page profile-view cases-view">
     <div class="view-wrapper">
 
-      <div class="page-header" style="margin-left: 0px;">
+      <!--div class="page-header" style="margin-left: 0px;">
         <i class="icon ion-person" style="margin-top:-5px;margin-right:11px;"></i>
         <h1>User Profile</h1>
-      </div>
+      </div-->
 
       <div ng-if="!userLoaded" class='loading-box'>
         <ion-spinner icon='ios'></ion-spinner>
       </div>
 
-      <div ng-if="userLoaded">
+      <div ng-if="userLoaded" style="margin-top: 20px">
         <div class="left-col">
           <div class="user-photo">
             <img ng-src="{{userPhoto}}" style="height:200px;with:200px">

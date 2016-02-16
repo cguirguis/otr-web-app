@@ -861,6 +861,17 @@ table.k-content {
 .page.match-view .scroll-content {
   padding: 10px 40px;
 }
+@media (max-width: 600px) {
+  .page.match-view .match-found {
+    margin: 0px -30px;
+  }
+  .match-insurance-note {
+    width: 80%;
+  }
+  .confirm-match-button {
+    font-size: 18px!important;
+  }
+}
 .page.match-view .match-found, .page.match-view .no-match-found {
   max-width: 800px;
   margin: auto;
@@ -887,13 +898,13 @@ table.k-content {
   width: 18%;
   word-wrap: normal;
   text-align: right;
-  min-width: 88px;
+  min-width: 78px;
 }
 .page.match-view .match-cost-text {
   float: left;
   font-size: 1.5em;
   margin-right: 10px;
-  width: 65%;
+  width: 50%;
   clear: left;
 }
 .page.match-view h2.match-cost-value {
@@ -958,15 +969,18 @@ table.k-content {
   font-size: 1.5em;
   margin-right: 10px;
   margin-top: 0!important;
-  width: 69%;
+  width: 65%;
   float: left;
 }
-.match-details-row .match-cost-value, .match-odds-value, .match-insurance-value {
+.match-cost-value, .match-odds-value, .match-insurance-value {
   float: right;
+  margin-top: -10px;
 }
 .match-odds-note, .match-cost-note, .match-insurance-note {
   float: left;
   color: #aaa;
+  font-size: 14px;
+  font-weight: 300;
 }
 .match-cost-note {
   color: forestgreen;
@@ -1005,7 +1019,7 @@ table.k-content {
   padding: 10px;
 }
 .page.match-view .slider-slides {
-  width: 800px!important;
+  width: 100%!important;
   display: -webkit-box;
   overflow-x: hidden;
   height: 127px!important;
@@ -1218,6 +1232,9 @@ table.k-content {
   .page.payment-view .payment-view {
     padding: 0px 20px!important;
   }
+  .page.payment-view ul.transactions-discount li input {
+    width: 110px!important;
+  }
 }
 
 
@@ -1226,7 +1243,7 @@ table.k-content {
 
 
 
-
+/* CASES VIEW */
 .page.cases-view .page.messages-view {
   padding: 10px 25px;
   background-color: #F0F3F4;

@@ -1,7 +1,7 @@
 
 controllers.controller('ProfileCtrl',
-  ['$rootScope', '$scope', '$state', '$timeout', '$ionicModal', 'DataService', 'FacebookService',
-  function($rootScope, $scope, $state, $timeout, $ionicModal, DataService, FacebookService) {
+  ['$rootScope', '$scope',
+  function($rootScope, $scope) {
     $rootScope.pageTitle = "User Profile";
     $rootScope.showProgress = false;
 
@@ -9,7 +9,6 @@ controllers.controller('ProfileCtrl',
 
     var loadUserPhoto = function() {
       if ($rootScope.user && !$rootScope.userPhoto) {
-
         if ($rootScope.user.loginProvider == "FACEBOOK") {
           $scope.$watch(
             function() { return $rootScope.userPhoto; }, function() {
@@ -22,6 +21,8 @@ controllers.controller('ProfileCtrl',
           $scope.userLoaded = true;
 
         }
+      } else if ($rootScope.userPhoto) {
+        $scope.userLoaded = true;
       }
     };
 

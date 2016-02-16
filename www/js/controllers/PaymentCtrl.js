@@ -64,7 +64,7 @@ controllers.controller('PaymentCtrl',
             citationResponse: newCase.citation
           };
           var appliedDiscount = $rootScope.currentCase.costBeforeReferrals - $rootScope.currentCase.totalCost;
-          $scope.appliedDiscountString = appliedDiscount < 0
+          $scope.appliedDiscountString = appliedDiscount > 0
             ? "($" + appliedDiscount + ")" : "$" + appliedDiscount;
         }
       };
