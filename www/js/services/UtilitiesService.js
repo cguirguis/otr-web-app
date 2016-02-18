@@ -7,9 +7,13 @@ WebApp.factory('UtilitiesService',
       return true;
     }
 
+    $rootScope.preventLoadingModal = true;
+
     DataService.getUser()
       .then(function(response) {
         $rootScope.user = response.data.user;
+
+        $rootScope.preventLoadingModal = false;
       });
 
     return false;
