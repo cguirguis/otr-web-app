@@ -3,7 +3,6 @@ controllers.controller('LoginCtrl',
   ['$rootScope', '$scope', 'DataService', 'UtilitiesService', 'FacebookService',
     function($rootScope, $scope, DataService, UtilitiesService, FacebookService)
   {
-    console.log("Login controller loaded.");
     $scope.showLoginOptions = true;
 
     $scope.loginWithEmail = function() {
@@ -77,12 +76,12 @@ controllers.controller('LoginCtrl',
     };
 
     $scope.submitEmailLoginForm = function(email, password) {
-      $scope.loading = true;
       $scope.errorMessage = "";
 
       if (!email.length || !password.length) {
         $scope.errorMessage = "Please provide a valid email and password.";
       } else {
+        $scope.loading = true;
         $rootScope.preventLoadingModal = true;
         DataService.login(email, password)
           .error(function(data, status, headers, config) {
@@ -102,7 +101,7 @@ controllers.controller('LoginCtrl',
       $scope.loading = false;
       $rootScope.showDefaultSpinner = false;
 
-      $rootScope.closeLoginModal();
+      $scope.closeLoginModal();
 
       $rootScope.broadcast('user:logged-in');
 
@@ -119,7 +118,7 @@ controllers.controller('LoginCtrl',
           $rootScope.user = response.data.user;
         });
 
-      $rootScope.closeLoginModal();
+      $scope.closeLoginModal();
       $scope.$emit('user:logged-in');
       $scope.loading = false;
 
@@ -128,5 +127,18 @@ controllers.controller('LoginCtrl',
 
     $scope.closeLoginModal = function() {
       $rootScope.closeLoginModal();
+
+      // Reset scope variables
+      initialize();
     };
+
+    function initialize() {
+      $scope.showLoginOptions = true;
+      $scope.showEmailLogin = false;
+      $scope.showSignup = false;
+      $scope.loading = false;
+      $scope.loginModalTitle = "Log in";
+      $("#signup-form input").val("");
+      $(".email-login-form input").val("");
+    }
   }]);

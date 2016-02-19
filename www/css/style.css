@@ -206,7 +206,7 @@ hr {
 
 /************* LOGIN MODAL ************/
 .login-view {
-  min-height: 550px;
+  /*min-height: 550px;*/
 }
 .button.close-login-modal {
   position: absolute;
@@ -2735,6 +2735,7 @@ button.cancel {
   background-color: #e9e9e9;
   border: solid 1px #ccc;
   opacity: 0.8;
+  max-width: 600px;
 }
 button.cancel:hover {
   background-color: #e5e5e5;

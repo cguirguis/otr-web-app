@@ -14,8 +14,12 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
 
 (function() {
   WebApp
-    .config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
-      function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$ionicConfigProvider',
+      function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider) {
+
+        if (window.innerWidth > 450) {
+          $ionicConfigProvider.views.transition('none');
+        }
 
         // Set this to get/send cookie info for all requests
         $httpProvider.defaults.withCredentials = true;
@@ -264,6 +268,13 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
         $rootScope.isLoggedIn = function() {
           return $rootScope.user != null;
         };
+
+        $rootScope.$on("user:logged-in", function() {
+          // If on cases view, refresh
+          if ($state.current.name == "cases") {
+            $state.reload();
+          }
+        });
 
         String.prototype.format = function () {
           var args = [].slice.call(arguments);

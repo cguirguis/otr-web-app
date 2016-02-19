@@ -1,11 +1,11 @@
 
 <ion-modal-view ng-controller="LoginCtrl">
   <ion-header-bar>
-    <h1 class="title">Login</h1>
+    <h1 class="title">{{loginModalTitle}}</h1>
     <div class="close-login-modal button" ng-click="closeLoginModal()">X</div>
   </ion-header-bar>
 
-  <ion-content>
+  <ion-content delegate-handle="loginModal">
     <div class="page login-view">
       <div class="login-options" ng-if="showLoginOptions">
         <button class="facebook-login-button" ng-click="loginWithFacebook()">
@@ -24,7 +24,7 @@
 
       <div class="email-login-form" ng-if="showEmailLogin">
           <div class="row">
-            <input type="text" name="email" ng-model="email" placeholder="Email" />
+            <input type="text" name="email" ng-model="email" placeholder="Email" focus-me="true" />
           </div>
           <div class="row">
             <input type="password" name="password" ng-model="password" ng-enter="submitEmailLoginForm(email, password)" placeholder="Password" />
@@ -39,7 +39,7 @@
 
       <div id="signup-form" ng-if="showSignup">
         <div class="row">
-          <input type="text" ng-model="newUser.firstname" placeholder="First name" />
+          <input type="text" ng-model="newUser.firstname" placeholder="First name" focus-me="true" />
         </div>
         <div class="row">
           <input type="text" ng-model="newUser.lastname" placeholder="Last name" />

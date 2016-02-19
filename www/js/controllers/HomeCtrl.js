@@ -74,6 +74,7 @@ controllers.controller('HomeCtrl',
 
     $scope.login = function() {
       $rootScope.showLoginModal();
+      $(".autofocus").focus();
     };
 
     $scope.logout = function() {
