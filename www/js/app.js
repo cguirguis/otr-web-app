@@ -153,6 +153,7 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
             //
             // These three cases are handled in the callback function.
             FB.getLoginStatus(function(response) {
+              $rootScope.preventLoadingModal = true;
               FacebookService.statusChangeCallback(response);
             }, {scope: 'public_profile,email'});
           };

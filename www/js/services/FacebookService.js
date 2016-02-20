@@ -34,11 +34,13 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
           function(otrResponse){
             console.log("\n\nLogged in to OTR via Facebook.");
             $rootScope.hideLoader();
+            $rootScope.preventLoadingModal = false;
           },
           function(response) {
             console.log(JSON.stringify(response.data.error.uiErrorMsg));
             $rootScope.errorMessage = response.data.error.uiErrorMsg;
             $rootScope.hideLoader();
+            $rootScope.preventLoadingModal = false;
           });
     }
     else if (response.status === 'not_authorized') {
@@ -46,11 +48,13 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
       //document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
       //FB.login()
       console.log("FB AUTH STATUS: not_authorized");
+      $rootScope.preventLoadingModal = false;
     }
     else {
       // The person is not logged into Facebook, prompt them to login
       //FB.login();
       console.log("FB AUTH STATUS: not_connected");
+      $rootScope.preventLoadingModal = false;
     };
   };
 
