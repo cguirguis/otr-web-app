@@ -8,8 +8,8 @@
     <meta property="og:url"                content="http://www.offtherecord.com" />
     <meta property="og:type"               content="website" />
     <meta property="og:title"              content="Always fight your traffic tickets" />
-    <meta property="og:description"        content="Off the Record lets you fight your ticket in just a few minutes. If we don't win, you pay nothing." />
-    <meta property="og:image"              content="http://www.offtherecord.com/assets/img/logo.png" />
+    <meta property="og:description"        content="Off the Record lets you fight your ticket in just minutes. If we don't beat it, you pay nothing." />
+    <meta property="og:image"              content="https://m.offtherecord.com/favicon-196x196.png" />
     <meta property="og:image:type"         content="image/png" />
     <!--meta property="og:image:width"         content="image/png" /-->
     <!--meta property="og:image:height"         content="image/png" /-->
@@ -17,8 +17,7 @@
     <!-- Apple's Smart App Banner -->
     <!-- This will show an app install banner on Safari when users are using an iOS device -->
     <!-- The 'app-argument' param can be used for deep linking (or tracking). Must be valid URL. -->
-    <!--<meta name="apple-itunes-app" content="app-id=1032930471, app-argument=http://www.offtherecord.com/m">-->
-    <!-- Angucomplete-alt -->
+    <meta name="apple-itunes-app" content="app-id=1032930471, app-argument=http://www.offtherecord.com/m">
 
     <!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
@@ -132,7 +131,7 @@
                 <button class="button button-icon left-menu-button" ng-click="toggleMenu()">
                   <i class="icon ion-navicon"></i>
                 </button>
-                <button class="button button-icon login-nav-button" ng-if="user == null" ng-click="login()">
+                <button class="button button-icon login-nav-button" ng-if="user == {}" ng-click="login()">
                   <i class="icon ion-log-in"></i>
                   <span style="font-size:15px;margin-right:5px;">Login</span>
                 </button>

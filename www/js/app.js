@@ -119,6 +119,7 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
 
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
+        $rootScope.user = null;
 
         $ionicPlatform.ready(function () {
           // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
