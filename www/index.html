@@ -131,7 +131,7 @@
                 <button class="button button-icon left-menu-button" ng-click="toggleMenu()">
                   <i class="icon ion-navicon"></i>
                 </button>
-                <button class="button button-icon login-nav-button" ng-if="user == {}" ng-click="login()">
+                <button class="button button-icon login-nav-button" ng-if="user == {} || user == null" ng-click="login()">
                   <i class="icon ion-log-in"></i>
                   <span style="font-size:15px;margin-right:5px;">Login</span>
                 </button>
