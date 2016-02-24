@@ -1,5 +1,5 @@
 
-var CourtCtrl = function($rootScope, $scope, $state, $http, $timeout, $location, $ionicModal, Constants)
+var CourtCtrl = function($rootScope, $scope, $state, $http, $timeout, $location, $ionicModal, Constants, DataService)
 {
   var _this = this;
   $rootScope.pageTitle = "Assigned court";
@@ -8,23 +8,6 @@ var CourtCtrl = function($rootScope, $scope, $state, $http, $timeout, $location,
   $scope.query = "";
   $scope.selectedCourt;
   $rootScope.showProgress = true;
-
-  var getCourts = function() {
-    var URL = Constants.ENV.apiEndpoint + "/courts/traffic/search?state=WA";
-
-    $http.get(URL).then(
-      function(response) {
-        $scope.courts = response.data.courts;
-      },
-      function(error) {
-        console.log('Error retrieving courts: {0}', JSON.stringify(error));
-        $rootScope.hideLoader();
-        // TODO: display appropriate error message
-        $rootScope.errorMessage = "Unable to load courts. Please make sure you have an active internet connection.";
-
-      }
-    );
-  };
 
   $scope.filterCourts = function(value) {
     var query = $scope.query.toLowerCase();
@@ -82,11 +65,28 @@ var CourtCtrl = function($rootScope, $scope, $state, $http, $timeout, $location,
     getCourts();
   }
 
+  function getCourts() {
+    $rootScope.showDefaultSpinner = false;
+    DataService.getCourts($scope.query)
+      .then(
+        function(response) {
+          $scope.courts = response.data.courts;
+          $rootScope.showDefaultSpinner = true;
+        },
+        function(error) {
+          console.log('Error retrieving courts: {0}', JSON.stringify(error));
+          $rootScope.hideLoader();
+          $rootScope.errorMessage = "Unable to load courts. Please make sure you have an active internet connection.";
+          $rootScope.showDefaultSpinner = true;
+        }
+      );
+  }
+
 };
 
 CourtCtrl.prototype.newFunction = function() {
 };
 
-CourtCtrl.$inject =   ['$rootScope', '$scope', '$state', '$http', '$timeout', '$location', '$ionicModal', 'Constants'];
+CourtCtrl.$inject =   ['$rootScope', '$scope', '$state', '$http', '$timeout', '$location', '$ionicModal', 'Constants', 'DataService'];
 
 controllers.controller('CourtCtrl', CourtCtrl);
