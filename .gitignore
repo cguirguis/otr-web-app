@@ -1,3 +1,6 @@
+bower_components/
+platforms/
+resources/
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion
 node_modules/
 *.iml

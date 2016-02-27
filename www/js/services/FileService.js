@@ -1,16 +1,18 @@
 
 WebApp.factory('FileService', function() {
-    var images;
+    var images = [];
     var IMAGE_STORAGE_KEY = 'images';
 
     function getImages() {
-      var img = window.localStorage.getItem(IMAGE_STORAGE_KEY);
-      if (img) {
-        images = JSON.parse(img);
-      } else {
-        images = [];
-      }
-      return images;
+
+        if(window.localStorage) {
+            //localStorage not available in Android's browser simulator
+            var img = window.localStorage.getItem(IMAGE_STORAGE_KEY);
+            if (img) {
+                images = JSON.parse(img);
+            }
+        }
+        return images;
     };
 
     function addImage(img) {

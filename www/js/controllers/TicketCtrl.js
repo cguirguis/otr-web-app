@@ -39,8 +39,11 @@ controllers.controller('TicketCtrl',
         $scope.showSelectSpinner = true;
 
         if (!isMobileDevice()) {
+          console.log("Is not a mobile device. Lets browser for a photo on the File System");
           fileInput.click();
         } else {
+          console.log("This is a mobile device.");
+
           $scope.hideSheet = $ionicActionSheet.show({
             buttons: [
               {text: 'Take photo'},
@@ -52,6 +55,8 @@ controllers.controller('TicketCtrl',
               $scope.takePicture(index);
             }
           });
+
+          console.log('after show ionic action sheet.');
         }
       };
 
