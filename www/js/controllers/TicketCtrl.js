@@ -60,6 +60,11 @@ controllers.controller('TicketCtrl',
         }
       };
 
+      document.addEventListener("deviceready",onDeviceReady,false);
+      function onDeviceReady() {
+        alert(navigator.camera);
+      }
+
       var fileInput = document.querySelector('#ticket-photo-input');
       var video = document.querySelector('video');
       var shutter = document.querySelector('.shutter-button');
