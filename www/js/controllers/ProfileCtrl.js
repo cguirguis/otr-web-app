@@ -17,7 +17,7 @@ controllers.controller('ProfileCtrl',
 
         } else {
 
-          $rootScope.userPhoto = "../img/default-profile-pic.png";
+          $rootScope.userPhoto = "img/default-profile-pic.png";
           $scope.userLoaded = true;
 
         }

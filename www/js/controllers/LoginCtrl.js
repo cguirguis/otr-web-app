@@ -116,6 +116,10 @@ controllers.controller('LoginCtrl',
       DataService.getUser()
         .then(function(response) {
           $rootScope.user = response.data.user;
+          //call into Android's native code. TODO: Make a delegate class for this.
+          if(!(typeof Android === 'undefined')) {
+            Android.registerDeviceToken(JSON.stringify(response));
+          }
         });
 
       $scope.closeLoginModal();

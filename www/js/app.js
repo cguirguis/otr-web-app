@@ -43,56 +43,56 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
           })
           .state('home', {
             url: "/",
-            templateUrl: "../views/home.html"
+            templateUrl: "views/home.html"
           })
           .state('ticket', {
             url: "/ticket",
-            templateUrl: "../views/ticket.html",
+            templateUrl: "views/ticket.html",
             controller: "TicketCtrl"
           })
           .state('court', {
             url: "/court",
-            templateUrl: "../views/court.html",
+            templateUrl: "views/court.html",
             controller: "CourtCtrl"
           })
           .state('date', {
             url: "/date",
-            templateUrl: "../views/date.html",
+            templateUrl: "views/date.html",
             controller: "DateCtrl"
           })
           .state('violations', {
             url: "/violations",
-            templateUrl: "../views/violations.html",
+            templateUrl: "views/violations.html",
             controller: "ViolationCtrl"
           })
           .state('payment', {
             url: "/payment",
-            templateUrl: "../views/payment.html",
+            templateUrl: "views/payment.html",
             controller: "PaymentCtrl"
           })
           .state('cases', {
             url: "/cases",
-            templateUrl: "../views/cases.html",
+            templateUrl: "views/cases.html",
             controller: "CasesCtrl"
           })
           .state('case', {
             url: "/case/:caseId",
-            templateUrl: "../views/case.html",
+            templateUrl: "views/case.html",
             controller: "CaseCtrl"
           })
           .state('messages', {
             url: "/messages/:caseId",
-            templateUrl: "../views/case-messages.html",
+            templateUrl: "views/case-messages.html",
             controller: "CaseMessagesCtrl"
           })
           .state('profile', {
             url: "/profile",
-            templateUrl: "../views/profile.html",
+            templateUrl: "views/profile.html",
             controller: "ProfileCtrl"
           })
           .state('requestArea', {
             url: "/requestarea",
-            templateUrl: "../views/request-area.html",
+            templateUrl: "views/request-area.html",
             controller: "FeedbackCtrl"
           });
 
