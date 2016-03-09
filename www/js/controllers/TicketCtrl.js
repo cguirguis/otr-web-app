@@ -22,7 +22,7 @@ controllers.controller('TicketCtrl',
       });
 
       function isMobileDevice() {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        return document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1;
       }
 
       function hasGetUserMedia() {
