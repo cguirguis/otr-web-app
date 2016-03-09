@@ -60,10 +60,13 @@ controllers.controller('TicketCtrl',
         }
       };
 
+      /* Is this intercepting the device control? It's set to false so it shouldn't
+
       document.addEventListener("deviceready",onDeviceReady,false);
       function onDeviceReady() {
         alert(navigator.camera);
       }
+      */
 
       var fileInput = document.querySelector('#ticket-photo-input');
       var video = document.querySelector('video');
