@@ -22,7 +22,12 @@ controllers.controller('TicketCtrl',
       });
 
       function isMobileDevice() {
-        return document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1;
+        return
+          (document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1) || isNativeApp()
+      }
+
+      function isNativeApp() {
+        return /OffTheRecord\/[0-9\.]+$/.test(navigator.userAgent);
       }
 
       function hasGetUserMedia() {
