@@ -21,14 +21,15 @@ controllers.controller('TicketCtrl',
         $ionicLoading.hide();
       });
 
+
       function isMobileDevice() {
-        return
-          (document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1) || isNativeApp()
+        //console.log('nav agent is... ', navigator.userAgent);
+        //var isEmbeddedWebView = ionic.Platform.isWebView();
+        //console.log('in embedded webview??? ', isEmbeddedWebView);
+
+        return (document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1);
       }
 
-      function isNativeApp() {
-        return /OffTheRecord\/[0-9\.]+$/.test(navigator.userAgent);
-      }
 
       function hasGetUserMedia() {
         return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
@@ -64,14 +65,6 @@ controllers.controller('TicketCtrl',
           console.log('after show ionic action sheet.');
         }
       };
-
-      /* Is this intercepting the device control? It's set to false so it shouldn't
-
-      document.addEventListener("deviceready",onDeviceReady,false);
-      function onDeviceReady() {
-        alert(navigator.camera);
-      }
-      */
 
       var fileInput = document.querySelector('#ticket-photo-input');
       var video = document.querySelector('video');
