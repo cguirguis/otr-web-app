@@ -114,6 +114,7 @@ controllers.controller('ViolationCtrl',
           lawfirmId: newCase.lawfirmId,
           lawfirmName: newCase.lawfirmCaseDecision.lawfirmName,
           lawfirmImageUrl: newCase.lawfirmCaseDecision.profilePictureUrl,
+          lawfirmCity: newCase.citation.court.address.city + ", " + newCase.citation.court.address.stateCode,
           citationResponse: newCase.citation
         }
       } else {
