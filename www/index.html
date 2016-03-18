@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title>Off the Record - Fight your traffic ticket</title>
+    <title>Off the Record - Fight your ticket</title>
 
     <meta property="og:url"                content="http://www.offtherecord.com" />
     <meta property="og:type"               content="website" />
@@ -26,20 +26,17 @@
     <!-- CSS -->
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
-    <!-- Kendo is hosted in a private git repo. We can bower this later... -->
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.common-material.min.css" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.material.min.css" />
-
-    <link rel="stylesheet" href="bower_components/animate.css/animate.min.css" />
+    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2015.3.1111/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2015.3.1111/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/daneden/animate.css/master/animate.min.css" />
 
     <!-- jQuery -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <script src="bower_components/moment/min/moment.min.js"></script>
-    <script src="bower_components/angular-moment/angular-moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.1/angular-moment.min.js"></script>
 
     <!-- Needed for Cordova/PhoneGap (this will be a 404 during development) -->
     <script src="lib/dist/ng-cordova.js"></script>
@@ -47,16 +44,15 @@
 
     <script src="lib/dist/require.js"></script>
     <script src="lib/dist/angular-pure-slider/angular-pure-slider.min.js"></script>
-    <script src="bower_components/angular-route/angular-route.min.js"></script>
-
-    <!-- Kendo is hosted in a private git repo. We can bower this later... -->
-    <script src="https://kendo.cdn.telerik.com/2015.3.1111/js/kendo.all.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+    <script src="//kendo.cdn.telerik.com/2015.3.1111/js/jquery.min.js"></script>
+    <script src="//kendo.cdn.telerik.com/2015.3.1111/js/kendo.all.min.js"></script>
 
     <!-- Stripe -->
-    <script src="bower_components/stripe/index.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
     <!-- AWS S3 -->
-    <script src="bower_components/aws-sdk-js/dist/aws-sdk.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.15.min.js"></script>
 
     <!-- App code -->
     <script src="js/app.js"></script>
@@ -101,8 +97,8 @@
           <ion-side-menu side="left" width="{{leftNavWidth}}" expose-aside-when="(min-width:768px)">
             <ion-header-bar class="bar-dark left-nav">
               <div class="logo-container" ui-sref="home">
-                <img class="logo-icon" src="img/OTR-icon.png">
-                <img class="logo-img" src="img/otr-logo-V2.gif">
+                <img class="logo-icon" src="../../img/OTR-icon.png">
+                <img class="logo-img" src="../../img/otr-logo-V2.gif">
               </div>
             </ion-header-bar>
             <ion-content scroll="false" style="background-color: #1B1E24;height:100%;padding-top: 0px;">

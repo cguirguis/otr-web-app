@@ -609,7 +609,7 @@ button.retake-picture.activated, button.continue.activated {
   color: #ccc;
 }
 .page.court-view ion-header-bar input {
-  line-height: 30px;
+  line-height: 2em;
   border: solid 3px #f0f0f0;
   width: 90%;
   font-size: 2em;

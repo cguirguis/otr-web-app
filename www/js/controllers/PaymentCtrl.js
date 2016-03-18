@@ -1,7 +1,7 @@
 
 controllers.controller('PaymentCtrl',
-  ['$rootScope', '$scope', '$state', '$timeout', '$ionicModal', 'DataService', 'Constants',
-    function($rootScope, $scope, $state, $timeout, $ionicModal, DataService, Constants)
+  ['$rootScope', '$scope', '$state', '$timeout', '$ionicModal', 'DataService', 'Constants', 'ScopeCache',
+    function($rootScope, $scope, $state, $timeout, $ionicModal, DataService, Constants, ScopeCache)
     {
       $scope.isCardVerified = false;
 
@@ -209,5 +209,6 @@ controllers.controller('PaymentCtrl',
       $scope.$on("$destroy", function() {
         $rootScope.currentCase = null;
         $rootScope.citation = null;
+        ScopeCache.clear();
       });
 }]);

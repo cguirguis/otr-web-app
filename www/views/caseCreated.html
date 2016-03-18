@@ -22,7 +22,8 @@
       <button class="view-case-button" ng-click="viewCase()">View Case</button>
 
       <div class="share-text">
-        <div class="share-blurb">Friends don't let friends pay traffic tickets.</div>
+        <div class="share-blurb" ng-if="!sharedOnFacebook">Friends don't let friends pay traffic tickets.</div>
+        <div class="share-blurb"  ng-if="sharedOnFacebook">Thanks for sharing with your friends!</div>
         <div class="facebook-share" ng-hide="sharedOnFacebook" ng-click="shareOnFacebook()">
           <i class="icon ion-social-facebook"></i>
           <div class="text">Share the news!</div>

@@ -28,7 +28,20 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
           getUserNavPhoto();
 
           // Authenticate user to our service
-          return DataService.loginWithFacebook($rootScope.fbAuth);
+          return DataService.loginWithFacebook($rootScope.fbAuth)
+            .then(function(response) {
+              // Now get user info
+              DataService.getUser()
+                .then(function(response) {
+                  $rootScope.user = response.data.user;
+                  //call into Android's native code. TODO: Make a delegate class for this.
+                  if(!(typeof Android === 'undefined')) {
+                    Android.registerDeviceToken(JSON.stringify(response));
+                  }
+                });
+
+              $rootScope.$broadcast('user:logged-in');
+            });
         })
         .then(
           function(otrResponse){
