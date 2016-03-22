@@ -36,32 +36,47 @@ controllers.controller('LoginCtrl',
     };
 
     $scope.submitSignupForm = function(newUser) {
+
+      var metaData = {}, newUser = newUser || {};
+      if ($scope.selectedSource && $scope.selectedSource.sourceTypeId) {
+        metaData.sourceTypeId = $scope.selectedSource.sourceTypeId;
+      }
+      if (newUser.referralCode) {
+        metaData.referralCode = newUser.referralCode;
+      }
+
       $scope.loading = true;
       $rootScope.showDefaultSpinner = true;
       $scope.errorMessage = "";
 
-      if (!newUser || !newUser.firstname.length) {
+      if (!newUser || !newUser.firstname || !newUser.firstname.length) {
         $scope.errorMessage = "Please enter a first name.";
+        $scope.loading = false;
         return;
-      } else if (!newUser.lastname.length) {
+      } else if (!newUser.lastname || !newUser.lastname.length) {
         $scope.errorMessage = "Please enter a last name.";
+        $scope.loading = false;
         return;
-      } else if (!newUser.emailAddress.length) {
+      } else if (!newUser.emailAddress || !newUser.emailAddress.length) {
         $scope.errorMessage = "Please enter an email address.";
+        $scope.loading = false;
         return;
-      } else if (!newUser.password.length) {
+      } else if (!newUser.password || !newUser.password.length) {
         $scope.errorMessage = "Please enter a password.";
+        $scope.loading = false;
         return;
-      } else if (!newUser.passwordConfirm.length) {
+      } else if (!newUser.passwordConfirm || !newUser.passwordConfirm.length) {
         $scope.errorMessage = "Please confirm your password.";
+        $scope.loading = false;
         return;
       } else if (newUser.password != newUser.passwordConfirm) {
         $scope.errorMessage = "Your passwords do not match.";
+        $scope.loading = false;
         return;
       }
 
       $rootScope.preventLoadingModal = true;
-      DataService.signup(newUser)
+      DataService.signup(newUser, metaData)
         .error(function(data, status, headers, config) {
           if (data) {
             console.log("Error: " + data.error.uiErrorMsg);
@@ -116,10 +131,6 @@ controllers.controller('LoginCtrl',
       DataService.getUser()
         .then(function(response) {
           $rootScope.user = response.data.user;
-          //call into Android's native code. TODO: Make a delegate class for this.
-          if(!(typeof Android === 'undefined')) {
-            Android.registerDeviceToken(JSON.stringify(response));
-          }
         });
 
       $scope.closeLoginModal();
@@ -136,6 +147,11 @@ controllers.controller('LoginCtrl',
       initialize();
     };
 
+    $scope.updateSelectedSource = function(value) {
+      $scope.selectedSource = value;
+      $scope.showReferralCode = value.sourceTypeId == 3 ? true : false;
+    };
+
     function initialize() {
       $scope.showLoginOptions = true;
       $scope.showEmailLogin = false;
@@ -145,4 +161,15 @@ controllers.controller('LoginCtrl',
       $("#signup-form input").val("");
       $(".email-login-form input").val("");
     }
+
+    DataService.getReferralSources()
+      .then(
+      //Success
+      function(response) {
+        $scope.selectedSource = {};
+        $scope.referralSources = response.data.sources.filter(function(e) {
+          return e.isDisplayed == true;
+        });
+      }
+    );
   }]);

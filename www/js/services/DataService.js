@@ -7,6 +7,7 @@ WebApp.factory('DataService', function($http, $q, Constants)
   var logoutUrl = baseUrl + "authentication/logout";
   var loginWithFacebookUrl = baseUrl + 'connect/facebook/';
   var signupUrl = baseUrl + 'signup';
+  var getReferralSourcesUrl = baseUrl + 'referrals/sources'
   var getCourtsUrl = baseUrl + "courts/traffic";
   var citationUrl = baseUrl + 'citations/';
   var matchCitationUrl = baseUrl + 'citations/{0}/case';
@@ -53,13 +54,22 @@ WebApp.factory('DataService', function($http, $q, Constants)
     return $http.post(loginWithFacebookUrl, data);
   };
 
-  var signup = function(newUser) {
+  var signup = function(newUser, metaData) {
     var headers = {
       'Content-Type': "application/json"
     };
-    var data = { "user" : newUser };
+    var data = {
+      user : newUser,
+      roleType: 'DEFENDANT',
+      userReferralSourceTypeId: metaData.sourceTypeId,
+      referralCode: metaData.referralCode
+    }
 
     return $http.post(signupUrl, data, { headers: headers });
+  };
+
+  var getReferralSources = function() {
+    return $http.get(getReferralSourcesUrl);
   };
 
   var postCitationImage = function(imageData) {
@@ -201,6 +211,7 @@ WebApp.factory('DataService', function($http, $q, Constants)
     logout: logout,
     loginWithFacebook: loginWithFacebook,
     signup : signup,
+    getReferralSources: getReferralSources,
     postCitationImage: postCitationImage,
     getCourts: getCourts,
     updateCitation: updateCitation,

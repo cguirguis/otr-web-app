@@ -11,7 +11,9 @@ WebApp.directive('focusMe', function($timeout, $parse) {
         }
       });
       element.bind('blur', function() {
-        scope.$apply(model.assign(scope, false));
+        if (model.assign) {
+          scope.$apply(model.assign(scope, false));
+        };
       })
     }
   };

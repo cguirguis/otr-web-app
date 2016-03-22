@@ -21,15 +21,9 @@ controllers.controller('TicketCtrl',
         $ionicLoading.hide();
       });
 
-
       function isMobileDevice() {
-        //console.log('nav agent is... ', navigator.userAgent);
-        //var isEmbeddedWebView = ionic.Platform.isWebView();
-        //console.log('in embedded webview??? ', isEmbeddedWebView);
-
-        return (document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1);
+        return document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1;
       }
-
 
       function hasGetUserMedia() {
         return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
@@ -45,11 +39,8 @@ controllers.controller('TicketCtrl',
         $scope.showSelectSpinner = true;
 
         if (!isMobileDevice()) {
-          console.log("Is not a mobile device. Lets browser for a photo on the File System");
           fileInput.click();
         } else {
-          console.log("This is a mobile device.");
-
           $scope.hideSheet = $ionicActionSheet.show({
             buttons: [
               {text: 'Take photo'},
@@ -61,8 +52,6 @@ controllers.controller('TicketCtrl',
               $scope.takePicture(index);
             }
           });
-
-          console.log('after show ionic action sheet.');
         }
       };
 

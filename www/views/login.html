@@ -53,7 +53,12 @@
         <div class="row">
           <input type="password" placeholder="Confirm password" ng-model="newUser.passwordConfirm" ng-enter="submitSignupForm(newUser)" />
         </div>
-
+        <div class="row">
+          <dropdown placeholder="How did you find us?" list="referralSources" selected="selectedSource" property="uiDisplayText"></dropdown>
+        </div>
+        <div class="row" ng-if="showReferralCode">
+          <input type="text" ng-model="newUser.referralCode" placeholder="Do you have a referral code?" />
+        </div>
         <div class="form-errors" ng-bind-html="errorMessage" ng-if="errorMessage.length"></div>
 
         <button type="submit" class="signup-submit-button big-blue-button" ng-disabled="loading" ng-click="submitSignupForm(newUser)">

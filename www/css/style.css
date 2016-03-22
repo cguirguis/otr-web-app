@@ -2735,7 +2735,6 @@ button.cancel {
   width: 100%;
   background-color: #e9e9e9;
   border: solid 1px #ccc;
-  opacity: 0.8;
   max-width: 600px;
 }
 button.cancel:hover {

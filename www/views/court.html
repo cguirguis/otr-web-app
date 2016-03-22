@@ -23,7 +23,7 @@
       <ion-list>
         <ion-item ng-hide="selectedCourt && !isEditing" ng-repeat="court in results" class="court-result-container"
                   ng-class="{ 'selected': court.selected }" ng-click="selectCourt(court)">
-          <img src="img/court-icon.png" class="court-icon" />
+          <img src="../../img/court-icon.png" class="court-icon" />
           <div class="court-result">
             <div class="court-name">{{court.courtName}}</div>
             <div class="court-city">{{court.city}}, {{court.state}}</div>
@@ -33,7 +33,7 @@
 
       <div class="selected-court-details" ng-if="selectedCourt">
         <div class="selected-court-text">You've selected the following court. This should match the court specified on your ticket.</div>
-        <img class="selected-court-icon" src="img/court-icon.png" />
+        <img class="selected-court-icon" src="../../img/court-icon.png" />
         <div class="selected-court-name">{{selectedCourt.courtName}}</div>
         <div class="selected-court-city">{{selectedCourt.city}}, {{selectedCourt.state}}</div>
       </div>

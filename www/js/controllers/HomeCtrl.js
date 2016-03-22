@@ -110,7 +110,7 @@ controllers.controller('HomeCtrl',
     };
 
     // Load user dropdown
-    $ionicPopover.fromTemplateUrl('views/user-dropdown.html', {
+    $ionicPopover.fromTemplateUrl('../views/user-dropdown.html', {
       scope: $scope
     }).then(function(popover) {
       $scope.userPopover = popover;
