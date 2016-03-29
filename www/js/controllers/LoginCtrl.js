@@ -28,11 +28,17 @@ controllers.controller('LoginCtrl',
     };
 
     $scope.loginWithFacebook = function() {
-      FacebookService.login(function(response) {
-        FacebookService.statusChangeCallback(response);
+      if (navigator.userAgent.match('CriOS')) {
+        FacebookService.chromeLogin();
         $rootScope.closeLoginModal();
         $rootScope.hideLoader();
-      });
+      } else {
+        FacebookService.login(function(response) {
+          FacebookService.statusChangeCallback(response);
+          $rootScope.closeLoginModal();
+          $rootScope.hideLoader();
+        });
+      }
     };
 
     $scope.submitSignupForm = function(newUser) {

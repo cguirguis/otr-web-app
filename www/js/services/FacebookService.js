@@ -91,6 +91,33 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
     );
   };
 
+  var chromeLogin = function() {
+    var ABSOLUTE_URI = "https://m-devo.offtherecord.com/fb-opener-handler.html";
+    var FB_ID = "545669822241752";
+
+    // Open your auth window containing FB auth page
+    // with forward URL to your Opened Window handler page (below)
+    var redirect_uri = "&redirect_uri=" + ABSOLUTE_URI + "fbjscomplete";
+    var scope = "&scope=public_profile,email";
+    var url = "https://www.facebook.com/dialog/oauth?client_id=" + FB_ID + redirect_uri + scope;
+
+    // notice the lack of other param in window.open
+    // for some reason the opener is set to null
+    // and the opened window can NOT reference it
+    // if params are passed. #Chrome iOS Bug
+    window.open(url);
+  };
+
+  function fbCompleteLogin(){
+    FB.getLoginStatus(function(response) {
+      // Calling this with the extra setting "true" forces
+      // a non-cached request and updates the FB cache.
+      // Since the auth login elsewhere validated the user
+      // this update will now asyncronously mark the user as authed
+    }, true);
+
+  }
+
   var logout = function() {
     FB.logout(function(response) {
       $rootScope.$apply(function() {
@@ -127,6 +154,7 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
     getUserInfo: getUserInfo,
     logout: logout,
     login: login,
+    chromeLogin: chromeLogin,
     getProfilePhoto: getProfilePhoto,
     getUserNavPhoto: getUserNavPhoto
   }
