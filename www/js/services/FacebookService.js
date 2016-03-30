@@ -44,17 +44,17 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
             });
         })
         .then(
-          function(otrResponse){
-            console.log("\n\nLogged in to OTR via Facebook.");
-            $rootScope.hideLoader();
-            $rootScope.preventLoadingModal = false;
-          },
-          function(response) {
-            console.log(JSON.stringify(response.data.error.uiErrorMsg));
-            $rootScope.errorMessage = response.data.error.uiErrorMsg;
-            $rootScope.hideLoader();
-            $rootScope.preventLoadingModal = false;
-          });
+        function(otrResponse){
+          console.log("\n\nLogged in to OTR via Facebook.");
+          $rootScope.hideLoader();
+          $rootScope.preventLoadingModal = false;
+        },
+        function(response) {
+          console.log(JSON.stringify(response.data.error.uiErrorMsg));
+          $rootScope.errorMessage = response.data.error.uiErrorMsg;
+          $rootScope.hideLoader();
+          $rootScope.preventLoadingModal = false;
+        });
     }
     else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
@@ -75,12 +75,12 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
     var deferred = $q.defer();
     FB.api('/me', { fields: 'first_name, last_name, email' },
       function(response) {
-      if (!response || response.error) {
-        deferred.reject('Error occured');
-      } else {
-        deferred.resolve(response);
-      }
-    });
+        if (!response || response.error) {
+          deferred.reject('Error occured');
+        } else {
+          deferred.resolve(response);
+        }
+      });
     return deferred.promise;
   };
 
@@ -92,12 +92,13 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
   };
 
   var chromeLogin = function() {
+
     var ABSOLUTE_URI = "https://m-devo.offtherecord.com/fb-opener-handler.html";
     var FB_ID = "545669822241752";
 
     // Open your auth window containing FB auth page
     // with forward URL to your Opened Window handler page (below)
-    var redirect_uri = "&redirect_uri=" + ABSOLUTE_URI + "fbjscomplete";
+    var redirect_uri = "&redirect_uri=" + ABSOLUTE_URI;
     var scope = "&scope=public_profile,email";
     var url = "https://www.facebook.com/dialog/oauth?client_id=" + FB_ID + redirect_uri + scope;
 
@@ -105,7 +106,7 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
     // for some reason the opener is set to null
     // and the opened window can NOT reference it
     // if params are passed. #Chrome iOS Bug
-    window.open(url);
+    window.open(url, null);
   };
 
   function fbCompleteLogin(){

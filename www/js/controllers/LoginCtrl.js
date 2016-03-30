@@ -124,7 +124,7 @@ controllers.controller('LoginCtrl',
 
       $scope.closeLoginModal();
 
-      $rootScope.$broadcast('user:logged-in');
+      $rootScope.broadcast('user:logged-in');
 
       $rootScope.preventLoadingModal = false;
     };

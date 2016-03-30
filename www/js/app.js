@@ -168,14 +168,15 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
             fjs.parentNode.insertBefore(js, fjs);
           }(document, 'script', 'facebook-jssdk'));
 
-          function fbCompleteLogin(){
+          window.fbCompleteLogin = function() {
             FB.getLoginStatus(function(response) {
               // Calling this with the extra setting "true" forces
               // a non-cached request and updates the FB cache.
               // Since the auth login elsewhere validated the user
               // this update will now asyncronously mark the user as authed
-            }, true);
-          }
+              FacebookService.statusChangeCallback(response);
+            });
+          };
 
           angular.element(document).on("click", function(e) {
             $rootScope.$broadcast("documentClicked", angular.element(e.target));
