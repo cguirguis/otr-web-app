@@ -27,8 +27,8 @@
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/dropdown.css" type="text/less" rel="stylesheet">
-    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2015.3.1111/styles/kendo.common-material.min.css" />
-    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2015.3.1111/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.material.min.css" />
     <link rel="stylesheet" href="https://raw.githubusercontent.com/daneden/animate.css/master/animate.min.css" />
 
     <!-- jQuery -->
@@ -36,8 +36,8 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.1/angular-moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.1/angular-moment.min.js"></script>
 
     <!-- Needed for Cordova/PhoneGap (this will be a 404 during development) -->
     <script src="lib/dist/ng-cordova.js"></script>
@@ -46,8 +46,12 @@
     <script src="lib/dist/require.js"></script>
     <script src="lib/dist/angular-pure-slider/angular-pure-slider.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-    <script src="//kendo.cdn.telerik.com/2015.3.1111/js/jquery.min.js"></script>
-    <script src="//kendo.cdn.telerik.com/2015.3.1111/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2015.3.1111/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2015.3.1111/js/kendo.all.min.js"></script>
+
+    <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="bower_components/underscore/underscore-min.js"></script>
+    <script src="bower_components/otr-shared-libs/dist/otrBackendService.min.js"></script>
 
     <!-- Stripe -->
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
@@ -99,8 +103,8 @@
           <ion-side-menu side="left" width="{{leftNavWidth}}" expose-aside-when="(min-width:768px)">
             <ion-header-bar class="bar-dark left-nav">
               <div class="logo-container" ui-sref="home">
-                <img class="logo-icon" src="../../img/OTR-icon.png">
-                <img class="logo-img" src="../../img/otr-logo-V2.gif">
+                <img class="logo-icon" src="img/OTR-icon.png">
+                <img class="logo-img" src="img/otr-logo-V2.gif">
               </div>
             </ion-header-bar>
             <ion-content scroll="false" style="background-color: #1B1E24;height:100%;padding-top: 0px;">

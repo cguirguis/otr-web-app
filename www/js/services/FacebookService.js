@@ -1,7 +1,7 @@
 
 WebApp.factory('FacebookService', function($q, $rootScope, DataService)
 {
-  var statusChangeCallback = function(response) {
+  var statusChangeCallback = function(response, metaData) {
     // This is called with the results from from FB.getLoginStatus().
 
     // The response object is returned with a status field that lets the
@@ -10,51 +10,54 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into Facebook and authorized for app
-      getUserInfo()
+      return getUserInfo()
         .then(function(userResponse) {
-          //$rootScope.user = userResponse;
-          $rootScope.user = $rootScope.user || {};
-          $rootScope.user.firstname = userResponse.first_name;
-          $rootScope.user.lastname = userResponse.last_name;
-          $rootScope.fbAuth = {
-            "accessToken": response.authResponse.accessToken,
-            "expiresIn" : response.authResponse.expiresIn,
-            "userID": response.authResponse.userID
-          };
+              //$rootScope.user = userResponse;
+              $rootScope.user = $rootScope.user || {};
+              $rootScope.user.firstname = userResponse.first_name;
+              $rootScope.user.lastname = userResponse.last_name;
+              $rootScope.fbAuth = {
+                "accessToken": response.authResponse.accessToken,
+                "expiresIn" : response.authResponse.expiresIn,
+                "userID": response.authResponse.userID
+              };
 
-          //console.log("logged into fb: " + JSON.stringify($rootScope.fbAuth));
+              //console.log("logged into fb: " + JSON.stringify($rootScope.fbAuth));
 
-          getProfilePhoto();
-          getUserNavPhoto();
+              getProfilePhoto();
+              getUserNavPhoto();
 
-          // Authenticate user to our service
-          return DataService.loginWithFacebook($rootScope.fbAuth)
-            .then(function(response) {
-              // Now get user info
-              DataService.getUser()
+              var branchData = { referralSourceData: $rootScope.branchData };
+
+              // Authenticate user to our service
+              return DataService.loginWithFacebook($rootScope.fbAuth, branchData)
                 .then(function(response) {
-                  $rootScope.user = response.data.user;
-                  //call into Android's native code. TODO: Make a delegate class for this.
-                  if(!(typeof Android === 'undefined')) {
-                    Android.registerDeviceToken(JSON.stringify(response));
-                  }
+                  // Now get user info
+                  DataService.getUser()
+                    .then(function(response) {
+                      $rootScope.user = response.data.user;
+                      //call into Android's native code. TODO: Make a delegate class for this.
+                      if(!(typeof Android === 'undefined')) {
+                        Android.registerDeviceToken(JSON.stringify(response));
+                      }
+                    });
+                  $rootScope.$broadcast('user:logged-in');
+                    return response;
                 });
-
-              $rootScope.$broadcast('user:logged-in');
-            });
         })
         .then(
-        function(otrResponse){
-          console.log("\n\nLogged in to OTR via Facebook.");
-          $rootScope.hideLoader();
-          $rootScope.preventLoadingModal = false;
-        },
-        function(response) {
-          console.log(JSON.stringify(response.data.error.uiErrorMsg));
-          $rootScope.errorMessage = response.data.error.uiErrorMsg;
-          $rootScope.hideLoader();
-          $rootScope.preventLoadingModal = false;
-        });
+          function(otrResponse){
+            console.log("\n\nLogged in to OTR via Facebook.");
+            $rootScope.hideLoader();
+            $rootScope.preventLoadingModal = false;
+            return otrResponse;
+          },
+          function(response) {
+            console.log(JSON.stringify(response.data.error.uiErrorMsg));
+            $rootScope.errorMessage = response.data.error.uiErrorMsg;
+            $rootScope.hideLoader();
+            $rootScope.preventLoadingModal = false;
+          });
     }
     else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.

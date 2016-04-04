@@ -7,9 +7,11 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
   'ionic',
   'ngCordova',
   'ngAnimate',
+  'ngCookies',
   'OTRControllers',
   'angularMoment',
-  'angular-pure-slider'
+  'angular-pure-slider',
+  'otrBackendService'
 ]);
 
 (function() {
@@ -43,56 +45,56 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
           })
           .state('home', {
             url: "/",
-            templateUrl: "../views/home.html"
+            templateUrl: "views/home.html"
           })
           .state('ticket', {
             url: "/ticket",
-            templateUrl: "../views/ticket.html",
+            templateUrl: "views/ticket.html",
             controller: "TicketCtrl"
           })
           .state('court', {
             url: "/court",
-            templateUrl: "../views/court.html",
+            templateUrl: "views/court.html",
             controller: "CourtCtrl"
           })
           .state('date', {
             url: "/date",
-            templateUrl: "../views/date.html",
+            templateUrl: "views/date.html",
             controller: "DateCtrl"
           })
           .state('violations', {
             url: "/violations",
-            templateUrl: "../views/violations.html",
+            templateUrl: "views/violations.html",
             controller: "ViolationCtrl"
           })
           .state('payment', {
             url: "/payment",
-            templateUrl: "../views/payment.html",
+            templateUrl: "views/payment.html",
             controller: "PaymentCtrl"
           })
           .state('cases', {
             url: "/cases",
-            templateUrl: "../views/cases.html",
+            templateUrl: "views/cases.html",
             controller: "CasesCtrl"
           })
           .state('case', {
             url: "/case/:caseId",
-            templateUrl: "../views/case.html",
+            templateUrl: "views/case.html",
             controller: "CaseCtrl"
           })
           .state('messages', {
             url: "/messages/:caseId",
-            templateUrl: "../views/case-messages.html",
+            templateUrl: "views/case-messages.html",
             controller: "CaseMessagesCtrl"
           })
           .state('profile', {
             url: "/profile",
-            templateUrl: "../views/profile.html",
+            templateUrl: "views/profile.html",
             controller: "ProfileCtrl"
           })
           .state('requestArea', {
             url: "/requestarea",
-            templateUrl: "../views/request-area.html",
+            templateUrl: "views/request-area.html",
             controller: "FeedbackCtrl"
           });
 
@@ -124,9 +126,11 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
         $ionicPlatform.ready(function () {
           // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
           // for form inputs)
-          if (window.cordova && window.cordova.plugins.Keyboard) {
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-          }
+          //if (window.cordova && window.cordova.plugins.Keyboard) {
+
+              //NOTE: this method is deprecated https://github.com/driftyco/ionic-plugin-keyboard
+          //  cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+          //}
           if (window.StatusBar) {
             StatusBar.styleDefault();
           }
@@ -134,7 +138,7 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
           window.fbAsyncInit = function() {
             // Executed when the SDK is loaded
             FB.init({
-              appId       : '545669822241752',
+              appId       : '545669822241752', //'680228325452567',
               //channelUrl  : 'views/channel.html',
               //status      : true, // Set if you want to check the authentication status at the start up of the app
               cookie      : true, // Enable cookies to allow the server to access the session
@@ -223,7 +227,7 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
             $ionicLoading.show({
               template: "<div class='loading-box'>" +
               "<ion-spinner icon='ios'></ion-spinner>" +
-              "<div class='loading-text'>Loading...</div>" +
+              "<div class='loading-text'>Loading..div>" +
               "</div>"
             });
         });
@@ -299,6 +303,46 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
           });
         };
       }
-    ]);
+    ])
+    .run(branchInit);
+
+  // Initialize branch.io and add smart banner
+  branchInit.$inject = ['$cookies'];
+  function branchInit($cookies) {
+    (function (b, r, a, n, c, h, _, s, d, k) {
+      if (!b[n] || !b[n]._q) {
+        for (; s < _.length;)c(h, _[s++]);
+        d = r.createElement(a);
+        d.async = 1;
+        d.src = "https://cdn.branch.io/branch-v2.0.0.min.js";
+        k = r.getElementsByTagName(a)[0];
+        k.parentNode.insertBefore(d, k);
+        b[n] = h
+      }
+    })(window, document, "script", "branch", function (b, r) {
+      b[r] = function () {
+        b._q.push([r, arguments])
+      }
+    }, {
+      _q: [],
+      _v: 1
+    }, "addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setIdentity track validateCode".split(" "), 0);
+
+    //live key: key_live_oik1hC6SvaFGaQl6L4f5chghyqkDbk9G
+    branch.init('key_test_gcn7as2JDdxRlRc0O1hYjfogFylsma9t', function (err, data) {
+      console.log('branch.init error: ', err);
+      console.log('branch.init data: ', data);
+
+      var branchInfo = $cookies.get('branch-link');
+      if(branchInfo) {
+        var branchData = JSON.parse(branchInfo);
+        $rootScope.branchData = branchData;
+        console.log('branchData: ', branchData);
+      } else {
+        console.log("No branch info was found in cookie.");
+      }
+    });
+  }
+
 
 })();

@@ -9,9 +9,13 @@ WebApp.directive("dropdown", function($rootScope) {
       selected: "=",
       property: "@"
     },
-    link: function(scope) {
+    link: function(scope, element, attrs) {
       scope.listVisible = false;
       scope.isPlaceholder = true;
+
+      if(attrs.orient === 'top') {
+        element.find('.dropdown-list').css('top', '0px');
+      }
 
       scope.select = function(item) {
         scope.isPlaceholder = false;
@@ -32,7 +36,7 @@ WebApp.directive("dropdown", function($rootScope) {
 
       $rootScope.$on("documentClicked", function(inner, target) {
         if (!$(target[0]).is(".dropdown-display") && !$(target[0]).parents(".dropdown-display").length > 0)
-          scope.$apply(function() {
+          scope.$apply(function () {
             scope.listVisible = false;
           });
       });

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.otrwebapp103658" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>OTRWebApp</name>
+<widget id="com.offtherecord.web.DriverApp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>Off the Record</name>
   <description>
-        An Ionic Framework and Cordova project.
+        The defacto mobile app to fight your traffic ticket.
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="team@offtherecord.com" href="http://offtherecord.com/">
+      Off the Record team
     </author>
   <content src="index.html"/>
-  <access origin="*"/>
+  <access origin="*"/>	
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>

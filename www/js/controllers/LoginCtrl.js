@@ -1,8 +1,20 @@
 
 controllers.controller('LoginCtrl',
-  ['$rootScope', '$scope', 'DataService', 'UtilitiesService', 'FacebookService',
-    function($rootScope, $scope, DataService, UtilitiesService, FacebookService)
+  ['Constants', '$rootScope', '$scope', '$cookies', 'DataService', 'UtilitiesService', 'FacebookService', 'OtrService', '$ionicModal',
+    function(Constants, $rootScope, $scope, $cookies, DataService, UtilitiesService, FacebookService, OtrService, $ionicModal)
   {
+
+    (function initController() {
+      $scope.otrService = new OtrService({domain: Constants.ENV.baseDomain});
+    })();
+
+    $ionicModal.fromTemplateUrl('views/modals/referral-source.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.referralModal = modal;
+    });
+
     $scope.showLoginOptions = true;
 
     $scope.loginWithEmail = function() {
@@ -27,18 +39,47 @@ controllers.controller('LoginCtrl',
       $scope.showSignup = false;
     };
 
-    $scope.loginWithFacebook = function() {
-      if (navigator.userAgent.match('CriOS')) {
-        FacebookService.chromeLogin();
-        $rootScope.closeLoginModal();
-        $rootScope.hideLoader();
+    $scope.submitReferralInfo = function() {
+      if($scope.selectedSource.sourceTypeId) {
+        var params = {
+          request : {
+            referralCode: $scope.referralCode,
+            referralSourceData: $rootScope.branchData,
+            userId: $rootScope.user.userId,
+            userReferralSourceTypeId: $scope.selectedSource.sourceTypeId
+          }
+        }
+
+        $scope.otrService.setReferralSourceUsingPOST(params)
+            .then(function(response) {
+              $scope.referralModal.hide();
+            });
       } else {
-        FacebookService.login(function(response) {
-          FacebookService.statusChangeCallback(response);
-          $rootScope.closeLoginModal();
-          $rootScope.hideLoader();
-        });
+        $scope.referralModal.hide();
       }
+
+    }
+
+    $scope.loginWithFacebook = function() {
+      FacebookService.login(function(response) {
+        FacebookService.statusChangeCallback(response)
+            .then(function(response) {
+              console.log('FB login response, ', response);
+
+              $rootScope.closeLoginModal();
+              $rootScope.hideLoader();
+
+                if(response.newAccount) {
+                  DataService.getReferralSources()
+                      .then(function(response) {
+                          $scope.referralSources = _.filter(response.data.sources, function(obj) {
+                            return obj.isDisplayed;
+                          });
+                          $scope.referralModal.show();
+                      });
+                }
+            });
+      });
     };
 
     $scope.submitSignupForm = function(newUser) {
@@ -82,6 +123,8 @@ controllers.controller('LoginCtrl',
       }
 
       $rootScope.preventLoadingModal = true;
+      metaData.referralSourceData = { referralSourceData: $rootScope.branchData };
+
       DataService.signup(newUser, metaData)
         .error(function(data, status, headers, config) {
           if (data) {

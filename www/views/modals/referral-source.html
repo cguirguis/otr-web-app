@@ -1,0 +1,33 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">How did you hear about us?</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div class="email-login-form">
+            <div class="row">
+                <dropdown visible=true placeholder="-- Please choose one --"
+                          list="referralSources"
+                          selected="selectedSource"
+                          orient="top"
+                          property="uiDisplayText"></dropdown>
+            </div>
+
+            <div class="row" ng-if="selectedSource.sourceTypeId === 3"> <!-- show for radio -->
+                <input type="text"
+                       ng-model="referralCode"
+                       placeholder="Do you have a referral code?" />
+            </div>
+            <div class="row" >
+                <button class="cancel" style="max-width: none;" ng-click="submitReferralInfo()">
+                <span ng-if="selectedSource.sourceTypeId">
+                    Next
+                </span>
+                <span ng-if="!selectedSource.sourceTypeId">
+                    Skip
+                </span>
+                </button>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-modal-view>

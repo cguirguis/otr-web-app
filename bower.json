@@ -11,13 +11,16 @@
     "jquery": "~2.1.4",
     "angular": "1.4.9",
     "angular-animate": "1.4.9",
+    "angular-cookies": "1.4.9",
     "stripe": "https://js.stripe.com/v2/",
     "angular-moment": "~0.10.1",
     "angular-ui-router": "~0.2.13",
     "aws-sdk-js": "~2.2.30",
     "angular-pure-slider": "~0.0.3",
     "angular-route": "~1.5.0",
-    "animate.css": "~3.5.1"
+    "animate.css": "~3.5.1",
+    "underscore": "~1.8.3",
+    "otr-shared-libs": "https://github.com/alexg313/OTRSharedLibs.git#v1.0.8"
   },
   "resolutions": {
     "angular": "1.4.9",

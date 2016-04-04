@@ -45,13 +45,17 @@ WebApp.factory('DataService', function($http, $q, Constants)
     return $http.post(logoutUrl);
   };
 
-  var loginWithFacebook = function(auth) {
+  var loginWithFacebook = function(auth, metadata) {
     var data = {
       "userAccessToken": auth.accessToken,
-      "expirationDate": new Date(new Date().getTime() + (auth.expiresIn * 1000))
+      "expirationDate": new Date(new Date().getTime() + (auth.expiresIn * 1000)),
+      referralSourceData: metadata.referralSourceData
     };
 
-    return $http.post(loginWithFacebookUrl, data);
+    return $http.post(loginWithFacebookUrl, data)
+        .then(function(response) {
+          return response.data;
+        });
   };
 
   var signup = function(newUser, metaData) {
@@ -62,7 +66,8 @@ WebApp.factory('DataService', function($http, $q, Constants)
       user : newUser,
       roleType: 'DEFENDANT',
       userReferralSourceTypeId: metaData.sourceTypeId,
-      referralCode: metaData.referralCode
+      referralCode: metaData.referralCode,
+      referralSourceData : metaData.referralSourceData
     }
 
     return $http.post(signupUrl, data, { headers: headers });

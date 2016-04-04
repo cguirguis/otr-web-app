@@ -34,7 +34,7 @@ WebApp.factory('ImageService', function($cordovaCamera, FileService, $q, $cordov
     function saveMedia(type) {
       return $q(function(resolve, reject) {
         var options = optionsForType(type);
-
+        console.log('options are , ', options);
         $ionicPlatform.ready(function() {
           $cordovaCamera.getPicture(options).then(function (imageUrl) {
             var name = imageUrl.substr(imageUrl.lastIndexOf('/') + 1);
