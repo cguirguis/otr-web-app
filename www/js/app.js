@@ -307,8 +307,8 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
     .run(branchInit);
 
   // Initialize branch.io and add smart banner
-  branchInit.$inject = ['$cookies'];
-  function branchInit($cookies) {
+  branchInit.$inject = ['$cookies', '$rootScope'];
+  function branchInit($cookies, $rootScope) {
     (function (b, r, a, n, c, h, _, s, d, k) {
       if (!b[n] || !b[n]._q) {
         for (; s < _.length;)c(h, _[s++]);
