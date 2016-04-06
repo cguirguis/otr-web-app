@@ -16,6 +16,7 @@ controllers.controller('LoginCtrl',
     });
 
     $scope.showLoginOptions = true;
+    $scope.extraInfo = {};
 
     $scope.loginWithEmail = function() {
       $scope.showLoginOptions = false;
@@ -43,7 +44,7 @@ controllers.controller('LoginCtrl',
       if($scope.selectedSource.sourceTypeId) {
         var params = {
           request : {
-            referralCode: $scope.referralCode,
+            referralCode: $scope.extraInfo.referralCode,
             referralSourceData: $rootScope.branchData,
             userId: $rootScope.user.userId,
             userReferralSourceTypeId: $scope.selectedSource.sourceTypeId
