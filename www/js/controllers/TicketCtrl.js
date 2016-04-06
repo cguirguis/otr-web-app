@@ -10,7 +10,7 @@ controllers.controller('TicketCtrl',
       $scope.showSelectSpinner = false;
 
       $ionicLoading.show({
-        template: "<span style='color:black;>Loading...</span>"
+        template: "<span style='color:black;'>Loading...</span>"
       });
 
       // Load images on app start

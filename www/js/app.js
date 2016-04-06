@@ -227,7 +227,7 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
             $ionicLoading.show({
               template: "<div class='loading-box'>" +
               "<ion-spinner icon='ios'></ion-spinner>" +
-              "<div class='loading-text'>Loading..div>" +
+              "<div class='loading-text'>Loading..." +
               "</div>"
             });
         });
