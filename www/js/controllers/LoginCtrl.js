@@ -124,7 +124,7 @@ controllers.controller('LoginCtrl',
       }
 
       $rootScope.preventLoadingModal = true;
-      metaData.referralSourceData = { referralSourceData: $rootScope.branchData };
+      metaData.referralSourceData = $rootScope.branchData;
 
       DataService.signup(newUser, metaData)
         .error(function(data, status, headers, config) {
@@ -168,7 +168,7 @@ controllers.controller('LoginCtrl',
 
       $scope.closeLoginModal();
 
-      $rootScope.broadcast('user:logged-in');
+      $rootScope.$broadcast('user:logged-in');
 
       $rootScope.preventLoadingModal = false;
     };
