@@ -138,7 +138,7 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
           window.fbAsyncInit = function() {
             // Executed when the SDK is loaded
             FB.init({
-              appId       : '680228325452567', //'545669822241752', //'680228325452567',
+              appId       : '545669822241752', //'680228325452567',
               //channelUrl  : 'views/channel.html',
               //status      : true, // Set if you want to check the authentication status at the start up of the app
               cookie      : true, // Enable cookies to allow the server to access the session
