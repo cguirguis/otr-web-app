@@ -328,19 +328,21 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
       _v: 1
     }, "addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setIdentity track validateCode".split(" "), 0);
 
+    var branchInfo = $cookies.get('branch-link');
+    if(branchInfo) {
+      var branchData = JSON.parse(branchInfo);
+      $rootScope.branchData = branchData;
+      console.log('branchData: ', branchData);
+    } else {
+      console.log("No branch info was found in cookie.");
+    }
+
     //test key: key_test_gcn7as2JDdxRlRc0O1hYjfogFylsma9t
     branch.init('key_live_oik1hC6SvaFGaQl6L4f5chghyqkDbk9G', function (err, data) {
       console.log('branch.init error: ', err);
       console.log('branch.init data: ', data);
 
-      var branchInfo = $cookies.get('branch-link');
-      if(branchInfo) {
-        var branchData = JSON.parse(branchInfo);
-        $rootScope.branchData = branchData;
-        console.log('branchData: ', branchData);
-      } else {
-        console.log("No branch info was found in cookie.");
-      }
+
     });
   }
 
