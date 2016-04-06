@@ -328,8 +328,8 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
       _v: 1
     }, "addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setIdentity track validateCode".split(" "), 0);
 
-    //live key: key_live_oik1hC6SvaFGaQl6L4f5chghyqkDbk9G
-    branch.init('key_test_gcn7as2JDdxRlRc0O1hYjfogFylsma9t', function (err, data) {
+    //test key: key_test_gcn7as2JDdxRlRc0O1hYjfogFylsma9t
+    branch.init('key_live_oik1hC6SvaFGaQl6L4f5chghyqkDbk9G', function (err, data) {
       console.log('branch.init error: ', err);
       console.log('branch.init data: ', data);
 
