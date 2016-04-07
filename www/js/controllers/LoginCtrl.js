@@ -79,6 +79,9 @@ controllers.controller('LoginCtrl',
                           $scope.referralModal.show();
                       });
                 }
+            }, function(error) {
+              $rootScope.closeLoginModal();
+              $rootScope.hideLoader();
             });
       });
     };

@@ -12,6 +12,24 @@ controllers.controller('PaymentCtrl',
 
       var stripeForm = $('#stripe-cc-form');
 
+      <!-- Fire off conversion tracking for the "Case Bookings from Web Clients" conversion action -->
+      $scope.recordGoogleAdwordsConversion = function() {
+
+        var conversionValue = $rootScope.currentCase.otrReferralFeeInDollars;
+        console.log('kicking off tracking event with conversion value: ', conversionValue);
+
+        window.google_trackConversion({
+          google_conversion_id : 937085283,
+          google_conversion_label : "fZevCLL7nGUQ45LrvgM",
+          google_conversion_value : conversionValue,
+          google_conversion_currency : "USD",
+          google_remarketing_only : false,
+          google_conversion_format : "3"
+        });
+
+        return conversionValue;
+      }
+
       $scope.validateDiscount = function() {
         // Validate discount
         var discountCode = $("input.discount-code").val();
@@ -168,6 +186,7 @@ controllers.controller('PaymentCtrl',
       };
 
       var paymentSuccess = function() {
+        $scope.recordGoogleAdwordsConversion();
         $scope.paymentProcessed = true;
         $rootScope.pageTitle = "Case " + $rootScope.currentCase.caseId;
       };

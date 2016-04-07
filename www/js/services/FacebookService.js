@@ -57,6 +57,7 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
             $rootScope.errorMessage = response.data.error.uiErrorMsg;
             $rootScope.hideLoader();
             $rootScope.preventLoadingModal = false;
+            return $q.reject(response);
           });
     }
     else if (response.status === 'not_authorized') {
@@ -65,13 +66,15 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
       //FB.login()
       console.log("FB AUTH STATUS: not_authorized");
       $rootScope.preventLoadingModal = false;
+      return $q.reject("not_authorized");
     }
     else {
       // The person is not logged into Facebook, prompt them to login
       //FB.login();
       console.log("FB AUTH STATUS: not_connected");
       $rootScope.preventLoadingModal = false;
-    };
+      return $q.reject("not_connected");
+    }
   };
 
   var getUserInfo = function() {
