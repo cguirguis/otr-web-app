@@ -12,7 +12,7 @@ controllers.controller('ViolationCtrl',
     $scope.setViolationCount = function(count) {
       $scope.violationCount = count;
       $rootScope.citation.violationCount = count;
-      $scope.extraViolations = Math.max(0, count - 2);
+      $scope.extraViolations = Math.max(0, count - 1);
     };
 
     $scope.$watch("$rootScope.citation.citationId", function() {

@@ -29,7 +29,10 @@ controllers.controller('CaseMessagesCtrl',
             };
 
             $scope.messages.unshift(newMsg);
+
             $scope.newMessageInput = "";
+            $(".send-message-textarea").value = "";
+
             $scope.savingMessage = false;
             $rootScope.hideLoader();
             $rootScope.preventLoadingModal = false;

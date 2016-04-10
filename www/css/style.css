@@ -23,7 +23,7 @@ body {
 }
 .page button.activated {
   box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.1);
-  font-size: 20.5px!important;
+  /*font-size: 20.5px!important;*/
 }
 .page button:hover {
   opacity: 1;
@@ -516,7 +516,7 @@ button.retake-picture:hover {
   border: solid 1px transparent;
 }
 button.retake-picture.activated, button.continue.activated {
-  font-size: 15.5px!important;
+  /*font-size: 15.5px!important;*/
 }
 @media (max-width: 400px) {
   button.retake-picture, button.continue {
@@ -1746,7 +1746,7 @@ div.court-icon {
   border-top: 0;
 }
 .panel-dark, .panel-header {
-  background-color: #edefed;
+  background-color: white;
 }
 .panel-body {
   margin: 0;

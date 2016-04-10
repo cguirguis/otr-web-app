@@ -48,10 +48,7 @@
           <input type="text" ng-model="newUser.emailAddress" placeholder="Email" />
         </div>
         <div class="row">
-          <input type="password" ng-model="newUser.password" placeholder="Choose a password" />
-        </div>
-        <div class="row">
-          <input type="password" placeholder="Confirm password" ng-model="newUser.passwordConfirm" ng-enter="submitSignupForm(newUser)" />
+          <input type="password" ng-model="newUser.password" placeholder="Choose a password" ng-enter="submitSignupForm(newUser)" />
         </div>
         <div class="row">
           <dropdown placeholder="How did you find us?" list="referralSources" selected="selectedSource" property="uiDisplayText"></dropdown>

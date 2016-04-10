@@ -58,8 +58,7 @@ controllers.controller('LoginCtrl',
       } else {
         $scope.referralModal.hide();
       }
-
-    }
+    };
 
     $scope.loginWithFacebook = function() {
       FacebookService.login(function(response) {
@@ -114,14 +113,6 @@ controllers.controller('LoginCtrl',
         return;
       } else if (!newUser.password || !newUser.password.length) {
         $scope.errorMessage = "Please enter a password.";
-        $scope.loading = false;
-        return;
-      } else if (!newUser.passwordConfirm || !newUser.passwordConfirm.length) {
-        $scope.errorMessage = "Please confirm your password.";
-        $scope.loading = false;
-        return;
-      } else if (newUser.password != newUser.passwordConfirm) {
-        $scope.errorMessage = "Your passwords do not match.";
         $scope.loading = false;
         return;
       }

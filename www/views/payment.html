@@ -5,8 +5,7 @@
       <div class="transaction-title">Transaction Details</div>
       <ul class="transactions">
         <li class="primary">
-          <div class="transaction-item">Legal services to contest traffic ticket,
-            {{citation.violationCount - citation.extraViolations}} moving violation{{citation.violationCount != 1 ? 's' : ''}}</div>
+          <div class="transaction-item">Legal services to contest traffic ticket, 1 moving violation</div>
           <div class="transaction-fee">${{currentCase.baseCost}}</div>
         </li>
         <li class="secondary" ng-if="citation.extraViolations > 0">
