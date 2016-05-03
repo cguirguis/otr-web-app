@@ -36,9 +36,9 @@ WebApp.directive("dropdown", function($rootScope) {
 
       $rootScope.$on("documentClicked", function(inner, target) {
         if (!$(target[0]).is(".dropdown-display") && !$(target[0]).parents(".dropdown-display").length > 0)
-          scope.$apply(function () {
+          //scope.$apply(function () {
             scope.listVisible = false;
-          });
+          //});
       });
 
       scope.$watch("selected", function(value) {

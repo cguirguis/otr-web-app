@@ -203,9 +203,9 @@ controllers.controller('PaymentCtrl',
         FB.ui({
             method: 'feed',
             name: "I just contested my traffic ticket with OTR!",
-            link: "https://www.offtherecord.com",
+            link: "https://offtherecord.com",
             caption: 'Always fight your ticket!',
-            picture: 'https://s3.amazonaws.com/offtherecord.com/assets/img/fightyourticket.jpg',
+            picture: 'https://s3.amazonaws.com/m.offtherecord.com/img/fight-your-ticket.jpg',
             description: "#FightYourTicket #CleanRecord #OffTheRecordApp"
           }, function(response) {
             if(response && response.post_id){
@@ -223,11 +223,12 @@ controllers.controller('PaymentCtrl',
 
       $scope.viewCase = function() {
         $state.go("case", { "caseId" : $rootScope.currentCase.caseId });
+        clearTicketData();
       };
 
-      $scope.$on("$destroy", function() {
+      function clearTicketData() {
         $rootScope.currentCase = null;
         $rootScope.citation = null;
         ScopeCache.clear();
-      });
+      }
 }]);

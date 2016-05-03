@@ -6,11 +6,11 @@
       <ul class="transactions">
         <li class="primary">
           <div class="transaction-item">Legal services to contest traffic ticket, 1 moving violation</div>
-          <div class="transaction-fee">${{currentCase.baseCost}}</div>
+          <div class="transaction-fee">${{currentCase.baseCost | currency : '$' }}</div>
         </li>
         <li class="secondary" ng-if="citation.extraViolations > 0">
           <div class="transaction-item">{{citation.extraViolations}} additional violation{{citation.extraViolations != 1 ? 's' : ''}}</div>
-          <div class="transaction-fee">${{currentCase.violationSurcharge}}</div>
+          <div class="transaction-fee">${{currentCase.violationSurcharge | currency : '$' }}</div>
         </li>
         <li class="secondary">
           <div class="transaction-item light-text">
@@ -26,7 +26,7 @@
         </li>
         <li class="secondary discount-applied" ng-if="discountValue">
           <div class="transaction-item discount-applied">Referral code applied ({{discountCode}})</div>
-          <div class="transaction-fee discount-value">{{appliedDiscountString}}</div>
+          <div class="transaction-fee discount-value">{{appliedDiscountString | currency : '$' }}</div>
         </li>
         <li class="secondary matched-lawyer" ng-if="isLawyerMatch">
           <i class="icon ion-android-star"></i>
@@ -44,7 +44,7 @@
       <ul class="transactions transactions-total">
         <li class="secondary total">
           <div class="transaction-item">Total</div>
-          <div class="transaction-fee">${{currentCase.totalCost}}</div>
+          <div class="transaction-fee">${{currentCase.totalCost | currency : '$' }}</div>
         </li>
       </ul>
 
@@ -213,7 +213,7 @@
   }
   .page.payment-view ul.transactions .transaction-fee {
     float: right;
-    width: 40px;
+    width: 70px;
     text-align: right;
   }
 

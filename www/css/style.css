@@ -426,7 +426,7 @@ button.big-blue-button:hover {
   position:absolute;
 }
 button.button.camera-button:active {
-  background-image: url('img/camera-icon-hover.png');
+  background-image: url('/img/camera-icon-hover.png');
   border:none;
 }
 button.button.camera-button.activated {
@@ -447,7 +447,7 @@ video {
   font-weight: 300;
 }
 .shutter-button {
-  background-image: url("img/shutter.png");
+  background-image: url("/img/shutter.png");
   background-repeat: no-repeat;
   background-size: 100px 100px;
   height: 100px; /*or your image's height*/
@@ -460,7 +460,7 @@ video {
   opacity: 1.0;
 }
 .shutter-button:active {
-  background-image: url("img/shutter-open.png");
+  background-image: url("/img/shutter-open.png");
 }
 .option-buttons {
   position: absolute;
@@ -1415,7 +1415,7 @@ table.k-content {
 }
 /* Court section */
 div.court-icon {
-  background-image: url("img/court-icon.png");
+  background-image: url("/img/court-icon.png");
   background-repeat: no-repeat;
   background-size: 20px 18px;
   opacity: 0.55;
@@ -1834,7 +1834,7 @@ div.court-icon {
   margin-top: -5px;
 }
 .user-profile-photo {
-  background-image: url('img/default-profile-pic.png');
+  background-image: url('/img/default-profile-pic.png');
   background-size: 100% 100%;
 }
 
