@@ -205,7 +205,7 @@ controllers.controller('PaymentCtrl',
             name: "I just contested my traffic ticket with OTR!",
             link: "https://offtherecord.com",
             caption: 'Always fight your ticket!',
-            picture: 'https://s3.amazonaws.com/m.offtherecord.com/img/fight-your-ticket.jpg',
+            picture: 'https://m.offtherecord.com/img/fight-your-ticket.jpg',
             description: "#FightYourTicket #CleanRecord #OffTheRecordApp"
           }, function(response) {
             if(response && response.post_id){

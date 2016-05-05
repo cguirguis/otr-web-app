@@ -82,10 +82,21 @@ var CourtCtrl = function($rootScope, $scope, $state, $http, $timeout, $location,
       );
   }
 
+  $("#court-search").on("click", function() {
+    $scope.resultsInitialTopOffset = $(".results-container").css("top");
+    $(".page.court-view").css("margin-top", "-70px");
+    $(".top-section").hide();
+    $(".results-container").css("top", "-33px");
+  });
+
+  $("#court-search").blur(function() {
+    $(".page.court-view").css("margin-top", "0px");
+    $(".top-section").show();
+    $(".results-container").css("top", $scope.resultsInitialTopOffset);
+  });
+
 };
 
-CourtCtrl.prototype.newFunction = function() {
-};
 
 CourtCtrl.$inject =   ['$rootScope', '$scope', '$state', '$http', '$timeout', '$location', '$ionicModal', 'Constants', 'DataService'];
 
