@@ -12,11 +12,17 @@ var CourtCtrl = function($rootScope, $scope, $state, $http, $timeout, $location,
   $scope.filterCourts = function(value) {
     var query = $scope.query.toLowerCase();
 
+    //console.log(query + ", length: " + query.length + ", courts: " + $scope.courts.length);
     if (query.length > 2) {
-      $scope.results = $scope.courts.filter(function(court) {
-        return court.courtName.toLowerCase().indexOf(query) >= 0
-          || court.city.toLowerCase().indexOf(query) === 0
-      });
+      if ($scope.courts.length == 0) {
+        $timeout(function () { $scope.filterCourts(value); }, 500);
+        console.log("Courts not loaded yet.");
+      } else {
+        $scope.results = $scope.courts.filter(function (court) {
+          return court.courtName.toLowerCase().indexOf(query) >= 0
+            || court.city.toLowerCase().indexOf(query) === 0
+        });
+      }
     }
     else {
       $scope.results = [];
@@ -82,19 +88,26 @@ var CourtCtrl = function($rootScope, $scope, $state, $http, $timeout, $location,
       );
   }
 
-  $("#court-search").on("click", function() {
-    $scope.resultsInitialTopOffset = $(".results-container").css("top");
-    $(".page.court-view").css("margin-top", "-70px");
-    $(".top-section").hide();
-    $(".results-container").css("top", "-33px");
-  });
-
-  $("#court-search").blur(function() {
-    $(".page.court-view").css("margin-top", "0px");
-    $(".top-section").show();
-    $(".results-container").css("top", $scope.resultsInitialTopOffset);
-  });
-
+  // Slide search bar up so that there is more screen
+  // real estate available to list search results
+  if ($(window).outerHeight() < 800) {
+    var resultContainer = $(".results-container");
+    var bottomSection = $(".bottom-section");
+    $("#court-search").on("click", function () {
+      $scope.resultsInitialTopMargin = resultContainer.css("margin-top");
+      $(".page.court-view").css("margin-top", "-65px");
+      $(".top-section").hide();
+      $(".progress-section").css("visibility", "hidden");
+      var topMargin = bottomSection.position().top + bottomSection.outerHeight() - resultContainer.position().top;
+      $(".results-container").css("margin-top", (topMargin) + "px");
+    });
+    $("#court-search").blur(function () {
+      $(".page.court-view").css("margin-top", "0px");
+      $(".top-section").show();
+      $(".progress-section").css("visibility", "visible");
+      resultContainer.css("margin-top", $scope.resultsInitialTopMargin);
+    });
+  }
 };
 
 
