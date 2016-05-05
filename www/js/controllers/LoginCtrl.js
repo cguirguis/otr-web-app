@@ -33,11 +33,13 @@ controllers.controller('LoginCtrl',
     $scope.cancelEmailLogin = function() {
       $scope.showLoginOptions = true;
       $scope.showEmailLogin = false;
+      $scope.errorMessage = "";
     };
 
     $scope.cancelSignup = function() {
       $scope.showLoginOptions = true;
       $scope.showSignup = false;
+      $scope.errorMessage = "";
     };
 
     $scope.submitReferralInfo = function() {
