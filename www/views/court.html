@@ -24,7 +24,7 @@
            style="font-size: 18px;color: #ccc;padding: 20px 35px;">
         <ion-spinner icon='ios' style="float: left;margin-right: 10px;margin-top: -5px;"></ion-spinner> Loading...
       </div>
-      <div ng-show="courts.length > 0 && !results.length && query.length >= 3"
+      <div ng-show="courts.length > 0 && !results.length && !loadingCourts"
         style="font-size: 18px;color: #ccc;padding: 20px 35px;">No courts found. Try searching by city or court
         name.</div>
       <ion-list>

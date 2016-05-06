@@ -22,6 +22,7 @@ var CourtCtrl = function($rootScope, $scope, $state, $http, $timeout, $location,
           return court.courtName.toLowerCase().indexOf(query) >= 0
             || court.city.toLowerCase().indexOf(query) === 0
         });
+        $scope.loadingCourts = false;
       }
     }
     else {
@@ -73,6 +74,7 @@ var CourtCtrl = function($rootScope, $scope, $state, $http, $timeout, $location,
 
   function getCourts() {
     $rootScope.showDefaultSpinner = false;
+    $scope.loadingCourts = true;
     DataService.getCourts($scope.query)
       .then(
         function(response) {
@@ -92,20 +94,20 @@ var CourtCtrl = function($rootScope, $scope, $state, $http, $timeout, $location,
   // real estate available to list search results
   if ($(window).outerHeight() < 800) {
     var resultContainer = $(".results-container");
-    var bottomSection = $(".bottom-section");
+    var bottomSection = $(".page.court-view .bottom-section");
     $("#court-search").on("click", function () {
-      $scope.resultsInitialTopMargin = resultContainer.css("margin-top");
+      var resultsInitialTopMargin = resultContainer.css("margin-top");
       $(".page.court-view").css("margin-top", "-65px");
       $(".top-section").hide();
       $(".progress-section").css("visibility", "hidden");
-      var topMargin = bottomSection.position().top + bottomSection.outerHeight() - resultContainer.position().top;
+      var topMargin = bottomSection.position().top + bottomSection.outerHeight() - resultsInitialTopMargin.position().top;
       $(".results-container").css("margin-top", (topMargin) + "px");
     });
     $("#court-search").blur(function () {
       $(".page.court-view").css("margin-top", "0px");
       $(".top-section").show();
       $(".progress-section").css("visibility", "visible");
-      resultContainer.css("margin-top", $scope.resultsInitialTopMargin);
+      resultContainer.css("margin-top", resultsInitialTopMargin);
     });
   }
 };
