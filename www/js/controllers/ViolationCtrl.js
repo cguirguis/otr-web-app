@@ -36,6 +36,13 @@ controllers.controller('ViolationCtrl',
     };
 
     $scope.fightThisTicket = function(involvesAccident) {
+      // If no citation picture, display error message
+      if (!$scope.citation || !$scope.citation.image) {
+        $rootScope.displayError("We're missing some key information. Please go back and take a photo" +
+          " of your ticket.");
+        return;
+      }
+
       if (!$scope.waitingForCitationId) {
         $rootScope.displayLoading("Crunching your ticket info...");
 

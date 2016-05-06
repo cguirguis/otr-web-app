@@ -198,6 +198,8 @@ hr {
 @media (max-width: 500px) {
   .error-box .error-text {
     padding: 5px 15px 5px 5px;
+    text-align: center;
+    width: 100%;
   }
   .error-box .error-button {
     margin: 10px 0px 0px 0px;
@@ -831,6 +833,9 @@ table.k-content {
 }
 .k-header {
   background-color: #d0d0d0!important; /*#5599F5!important*/
+}
+.k-calendar td#calendar_cell_selected {
+  background-color: #efefef;
 }
 
 /*********** VIOLATION VIEW ******************/

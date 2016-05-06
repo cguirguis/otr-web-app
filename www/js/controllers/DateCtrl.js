@@ -13,6 +13,7 @@ controllers.controller('DateCtrl',
         value: null,
         change: function() {
           $scope.selectedDate = this.value();
+          $(".k-footer a").html($scope.selectedDate.toDateString());
 
           $scope.$apply();
           $timeout(function() {
@@ -45,6 +46,7 @@ controllers.controller('DateCtrl',
       };
 
       $('#calendar').unbind('mouseup');
+
       //$('#calendar div').unbind('click');
       //$('#calendar a').unbind('click');
 

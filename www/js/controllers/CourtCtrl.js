@@ -96,18 +96,18 @@ var CourtCtrl = function($rootScope, $scope, $state, $http, $timeout, $location,
     var resultContainer = $(".results-container");
     var bottomSection = $(".page.court-view .bottom-section");
     $("#court-search").on("click", function () {
-      var resultsInitialTopMargin = resultContainer.css("margin-top");
+      $scope.resultsInitialTopMargin = resultContainer.css("margin-top");
       $(".page.court-view").css("margin-top", "-65px");
       $(".top-section").hide();
       $(".progress-section").css("visibility", "hidden");
-      var topMargin = bottomSection.position().top + bottomSection.outerHeight() - resultsInitialTopMargin.position().top;
+      var topMargin = bottomSection.position().top + bottomSection.outerHeight() - resultContainer.position().top;
       $(".results-container").css("margin-top", (topMargin) + "px");
     });
     $("#court-search").blur(function () {
       $(".page.court-view").css("margin-top", "0px");
       $(".top-section").show();
       $(".progress-section").css("visibility", "visible");
-      resultContainer.css("margin-top", resultsInitialTopMargin);
+      resultContainer.css("margin-top", $scope.resultsInitialTopMargin);
     });
   }
 };
