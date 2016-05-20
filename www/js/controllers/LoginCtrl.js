@@ -89,7 +89,9 @@ controllers.controller('LoginCtrl',
 
     $scope.submitSignupForm = function(newUser) {
 
-      var metaData = {}, newUser = newUser || {};
+      var metaData = {},
+          newUser = newUser || {};
+
       if ($scope.selectedSource && $scope.selectedSource.sourceTypeId) {
         metaData.sourceTypeId = $scope.selectedSource.sourceTypeId;
       }
@@ -122,6 +124,8 @@ controllers.controller('LoginCtrl',
       $rootScope.preventLoadingModal = true;
       metaData.referralSourceData = $rootScope.branchData;
 
+        metaData.httpReferrer = $scope.getReferrerFromCookie();
+
       DataService.signup(newUser, metaData)
         .error(function(data, status, headers, config) {
           if (data) {
@@ -134,6 +138,17 @@ controllers.controller('LoginCtrl',
           $rootScope.preventLoadingModal = false;
         })
         .then(signupResponseHandler);
+    };
+
+    $scope.getReferrerFromCookie = function($cookies) {
+
+      var httpReferrer = null;
+      if ($cookies.get('otr-referrer')) {
+        httpReferrer = JSON.parse($cookies.get('otr-referrer'));
+      }
+
+      console.log('httpReferrer: ', httpReferrer);
+      return httpReferrer;
     };
 
     $scope.submitEmailLoginForm = function(email, password) {
