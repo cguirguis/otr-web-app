@@ -140,7 +140,7 @@ controllers.controller('LoginCtrl',
         .then(signupResponseHandler);
     };
 
-    $scope.getReferrerFromCookie = function($cookies) {
+    $scope.getReferrerFromCookie = function() {
 
       var httpReferrer = null;
       if ($cookies.get('otr-referrer')) {
@@ -148,7 +148,8 @@ controllers.controller('LoginCtrl',
       }
 
       console.log('httpReferrer: ', httpReferrer);
-      return httpReferrer;
+      // $rootScope.httpReferrer = httpReferrer;
+        return httpReferrer;
     };
 
     $scope.submitEmailLoginForm = function(email, password) {
