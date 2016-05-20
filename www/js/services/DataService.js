@@ -49,7 +49,8 @@ WebApp.factory('DataService', function($http, $q, Constants)
     var data = {
       "userAccessToken": auth.accessToken,
       "expirationDate": new Date(new Date().getTime() + (auth.expiresIn * 1000)),
-      referralSourceData: metadata.referralSourceData
+      referralSourceData: metadata.referralSourceData,
+      httpReferrer : metadata.httpReferrer
     };
 
     return $http.post(loginWithFacebookUrl, data)
@@ -67,7 +68,8 @@ WebApp.factory('DataService', function($http, $q, Constants)
       roleType: 'DEFENDANT',
       userReferralSourceTypeId: metaData.sourceTypeId,
       referralCode: metaData.referralCode,
-      referralSourceData : metaData.referralSourceData
+      referralSourceData : metaData.referralSourceData,
+      httpReferrer : metaData.httpReferrer
     }
 
     return $http.post(signupUrl, data, { headers: headers });

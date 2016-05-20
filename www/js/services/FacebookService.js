@@ -1,7 +1,7 @@
 
 WebApp.factory('FacebookService', function($q, $rootScope, DataService)
 {
-  var statusChangeCallback = function(response, metaData) {
+  var statusChangeCallback = function(response, metadata) {
     // This is called with the results from from FB.getLoginStatus().
 
     // The response object is returned with a status field that lets the
@@ -27,10 +27,8 @@ WebApp.factory('FacebookService', function($q, $rootScope, DataService)
               getProfilePhoto();
               getUserNavPhoto();
 
-              var branchData = { referralSourceData: $rootScope.branchData };
-
               // Authenticate user to our service
-              return DataService.loginWithFacebook($rootScope.fbAuth, branchData)
+              return DataService.loginWithFacebook($rootScope.fbAuth, metadata)
                 .then(function(response) {
                   // Now get user info
                   DataService.getUser()

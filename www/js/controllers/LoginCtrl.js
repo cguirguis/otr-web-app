@@ -63,8 +63,14 @@ controllers.controller('LoginCtrl',
     };
 
     $scope.loginWithFacebook = function() {
+
+        var metadata = {
+            referralSourceData : $rootScope.branchData,
+            httpReferrer : $scope.getReferrerFromCookie()
+        }
+
       FacebookService.login(function(response) {
-        FacebookService.statusChangeCallback(response)
+        FacebookService.statusChangeCallback(response, metadata)
             .then(function(response) {
               console.log('FB login response, ', response);
 
@@ -123,7 +129,6 @@ controllers.controller('LoginCtrl',
 
       $rootScope.preventLoadingModal = true;
       metaData.referralSourceData = $rootScope.branchData;
-
         metaData.httpReferrer = $scope.getReferrerFromCookie();
 
       DataService.signup(newUser, metaData)
