@@ -63,7 +63,7 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
                 // These three cases are handled in the callback function.
                 FB.getLoginStatus(function(response) {
                     $rootScope.preventLoadingModal = true;
-                    FacebookService.statusChangeCallback(response);
+                    FacebookService.statusChangeCallback(response, {});
                 }, {scope: 'public_profile,email'});
             };
 
@@ -82,7 +82,7 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
                     // a non-cached request and updates the FB cache.
                     // Since the auth login elsewhere validated the user
                     // this update will now asyncronously mark the user as authed
-                    FacebookService.statusChangeCallback(response);
+                    FacebookService.statusChangeCallback(response, {});
                 });
             };
 
