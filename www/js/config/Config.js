@@ -12,10 +12,11 @@ WebApp.constant("Constants", {
 
     /*
     'name': 'PROD',
-    'apiEndpoint': 'https://otr-backend-service-us-prod.offtherecord.com/api/v1/',
-    'baseDomain': 'https://otr-backend-service-us-prod.offtherecord.com',
+    'apiEndpoint': 'https://otr-backend-service-us-prod.offtherecord.com:316/api/v1/',
+    'baseDomain': 'https://otr-backend-service-us-prod.offtherecord.com:316',
     'stripeClientId': 'pk_live_tfkS6orQi9EW3DePjrkHNLMT',
-    'debug': false*/
+    'debug': false
+    */
   },
   CONFIGS: {
     'DaysToRespondToTicket' : 15

@@ -20,7 +20,7 @@
     "angular-route": "~1.5.0",
     "animate.css": "~3.5.1",
     "underscore": "~1.8.3",
-    "otr-shared-libs": "https://github.com/alexg313/OTRSharedLibs.git#v1.0.8"
+    "otr-shared-libs": "https://github.com/alexg313/OTRSharedLibs.git#v1.2.0"
   },
   "resolutions": {
     "angular": "1.4.9",
