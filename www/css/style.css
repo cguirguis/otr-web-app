@@ -898,7 +898,6 @@ table.k-content {
   width: 69%;
 }
 .page.match-view .match-odds-value {
-  color: lightgreen;
   font-size:40px;
   width: 18%;
   word-wrap: normal;
@@ -918,10 +917,10 @@ table.k-content {
   word-wrap: normal;
   text-align: right;
   min-width: 92px;
-  color: #333!important;
+  color: #333 !important;
 }
 .match-insurance-value {
-  color: #c5243b !important;
+  color: #ff5a5f !important;
   font-size: 33px;
   text-align: right;
 }
@@ -981,7 +980,7 @@ table.k-content {
   float: right;
   margin-top: -10px;
 }
-.match-odds-note, .match-cost-note, .match-insurance-note {
+.match-note, .match-odds-note, .match-cost-note, .match-insurance-note {
   float: left;
   color: #aaa;
   font-size: 14px;

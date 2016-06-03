@@ -9,22 +9,31 @@
       </h2>
       <h4 class="match-subtitle ng-binding">We were able to match you with one of the top-rated traffic attorneys in {{currentCase.lawfirmCity}}.</h4>
 
-      <div class="match-details-row">
-        <h2 class="match-odds-value">{{currentCase.chanceOfSuccess}}%</h2>
-        <h3 class="match-odds-text">Your chance of success:</h3>
-        <div class="match-odds-note">Based on historical performance</div>
-      </div>
       <div class="match-details-row" ng-click="viewRefundPolicy()">
+        <h2 ng-class="currentCase.refund.isEligible ? 'match-odds-value text-lima' : 'match-odds-value text-rausch'">
+          {{currentCase.refund.isEligible | yesNo}}
+        </h2>
+        <h3 class="match-odds-text">Eligible for a refund:</h3>
+        <div ng-class="currentCase.refund.isEligible ? 'match-note text-lima' : 'match-note'">
+          {{currentCase.refund.uiReasonMsg}}
+        </div>
+      </div>
+      <div class="match-details-row">
+        <h2 class="match-odds-value text-lima">{{currentCase.chanceOfSuccess}}%</h2>
+        <h3 class="match-odds-text">Your chance of success:</h3>
+        <div class="match-note">Based on historical performance</div>
+      </div>
+      <div class="match-details-row">
         <h2 class="match-cost-value ng-binding">${{currentCase.estimatedCost}}</h2>
         <h3 class="match-cost-text">Your cost:</h3>
-        <div class="match-cost-note">You'll get a full refund if the ticket is not kept off your record</div>
+        <div class="match-note">This includes your legal fee and all service charges</div>
       </div>
       <div class="match-details-row">
         <h2 class="match-insurance-value ng-binding">$540
           <div>+ ticket fine</div>
         </h2>
         <h3 class="match-insurance-text">Cost of not fighting your ticket:</h3>
-        <div class="match-insurance-note">Estimate based on average insurance premium increase over 3 years</div>
+        <div class="match-note">Estimate based on average insurance premium increase over 3 years</div>
       </div>
 
       <div class="included-title">What's included?</div>

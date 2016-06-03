@@ -1,7 +1,11 @@
 
 controllers.controller('ViolationCtrl',
-  ['$rootScope', '$scope', '$state', '$timeout', '$ionicLoading', 'ScopeCache', 'DataService', 'Constants',
-    function($rootScope, $scope, $state, $timeout, $ionicLoading, ScopeCache, DataService, Constants) {
+  ['Constants', '$rootScope', '$scope', '$state', '$timeout', '$ionicLoading', 'ScopeCache', 'DataService', 'OtrService',
+    function(Constants, $rootScope, $scope, $state, $timeout, $ionicLoading, ScopeCache, DataService, OtrService) {
+
+        (function initController() {
+            $scope.otrService = new OtrService({domain: Constants.ENV.baseDomain});
+        })();
 
     $rootScope.pageTitle = $scope.match && !$scope.matchErrorMessage ? "" : "Violations";
     $rootScope.showProgress = true;
@@ -108,23 +112,34 @@ controllers.controller('ViolationCtrl',
       $rootScope.showProgress = false;
 
       if (response && response.data && response.data.theCase) {
-        $scope.match = response;
-        var newCase = response.data.theCase;
-        $rootScope.currentCase = {
-          chanceOfSuccess: response.data.chanceOfSuccess,
-          caseId: newCase.caseId,
-          estimatedCost: newCase.estimatedCost/100,
-          baseCost: newCase.lawfirmCaseDecision.caseFinancials.caseBaseCost/100,
-          violationSurcharge: newCase.lawfirmCaseDecision.caseFinancials.multipleViolationSurcharge/100,
-          totalCost: newCase.lawfirmCaseDecision.caseFinancials.clientTotalCost/100,
-          costBeforeReferrals: newCase.lawfirmCaseDecision.caseFinancials.clientCostBeforeReferrals/100,
-          otrReferralFeeInDollars: newCase.lawfirmCaseDecision.caseFinancials.otrReferralFee / 100,
-          lawfirmId: newCase.lawfirmId,
-          lawfirmName: newCase.lawfirmCaseDecision.lawfirmName,
-          lawfirmImageUrl: newCase.lawfirmCaseDecision.profilePictureUrl,
-          lawfirmCity: newCase.citation.court.address.city + ", " + newCase.citation.court.address.stateCode,
-          citationResponse: newCase.citation
-        }
+          $scope.match = response;
+          var newCase = response.data.theCase;
+          $rootScope.currentCase = {
+              chanceOfSuccess: response.data.chanceOfSuccess,
+              caseId: newCase.caseId,
+              estimatedCost: newCase.estimatedCost/100,
+              baseCost: newCase.lawfirmCaseDecision.caseFinancials.caseBaseCost/100,
+              violationSurcharge: newCase.lawfirmCaseDecision.caseFinancials.multipleViolationSurcharge/100,
+              totalCost: newCase.lawfirmCaseDecision.caseFinancials.clientTotalCost/100,
+              costBeforeReferrals: newCase.lawfirmCaseDecision.caseFinancials.clientCostBeforeReferrals/100,
+              otrReferralFeeInDollars: newCase.lawfirmCaseDecision.caseFinancials.otrReferralFee / 100,
+              lawfirmId: newCase.lawfirmId,
+              lawfirmName: newCase.lawfirmCaseDecision.lawfirmName,
+              lawfirmImageUrl: newCase.lawfirmCaseDecision.profilePictureUrl,
+              lawfirmCity: newCase.citation.court.address.city + ", " + newCase.citation.court.address.stateCode,
+              citationResponse: newCase.citation
+          }
+
+          $scope.otrService.isRefundEligibleUsingGET({caseId: newCase.caseId})
+              .then(
+                  function(response) {
+                      $rootScope.currentCase.refund = {
+                          isEligible: response.refundEligibilityType === 'FULL_REFUND',
+                          uiReasonMsg: response.uiReasonMsg
+
+                      }
+                  }
+              )
       } else {
         // Display 'no lawyer found' view
         displayNoMatchView(data.error.uiErrorMsg);
