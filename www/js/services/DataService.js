@@ -8,7 +8,6 @@ WebApp.factory('DataService', function($http, $q, Constants)
   var loginWithFacebookUrl = baseUrl + 'connect/facebook/';
   var signupUrl = baseUrl + 'signup';
   var getReferralSourcesUrl = baseUrl + 'referrals/sources'
-  var getCourtsUrl = baseUrl + "courts/traffic";
   var citationUrl = baseUrl + 'citations/';
   var matchCitationUrl = baseUrl + 'citations/{0}/case';
   var associateCaseUrl = baseUrl + 'cases/{0}/owner';
@@ -86,11 +85,6 @@ WebApp.factory('DataService', function($http, $q, Constants)
     var data = { "rawImageData": imageData };
 
     return $http.post(citationUrl, data, { headers: headers });
-  };
-
-  var getCourts = function(searchQuery) {
-    var url = getCourtsUrl + "/" + searchQuery;
-    return $http.get(getCourtsUrl);
   };
 
   var updateCitation = function(citation) {
@@ -220,7 +214,6 @@ WebApp.factory('DataService', function($http, $q, Constants)
     signup : signup,
     getReferralSources: getReferralSources,
     postCitationImage: postCitationImage,
-    getCourts: getCourts,
     updateCitation: updateCitation,
     matchCitation : matchCitation,
     rematchCitation : rematchCitation,

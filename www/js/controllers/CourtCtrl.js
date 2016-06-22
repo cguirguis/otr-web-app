@@ -1,32 +1,34 @@
 
-var CourtCtrl = function($rootScope, $scope, $state, $http, $timeout, $location, $ionicModal, Constants, DataService)
+
+controllers.controller('CourtCtrl',
+    ['Constants', '$rootScope', '$scope', '$state', '$http', '$timeout', '$location', '$ionicModal', 'DataService', 'OtrService',
+function(Constants, $rootScope, $scope, $state, $http, $timeout, $location, $ionicModal, DataService, OtrService)
 {
   var _this = this;
   $rootScope.pageTitle = "Assigned court";
-  $scope.courts = [];
+  $scope.courts = null;
   $scope.results = [];
   $scope.query = "";
   $scope.selectedCourt;
+  $scope.isCourtsLoading = false
   $rootScope.showProgress = true;
 
-  $scope.filterCourts = function(value) {
+  $scope.otrService = new OtrService({domain: Constants.ENV.baseDomain});
+
+
+  $scope.fetchCourts = function(value) {
     var query = $scope.query.toLowerCase();
 
-    //console.log(query + ", length: " + query.length + ", courts: " + $scope.courts.length);
-    if (query.length > 2) {
-      if ($scope.courts.length == 0) {
-        $timeout(function () { $scope.filterCourts(value); }, 500);
-        console.log("Courts not loaded yet.");
-      } else {
-        $scope.results = $scope.courts.filter(function (court) {
-          return court.courtName.toLowerCase().indexOf(query) >= 0
-            || court.city.toLowerCase().indexOf(query) === 0
-        });
-        $scope.loadingCourts = false;
-      }
+    $timeout.cancel($scope.searchQueryTimer);
+
+    if (query.length >= 3) {
+        $scope.searchQueryTimer = $timeout(function() {
+          getCourts($scope.query);
+        }, 375);
+
     }
     else {
-      $scope.results = [];
+      $scope.courts = null;
     }
   };
 
@@ -67,21 +69,21 @@ var CourtCtrl = function($rootScope, $scope, $state, $http, $timeout, $location,
     $scope.isEditing = true;
   }, false);
 
-
-  if (!$scope.courts.length) {
-    getCourts();
-  }
-
-  function getCourts() {
+  function getCourts(value) {
     $rootScope.showDefaultSpinner = false;
-    $scope.loadingCourts = true;
-    DataService.getCourts($scope.query)
+    var params = {searchQuery: value}
+    $scope.isCourtsLoading = true;
+
+    return $scope.otrService.getCourtsByQueryUsingGET(params)
       .then(
         function(response) {
-          $scope.courts = response.data.courts;
+          $scope.courts = response.courts;
           $rootScope.showDefaultSpinner = true;
+          $scope.isCourtsLoading = false;
+          return response.courts;
         },
         function(error) {
+          $scope.isCourtsLoading = false;
           console.log('Error retrieving courts: {0}', JSON.stringify(error));
           $rootScope.hideLoader();
           $rootScope.errorMessage = "Unable to load courts. Please make sure you have an active internet connection.";
@@ -110,9 +112,5 @@ var CourtCtrl = function($rootScope, $scope, $state, $http, $timeout, $location,
       resultContainer.css("margin-top", $scope.resultsInitialTopMargin);
     });
   }
-};
+}]);
 
-
-CourtCtrl.$inject =   ['$rootScope', '$scope', '$state', '$http', '$timeout', '$location', '$ionicModal', 'Constants', 'DataService'];
-
-controllers.controller('CourtCtrl', CourtCtrl);

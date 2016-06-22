@@ -228,7 +228,7 @@ controllers.controller('PaymentCtrl',
 
       function clearTicketData() {
         $rootScope.currentCase = null;
-        $rootScope.citation = null;
+        $rootScope.citation = {};
         ScopeCache.clear();
       }
 }]);

@@ -127,6 +127,7 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
             $rootScope.popupViewModal.hide();
         };
 
+
         $rootScope.$on('loading:show', function() {
             $ionicLoading.show({
                 template: "<div class='loading-box'>" +
@@ -294,8 +295,12 @@ var WebApp = WebApp || angular.module('OTRWebApp', [
         $httpProvider.interceptors.push(function($rootScope) {
             return {
                 request: function(config) {
-                    if (!$rootScope.preventLoadingModal) {
-                        $rootScope.$broadcast('loading:show');
+                    if(config.url.indexOf('/courts/traffic/') !== -1) {
+                        return config;
+                    } else {
+                        if (!$rootScope.preventLoadingModal) {
+                            $rootScope.$broadcast('loading:show');
+                        }
                     }
                     return config;
                 },

@@ -13,27 +13,29 @@
       </div>
       <div class="bottom-section" style="text-align: center;">
         <i class="icon ion-ios-search placeholder-icon"></i>
-        <input type="search" id="court-search" placeholder="Search" ng-change="filterCourts()" ng-model="query">
+        <input type="search" id="court-search" placeholder="Search" ng-keyup="fetchCourts()" ng-model="query">
         <button class="big-blue-button button" ng-click="confirmCourt()"
                 ng-show="selectedCourt" style="min-width: ">Continue</button>
       </div>
     </ion-header-bar>
 
     <ion-content class="results-container">
-      <div ng-show="!courts.length && query.length >= 3"
-           style="font-size: 18px;color: #ccc;padding: 20px 35px;">
-        <ion-spinner icon='ios' style="float: left;margin-right: 10px;margin-top: -5px;"></ion-spinner> Loading...
+      <div ng-show="courts.length == 0 && !isCourtsLoading"
+           style="font-size: 18px;color: #ccc;padding: 20px 35px;">No courts found. Try searching by city or court
+        name.
       </div>
-      <div ng-show="courts.length > 0 && !results.length && !loadingCourts"
-        style="font-size: 18px;color: #ccc;padding: 20px 35px;">No courts found. Try searching by city or court
-        name.</div>
+      <div ng-show="query.length >= 3 && isCourtsLoading"
+           style="font-size: 18px;color: #ccc;padding: 20px 35px;">
+        <ion-spinner icon='ios' style="float: left;margin-right: 10px;margin-top: -5px;"></ion-spinner>Loading...
+      </div>
+
       <ion-list>
-        <ion-item ng-hide="selectedCourt && !isEditing" ng-repeat="court in results" class="court-result-container"
+        <ion-item ng-hide="selectedCourt && !isEditing" ng-repeat="court in courts" class="court-result-container"
                   ng-class="{ 'selected': court.selected }" ng-click="selectCourt(court)">
           <img src="img/court-icon.png" class="court-icon" />
           <div class="court-result">
             <div class="court-name">{{court.courtName}}</div>
-            <div class="court-city">{{court.city}}, {{court.state}}</div>
+            <div class="court-city">{{court.address.city}}, {{court.address.stateCode}}</div>
           </div>
         </ion-item>
       </ion-list>
@@ -42,7 +44,7 @@
         <div class="selected-court-text">You've selected the following court. This should match the court specified on your ticket.</div>
         <img class="selected-court-icon" src="img/court-icon.png" />
         <div class="selected-court-name">{{selectedCourt.courtName}}</div>
-        <div class="selected-court-city">{{selectedCourt.city}}, {{selectedCourt.state}}</div>
+        <div class="selected-court-city">{{selectedCourt.address.city}}, {{selectedCourt.address.stateCode}}</div>
       </div>
 
       <div style="height: 110px;"></div>
